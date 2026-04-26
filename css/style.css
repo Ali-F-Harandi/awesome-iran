@@ -22,8 +22,45 @@
     --radius-xl: 20px;
     --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    --font: 'Tahoma', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font: 'Vazirmatn', 'Tahoma', 'Segoe UI', system-ui, -apple-system, sans-serif;
     --copy-success: #10b981;
+}
+
+/* ── Vazirmatn Font ─────────────── */
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('../fonts/vazirmatn/Vazirmatn-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('../fonts/vazirmatn/Vazirmatn-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('../fonts/vazirmatn/Vazirmatn-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('../fonts/vazirmatn/Vazirmatn-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('../fonts/vazirmatn/Vazirmatn-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
 }
 
 * {
@@ -51,12 +88,14 @@ body {
     background-attachment: fixed;
 }
 
+/* ── Container ─────────────────────── */
 .container {
     max-width: 880px;
     margin: 0 auto;
     padding: 16px 16px 40px;
 }
 
+/* ── Header ───────────────────────── */
 .header {
     text-align: center;
     padding: 28px 20px 8px;
@@ -93,6 +132,7 @@ body {
     margin-top: 2px;
 }
 
+/* ── Search Section (NOT sticky anymore) ── */
 .search-section {
     position: relative;
     background: var(--surface);
@@ -194,6 +234,7 @@ body {
     font-weight: 700;
 }
 
+/* ── Tag Chips ────────────────────── */
 .tags-container {
     display: flex;
     flex-wrap: wrap;
@@ -286,18 +327,22 @@ body {
     border-color: #fca5a5;
 }
 
+/* ── Site Cards Grid ──────────────── */
 .sites-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
+    align-items: start;
 }
 @media (min-width: 700px) {
     .sites-grid {
         grid-template-columns: 1fr 1fr;
         gap: 12px;
+        align-items: start;
     }
 }
 
+/* ── Site Card ────────────────────── */
 .site-card {
     background: var(--surface);
     border-radius: var(--radius-lg);
@@ -340,6 +385,7 @@ body {
     border-right: 3px solid var(--star);
 }
 
+/* ── Card Main Row ────────────────── */
 .card-main {
     display: flex;
     align-items: center;
@@ -364,8 +410,13 @@ body {
     animation: starPop 0.4s ease;
 }
 @keyframes starPop {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.35); }
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.35);
+    }
 }
 .card-star svg {
     width: 22px;
@@ -462,6 +513,7 @@ body {
     transition: transform var(--transition);
 }
 
+/* ── Expanded Content ─────────────── */
 .card-expanded {
     max-height: 0;
     opacity: 0;
@@ -538,9 +590,16 @@ body {
     animation: copyPulse 0.5s ease;
 }
 @keyframes copyPulse {
-    0%, 100% { transform: scale(1); }
-    30% { transform: scale(1.08); }
-    60% { transform: scale(0.97); }
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.08);
+    }
+    60% {
+        transform: scale(0.97);
+    }
 }
 .expanded-link-label {
     font-size: 0.7rem;
@@ -549,6 +608,7 @@ body {
     letter-spacing: -0.2px;
 }
 
+/* ── Social Media Badges ──────────── */
 .social-title {
     font-size: 0.75rem;
     font-weight: 700;
@@ -584,18 +644,41 @@ body {
 .social-badge:active {
     transform: scale(0.93);
 }
-.social-telegram { background: #26A5E4; }
-.social-instagram { background: #E4405F; }
-.social-twitter { background: #1DA1F2; }
-.social-youtube { background: #FF0000; }
-.social-eitaa { background: #F78F1E; }
-.social-rubika { background: #00BFA5; }
-.social-soroush { background: #5B4DA8; }
-.social-bale { background: #4CAF50; }
-.social-aparat { background: #ED145B; }
-.social-whatsapp { background: #25D366; }
-.social-linkedin { background: #0A66C2; }
+.social-telegram {
+    background: #26A5E4;
+}
+.social-instagram {
+    background: #E4405F;
+}
+.social-twitter {
+    background: #1DA1F2;
+}
+.social-youtube {
+    background: #FF0000;
+}
+.social-eitaa {
+    background: #F78F1E;
+}
+.social-rubika {
+    background: #00BFA5;
+}
+.social-soroush {
+    background: #5B4DA8;
+}
+.social-bale {
+    background: #4CAF50;
+}
+.social-aparat {
+    background: #ED145B;
+}
+.social-whatsapp {
+    background: #25D366;
+}
+.social-linkedin {
+    background: #0A66C2;
+}
 
+/* ── Empty State ──────────────────── */
 .empty-state {
     display: none;
     flex-direction: column;
@@ -623,6 +706,7 @@ body {
     color: var(--text-muted);
 }
 
+/* ── Footer ───────────────────────── */
 .footer {
     text-align: center;
     padding: 24px 16px;
@@ -631,6 +715,7 @@ body {
     letter-spacing: -0.2px;
 }
 
+/* ── Responsive Fine-tuning ───────── */
 @media (max-width: 480px) {
     .container {
         padding: 8px 8px 32px;
@@ -690,6 +775,7 @@ body {
     .sites-grid {
         grid-template-columns: 1fr 1fr;
         gap: 14px;
+        align-items: start;
     }
     .card-main {
         padding: 15px 18px;
@@ -705,5 +791,6 @@ body {
     .sites-grid {
         grid-template-columns: 1fr 1fr 1fr;
         gap: 14px;
+        align-items: start;
     }
 }
