@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ایران‌لینک | مرکز سایت‌های مفید در شرایط نت ملی</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Vazir (با کیفیت فارسی) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f6f9fc 0%, #edf2f7 100%);
+            font-family: 'Vazirmatn', 'Inter', system-ui, -apple-system, sans-serif;
+            padding: 2rem 1.5rem;
+            color: #1e2a3e;
+        }
+
+        /* ظاهر کلی */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* header */
+        .hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e3c72, #2b4f8c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero h1 i {
+            background: none;
+            color: #f5b042;
+            font-size: 2rem;
+        }
+
+        .hero p {
+            color: #4b5b6c;
+            margin-top: 0.5rem;
+            font-weight: 400;
+            font-size: 1rem;
+        }
+
+        /* جستجو و فیلتر */
+        .search-section {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(3px);
+            border-radius: 2rem;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 3rem;
+            padding: 0.3rem 1rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .search-box i {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-family: 'Vazirmatn', inherit;
+            font-size: 1rem;
+            padding: 0.9rem 0;
+            background: transparent;
+            color: #0f172a;
+        }
+
+        .search-box input::placeholder {
+            color: #cbd5e1;
+            font-weight: 400;
+        }
+
+        /* برچسب‌های تگ */
+        .tags-filter {
+            margin-top: 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .filter-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #334155;
+            background: #eef2ff;
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tag-chip {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #2c3e5c;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .tag-chip i {
+            font-size: 0.75rem;
+            margin-left: 5px;
+            color: #6c86a3;
+        }
+
+        .tag-chip:hover {
+            background: #e6f0ff;
+            border-color: #b9d0f0;
+            transform: translateY(-1px);
+        }
+
+        .tag-chip.active {
+            background: #1e4a76;
+            border-color: #1e4a76;
+            color: white;
+        }
+
+        .tag-chip.active i {
+            color: white;
+        }
+
+        .clear-tag {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .clear-tag:hover {
+            background: #e2e8f0;
+        }
+
+        /* تعداد نتایج */
+        .stats {
+            margin: 1rem 0 0.5rem;
+            font-size: 0.85rem;
+            color: #2c3e50;
+            font-weight: 500;
+            padding-right: 0.5rem;
+        }
+
+        /* گرید سایت‌ها */
+        .sites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1rem;
+        }
+
+        /* کارت */
+        .site-card {
+            background: white;
+            border-radius: 1.75rem;
+            box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.2s ease;
+            overflow: hidden;
+            border: 1px solid #edf2f7;
+            cursor: pointer;
+        }
+
+        .site-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.12);
+            border-color: #cbdff2;
+        }
+
+        .card-inner {
+            padding: 1.3rem 1.3rem 1rem 1.3rem;
+        }
+
+        /* هدر کارت (قابل کلیک برای dropdown) */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 0.75rem;
+        }
+
+        .title-area {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .site-name {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #0f2b3d;
+            letter-spacing: -0.2px;
+        }
+
+        .star-suggest {
+            color: #fbbf24;
+            font-size: 1.1rem;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+        }
+
+        .expand-icon {
+            font-size: 1.2rem;
+            color: #7c8ea0;
+            transition: transform 0.25s ease;
+            cursor: pointer;
+            background: #f8fafc;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        /* تگ‌های کوچک داخل کارت */
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 12px 0 14px;
+        }
+
+        .mini-tag {
+            background: #eff3f8;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #2c4c6e;
+        }
+
+        .action-btn {
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .btn-go {
+            background: #1e6f5c;
+            border: none;
+            padding: 0.55rem 1.2rem;
+            border-radius: 2rem;
+            font-family: 'Vazirmatn', inherit;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .btn-go i {
+            font-size: 0.8rem;
+        }
+
+        .btn-go:hover {
+            background: #0f5a4a;
+            transform: scale(0.97);
+        }
+
+        /* بخش جزئیات (drop-down) */
+        .extra-details {
+            display: none;
+            border-top: 1px solid #eef2fa;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            background: #fefefe;
+            border-radius: 0 0 1rem 1rem;
+        }
+
+        .site-card.expanded .extra-details {
+            display: block;
+        }
+
+        .site-card.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: #eef3ff;
+        }
+
+        .detail-row {
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .detail-label {
+            font-weight: 700;
+            color: #1f4a6e;
+            display: inline-block;
+            width: 85px;
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .social-icon {
+            background: #f0f4fa;
+            padding: 6px 12px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            text-decoration: none;
+            color: #2c5282;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+
+        .social-icon i {
+            font-size: 0.9rem;
+        }
+
+        .social-icon:hover {
+            background: #e2eafc;
+            color: #0f3b5c;
+        }
+
+        .main-link a, .original-link a {
+            color: #1e6f5c;
+            text-decoration: none;
+            border-bottom: 1px dashed #b3d4c8;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            background: #ffffffcc;
+            border-radius: 2rem;
+            font-size: 1.1rem;
+            color: #4b5563;
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #7e8c9e;
+            border-top: 1px solid #e2edf7;
+            padding-top: 1.5rem;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+            .sites-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            .card-inner {
+                padding: 1rem;
+            }
+            .detail-label {
+                width: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1><i class="fas fa-globe-asia"></i> سایت‌های بدردبخور ایرانی <span style="background: none; color:#1e6f5c;">| نت ملی</span></h1>
+        <p>دسترسی سریع به سرویس‌های کاربردی • لینک‌های بدون فیلتر • دسته‌بندی هوشمند</p>
+    </div>
+
+    <div class="search-section">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="جستجو با نام سایت یا تگ‌ها ... مثلا «دان», «بازی», «خرید»" autocomplete="off">
+        </div>
+        <div class="tags-filter" id="tagsFilterContainer">
+            <!-- دکمه‌های تگ به صورت داینامیک加载 -->
+        </div>
+        <div class="stats" id="resultStats">در حال بارگذاری...</div>
+    </div>
+
+    <div class="sites-grid" id="sitesGrid"></div>
+    <footer>
+        <i class="fas fa-shield-alt"></i> لینک‌های بدون فیلتر پیشنهادی • تمامی سایت‌ها برای نمایش نمونه • با کلیک روی هر کارت اطلاعات بیشتری نمایش داده می‌شود
+    </footer>
+</div>
+
+<script>
+    // ---------- دیتابیس نمونه از سایت‌های ایرانی (بدردبخور در شرایط نت ملی) ----------
+    const sitesData = [
+        {
+            id: 1,
+            name: "دیجی‌کالا",
+            unfilteredLink: "https://www.digikala.com",
+            mainLink: "https://www.digikala.com",
+            description: "بزرگترین فروشگاه آنلاین ایران، انواع کالاهای دیجیتال، لوازم خانگی، مد و پوشاک.",
+            tags: ["خرید", "الکترونیک", "فروشگاهی", "کالا"],
+            suggested: true,
+            socialLinks: [
+                { name: "اینستاگرام", url: "https://www.instagram.com/digikala", icon: "fab fa-instagram" },
+                { name: "تلگرام", url: "https://t.me/digikala_official", icon: "fab fa-telegram" }
+            ]
+        },
+        {
+            id: 2,
+            name: "دیوار",
+            unfilteredLink: "https://divar.ir",
+            mainLink: "https://divar.ir",
+            description: "بازار خرید و فروش آنلاین آگهی‌های ملکی، خودرو، استخدام و کالاهای دست دوم.",
+            tags: ["آگهی", "خریدوفروش", "املاک", "خودرو"],
+            suggested: true,
+            socialLinks: [
+                { name: "اینستاگرام", url: "https://instagram.com/divar", icon: "fab fa-instagram" },
+                { name: "توییتر", url: "https://twitter.com/divar", icon: "fab fa-twitter" }
+            ]
+        },
+        {
+            id: 3,
+            name: "ترُبو",
+            unfilteredLink: "https://torob.com",
+            mainLink: "https://torob.com",
+            description: "موتور جستجوی قیمت، مقایسه و خرید از فروشگاه‌های معتبر ایران.",
+            tags: ["خرید", "مقایسه قیمت", "کالا"],
+            suggested: false,
+            socialLinks: [
+                { name: "اینستاگرام", url: "https://instagram.com/torob", icon: "fab fa-instagram" },
+                { name: "لینکدین", url: "https://linkedin.com/company/torob", icon: "fab fa-linkedin" }
+            ]
+        },
+        {
+            id: 4,
+            name: "فیلیمو",
+            unfilteredLink: "https://filimo.com",
+            mainLink: "https://filimo.com",
+            description: "پلتفرم تماشای آنلاین فیلم و سریال ایرانی و خارجی (سینمایی، کودک، مستند).",
+            tags: ["فیلم", "سریال", "ویدئو", "سرگرمی"],
+            suggested: false,
+            socialLinks: [
+                { name: "اینستاگرام", url: "https://instagram.com/filimo", icon: "fab fa-instagram" },
+                { name: "تلگرام", url: "https://t.me/filimo", icon: "fab fa-telegram" }
+            ]
+        },
+        {
+            id: 5,
+            name: "بازی‌ سنتر",
+            unfilteredLink: "https://bazicenter.ir",
+            mainLink: "https://bazicenter.ir",
+            description: "مرجع تخصصی دانلود بازی، نرم‌افزار، و معرفی بازی‌های رایانه‌ای و موبایل.",
+            tags: ["بازی", "دانلود", "سرگرمی", "نرم افزار"],
+            suggested: true,
+            socialLinks: [
+                { name: "تلگرام", url: "https://t.me/bazicenter", icon: "fab fa-telegram" },
+                { name: "یوتیوب", url: "https://youtube.com/c/bazicenter", icon: "fab fa-youtube" }
+            ]
+        },
+        {
+            id: 6,
+            name: "دانلودلی",
+            unfilteredLink: "https://downloadly.ir",
+            mainLink: "https://downloadly.ir",
+            description: "دانلود نرم‌افزار، بازی، کتاب و آموزش با لینک مستقیم و پشتیبانی سریع.",
+            tags: ["دانلود", "نرم افزار", "بازی", "آموزشی"],
+            suggested: false,
+            socialLinks: [
+                { name: "اینستاگرام", url: "https://instagram.com/downloadly", icon: "fab fa-instagram" }
+            ]
+        },
+        {
+            id: 7,
+            name: "پیام‌رسان بله",
+            unfilteredLink: "https://bale.ai",
+            mainLink: "https://bale.ai",
+            description: "پیام‌رسان ایرانی با قابلیت‌های گسترده، امن و پرسرعت.",
+            tags: ["پیام رسان", "ارتباطی", "اجتماعی"],
+            suggested: true,
+            socialLinks: [
+                { name: "تلگرام", url: "https://t.me/bale", icon: "fab fa-telegram" },
+                { name: "توییتر", url: "https://twitter.com/bale", icon: "fab fa-twitter" }
+            ]
+        },
+        {
+            id: 8,
+            name: "سایت دانلودها (دانلودها)",
+            unfilteredLink: "https://dlha.ir",
+            mainLink: "https://dlha.ir",
+            description: "منبع به‌روز نرم‌افزار، فیلم، موسیقی و قالب‌های وب با لینک مستقیم.",
+            tags: ["دانلود", "نرم افزار", "قالب وب"],
+            suggested: false,
+            socialLinks: [
+                { name: "تلگرام", url: "https://t.me/dlha", icon: "fab fa-telegram" }
+            ]
+        }
+    ];
+
+    // -------- متغیرهای حالت ----------
+    let currentSearchTerm = "";
+    let currentTagFilter = null;   // تگ انتخاب شده برای فیلتر
+
+    // رفرنس‌های DOM
+    const sitesGrid = document.getElementById("sitesGrid");
+    const searchInput = document.getElementById("searchInput");
+    const tagsFilterContainer = document.getElementById("tagsFilterContainer");
+    const resultStats = document.getElementById("resultStats");
+
+    // ---------- استخراج همه تگ‌های یکتا ----------
+    function getAllUniqueTags() {
+        const allTags = new Set();
+        sitesData.forEach(site => {
+            site.tags.forEach(tag => allTags.add(tag));
+        });
+        return Array.from(allTags).sort();
+    }
+
+    // ---------- رندر دکمه‌های فیلتر تگ ----------
+    function renderTagFilters() {
+        const uniqueTags = getAllUniqueTags();
+        let tagsHtml = `<div class="filter-label"><i class="fas fa-tags"></i> فیلتر برچسب:</div>
+                        <div class="tag-chip clear-tag ${currentTagFilter === null ? 'active' : ''}" data-tag="all">
+                            <i class="fas fa-undo-alt"></i> همه
+                        </div>`;
+        uniqueTags.forEach(tag => {
+            const activeClass = (currentTagFilter === tag) ? 'active' : '';
+            tagsHtml += `<div class="tag-chip ${activeClass}" data-tag="${tag}">
+                            <i class="fas fa-hashtag"></i> ${tag}
+                         </div>`;
+        });
+        tagsFilterContainer.innerHTML = tagsHtml;
+
+        // اضافه کردن رویدادها به تگ‌های فیلتر
+        document.querySelectorAll('.tag-chip').forEach(chip => {
+            chip.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const tagValue = chip.getAttribute('data-tag');
+                if (tagValue === 'all') {
+                    currentTagFilter = null;
+                } else {
+                    currentTagFilter = tagValue;
+                }
+                // رندر مجدد فیلترها (برای هایلایت) و فیلتر کردن سایت‌ها
+                renderTagFilters();   // re-render active state
+                filterAndRenderSites();
+            });
+        });
+    }
+
+    // ---------- فیلتر کردن سایت‌ها بر اساس جستجو و تگ فعلی ----------
+    function filterSites() {
+        let filtered = [...sitesData];
+        
+        // فیلتر جستجو (اسم سایت یا هر کدام از تگ‌ها)
+        if (currentSearchTerm.trim() !== "") {
+            const searchLower = currentSearchTerm.trim().toLowerCase();
+            filtered = filtered.filter(site => {
+                const nameMatch = site.name.toLowerCase().includes(searchLower);
+                const tagMatch = site.tags.some(tag => tag.toLowerCase().includes(searchLower));
+                return nameMatch || tagMatch;
+            });
+        }
+        
+        // فیلتر تگ (دقیق)
+        if (currentTagFilter !== null) {
+            filtered = filtered.filter(site => site.tags.includes(currentTagFilter));
+        }
+        
+        return filtered;
+    }
+
+    // ---------- رندر کارت‌ها (با حفظ وضعیت expanded قبل از بازسازی؟  برای سادگی ریست می‌کنیم) ----------
+    let expandedCardId = null;   // اختیاری برای حفظ وضعیت? ولی چون رندر مجدد می‌شود بهتر است بازشونده نگهداری نشود. dropdown با کلیک جدید مدیریت می‌شود.
+    function renderSites() {
+        const filteredSites = filterSites();
+        resultStats.innerText = `${filteredSites.length} سایت پیدا شد ${currentTagFilter ? ` • تگ: "${currentTagFilter}"` : ''} ${currentSearchTerm ? ` • عبارت: "${currentSearchTerm}"` : ''}`;
+        
+        if (filteredSites.length === 0) {
+            sitesGrid.innerHTML = `<div class="no-results"><i class="fas fa-face-frown"></i>  هیچ سایتی با این جستجو یا برچسب یافت نشد.<br>برچسب دیگری انتخاب کنید یا متن جستجو را تغییر دهید.</div>`;
+            return;
+        }
+        
+        let cardsHtml = "";
+        filteredSites.forEach(site => {
+            const starIcon = site.suggested ? `<span class="star-suggest"><i class="fas fa-star"></i></span>` : ``;
+            // ساخت تگ‌های کوچک داخل کارت
+            const miniTagsHtml = site.tags.map(tg => `<span class="mini-tag">#${tg}</span>`).join('');
+            // ساخت لینک‌های شبکه اجتماعی
+            let socialHtml = '';
+            if (site.socialLinks && site.socialLinks.length) {
+                socialHtml = `<div class="detail-row">
+                                <span class="detail-label"><i class="fas fa-share-alt"></i> شبکه‌ها:</span>
+                                <div class="social-links">`;
+                site.socialLinks.forEach(social => {
+                    const iconClass = social.icon || "fab fa-internet-explorer";
+                    socialHtml += `<a href="${social.url}" target="_blank" rel="noopener noreferrer" class="social-icon" onclick="event.stopPropagation()"><i class="${iconClass}"></i> ${social.name}</a>`;
+                });
+                socialHtml += `</div></div>`;
+            } else {
+                socialHtml = `<div class="detail-row"><span class="detail-label">شبکه‌ها:</span> <span style="color:#8ba0b5;">—</span></div>`;
+            }
+            
+            cardsHtml += `
+                <div class="site-card" data-id="${site.id}" data-name="${site.name}" data-tags="${site.tags.join(',')}">
+                    <div class="card-inner">
+                        <div class="card-header">
+                            <div class="title-area">
+                                <span class="site-name">${escapeHtml(site.name)}</span>
+                                ${starIcon}
+                            </div>
+                            <div class="expand-icon"><i class="fas fa-chevron-down"></i></div>
+                        </div>
+                        <div class="card-tags">
+                            ${miniTagsHtml}
+                        </div>
+                        <div class="action-btn">
+                            <button class="btn-go go-to-site" data-unfiltered="${site.unfilteredLink}"><i class="fas fa-external-link-alt"></i> برو به سایت (بدون فیلتر)</button>
+                        </div>
+                        <!-- بخش دراپ‌داون جزئیات -->
+                        <div class="extra-details">
+                            <div class="detail-row"><span class="detail-label"><i class="fas fa-align-left"></i> توضیحات:</span> ${escapeHtml(site.description)}</div>
+                            <div class="detail-row"><span class="detail-label"><i class="fas fa-link"></i> لینک اصلی:</span> <span class="original-link"><a href="${site.mainLink}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">${site.mainLink}</a></span></div>
+                            ${socialHtml}
+                            <div class="detail-row"><span class="detail-label"><i class="fas fa-tag"></i> تگ‌ها:</span> ${site.tags.map(t => `#${t}`).join(' • ')}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        sitesGrid.innerHTML = cardsHtml;
+        
+        // الحاق رویدادها: کلیک روی کارت (به جز دکمه و لینک اجتماعی) برای باز و بسته شدن drop-down
+        document.querySelectorAll('.site-card').forEach(card => {
+            // رویداد کلیک روی خود کارت (گرفتن event)
+            card.addEventListener('click', (e) => {
+                // اگر روی دکمه یا لینک یا آیکون اجتماعی کلیک شده، نباید توگل شود
+                const target = e.target;
+                if (target.closest('.go-to-site') || target.closest('.social-icon') || target.closest('.original-link a') || target.closest('.main-link a') || target.closest('a')) {
+                    e.stopPropagation();
+                    return;
+                }
+                // همچنین اگر روی expand-icon زده شود باز هم توگل (مجاز)
+                // جلوگیری از تداخل با لینک‌های اجتماعی
+                card.classList.toggle('expanded');
+            });
+            
+            // رویداد جداگانه برای دکمه "برو به سایت" (لینک بدون فیلتر)
+            const goBtn = card.querySelector('.go-to-site');
+            if (goBtn) {
+                goBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const url = goBtn.getAttribute('data-unfiltered');
+                    if (url) {
+                        window.open(url, '_blank', 'noopener,noreferrer');
+                    }
+                });
+            }
+        });
+    }
+    
+    // فیلتر و رندر همزمان (جستجو realtime)
+    function filterAndRenderSites() {
+        renderSites();
+    }
+    
+    // هِلوپر escapeHtml
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+    
+    // رویداد جستجوی realtime
+    function bindSearchEvent() {
+        searchInput.addEventListener('input', (e) => {
+            currentSearchTerm = e.target.value;
+            filterAndRenderSites();
+        });
+    }
+    
+    // راه‌اندازی اولیه
+    function init() {
+        renderTagFilters();
+        bindSearchEvent();
+        filterAndRenderSites(); // اولین رندر
+    }
+    
+    init();
+</script>
+</body>
+</html>
