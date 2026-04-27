@@ -5,7 +5,14 @@
     "mainLink": "https://downloadha.com",
     "unfilteredLink": "https://downloadha.com",
     "description": "مرجع دانلود فیلم، سریال، نرم‌افزار، بازی و موسیقی با لینک مستقیم. یکی از قدیمی‌ترین و معتبرترین سایت‌های دانلود ایرانی.",
-    "tags": ["دانلود", "فیلم", "سریال", "نرم‌افزار", "بازی", "موسیقی"],
+    "tags": [
+      "دانلود",
+      "فیلم",
+      "سریال",
+      "نرم‌افزار",
+      "بازی",
+      "موسیقی"
+    ],
     "recommended": true,
     "social": {
       "telegram": "https://t.me/downloadha",
@@ -13,7 +20,9 @@
       "eitaa": "https://eitaa.com/downloadha",
       "aparat": "https://aparat.com/downloadha",
       "rubika": "https://rubika.ir/downloadha"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 2,
@@ -21,14 +30,21 @@
     "mainLink": "https://downloadli.ir",
     "unfilteredLink": "https://downloadli.ir",
     "description": "سایت دانلود فیلم و سریال با زیرنویس فارسی، کیفیت‌های متنوع و آرشیو قوی از محتوای ایرانی و خارجی.",
-    "tags": ["دانلود", "فیلم", "سریال", "زیرنویس"],
+    "tags": [
+      "دانلود",
+      "فیلم",
+      "سریال",
+      "زیرنویس"
+    ],
     "recommended": true,
     "social": {
       "telegram": "https://t.me/downloadli",
       "instagram": "https://instagram.com/downloadli",
       "eitaa": "https://eitaa.com/downloadli",
       "soroush": "https://soroush.ir/downloadli"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 3,
@@ -36,7 +52,12 @@
     "mainLink": "https://aparat.com",
     "unfilteredLink": "https://aparat.com",
     "description": "بزرگترین پلتفرم اشتراک‌گذاری ویدیو در ایران. تماشای ویدیوهای متنوع، کانال‌های شخصی و پخش زنده.",
-    "tags": ["ویدیو", "اشتراک‌گذاری", "سرگرمی", "پخش زنده"],
+    "tags": [
+      "ویدیو",
+      "اشتراک‌گذاری",
+      "سرگرمی",
+      "پخش زنده"
+    ],
     "recommended": true,
     "social": {
       "telegram": "https://t.me/aparat",
@@ -45,7 +66,9 @@
       "aparat": "https://aparat.com/aparat",
       "eitaa": "https://eitaa.com/aparat",
       "rubika": "https://rubika.ir/aparat"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 4,
@@ -53,7 +76,13 @@
     "mainLink": "https://filimo.com",
     "unfilteredLink": "https://filimo.com",
     "description": "پلتفرم استریم فیلم و سریال ایرانی و خارجی با زیرنویس و دوبله فارسی، پخش آنلاین با کیفیت بالا.",
-    "tags": ["فیلم", "سریال", "استریم", "اشتراکی", "سرگرمی"],
+    "tags": [
+      "فیلم",
+      "سریال",
+      "استریم",
+      "اشتراکی",
+      "سرگرمی"
+    ],
     "recommended": true,
     "social": {
       "telegram": "https://t.me/filimo",
@@ -61,7 +90,9 @@
       "twitter": "https://twitter.com/filimo",
       "aparat": "https://aparat.com/filimo",
       "eitaa": "https://eitaa.com/filimo"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 5,
@@ -69,14 +100,22 @@
     "mainLink": "https://namava.ir",
     "unfilteredLink": "https://namava.ir",
     "description": "سرویس استریم ویدیوی ایرانی با کتابخانه‌ای غنی از فیلم، سریال، مستند و برنامه‌های تلویزیونی.",
-    "tags": ["فیلم", "سریال", "استریم", "اشتراکی", "سرگرمی"],
+    "tags": [
+      "فیلم",
+      "سریال",
+      "استریم",
+      "اشتراکی",
+      "سرگرمی"
+    ],
     "recommended": false,
     "social": {
       "telegram": "https://t.me/namava",
       "instagram": "https://instagram.com/namava",
       "twitter": "https://twitter.com/namava",
       "eitaa": "https://eitaa.com/namava"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 6,
@@ -84,7 +123,12 @@
     "mainLink": "https://digikala.com",
     "unfilteredLink": "https://digikala.com",
     "description": "بزرگترین فروشگاه اینترنتی ایران. خرید انواع کالاهای دیجیتال، لوازم خانگی، مد و پوشاک، کتاب و ...",
-    "tags": ["خرید", "فروشگاه", "محصولات", "کالا"],
+    "tags": [
+      "خرید",
+      "فروشگاه",
+      "محصولات",
+      "کالا"
+    ],
     "recommended": true,
     "social": {
       "telegram": "https://t.me/digikala",
@@ -92,7 +136,9 @@
       "twitter": "https://twitter.com/digikala",
       "aparat": "https://aparat.com/digikala",
       "linkedin": "https://linkedin.com/company/digikala"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 7,
@@ -100,13 +146,20 @@
     "mainLink": "https://torob.com",
     "unfilteredLink": "https://torob.com",
     "description": "موتور جستجوی خرید و مقایسه قیمت محصولات در فروشگاه‌های اینترنتی ایران. بهترین قیمت را پیدا کنید.",
-    "tags": ["خرید", "مقایسه قیمت", "محصولات", "اقتصادی"],
+    "tags": [
+      "خرید",
+      "مقایسه قیمت",
+      "محصولات",
+      "اقتصادی"
+    ],
     "recommended": true,
     "social": {
       "telegram": "https://t.me/torob",
       "instagram": "https://instagram.com/torob",
       "twitter": "https://twitter.com/torob"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 8,
@@ -114,13 +167,20 @@
     "mainLink": "https://virgool.io",
     "unfilteredLink": "https://virgool.io",
     "description": "پلتفرم وبلاگ‌نویسی و محتوای ایرانی. انتشار مقالات، داستان‌ها و نوشته‌های کاربران در موضوعات مختلف.",
-    "tags": ["وبلاگ", "نویسندگی", "محتوا", "مطالعه"],
+    "tags": [
+      "وبلاگ",
+      "نویسندگی",
+      "محتوا",
+      "مطالعه"
+    ],
     "recommended": true,
     "social": {
       "telegram": "https://t.me/virgool",
       "instagram": "https://instagram.com/virgool",
       "twitter": "https://twitter.com/virgool"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 9,
@@ -128,11 +188,17 @@
     "mainLink": "https://mihanblog.com",
     "unfilteredLink": "https://mihanblog.com",
     "description": "سرویس وبلاگ‌دهی قدیمی و محبوب ایرانی. ساخت وبلاگ رایگان با امکانات متنوع.",
-    "tags": ["وبلاگ", "وبلاگدهی", "ساخت وبلاگ"],
+    "tags": [
+      "وبلاگ",
+      "وبلاگدهی",
+      "ساخت وبلاگ"
+    ],
     "recommended": false,
     "social": {
       "telegram": "https://t.me/mihanblog"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 10,
@@ -140,12 +206,18 @@
     "mainLink": "https://blogfa.com",
     "unfilteredLink": "https://blogfa.com",
     "description": "یکی از قدیمی‌ترین سرویس‌های وبلاگ‌دهی فارسی. جامعه بزرگ وبلاگ‌نویسان ایرانی.",
-    "tags": ["وبلاگ", "وبلاگدهی", "جامعه"],
+    "tags": [
+      "وبلاگ",
+      "وبلاگدهی",
+      "جامعه"
+    ],
     "recommended": false,
     "social": {
       "telegram": "https://t.me/blogfa",
       "instagram": "https://instagram.com/blogfa"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 11,
@@ -153,14 +225,21 @@
     "mainLink": "https://sokanacademy.com",
     "unfilteredLink": "https://sokanacademy.com",
     "description": "آکادمی آموزش برنامه‌نویسی و تکنولوژی. دوره‌های آنلاین، مقالات تخصصی و مسیرهای یادگیری.",
-    "tags": ["آموزش", "برنامه‌نویسی", "تکنولوژی", "دوره آنلاین"],
+    "tags": [
+      "آموزش",
+      "برنامه‌نویسی",
+      "تکنولوژی",
+      "دوره آنلاین"
+    ],
     "recommended": true,
     "social": {
       "telegram": "https://t.me/sokanacademy",
       "instagram": "https://instagram.com/sokanacademy",
       "youtube": "https://youtube.com/@sokanacademy",
       "aparat": "https://aparat.com/sokanacademy"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 12,
@@ -168,7 +247,13 @@
     "mainLink": "https://jadi.net",
     "unfilteredLink": "https://jadi.net",
     "description": "وبسایت شخصی جادی میرمیرانی. آموزش‌های برنامه‌نویسی، پادکست، ویدیوهای آموزشی و مطالب جذاب تکنولوژی.",
-    "tags": ["آموزش", "برنامه‌نویسی", "تکنولوژی", "وبلاگ", "پادکست"],
+    "tags": [
+      "آموزش",
+      "برنامه‌نویسی",
+      "تکنولوژی",
+      "وبلاگ",
+      "پادکست"
+    ],
     "recommended": true,
     "social": {
       "telegram": "https://t.me/jadi",
@@ -176,7 +261,9 @@
       "youtube": "https://youtube.com/@jadi",
       "aparat": "https://aparat.com/jadi",
       "instagram": "https://instagram.com/jadi"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 13,
@@ -184,14 +271,22 @@
     "mainLink": "https://cafebazaar.ir",
     "unfilteredLink": "https://cafebazaar.ir",
     "description": "بزرگترین مارکت اپلیکیشن اندروید در ایران. دانلود اپ‌ها، بازی‌ها و برنامه‌های ایرانی.",
-    "tags": ["اپلیکیشن", "اندروید", "فروشگاه", "بازی", "دانلود"],
+    "tags": [
+      "اپلیکیشن",
+      "اندروید",
+      "فروشگاه",
+      "بازی",
+      "دانلود"
+    ],
     "recommended": true,
     "social": {
       "telegram": "https://t.me/cafebazaar",
       "instagram": "https://instagram.com/cafebazaar",
       "twitter": "https://twitter.com/cafebazaar",
       "linkedin": "https://linkedin.com/company/cafebazaar"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 14,
@@ -199,13 +294,21 @@
     "mainLink": "https://taaghche.com",
     "unfilteredLink": "https://taaghche.com",
     "description": "فروشگاه و کتابخوان الکترونیک ایرانی. خرید و مطالعه کتاب‌های الکترونیک و صوتی.",
-    "tags": ["کتاب", "کتابخوان", "کتاب صوتی", "مطالعه", "فروشگاه"],
+    "tags": [
+      "کتاب",
+      "کتابخوان",
+      "کتاب صوتی",
+      "مطالعه",
+      "فروشگاه"
+    ],
     "recommended": true,
     "social": {
       "telegram": "https://t.me/taaghche",
       "instagram": "https://instagram.com/taaghche",
       "twitter": "https://twitter.com/taaghche"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 15,
@@ -213,13 +316,20 @@
     "mainLink": "https://fidibo.com",
     "unfilteredLink": "https://fidibo.com",
     "description": "پلتفرم کتاب الکترونیک و صوتی ایرانی با هزاران عنوان کتاب از ناشران مطرح.",
-    "tags": ["کتاب", "کتابخوان", "کتاب الکترونیک", "مطالعه"],
+    "tags": [
+      "کتاب",
+      "کتابخوان",
+      "کتاب الکترونیک",
+      "مطالعه"
+    ],
     "recommended": false,
     "social": {
       "telegram": "https://t.me/fidibo",
       "instagram": "https://instagram.com/fidibo",
       "twitter": "https://twitter.com/fidibo"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 16,
@@ -227,14 +337,22 @@
     "mainLink": "https://divar.ir",
     "unfilteredLink": "https://divar.ir",
     "description": "پلتفرم خرید و فروش و معاوضه کالا و خدمات. آگهی‌های رایگان در سراسر ایران.",
-    "tags": ["خرید", "فروش", "آگهی", "اقتصادی", "محصولات"],
+    "tags": [
+      "خرید",
+      "فروش",
+      "آگهی",
+      "اقتصادی",
+      "محصولات"
+    ],
     "recommended": true,
     "social": {
       "telegram": "https://t.me/divar",
       "instagram": "https://instagram.com/divar",
       "twitter": "https://twitter.com/divar",
       "linkedin": "https://linkedin.com/company/divar"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 17,
@@ -242,12 +360,19 @@
     "mainLink": "https://sheypoor.com",
     "unfilteredLink": "https://sheypoor.com",
     "description": "سایت آگهی و خرید و فروش اینترنتی. معامله سریع و آسان کالاهای نو و دست دوم.",
-    "tags": ["خرید", "فروش", "آگهی", "اقتصادی"],
+    "tags": [
+      "خرید",
+      "فروش",
+      "آگهی",
+      "اقتصادی"
+    ],
     "recommended": false,
     "social": {
       "telegram": "https://t.me/sheypoor",
       "instagram": "https://instagram.com/sheypoor"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 18,
@@ -255,13 +380,21 @@
     "mainLink": "https://basalam.com",
     "unfilteredLink": "https://basalam.com",
     "description": "بازار آنلاین صنایع دستی و محصولات بومی ایرانی. حمایت از کسب‌وکارهای کوچک و هنرمندان.",
-    "tags": ["خرید", "صنایع دستی", "محصولات", "هنر", "فروشگاه"],
+    "tags": [
+      "خرید",
+      "صنایع دستی",
+      "محصولات",
+      "هنر",
+      "فروشگاه"
+    ],
     "recommended": true,
     "social": {
       "telegram": "https://t.me/basalam",
       "instagram": "https://instagram.com/basalam",
       "eitaa": "https://eitaa.com/basalam"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 19,
@@ -269,13 +402,20 @@
     "mainLink": "https://neshan.org",
     "unfilteredLink": "https://neshan.org",
     "description": "اپلیکیشن و سایت نقشه و مسیریاب ایرانی. ناوبری دقیق با نقشه‌های آفلاین و ترافیک زنده.",
-    "tags": ["نقشه", "مسیریاب", "ناوبری", "اپلیکیشن"],
+    "tags": [
+      "نقشه",
+      "مسیریاب",
+      "ناوبری",
+      "اپلیکیشن"
+    ],
     "recommended": true,
     "social": {
       "telegram": "https://t.me/neshan",
       "instagram": "https://instagram.com/neshan",
       "twitter": "https://twitter.com/neshan"
-    }
+    },
+    "donate": null,
+    "customLinks": []
   },
   {
     "id": 20,
@@ -283,11 +423,69 @@
     "mainLink": "https://balad.ir",
     "unfilteredLink": "https://balad.ir",
     "description": "نقشه و مسیریاب ایرانی با رابط کاربری ساده. مسیریابی دقیق در شهرهای ایران.",
-    "tags": ["نقشه", "مسیریاب", "ناوبری", "اپلیکیشن"],
+    "tags": [
+      "نقشه",
+      "مسیریاب",
+      "ناوبری",
+      "اپلیکیشن"
+    ],
     "recommended": false,
     "social": {
       "telegram": "https://t.me/balad",
       "instagram": "https://instagram.com/balad"
-    }
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 21,
+    "name": "مووی‌یاب",
+    "mainLink": "https://movieyaab.ir",
+    "unfilteredLink": "https://movieyaab.ir",
+    "description": "پلتفرم جستجوی فیلم، سریال و انیمه. جستجوی نام فارسی یا انگلیسی فیلم و سریال، دریافت لینک دانلود و پخش آنلاین. متصل به منابع متنوع شامل MovieBox، Animeone، FilmKio، Moviejavan، Simba و AnimeGate.",
+    "tags": [
+      "فیلم",
+      "سریال",
+      "انیمه",
+      "جستجو",
+      "پخش آنلاین",
+      "دانلود"
+    ],
+    "recommended": true,
+    "social": {
+      "rubika": "https://rubika.ir/movieyaab",
+      "bale": "https://ble.ir/movieyaab",
+      "links": "https://zil.ink/movieyaab"
+    },
+    "donate": "https://movieyaab.ir/donate",
+    "customLinks": []
+  },
+  {
+    "id": 22,
+    "name": "دنیای سریال (سریال بلاگ)",
+    "mainLink": "https://serialblog.top/",
+    "unfilteredLink": "https://donyayeserial.com/",
+    "description": "دانلود فیلم و سریال های خارجی بدون سانسور به همراه زیرنویس و دوبله فارسی کاملا رایگان. آرشیو جامع با بیش از ۱۰ هزار عنوان.",
+    "tags": [
+      "دانلود",
+      "فیلم",
+      "سریال",
+      "بدون سانسور",
+      "زیرنویس",
+      "دوبله",
+      "رایگان"
+    ],
+    "recommended": true,
+    "social": {
+      "telegram_bot": "https://t.me/DonyayeSerialBot",
+      "telegram": "https://t.me/donyayeserialtel",
+      "bale": "https://ble.ir/serial_blog",
+      "rubika": "https://rubika.ir/serialblog"
+    },
+    "donate": "https://daramet.com/donyayeserial",
+    "customLinks": [
+      { "title": "وبلاگ", "url": "https://serialblog.rzb.ir/", "icon": "blog" },
+      { "title": "آرشیو دنیای سریال", "url": "https://dls6.iran-gamecenter-host.com/DonyayeSerial/10_thous.html", "icon": "link" }
+    ]
   }
 ]

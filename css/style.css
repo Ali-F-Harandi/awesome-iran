@@ -677,6 +677,17 @@ body {
 .social-linkedin {
     background: #0A66C2;
 }
+.social-custom {
+    background: #6366f1;
+}
+.custom-links-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(100, 116, 139, 0.25);
+}
 
 /* ── Empty State ──────────────────── */
 .empty-state {
@@ -793,4 +804,38 @@ body {
         gap: 14px;
         align-items: start;
     }
+}
+
+/* ─── Donate Badge ─── */
+.donate-section {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(239, 68, 68, 0.3);
+}
+.donate-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    color: #991b1b;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.donate-badge:hover {
+    background: linear-gradient(135deg, #fecaca, #fca5a5);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+}
+.donate-badge i {
+    color: #ef4444;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
 }

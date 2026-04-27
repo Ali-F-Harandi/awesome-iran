@@ -192,6 +192,7 @@
     function getSocialBadges(social) {
         if (!social) return '';
         const platformConfig = {
+            telegram_bot: { label: 'ربات تلگرام', cls: 'social-telegram', icon: 'fa-solid fa-robot' },
             telegram: { label: 'تلگرام', cls: 'social-telegram', icon: 'fa-brands fa-telegram' },
             instagram: { label: 'اینستاگرام', cls: 'social-instagram', icon: 'fa-brands fa-instagram' },
             twitter: { label: 'توییتر', cls: 'social-twitter', icon: 'fa-brands fa-x-twitter' },
@@ -221,10 +222,39 @@
         }
         return badges.length > 0 ?
             `
-                <div class="social-title">شبکه‌های اجتماعی:</div>
+                <div class="social-title">شبکه‌های اجتماعی و لینک‌های مرتبط:</div>
                 <div class="social-badges">${badges.join('')}</div>
             ` :
             '';
+    }
+
+    // ──────────────────────────────────
+    // Custom Links HTML Generator
+    // ──────────────────────────────────
+    function getCustomLinksHtml(customLinks) {
+        if (!customLinks || !Array.isArray(customLinks) || customLinks.length === 0) return '';
+        const iconMap = {
+            'blog': 'fa-solid fa-blog',
+            'link': 'fa-solid fa-arrow-up-right-from-square',
+            'website': 'fa-solid fa-globe',
+            'download': 'fa-solid fa-download',
+            'archive': 'fa-solid fa-box-archive',
+            'support': 'fa-solid fa-headset',
+            'contact': 'fa-solid fa-envelope',
+            'app': 'fa-solid fa-mobile-screen-button',
+        };
+        const badges = customLinks.map(cl => {
+            const icon = (cl.icon && iconMap[cl.icon]) || iconMap['link'];
+            return `
+                    <a href="${escapeHtml(cl.url)}" target="_blank" rel="noopener noreferrer"
+                       class="social-badge social-custom"
+                       title="${escapeHtml(cl.title)}"
+                       onclick="event.stopPropagation();">
+                        <i class="${icon}"></i> ${escapeHtml(cl.title)}
+                    </a>
+                `;
+        }).join('');
+        return `<div class="custom-links-badges">${badges}</div>`;
     }
 
     // ──────────────────────────────────
@@ -302,6 +332,17 @@
                             </span>
                         </div>
                         ${socialBadgesHtml}
+                        ${getCustomLinksHtml(site.customLinks)}
+                        ${site.donate ? `
+                            <div class="donate-section">
+                                <a href="${escapeHtml(site.donate)}" target="_blank" rel="noopener noreferrer"
+                                   class="donate-badge"
+                                   title="حمایت مالی"
+                                   onclick="event.stopPropagation();">
+                                    <i class="fa-solid fa-heart"></i> حمایت مالی ❤
+                                </a>
+                            </div>
+                        ` : ''}
                     </div>
                 `;
 
