@@ -5,9 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="fonts/fontawesome/css/all.min.css">
     <title>سایت‌های ایرانی - نت ملی</title>
+    <script>
+        // Prevent FOUC: set theme before any rendering
+        (function(){
+            var t = localStorage.getItem('theme');
+            if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" title="تغییر حالت نمایش">
+        <span class="icon-moon">🌙</span>
+        <span class="icon-sun">☀️</span>
+    </button>
+
     <div class="container">
         <!-- Header -->
         <header class="header">
