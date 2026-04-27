@@ -5,18 +5,24 @@ A fully responsive, single-page web directory of Iranian websites, designed for 
 ## ✨ Features
 
 - **Real-time search** by site name, tags, description, and even parts of the URL.
-- **Tag-based filtering** with interactive chips; clicking a tag instantly filters the list.
+- **Tag-based filtering** with interactive pill-shaped chips; clicking a tag instantly filters the list.
+- **Recommended sites** are sorted first with a gold "★ پیشنهادی" badge and a highlighted border.
+- **Results count** shows "نمایش X از Y سایت" to always know how many sites are visible.
+- **URL hash persistence** – filter state is saved in the URL (e.g. `#search=film&tag=دانلود`) so you can share filtered views.
+- **Dark mode** with system preference detection and localStorage persistence.
+- **Back-to-top button** appears after scrolling, for easy navigation on mobile.
 - **Expandable cards** – click on a card (except buttons) to reveal:
   - A description of the site
   - "آدرس اصلی" (main link) and "آدرس فعلی" (unfiltered/alternative link) – clicking them **copies the URL to your clipboard**.
   - Social media and related links (global platforms like Telegram, Instagram, plus Iranian networks like Eitaa, Rubika, Soroush, Bale, Aparat).
   - Custom links (blog, archive, support, etc.).
   - Donate/support link (if available).
-- **Recommended sites** are marked with a star (⭐) and a highlighted border.
-- A single "برو به سایت" (Go to site) button that opens the unfiltered link in a new tab.
-- Fully responsive layout – works on mobile, tablet, and desktop.
-- No external CDN dependencies; all assets are inline.
-- **Standalone site editor** (`site-editor.html`) for managing `sites.json` without editing code directly.
+- **Smooth animations** – cards fade in with staggered delay, hover effects with lift, and transitions throughout.
+- **Responsive grid** using `auto-fit` / `minmax` for fluid column layout without complex media queries.
+- **Accessibility** – focus-visible outlines on all interactive elements, touch-friendly 44px targets, semantic HTML.
+- **Footer** with last-updated date from `meta.json`.
+- No external CDN dependencies; all assets are bundled locally.
+- **Standalone site editor** (`site-editor.html`) for managing `sites.json` and `meta.json` without editing code directly.
 
 ## 📁 Project Structure
 
@@ -25,11 +31,12 @@ awesome-iran/
 ├── index.html              # Main site page
 ├── site-editor.html        # Standalone JSON editor for managing sites
 ├── css/
-│   └── style.css           # All styles
+│   └── style.css           # All styles (emerald green theme + dark mode)
 ├── js/
-│   └── main.js             # Site logic (search, filter, render)
+│   └── main.js             # Site logic (search, filter, render, hash, back-to-top)
 ├── data/
-│   └── sites.json          # Site data (array of site objects)
+│   ├── sites.json          # Site data (array of site objects)
+│   └── meta.json           # Project metadata (lastUpdated date)
 ├── fonts/
 │   ├── vazirmatn/          # Vazirmatn Persian font (woff2)
 │   │   ├── Vazirmatn-Regular.woff2
@@ -48,7 +55,6 @@ awesome-iran/
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml      # GitHub Pages auto-deploy
-├── project.zip             # Ready-to-download archive of the project
 └── README.md
 ```
 
@@ -90,14 +96,12 @@ Each site in the directory is represented by a JSON object in `data/sites.json`:
 | `unfilteredLink` | String | ✅ | An alternative or bypass link. Displayed as "آدرس فعلی" in the card. |
 | `description` | String | ✅ | A short description explaining what the site offers. |
 | `tags` | Array of Strings | ✅ | Keywords for search and filtering. Example: `["دانلود", "فیلم", "سریال"]`. |
-| `recommended` | Boolean | ✅ | If `true`, a ⭐ star and a highlighted border are shown on the card. |
-| `social` | Object | — | Social media links. Keys are platform names, values are full URLs. See supported platforms below. |
-| `donate` | String or `null` | — | A donation/support URL. If present, a "حمایت مالی ❤" button appears in the card. Use `null` to omit. |
-| `customLinks` | Array of Objects | — | Additional custom links (blog, archive, app store, etc.). Each item has `title`, `url`, and `icon` fields. See supported icons below. |
+| `recommended` | Boolean | ✅ | If `true`, a gold "★ پیشنهادی" badge and a highlighted border are shown. |
+| `social` | Object | — | Social media links. Keys are platform names, values are full URLs. |
+| `donate` | String or `null` | — | A donation/support URL. If present, a "حمایت مالی ❤" button appears. Use `null` to omit. |
+| `customLinks` | Array of Objects | — | Additional custom links. Each item has `title`, `url`, and `icon` fields. |
 
 ### Supported Social Platforms
-
-The `social` object accepts any of these platform keys:
 
 | Key | Label | Icon |
 |-----|-------|------|
@@ -116,8 +120,6 @@ The `social` object accepts any of these platform keys:
 
 ### Supported Custom Link Icons
 
-The `icon` field in `customLinks` accepts these values:
-
 | Icon Value | Display Icon |
 |------------|-------------|
 | `link` | 🔗 Link (default) |
@@ -128,17 +130,19 @@ The `icon` field in `customLinks` accepts these values:
 | `support` | 🎧 Support |
 | `contact` | ✉️ Contact |
 | `app` | 📱 App |
+| `heart` | ❤️ Heart |
 
 ## 🛠 Site Editor (`site-editor.html`)
 
-A standalone HTML file for visually editing `sites.json` without touching code:
+A standalone HTML file for visually editing site data without touching code:
 
-- **Import** existing `sites.json` file
+- **Import** existing `sites.json` and `meta.json` files
 - **Add / Delete / Duplicate** sites
 - **Edit** all fields inline (name, links, description, tags, social, donate, custom links)
 - **Drag & drop** to reorder sites
+- **Meta.json editor** with Gregorian → Jalali date auto-conversion
 - **Search** through the list
-- **Export** updated JSON — copy to clipboard or download as `sites.json`
+- **Export** updated JSON — copy to clipboard or download
 
 > The editor works completely standalone — just open it in a browser (no server needed).
 
@@ -170,11 +174,20 @@ This project includes a GitHub Actions workflow (`.github/workflows/deploy.yml`)
 
 ## 📱 Responsive Design
 
-The layout adapts using CSS Grid and media queries:
+The layout uses CSS Grid with `auto-fit` / `minmax(300px, 1fr)`:
 
-- **Mobile** (< 480px): single column, compact padding.
-- **Tablet & Small desktop** (≥ 700px): two columns.
-- **Large screens** (≥ 1300px): three columns for efficient browsing.
+- Automatically adjusts from 1 to 3 columns based on available width.
+- Mobile (< 480px): single column, compact padding.
+- Tablet & desktop: fluid multi-column layout.
+
+## 🎨 Design
+
+- **Emerald green** accent color (#10b981) with warm background gradient.
+- **Vazirmatn** Persian font for excellent readability.
+- **Dark mode** with system preference detection and manual toggle.
+- **Focus-visible** outlines for keyboard accessibility.
+- **44px minimum** touch targets for mobile-friendly interaction.
+- **Smooth animations** — staggered card entrance, hover lift effects, tag transitions.
 
 ## 🔒 No External Dependencies
 

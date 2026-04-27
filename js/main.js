@@ -32,6 +32,14 @@
     let hashUpdateTimer = null;
 
     // ──────────────────────────────────
+    // Persian Digit Converter
+    // ──────────────────────────────────
+    function toPersianDigits(str) {
+        const persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+        return str.toString().replace(/[0-9]/g, d => persianDigits[parseInt(d)]);
+    }
+
+    // ──────────────────────────────────
     // DOM References
     // ──────────────────────────────────
     const searchInput = document.getElementById('searchInput');
@@ -42,6 +50,7 @@
     const emptyState = document.getElementById('emptyState');
     const resultsCount = document.getElementById('resultsCount');
     const footerDateEl = document.getElementById('footerDate');
+    const backToTopBtn = document.getElementById('backToTop');
 
     // ──────────────────────────────────
     // Load Data from JSON
@@ -354,7 +363,7 @@
         if (sites.length === 0) {
             emptyState.classList.add('visible');
             sitesGrid.appendChild(emptyState);
-            resultsCount.innerHTML = 'نمایش <strong>۰</strong> سایت';
+            resultsCount.innerHTML = 'نمایش <strong>۰</strong> از ' + toPersianDigits(sitesData.length) + ' سایت';
             return;
         }
 
@@ -364,7 +373,7 @@
         }
         emptyState.classList.remove('visible');
 
-        resultsCount.innerHTML = 'نمایش <strong>' + sites.length + '</strong> سایت';
+        resultsCount.innerHTML = 'نمایش <strong>' + toPersianDigits(sites.length) + '</strong> از ' + toPersianDigits(sitesData.length) + ' سایت';
 
         sites.forEach((site, index) => {
             const isExpanded = expandedCardIds.has(site.id);
@@ -374,6 +383,9 @@
                 `site-card visible${isExpanded ? ' expanded' : ''}${isRec ? ' recommended' : ''}`;
             card.setAttribute('data-id', site.id);
             card.style.animationDelay = `${index * 0.04}s`;
+
+            // Recommended badge
+            const recBadge = isRec ? '<span class="recommended-badge">\u2605 پیشنهادی</span>' : '';
 
             const socialBadgesHtml = getSocialBadges(site.social);
             const tagsMiniHtml = site.tags.map(t =>
@@ -387,7 +399,7 @@
                         </div>
                         <div class="card-info">
                             <div class="card-name">${escapeHtml(site.name)}</div>
-                            <div class="card-tags-row">${tagsMiniHtml}</div>
+                            <div class="card-tags-row">${recBadge}${tagsMiniHtml}</div>
                         </div>
                         <div class="card-actions">
                             <a href="${escapeHtml(site.unfilteredLink)}"
@@ -490,6 +502,21 @@
         renderSites(filtered);
         scheduleHashUpdate();
     }
+
+    // ──────────────────────────────────
+    // Back-to-Top Button
+    // ──────────────────────────────────
+    function handleScroll() {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
     // ──────────────────────────────────
     // Event Listeners
