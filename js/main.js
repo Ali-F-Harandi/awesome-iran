@@ -29,6 +29,7 @@
     let activeTags = new Set();
     let searchQuery = '';
     let expandedCardIds = new Set();
+    let hashUpdateTimer = null;
 
     // ──────────────────────────────────
     // DOM References
@@ -40,6 +41,7 @@
     const sitesGrid = document.getElementById('sitesGrid');
     const emptyState = document.getElementById('emptyState');
     const resultsCount = document.getElementById('resultsCount');
+    const footerDateEl = document.getElementById('footerDate');
 
     // ──────────────────────────────────
     // Load Data from JSON
@@ -51,10 +53,26 @@
                 throw new Error('خطا در بارگذاری داده‌ها');
             }
             sitesData = await response.json();
+            // Load meta.json for last updated date
+            loadMetaData();
             init();
         } catch (error) {
             console.error('خطا در بارگذاری sites.json:', error);
             resultsCount.innerHTML = '<strong style="color:#ef4444;">خطا در بارگذاری داده‌ها</strong>';
+        }
+    }
+
+    async function loadMetaData() {
+        try {
+            const res = await fetch('data/meta.json');
+            if (!res.ok) return;
+            const meta = await res.json();
+            if (meta.lastUpdated && footerDateEl) {
+                footerDateEl.textContent = meta.lastUpdated;
+                footerDateEl.closest('.footer-date-wrap').style.display = '';
+            }
+        } catch (e) {
+            // Silently ignore meta.json errors
         }
     }
 
@@ -138,6 +156,46 @@
     }
 
     // ──────────────────────────────────
+    // URL Hash Persistence
+    // ──────────────────────────────────
+    function readHash() {
+        const hash = window.location.hash.slice(1);
+        if (!hash) return false;
+        const params = new URLSearchParams(hash);
+        const search = params.get('search');
+        if (search !== null && search !== '') {
+            searchQuery = decodeURIComponent(search);
+            searchInput.value = searchQuery;
+            clearSearchBtn.classList.add('visible');
+        }
+        const tags = params.getAll('tag');
+        if (tags.length > 0) {
+            tags.forEach(t => activeTags.add(decodeURIComponent(t)));
+        }
+        return (search !== null && search !== '') || tags.length > 0;
+    }
+
+    function writeHash() {
+        const params = new URLSearchParams();
+        if (searchQuery.trim()) {
+            params.set('search', searchQuery.trim());
+        }
+        activeTags.forEach(tag => {
+            params.append('tag', tag);
+        });
+        const hashStr = params.toString();
+        const newHash = hashStr ? '#' + hashStr : '';
+        if (window.location.hash !== newHash) {
+            history.replaceState(null, '', location.pathname + newHash);
+        }
+    }
+
+    function scheduleHashUpdate() {
+        clearTimeout(hashUpdateTimer);
+        hashUpdateTimer = setTimeout(writeHash, 150);
+    }
+
+    // ──────────────────────────────────
     // Filter Logic (NOW INCLUDES URL SEARCH)
     // ──────────────────────────────────
     function getFilteredSites() {
@@ -158,6 +216,11 @@
                 site.tags.some(tag => activeTags.has(tag));
 
             return matchesSearch && matchesTags;
+        }).sort((a, b) => {
+            // Recommended items first, then by original order (id)
+            if (a.recommended && !b.recommended) return -1;
+            if (!a.recommended && b.recommended) return 1;
+            return a.id - b.id;
         });
     }
 
@@ -265,6 +328,7 @@
             'support': 'fa-solid fa-headset',
             'contact': 'fa-solid fa-envelope',
             'app': 'fa-solid fa-mobile-screen-button',
+            'heart': 'fa-solid fa-heart',
         };
         const badges = customLinks.map(cl => {
             const icon = (cl.icon && iconMap[cl.icon]) || iconMap['link'];
@@ -424,6 +488,7 @@
             }
         }
         renderSites(filtered);
+        scheduleHashUpdate();
     }
 
     // ──────────────────────────────────
@@ -451,6 +516,17 @@
         resetAllTags();
     });
 
+    // Listen for back/forward navigation to restore hash state
+    window.addEventListener('hashchange', function() {
+        activeTags.clear();
+        searchQuery = '';
+        searchInput.value = '';
+        clearSearchBtn.classList.remove('visible');
+        readHash();
+        renderTagChips();
+        filterAndRender();
+    });
+
     // Keyboard shortcut: Escape to clear search
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
@@ -467,6 +543,8 @@
     // Initial Render
     // ──────────────────────────────────
     function init() {
+        // Restore state from URL hash
+        readHash();
         renderTagChips();
         filterAndRender();
         // Small delay to trigger entrance animations
@@ -479,6 +557,7 @@
         console.log('✅ سایت‌های ایرانی آماده | ' + sitesData.length + ' سایت بارگذاری شد');
         console.log('🔍 قابلیت‌ها: جستجوی Real-time با نام، آدرس و تگ | فیلتر با تگ | کپی آدرس با کلیک');
         console.log('📱 طراحی کاملاً ریسپانسیو | بدون CDN خارجی | بدون شناور بودن بخش جستجو');
+        console.log('🔗 ذخیره و اشتراک‌گذاری وضعیت فیلترها از طریق URL');
     }
 
     // ──────────────────────────────────

@@ -677,6 +677,10 @@
                 <button class="btn btn-primary">📂 ایمپورت sites.json</button>
                 <input type="file" id="fileInput" accept=".json" />
             </div>
+            <div class="file-input-wrapper">
+                <button class="btn">⚙️ ایمپورت meta.json</button>
+                <input type="file" id="metaFileInput" accept=".json" />
+            </div>
             <button class="btn" onclick="loadSampleData()" title="بارگذاری داده نمونه">📋 نمونه</button>
         </div>
         <div class="toolbar-group">
@@ -696,6 +700,28 @@
 
     <!-- Main Content -->
     <div class="main">
+        <!-- Meta.json Section -->
+        <div class="export-section" id="metaSection" style="display:none; margin-top: 24px;">
+            <div class="export-header" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">
+                <h3>📅 تاریخ آخرین به‌روزرسانی (meta.json)</h3>
+                <div style="display:flex; gap:8px;">
+                    <button class="btn btn-sm" onclick="copyMetaJSON()">📋 کپی</button>
+                    <button class="btn btn-sm btn-primary" onclick="downloadMetaJSON()">⬇️ دانلود meta.json</button>
+                </div>
+            </div>
+            <div style="padding: 18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                <div style="flex:1; min-width:200px;">
+                    <label class="field-label">تاریخ شمسی (مثل: ۱۴۰۳/۱۰/۲۵)</label>
+                    <input class="field-input rtl" type="text" id="metaDateInput" placeholder="۱۴۰۳/۱۰/۲۵" oninput="onMetaDateChange(this.value)" />
+                </div>
+                <div style="padding-top:18px;">
+                    <button class="btn btn-sm" onclick="autoSetTodayDate()" title="تنظیم خودکار به تاریخ امروز">
+                        📅 امروز: <span id="todayPreview"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!-- Empty State -->
         <div class="empty-state" id="emptyState">
             <div class="icon">📁</div>
@@ -748,6 +774,7 @@
     let sitesData = [];
     let nextId = 1;
     let searchQuery = '';
+    let metaData = { lastUpdated: '' };
 
     // ═══════════════════════════════════════════
     // Utility Functions
@@ -782,6 +809,38 @@
         output.value = generateJSON();
     }
 
+    // ═══════════════════════════════════════════
+    // Gregorian → Jalali Converter
+    // ═══════════════════════════════════════════
+    function gregorianToJalali(gy, gm, gd) {
+        const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+        let jy, jm, jd, gy2, days;
+        gy2 = (gm > 2) ? (gy + 1) : gy;
+        days = 355666 + (365 * gy) + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100) + Math.floor((gy2 + 399) / 400) + gd + g_d_m[gm - 1];
+        jy = -1595 + (33 * Math.floor(days / 12053));
+        days %= 12053;
+        jy += 4 * Math.floor(days / 1461);
+        days %= 1461;
+        if (days > 365) {
+            jy += Math.floor((days - 1) / 365);
+            days = (days - 1) % 365;
+        }
+        if (days < 186) { jm = 1 + Math.floor(days / 31); jd = 1 + (days % 31); }
+        else { jm = 7 + Math.floor((days - 186) / 30); jd = 1 + ((days - 186) % 30); }
+        return { jy, jm, jd };
+    }
+
+    function toPersianDigits(str) {
+        const persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+        return str.toString().replace(/[0-9]/g, d => persianDigits[parseInt(d)]);
+    }
+
+    function getTodayJalali() {
+        const now = new Date();
+        const { jy, jm, jd } = gregorianToJalali(now.getFullYear(), now.getMonth() + 1, now.getDate());
+        return toPersianDigits(jy + '/' + String(jm).padStart(2,'0') + '/' + String(jd).padStart(2,'0'));
+    }
+
     function updateStats() {
         const statsText = document.getElementById('statsText');
         const countBadge = document.getElementById('countBadge');
@@ -801,6 +860,27 @@
         countBadge.textContent = sitesData.length;
         updateExport();
     }
+
+    // ═══════════════════════════════════════════
+    // Meta.json Import
+    // ═══════════════════════════════════════════
+    document.getElementById('metaFileInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            try {
+                const data = JSON.parse(ev.target.result);
+                metaData.lastUpdated = data.lastUpdated || '';
+                renderMetaSection();
+                showToast('✅ meta.json بارگذاری شد');
+            } catch (err) {
+                showToast('خطا در خواندن meta.json: ' + err.message, 'error');
+            }
+        };
+        reader.readAsText(file);
+        this.value = '';
+    });
 
     // ═══════════════════════════════════════════
     // File Import
@@ -1406,6 +1486,57 @@
         showToast('⬇️ فایل sites.json دانلود شد');
     }
 
+    function downloadMetaJSON() {
+        const json = JSON.stringify(metaData, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'meta.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('⬇️ فایل meta.json دانلود شد');
+    }
+
+    function copyMetaJSON() {
+        const json = JSON.stringify(metaData, null, 2);
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(json).then(() => {
+                showToast('📋 meta.json کپی شد');
+            }).catch(() => {
+                showToast('📋 meta.json کپی شد');
+            });
+        } else {
+            showToast('📋 meta.json کپی شد');
+        }
+    }
+
+    // ═══════════════════════════════════════════
+    // Meta Section Render
+    // ═══════════════════════════════════════════
+    function renderMetaSection() {
+        const container = document.getElementById('metaSection');
+        const input = document.getElementById('metaDateInput');
+        if (input) input.value = metaData.lastUpdated || '';
+        const todayEl = document.getElementById('todayPreview');
+        if (todayEl) todayEl.textContent = getTodayJalali();
+        container.style.display = '';
+    }
+
+    function onMetaDateChange(value) {
+        metaData.lastUpdated = value.trim();
+    }
+
+    function autoSetTodayDate() {
+        const jalali = getTodayJalali();
+        metaData.lastUpdated = jalali;
+        const input = document.getElementById('metaDateInput');
+        if (input) input.value = jalali;
+        showToast('📅 تاریخ به امروز تنظیم شد: ' + jalali);
+    }
+
     // ═══════════════════════════════════════════
     // Keyboard shortcuts
     // ═══════════════════════════════════════════
@@ -1430,6 +1561,7 @@
     // Init
     // ═══════════════════════════════════════════
     updateStats();
+    renderMetaSection();
     </script>
 </body>
 </html>

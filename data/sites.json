@@ -485,7 +485,60 @@
     "donate": "https://daramet.com/donyayeserial",
     "customLinks": [
       { "title": "وبلاگ", "url": "https://serialblog.rzb.ir/", "icon": "blog" },
-      { "title": "آرشیو دنیای سریال", "url": "https://dls6.iran-gamecenter-host.com/DonyayeSerial/10_thous.html", "icon": "archive" }
+      { "title": "آرشیو دنیای سریال", "url": "https://dls6.iran-gamecenter-host.com/DonyayeSerial/10_thous.html", "icon": "link" }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "ذره‌بین",
+    "mainLink": "https://zarebin.ir",
+    "unfilteredLink": "https://zarebin.ir",
+    "description": "جستجوگر هوشمند فارسی با فناوری متا سرچ و هوش مصنوعی. جستجوی آینده در دستان شما — خلاقیت، تولید تصویر، خلاصه‌سازی و پاسخ به سوالات روزمره. اولین هوش مصنوعی ایرانی متصل به وب زنده.",
+    "tags": [
+      "جستجو",
+      "هوش مصنوعی",
+      "متا سرچ",
+      "دستیار هوشمند",
+      "اندروید",
+      "تولید تصویر"
+    ],
+    "recommended": true,
+    "social": {
+      "bale": "https://ble.ir/zarebin",
+      "rubika": "https://rubika.ir/zarebin"
+    },
+    "donate": null,
+    "customLinks": [
+      { "title": "دانلود مستقیم", "url": "https://zarebin.ir/download", "icon": "download" },
+      { "title": "کافه بازار", "url": "https://cafebazaar.ir/app/com.zarebin.browser", "icon": "app" },
+      { "title": "مایکت", "url": "https://myket.ir/app/com.zarebin.browser", "icon": "app" }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "گردو",
+    "mainLink": "https://gerdoo.me",
+    "unfilteredLink": "https://gerdoo.me",
+    "description": "فراجستجوگر ایرانی با حریم شخصی بالا. جستجو در سایت‌ها، عکس‌ها، فیلم‌ها و خبرها. امکان رتبه‌بندی سایت‌ها و تبلیغات.",
+    "tags": [
+      "جستجو",
+      "فراجستجوگر",
+      "حریم شخصی",
+      "وبگرد",
+      "متا سرچ"
+    ],
+    "recommended": true,
+    "social": {
+      "eitaa": "https://eitaa.com/gerdoo_me_channel",
+      "rubika": "https://rubika.ir/gerdoo_me_channel",
+      "bale": "https://ble.ir/gerdoo_me_channel",
+      "telegram": "https://t.me/s/gerdoo_me_channel"
+    },
+    "donate": "https://gerdoo.me/charity/",
+    "customLinks": [
+      { "title": "رتبه‌بندی سایت‌ها", "url": "https://analytics.gerdoo.me/", "icon": "website" },
+      { "title": "تبلیغات", "url": "https://agahi.gerdoo.me/", "icon": "link" },
+      { "title": "کمک به خیریه", "url": "https://gerdoo.me/charity/", "icon": "heart" }
     ]
   }
 ]
