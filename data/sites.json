@@ -4,13 +4,12 @@
     "name": "دانلودها",
     "mainLink": "https://downloadha.com",
     "unfilteredLink": "https://downloadha.com",
-    "description": "مرجع دانلود فیلم، سریال، نرم‌افزار، بازی و موسیقی با لینک مستقیم. یکی از قدیمی‌ترین و معتبرترین سایت‌های دانلود ایرانی.",
+    "description": "مرجع دانلود نرم‌افزار و بازی با لینک مستقیم. یکی از قدیمی‌ترین و معتبرترین سایت‌های دانلود ایرانی.",
     "tags": [
       "دانلود",
-      "فیلم و سریال",
-      "نرم‌افزار",
       "بازی",
-      "موسیقی"
+      "نرم‌افزار",
+      "آموزش"
     ],
     "recommended": true,
     "social": {
@@ -24,27 +23,6 @@
     "customLinks": []
   },
   {
-    "id": 2,
-    "name": "دانلود لی",
-    "mainLink": "https://downloadli.ir",
-    "unfilteredLink": "https://downloadli.ir",
-    "description": "سایت دانلود فیلم و سریال با زیرنویس فارسی، کیفیت‌های متنوع و آرشیو قوی از محتوای ایرانی و خارجی.",
-    "tags": [
-      "دانلود",
-      "فیلم و سریال",
-      "زیرنویس"
-    ],
-    "recommended": true,
-    "social": {
-      "telegram": "https://t.me/downloadli",
-      "instagram": "https://instagram.com/downloadli",
-      "eitaa": "https://eitaa.com/downloadli",
-      "soroush": "https://soroush.ir/downloadli"
-    },
-    "donate": null,
-    "customLinks": []
-  },
-  {
     "id": 3,
     "name": "آپارات",
     "mainLink": "https://aparat.com",
@@ -53,7 +31,6 @@
     "tags": [
       "ویدیو",
       "اشتراک‌گذاری",
-      "سرگرمی",
       "پخش زنده"
     ],
     "recommended": true,
@@ -233,30 +210,6 @@
       "instagram": "https://instagram.com/sokanacademy",
       "youtube": "https://youtube.com/@sokanacademy",
       "aparat": "https://aparat.com/sokanacademy"
-    },
-    "donate": null,
-    "customLinks": []
-  },
-  {
-    "id": 12,
-    "name": "جادی",
-    "mainLink": "https://jadi.net",
-    "unfilteredLink": "https://jadi.net",
-    "description": "وبسایت شخصی جادی میرمیرانی. آموزش‌های برنامه‌نویسی، پادکست، ویدیوهای آموزشی و مطالب جذاب تکنولوژی.",
-    "tags": [
-      "آموزش",
-      "برنامه‌نویسی",
-      "تکنولوژی",
-      "وبلاگ",
-      "پادکست"
-    ],
-    "recommended": true,
-    "social": {
-      "telegram": "https://t.me/jadi",
-      "twitter": "https://twitter.com/jadi",
-      "youtube": "https://youtube.com/@jadi",
-      "aparat": "https://aparat.com/jadi",
-      "instagram": "https://instagram.com/jadi"
     },
     "donate": null,
     "customLinks": []
@@ -478,8 +431,16 @@
     },
     "donate": "https://daramet.com/donyayeserial",
     "customLinks": [
-      { "title": "وبلاگ", "url": "https://serialblog.rzb.ir/", "icon": "blog" },
-      { "title": "آرشیو دنیای سریال", "url": "https://dls6.iran-gamecenter-host.com/DonyayeSerial/10_thous.html", "icon": "link" }
+      {
+        "title": "وبلاگ",
+        "url": "https://serialblog.rzb.ir/",
+        "icon": "blog"
+      },
+      {
+        "title": "آرشیو دنیای سریال",
+        "url": "https://dls6.iran-gamecenter-host.com/DonyayeSerial/10_thous.html",
+        "icon": "link"
+      }
     ]
   },
   {
@@ -503,9 +464,21 @@
     },
     "donate": null,
     "customLinks": [
-      { "title": "دانلود مستقیم", "url": "https://zarebin.ir/download", "icon": "download" },
-      { "title": "کافه بازار", "url": "https://cafebazaar.ir/app/com.zarebin.browser", "icon": "app" },
-      { "title": "مایکت", "url": "https://myket.ir/app/com.zarebin.browser", "icon": "app" }
+      {
+        "title": "دانلود مستقیم",
+        "url": "https://zarebin.ir/download",
+        "icon": "download"
+      },
+      {
+        "title": "کافه بازار",
+        "url": "https://cafebazaar.ir/app/com.zarebin.browser",
+        "icon": "app"
+      },
+      {
+        "title": "مایکت",
+        "url": "https://myket.ir/app/com.zarebin.browser",
+        "icon": "app"
+      }
     ]
   },
   {
@@ -530,9 +503,21 @@
     },
     "donate": "https://gerdoo.me/charity/",
     "customLinks": [
-      { "title": "رتبه‌بندی سایت‌ها", "url": "https://analytics.gerdoo.me/", "icon": "website" },
-      { "title": "تبلیغات", "url": "https://agahi.gerdoo.me/", "icon": "link" },
-      { "title": "کمک به خیریه", "url": "https://gerdoo.me/charity/", "icon": "heart" }
+      {
+        "title": "رتبه‌بندی سایت‌ها",
+        "url": "https://analytics.gerdoo.me/",
+        "icon": "website"
+      },
+      {
+        "title": "تبلیغات",
+        "url": "https://agahi.gerdoo.me/",
+        "icon": "link"
+      },
+      {
+        "title": "کمک به خیریه",
+        "url": "https://gerdoo.me/charity/",
+        "icon": "heart"
+      }
     ]
   },
   {
@@ -552,12 +537,36 @@
     },
     "donate": null,
     "customLinks": [
-      { "title": "هوش مصنوعی رایگان", "url": "https://llm.bertina.ir/", "icon": "link" },
-      { "title": "ایمیل رایگان", "url": "https://www.bertinamail.com/", "icon": "link" },
-      { "title": "مترجم رایگان", "url": "https://translate.bertina.ir/", "icon": "link" },
-      { "title": "DNS رایگان", "url": "https://www.bertina.ir/dns", "icon": "link" },
-      { "title": "هواشناسی", "url": "https://weather.bertina.ir/", "icon": "link" },
-      { "title": "درباره برتینا", "url": "https://www.bertina.ir/about-us", "icon": "website" }
+      {
+        "title": "هوش مصنوعی رایگان",
+        "url": "https://llm.bertina.ir/",
+        "icon": "link"
+      },
+      {
+        "title": "ایمیل رایگان",
+        "url": "https://www.bertinamail.com/",
+        "icon": "contact"
+      },
+      {
+        "title": "مترجم رایگان",
+        "url": "https://translate.bertina.ir/",
+        "icon": "link"
+      },
+      {
+        "title": "DNS رایگان",
+        "url": "https://www.bertina.ir/dns",
+        "icon": "link"
+      },
+      {
+        "title": "هواشناسی",
+        "url": "https://weather.bertina.ir/",
+        "icon": "link"
+      },
+      {
+        "title": "درباره برتینا",
+        "url": "https://www.bertina.ir/about-us",
+        "icon": "website"
+      }
     ]
   },
   {
@@ -570,11 +579,15 @@
       "بازی",
       "دانلود",
       "فارسی ساز",
-      "کامپیوتر"
+      "کامپیوتر",
+      "اندروید",
+      "نرم افزار"
     ],
     "recommended": true,
     "social": {
-      "twitter": "https://twitter.com/kingtimes"
+      "rubika": "https://rubika.ir/vgdl2033",
+      "eitaa": "https://eitaa.com/vgdl_ir",
+      "telegram": "https://t.me/gbox_ir"
     },
     "donate": null,
     "customLinks": []
@@ -600,12 +613,36 @@
     },
     "donate": null,
     "customLinks": [
-      { "title": "فروشگاه", "url": "https://fansub.ir/shop/", "icon": "link" },
-      { "title": "فارسی‌سازهای رایگان", "url": "https://fansub.ir/product-category/free-sub/", "icon": "link" },
-      { "title": "مقالات", "url": "https://fansub.ir/blog/", "icon": "blog" },
-      { "title": "سوالات پرتکرار", "url": "https://fansub.ir/faq/", "icon": "link" },
-      { "title": "درباره ما", "url": "https://fansub.ir/%d8%af%d8%b1%d8%a8%d8%a7%d8%b1%d9%87-%d9%85%d8%a7/", "icon": "website" },
-      { "title": "ارتباط با ما", "url": "https://fansub.ir/joint-us/", "icon": "link" }
+      {
+        "title": "فروشگاه",
+        "url": "https://fansub.ir/shop/",
+        "icon": "link"
+      },
+      {
+        "title": "فارسی‌سازهای رایگان",
+        "url": "https://fansub.ir/product-category/free-sub/",
+        "icon": "link"
+      },
+      {
+        "title": "مقالات",
+        "url": "https://fansub.ir/blog/",
+        "icon": "blog"
+      },
+      {
+        "title": "سوالات پرتکرار",
+        "url": "https://fansub.ir/faq/",
+        "icon": "link"
+      },
+      {
+        "title": "درباره ما",
+        "url": "https://fansub.ir/%d8%af%d8%b1%d8%a8%d8%a7%d8%b1%d9%87-%d9%85%d8%a7/",
+        "icon": "website"
+      },
+      {
+        "title": "ارتباط با ما",
+        "url": "https://fansub.ir/joint-us/",
+        "icon": "link"
+      }
     ]
   }
 ]
