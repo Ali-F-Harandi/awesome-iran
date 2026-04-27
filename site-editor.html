@@ -602,12 +602,28 @@
             cursor: grab;
             color: var(--text-muted);
             font-size: 16px;
-            padding: 4px;
+            padding: 4px 6px;
             user-select: none;
             opacity: 0.4;
             transition: opacity var(--transition);
         }
         .drag-handle:hover { opacity: 1; }
+        .drag-handle:active { cursor: grabbing; }
+
+        /* ─── Drag & Drop States ─── */
+        .site-card.dragging {
+            opacity: 0.4;
+            box-shadow: 0 0 0 2px var(--primary);
+            transform: scale(0.98);
+        }
+        .site-card.drag-over-top {
+            border-top: 3px solid var(--primary);
+            margin-top: -2px;
+        }
+        .site-card.drag-over-bottom {
+            border-bottom: 3px solid var(--primary);
+            margin-bottom: -2px;
+        }
 
         /* ─── Section Divider ─── */
         .section-divider {
@@ -884,10 +900,10 @@
         }
 
         container.innerHTML = filtered.map((site, idx) => `
-            <div class="site-card" id="card-${site.id}">
+            <div class="site-card" id="card-${site.id}" draggable="true" data-id="${site.id}" ondragstart="onDragStart(event, ${site.id})" ondragover="onDragOver(event)" ondrop="onDrop(event, ${site.id})" ondragend="onDragEnd(event)">
                 <div class="site-card-header" onclick="toggleCard(${site.id})">
                     <div class="title-area">
-                        <span class="drag-handle" title="جابجایی" onclick="event.stopPropagation()">⠿</span>
+                        <span class="drag-handle" title="برای جابجایی بکشید و رها کنید" onmousedown="event.stopPropagation()">⠿</span>
                         <span class="site-id">${site.id}</span>
                         <span class="site-name">${escapeHtml(site.name) || '(بدون نام)'}</span>
                         <span class="site-url">${escapeHtml(site.mainLink)}</span>
@@ -955,13 +971,13 @@
 
             <!-- Recommended -->
             <div class="field-group">
-                <label class="toggle-wrapper">
+                <div class="toggle-wrapper" onclick="event.stopPropagation()">
                     <label class="toggle">
                         <input type="checkbox" ${site.recommended ? 'checked' : ''} onchange="updateField(${site.id}, 'recommended', this.checked)" />
                         <span class="slider"></span>
                     </label>
                     <span class="toggle-label">سایت پیشنهادی ⭐</span>
-                </label>
+                </div>
             </div>
 
             <!-- Tags -->
@@ -1001,6 +1017,68 @@
                 <button class="btn btn-sm" onclick="moveSite(${site.id}, 1)">⬇️ پایین</button>
             </div>
         `;
+    }
+
+    // ═══════════════════════════════════════════
+    // Drag & Drop Reordering
+    // ═══════════════════════════════════════════
+    let draggedId = null;
+
+    function onDragStart(e, id) {
+        draggedId = id;
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', id);
+        // Add a small delay so the browser captures the drag image before styling
+        setTimeout(() => {
+            const card = document.getElementById('card-' + id);
+            if (card) card.classList.add('dragging');
+        }, 0);
+    }
+
+    function onDragOver(e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        const card = e.currentTarget;
+        const rect = card.getBoundingClientRect();
+        const midY = rect.top + rect.height / 2;
+        card.classList.remove('drag-over-top', 'drag-over-bottom');
+        if (e.clientY < midY) {
+            card.classList.add('drag-over-top');
+        } else {
+            card.classList.add('drag-over-bottom');
+        }
+    }
+
+    function onDrop(e, targetId) {
+        e.preventDefault();
+        if (draggedId === null || draggedId === targetId) return;
+
+        const fromIndex = sitesData.findIndex(s => s.id === draggedId);
+        const toIndex = sitesData.findIndex(s => s.id === targetId);
+        if (fromIndex === -1 || toIndex === -1) return;
+
+        // Calculate actual insert position based on cursor
+        const card = e.currentTarget;
+        const rect = card.getBoundingClientRect();
+        const midY = rect.top + rect.height / 2;
+        let insertIndex = e.clientY < midY ? toIndex : toIndex + 1;
+        if (fromIndex < toIndex) insertIndex--;
+
+        // Remove from old position
+        const [moved] = sitesData.splice(fromIndex, 1);
+        // Insert at new position
+        sitesData.splice(insertIndex, 0, moved);
+
+        renderList();
+        updateExport();
+        showToast(`آیتم جابجا شد`);
+    }
+
+    function onDragEnd(e) {
+        draggedId = null;
+        document.querySelectorAll('.site-card').forEach(card => {
+            card.classList.remove('dragging', 'drag-over-top', 'drag-over-bottom');
+        });
     }
 
     // ═══════════════════════════════════════════

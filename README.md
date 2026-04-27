@@ -1,81 +1,189 @@
 # 🇮🇷 Iranian Useful Sites Directory
 
-A fully responsive, single-page web directory of Iranian websites, designed for ease of use during the national internet (intranet) period.
+A fully responsive, single-page web directory of Iranian websites, designed for ease of use during the national internet (intranet) period. The page loads without any external CDN – all fonts, styles, and icons are self-contained.
 
 ## ✨ Features
 
-- **Real-time search** by site name, tags, description, and URL
-- **Tag-based filtering** with interactive chips
-- **Expandable cards** with description, copy-to-clipboard links, and social media badges
-- **FontAwesome icons** and **Vazirmatn Persian font** — all bundled locally (no CDN)
-- Fully responsive layout (1/2/3 columns)
+- **Real-time search** by site name, tags, description, and even parts of the URL.
+- **Tag-based filtering** with interactive chips; clicking a tag instantly filters the list.
+- **Expandable cards** – click on a card (except buttons) to reveal:
+  - A description of the site
+  - "آدرس اصلی" (main link) and "آدرس فعلی" (unfiltered/alternative link) – clicking them **copies the URL to your clipboard**.
+  - Social media and related links (global platforms like Telegram, Instagram, plus Iranian networks like Eitaa, Rubika, Soroush, Bale, Aparat).
+  - Custom links (blog, archive, support, etc.).
+  - Donate/support link (if available).
+- **Recommended sites** are marked with a star (⭐) and a highlighted border.
+- A single "برو به سایت" (Go to site) button that opens the unfiltered link in a new tab.
+- Fully responsive layout – works on mobile, tablet, and desktop.
+- No external CDN dependencies; all assets are inline.
+- **Standalone site editor** (`site-editor.html`) for managing `sites.json` without editing code directly.
 
 ## 📁 Project Structure
 
 ```
 awesome-iran/
-├── index.html
+├── index.html              # Main site page
+├── site-editor.html        # Standalone JSON editor for managing sites
 ├── css/
-│   └── style.css
+│   └── style.css           # All styles
 ├── js/
-│   └── main.js
+│   └── main.js             # Site logic (search, filter, render)
 ├── data/
-│   └── sites.json
+│   └── sites.json          # Site data (array of site objects)
 ├── fonts/
-│   ├── vazirmatn/          # Persian font (local)
+│   ├── vazirmatn/          # Vazirmatn Persian font (woff2)
 │   │   ├── Vazirmatn-Regular.woff2
 │   │   ├── Vazirmatn-Bold.woff2
 │   │   ├── Vazirmatn-Medium.woff2
 │   │   ├── Vazirmatn-SemiBold.woff2
 │   │   └── Vazirmatn-Black.woff2
-│   └── fontawesome/        # FA 6 icons (local)
-│       ├── css/all.min.css
+│   └── fontawesome/        # Font Awesome 6 icons
+│       ├── css/
+│       │   └── all.min.css
 │       └── webfonts/
-├── .github/workflows/
-│   └── deploy.yml
+│           ├── fa-solid-900.woff2
+│           ├── fa-regular-400.woff2
+│           ├── fa-brands-400.woff2
+│           └── ...
+├── .github/
+│   └── workflows/
+│       └── deploy.yml      # GitHub Pages auto-deploy
+├── project.zip             # Ready-to-download archive of the project
 └── README.md
 ```
 
-## 📦 Sample Data Record
+## 📦 Data Structure
+
+Each site in the directory is represented by a JSON object in `data/sites.json`:
 
 ```json
 {
-  "id": 1,
-  "name": "دانلودها",
-  "mainLink": "https://downloadha.com",
-  "unfilteredLink": "https://downloadha.com",
-  "description": "مرجع دانلود فیلم، سریال، نرم‌افزار، بازی و موسیقی با لینک مستقیم. یکی از قدیمی‌ترین و معتبرترین سایت‌های دانلود ایرانی.",
-  "tags": ["دانلود", "فیلم", "سریال", "نرم‌افزار", "بازی", "موسیقی"],
+  "id": 21,
+  "name": "مووی‌یاب",
+  "mainLink": "https://movieyaab.ir",
+  "unfilteredLink": "https://movieyaab.ir",
+  "description": "پلتفرم جستجوی فیلم، سریال و انیمه.",
+  "tags": ["فیلم", "سریال", "انیمه", "جستجو", "پخش آنلاین", "دانلود"],
   "recommended": true,
   "social": {
-    "telegram": "https://t.me/downloadha",
-    "instagram": "https://instagram.com/downloadha_ir",
-    "eitaa": "https://eitaa.com/downloadha",
-    "aparat": "https://aparat.com/downloadha",
-    "rubika": "https://rubika.ir/downloadha"
-  }
+    "telegram_bot": "https://t.me/example_bot",
+    "telegram": "https://t.me/example",
+    "instagram": "https://instagram.com/example",
+    "rubika": "https://rubika.ir/example",
+    "bale": "https://ble.ir/example"
+  },
+  "donate": "https://example.com/donate",
+  "customLinks": [
+    { "title": "وبلاگ", "url": "https://blog.example.com", "icon": "blog" },
+    { "title": "آرشیو", "url": "https://archive.example.com", "icon": "archive" }
+  ]
 }
 ```
 
-## 🛠 Usage
+### Field Details
 
-1. Clone or download the repository
-2. Start a local HTTP server (required for JSON fetch):
-   ```bash
-   python3 -m http.server 8000
-   # or
-   npx serve .
-   ```
-3. Open `http://localhost:8000` in your browser
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | Number | ✅ | A unique numeric ID for the site. |
+| `name` | String | ✅ | Display name of the site (Persian or English). |
+| `mainLink` | String | ✅ | The primary domain/URL of the site. |
+| `unfilteredLink` | String | ✅ | An alternative or bypass link. Displayed as "آدرس فعلی" in the card. |
+| `description` | String | ✅ | A short description explaining what the site offers. |
+| `tags` | Array of Strings | ✅ | Keywords for search and filtering. Example: `["دانلود", "فیلم", "سریال"]`. |
+| `recommended` | Boolean | ✅ | If `true`, a ⭐ star and a highlighted border are shown on the card. |
+| `social` | Object | — | Social media links. Keys are platform names, values are full URLs. See supported platforms below. |
+| `donate` | String or `null` | — | A donation/support URL. If present, a "حمایت مالی ❤" button appears in the card. Use `null` to omit. |
+| `customLinks` | Array of Objects | — | Additional custom links (blog, archive, app store, etc.). Each item has `title`, `url`, and `icon` fields. See supported icons below. |
 
-## 📝 Adding New Sites
+### Supported Social Platforms
 
-Edit `data/sites.json` and add a new object following the sample structure above.
+The `social` object accepts any of these platform keys:
 
-## 🚀 GitHub Pages
+| Key | Label | Icon |
+|-----|-------|------|
+| `telegram` | تلگرام | Telegram |
+| `telegram_bot` | ربات تلگرام | Robot |
+| `instagram` | اینستاگرام | Instagram |
+| `twitter` | توییتر | X (Twitter) |
+| `youtube` | یوتیوب | YouTube |
+| `eitaa` | ایتا | Paper Plane |
+| `rubika` | روبیکا | Chat Dots |
+| `soroush` | سروش | Feather |
+| `bale` | بله | Dove |
+| `aparat` | آپارات | Video |
+| `whatsapp` | واتساپ | WhatsApp |
+| `linkedin` | لینکدین | LinkedIn |
 
-The included `.github/workflows/deploy.yml` automatically deploys to GitHub Pages on every push to `main`.
+### Supported Custom Link Icons
+
+The `icon` field in `customLinks` accepts these values:
+
+| Icon Value | Display Icon |
+|------------|-------------|
+| `link` | 🔗 Link (default) |
+| `blog` | 📝 Blog |
+| `website` | 🌐 Website |
+| `download` | ⬇️ Download |
+| `archive` | 📦 Archive |
+| `support` | 🎧 Support |
+| `contact` | ✉️ Contact |
+| `app` | 📱 App |
+
+## 🛠 Site Editor (`site-editor.html`)
+
+A standalone HTML file for visually editing `sites.json` without touching code:
+
+- **Import** existing `sites.json` file
+- **Add / Delete / Duplicate** sites
+- **Edit** all fields inline (name, links, description, tags, social, donate, custom links)
+- **Drag & drop** to reorder sites
+- **Search** through the list
+- **Export** updated JSON — copy to clipboard or download as `sites.json`
+
+> The editor works completely standalone — just open it in a browser (no server needed).
+
+## 🚀 Usage
+
+1. Clone or download the repository.
+2. Open `index.html` in any modern browser (requires a local server for JSON loading, e.g. `python3 -m http.server` or VS Code Live Server).
+3. Use the search box to find sites by name, URL, or tag.
+4. Click on tag chips to filter by category.
+5. Click on a card to expand and see more details, then click on any link label to copy the URL.
+6. Press the "برو به سایت" button to directly visit a site in a new tab.
+
+### To Edit Sites:
+1. Open `site-editor.html` in a browser.
+2. Import your `sites.json` file.
+3. Edit, add, remove, or reorder sites.
+4. Download or copy the updated JSON.
+5. Replace `data/sites.json` with the new content.
+
+## 🚀 Deployment to GitHub Pages
+
+This project includes a GitHub Actions workflow (`.github/workflows/deploy.yml`) that automatically deploys to GitHub Pages on every push to the `main` branch.
+
+### Setup Steps:
+1. Go to your repository **Settings** → **Pages**
+2. Under **Source**, select **GitHub Actions**
+3. Push your code to the `main` branch
+4. The site will be automatically built and deployed
+
+## 📱 Responsive Design
+
+The layout adapts using CSS Grid and media queries:
+
+- **Mobile** (< 480px): single column, compact padding.
+- **Tablet & Small desktop** (≥ 700px): two columns.
+- **Large screens** (≥ 1300px): three columns for efficient browsing.
 
 ## 🔒 No External Dependencies
 
-All assets (Vazirmatn font, FontAwesome icons) are bundled locally — no CDN required.
+The page is completely self-contained:
+
+- **Vazirmatn** Persian font is bundled locally (woff2) in `fonts/vazirmatn/`.
+- **Font Awesome 6** icons are bundled locally in `fonts/fontawesome/` — no CDN required.
+- All styles and scripts are separate files but self-contained.
+
+## 📄 License
+
+This project is provided for educational and community use. Feel free to adapt and share.
