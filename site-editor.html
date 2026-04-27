@@ -809,7 +809,9 @@
                     description: s.description || '',
                     tags: Array.isArray(s.tags) ? [...s.tags] : [],
                     recommended: !!s.recommended,
-                    social: (s.social && typeof s.social === 'object') ? { ...s.social } : {}
+                    social: (s.social && typeof s.social === 'object') ? { ...s.social } : {},
+                    donate: s.donate || null,
+                    customLinks: Array.isArray(s.customLinks) ? s.customLinks.map(cl => ({ ...cl })) : []
                 }));
                 nextId = getNextId();
                 renderList();
@@ -979,6 +981,20 @@
                 <button class="btn btn-sm" onclick="addSocial(${site.id})" style="margin-top:8px;">➕ افزودن شبکه اجتماعی</button>
             </div>
 
+            <!-- Donate -->
+            <div class="section-divider">❤️ حمایت مالی</div>
+            <div class="field-group">
+                <label class="field-label">لینک حمایت مالی (donate)</label>
+                <input class="field-input" type="text" value="${escapeHtml(site.donate || '')}" placeholder="https://... (خالی = بدون لینک)" dir="ltr" onchange="updateField(${site.id}, 'donate', this.value || null)" />
+            </div>
+
+            <!-- Custom Links -->
+            <div class="section-divider">🔗 لینک‌های کاستوم (customLinks)</div>
+            <div class="field-group" id="customlinks-${site.id}">
+                ${renderCustomLinksEntries(site.id, site.customLinks || [])}
+                <button class="btn btn-sm" onclick="addCustomLink(${site.id})" style="margin-top:8px;">➕ افزودن لینک کاستوم</button>
+            </div>
+
             <!-- Move buttons -->
             <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
                 <button class="btn btn-sm" onclick="moveSite(${site.id}, -1)">⬆️ بالا</button>
@@ -1131,6 +1147,63 @@
     }
 
     // ═══════════════════════════════════════════
+    // Custom Links Management
+    // ═══════════════════════════════════════════
+    function renderCustomLinksEntries(siteId, customLinks) {
+        if (!customLinks || customLinks.length === 0) return '';
+        return customLinks.map((cl, i) => `
+            <div class="social-entry">
+                <input class="field-input" type="text" value="${escapeHtml(cl.title || '')}" placeholder="عنوان (مثل: وبلاگ)" onchange="updateCustomLink(${siteId}, ${i}, 'title', this.value)" style="flex:0 0 140px;" />
+                <input class="field-input" type="text" value="${escapeHtml(cl.url || '')}" placeholder="https://..." dir="ltr" onchange="updateCustomLink(${siteId}, ${i}, 'url', this.value)" style="flex:1;" />
+                <select class="field-input" style="flex:0 0 130px;" onchange="updateCustomLink(${siteId}, ${i}, 'icon', this.value)">
+                    <option value="link" ${cl.icon === 'link' ? 'selected' : ''}>🔗 لینک</option>
+                    <option value="blog" ${cl.icon === 'blog' ? 'selected' : ''}>📝 وبلاگ</option>
+                    <option value="website" ${cl.icon === 'website' ? 'selected' : ''}>🌐 وبسایت</option>
+                    <option value="download" ${cl.icon === 'download' ? 'selected' : ''}>⬇️ دانلود</option>
+                    <option value="archive" ${cl.icon === 'archive' ? 'selected' : ''}>📦 آرشیو</option>
+                    <option value="support" ${cl.icon === 'support' ? 'selected' : ''}>🎧 پشتیبانی</option>
+                    <option value="contact" ${cl.icon === 'contact' ? 'selected' : ''}>✉️ تماس</option>
+                    <option value="app" ${cl.icon === 'app' ? 'selected' : ''}>📱 اپلیکیشن</option>
+                </select>
+                <button class="btn btn-sm btn-icon btn-danger" onclick="removeCustomLink(${siteId}, ${i})" title="حذف">✕</button>
+            </div>
+        `).join('');
+    }
+
+    function addCustomLink(siteId) {
+        const site = sitesData.find(s => s.id === siteId);
+        if (!site) return;
+        if (!Array.isArray(site.customLinks)) site.customLinks = [];
+        site.customLinks.push({ title: '', url: '', icon: 'link' });
+        updateExport();
+        refreshCustomLinks(siteId);
+        showToast('لینک کاستوم اضافه شد');
+    }
+
+    function updateCustomLink(siteId, index, field, value) {
+        const site = sitesData.find(s => s.id === siteId);
+        if (!site || !site.customLinks || !site.customLinks[index]) return;
+        site.customLinks[index][field] = value.trim();
+        updateExport();
+    }
+
+    function removeCustomLink(siteId, index) {
+        const site = sitesData.find(s => s.id === siteId);
+        if (!site || !site.customLinks) return;
+        site.customLinks.splice(index, 1);
+        updateExport();
+        refreshCustomLinks(siteId);
+    }
+
+    function refreshCustomLinks(siteId) {
+        const site = sitesData.find(s => s.id === siteId);
+        const container = document.getElementById('customlinks-' + siteId);
+        if (!container || !site) return;
+        container.innerHTML = renderCustomLinksEntries(siteId, site.customLinks || []) +
+            `<button class="btn btn-sm" onclick="addCustomLink(${siteId})" style="margin-top:8px;">➕ افزودن لینک کاستوم</button>`;
+    }
+
+    // ═══════════════════════════════════════════
     // Add / Delete / Duplicate / Move
     // ═══════════════════════════════════════════
     function addNewSite() {
@@ -1142,7 +1215,9 @@
             description: '',
             tags: [],
             recommended: false,
-            social: {}
+            social: {},
+            donate: null,
+            customLinks: []
         };
         sitesData.push(newSite);
         renderList();
