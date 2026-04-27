@@ -6,8 +6,10 @@ A fully responsive, single-page web directory of Iranian websites, designed for 
 
 - **Real-time search** by site name, tags, description, and even parts of the URL.
 - **Tag-based filtering** with interactive pill-shaped chips; clicking a tag instantly filters the list.
-- **Recommended sites** are sorted first with a gold "★ پیشنهادی" badge and a highlighted border.
-- **Results count** shows "نمایش X از Y سایت" to always know how many sites are visible.
+- **First tag = main category** — the first tag of each site is displayed in red as its primary category.
+- **Grouped display** — sites are grouped by their main category (first tag), sorted by **frequency** (most common category first). Within each group, recommended sites appear first, then by ID.
+- **Smart filter sorting** — when a tag filter is active, sites are sorted: recommended first → main tag matches filter → by ID. This ensures the most relevant results appear at the top.
+- **Results count** shows "نمایش X از Y سایت" (with normal digits) to always know how many sites are visible.
 - **URL hash persistence** – filter state is saved in the URL (e.g. `#search=film&tag=دانلود`) so you can share filtered views.
 - **Dark mode** with system preference detection and localStorage persistence.
 - **Back-to-top button** appears after scrolling, for easy navigation on mobile.
@@ -69,7 +71,7 @@ Each site in the directory is represented by a JSON object in `data/sites.json`:
   "mainLink": "https://movieyaab.ir",
   "unfilteredLink": "https://movieyaab.ir",
   "description": "پلتفرم جستجوی فیلم، سریال و انیمه.",
-  "tags": ["فیلم", "سریال", "انیمه", "جستجو", "پخش آنلاین", "دانلود"],
+  "tags": ["فیلم و سریال", "انیمه", "جستجو", "پخش آنلاین", "دانلود"],
   "recommended": true,
   "social": {
     "telegram_bot": "https://t.me/example_bot",
@@ -95,7 +97,7 @@ Each site in the directory is represented by a JSON object in `data/sites.json`:
 | `mainLink` | String | ✅ | The primary domain/URL of the site. |
 | `unfilteredLink` | String | ✅ | An alternative or bypass link. Displayed as "آدرس فعلی" in the card. |
 | `description` | String | ✅ | A short description explaining what the site offers. |
-| `tags` | Array of Strings | ✅ | Keywords for search and filtering. Example: `["دانلود", "فیلم", "سریال"]`. |
+| `tags` | Array of Strings | ✅ | Keywords for search and filtering. The **first tag** is the site's **main category** (displayed in red). Example: `["فیلم و سریال", "دانلود", "زیرنویس"]`. |
 | `recommended` | Boolean | ✅ | If `true`, a gold "★ پیشنهادی" badge and a highlighted border are shown. |
 | `social` | Object | — | Social media links. Keys are platform names, values are full URLs. |
 | `donate` | String or `null` | — | A donation/support URL. If present, a "حمایت مالی ❤" button appears. Use `null` to omit. |

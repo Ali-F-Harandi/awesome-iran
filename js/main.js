@@ -32,14 +32,6 @@
     let hashUpdateTimer = null;
 
     // ──────────────────────────────────
-    // Persian Digit Converter
-    // ──────────────────────────────────
-    function toPersianDigits(str) {
-        const persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
-        return str.toString().replace(/[0-9]/g, d => persianDigits[parseInt(d)]);
-    }
-
-    // ──────────────────────────────────
     // DOM References
     // ──────────────────────────────────
     const searchInput = document.getElementById('searchInput');
@@ -209,7 +201,7 @@
     // ──────────────────────────────────
     function getFilteredSites() {
         const query = searchQuery.trim().toLowerCase();
-        return sitesData.filter(site => {
+        const filtered = sitesData.filter(site => {
             // Search by name, tags, description, AND URLs
             const matchesSearch =
                 !query ||
@@ -225,12 +217,61 @@
                 site.tags.some(tag => activeTags.has(tag));
 
             return matchesSearch && matchesTags;
-        }).sort((a, b) => {
-            // Recommended items first, then by original order (id)
-            if (a.recommended && !b.recommended) return -1;
-            if (!a.recommended && b.recommended) return 1;
-            return a.id - b.id;
         });
+
+        // ── Sorting ──
+        if (activeTags.size > 0) {
+            // FILTER MODE: recommended first → main tag match → id
+            filtered.sort((a, b) => {
+                // 1. Recommended sites first
+                if (a.recommended && !b.recommended) return -1;
+                if (!a.recommended && b.recommended) return 1;
+                // 2. Sites whose main tag (first tag) matches the active filter
+                const mainA = (a.tags && a.tags.length > 0) ? a.tags[0] : '';
+                const mainB = (b.tags && b.tags.length > 0) ? b.tags[0] : '';
+                const matchA = activeTags.has(mainA) ? 0 : 1;
+                const matchB = activeTags.has(mainB) ? 0 : 1;
+                if (matchA !== matchB) return matchA - matchB;
+                // 3. By id
+                return a.id - b.id;
+            });
+        } else {
+            // DEFAULT MODE: group by first tag (frequency order), recommended within groups
+            // Build frequency map of first tags (from ALL sites, not just filtered)
+            const tagFreq = {};
+            sitesData.forEach(site => {
+                const mainTag = (site.tags && site.tags.length > 0) ? site.tags[0] : '';
+                if (mainTag) tagFreq[mainTag] = (tagFreq[mainTag] || 0) + 1;
+            });
+
+            // Sort first tags: frequency desc, then Persian alphabetical for ties
+            const sortedTags = Object.entries(tagFreq)
+                .sort((a, b) => {
+                    if (b[1] !== a[1]) return b[1] - a[1]; // frequency desc
+                    return a[0].localeCompare(b[0], 'fa');   // alpha for ties
+                })
+                .map(([tag]) => tag);
+
+            // Build order lookup
+            const tagOrder = {};
+            sortedTags.forEach((tag, idx) => tagOrder[tag] = idx);
+
+            filtered.sort((a, b) => {
+                const tagA = (a.tags && a.tags.length > 0) ? a.tags[0] : '';
+                const tagB = (b.tags && b.tags.length > 0) ? b.tags[0] : '';
+                // 1. Group by first tag using frequency-based order
+                const orderA = tagOrder[tagA] !== undefined ? tagOrder[tagA] : 9999;
+                const orderB = tagOrder[tagB] !== undefined ? tagOrder[tagB] : 9999;
+                if (orderA !== orderB) return orderA - orderB;
+                // 2. Within same group: recommended first
+                if (a.recommended && !b.recommended) return -1;
+                if (!a.recommended && b.recommended) return 1;
+                // 3. By id
+                return a.id - b.id;
+            });
+        }
+
+        return filtered;
     }
 
     // ──────────────────────────────────
@@ -363,7 +404,7 @@
         if (sites.length === 0) {
             emptyState.classList.add('visible');
             sitesGrid.appendChild(emptyState);
-            resultsCount.innerHTML = 'نمایش <strong>۰</strong> از ' + toPersianDigits(sitesData.length) + ' سایت';
+            resultsCount.innerHTML = 'نمایش <strong>0</strong> از ' + sitesData.length + ' سایت';
             return;
         }
 
@@ -373,7 +414,7 @@
         }
         emptyState.classList.remove('visible');
 
-        resultsCount.innerHTML = 'نمایش <strong>' + toPersianDigits(sites.length) + '</strong> از ' + toPersianDigits(sitesData.length) + ' سایت';
+        resultsCount.innerHTML = 'نمایش <strong>' + sites.length + '</strong> از ' + sitesData.length + ' سایت';
 
         sites.forEach((site, index) => {
             const isExpanded = expandedCardIds.has(site.id);
@@ -388,9 +429,11 @@
             const recBadge = isRec ? '<span class="recommended-badge">\u2605 پیشنهادی</span>' : '';
 
             const socialBadgesHtml = getSocialBadges(site.social);
-            const tagsMiniHtml = site.tags.map(t =>
-                `<span class="card-tag-mini">${escapeHtml(t)}</span>`
-            ).join('');
+            const tagsMiniHtml = site.tags.map((t, i) => {
+                const isMain = (i === 0);
+                const cls = isMain ? 'card-tag-main' : 'card-tag-mini';
+                return `<span class="${cls}">${escapeHtml(t)}</span>`;
+            }).join('');
 
             card.innerHTML = `
                     <div class="card-main">
