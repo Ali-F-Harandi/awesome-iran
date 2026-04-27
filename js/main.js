@@ -1,3 +1,26 @@
+// ──────────────────────────────────
+// Dark Mode (runs immediately)
+// ──────────────────────────────────
+(function initTheme() {
+    const STORAGE_KEY = 'theme';
+    const toggle = document.getElementById('themeToggle');
+    if (!toggle) return;
+
+    // Determine initial theme: saved > system > light
+    let theme = localStorage.getItem(STORAGE_KEY);
+    if (!theme) {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-theme', theme);
+
+    toggle.addEventListener('click', function() {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem(STORAGE_KEY, next);
+    });
+})();
+
 (function() {
     // ──────────────────────────────────
     // State
@@ -457,9 +480,3 @@
         console.log('🔍 قابلیت‌ها: جستجوی Real-time با نام، آدرس و تگ | فیلتر با تگ | کپی آدرس با کلیک');
         console.log('📱 طراحی کاملاً ریسپانسیو | بدون CDN خارجی | بدون شناور بودن بخش جستجو');
     }
-
-    // ──────────────────────────────────
-    // Start: Load data then initialize
-    // ──────────────────────────────────
-    loadSitesData();
-})();
