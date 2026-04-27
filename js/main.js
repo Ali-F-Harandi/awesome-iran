@@ -340,6 +340,7 @@
             aparat: { label: 'آپارات', cls: 'social-aparat', icon: 'fa-solid fa-video' },
             whatsapp: { label: 'واتساپ', cls: 'social-whatsapp', icon: 'fa-brands fa-whatsapp' },
             linkedin: { label: 'لینکدین', cls: 'social-linkedin', icon: 'fa-brands fa-linkedin' },
+            discord: { label: 'دیسکورد', cls: 'social-discord', icon: 'fa-brands fa-discord' },
         };
 
         const badges = [];
@@ -490,12 +491,13 @@
 
             // Click on card (except interactive elements) toggles expand
             card.addEventListener('click', function(e) {
-                // Don't toggle if clicking on a link, button, social badge, or copy-link item
+                // Don't toggle if clicking on a link, button, social badge, copy-link item, or inside card-expanded
                 if (
                     e.target.closest('a') ||
                     e.target.closest('button') ||
                     e.target.closest('.social-badge') ||
-                    e.target.closest('.expanded-link-item')
+                    e.target.closest('.expanded-link-item') ||
+                    e.target.closest('.card-expanded')
                 ) {
                     return;
                 }

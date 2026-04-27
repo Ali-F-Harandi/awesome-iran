@@ -442,9 +442,9 @@
     "tags": [
       "فیلم و سریال",
       "انیمه",
-      "جستجو",
       "پخش آنلاین",
-      "دانلود"
+      "دانلود",
+      "بدون سانسور"
     ],
     "recommended": true,
     "social": {
@@ -489,14 +489,14 @@
     "unfilteredLink": "https://zarebin.ir",
     "description": "جستجوگر هوشمند فارسی با فناوری متا سرچ و هوش مصنوعی. جستجوی آینده در دستان شما — خلاقیت، تولید تصویر، خلاصه‌سازی و پاسخ به سوالات روزمره. اولین هوش مصنوعی ایرانی متصل به وب زنده.",
     "tags": [
-      "جستجو",
+      "جستجوگر",
       "هوش مصنوعی",
       "متا سرچ",
       "دستیار هوشمند",
       "اندروید",
       "تولید تصویر"
     ],
-    "recommended": true,
+    "recommended": false,
     "social": {
       "bale": "https://ble.ir/zarebin",
       "rubika": "https://rubika.ir/zarebin"
@@ -515,13 +515,13 @@
     "unfilteredLink": "https://gerdoo.me",
     "description": "فراجستجوگر ایرانی با حریم شخصی بالا. جستجو در سایت‌ها، عکس‌ها، فیلم‌ها و خبرها. امکان رتبه‌بندی سایت‌ها و تبلیغات.",
     "tags": [
-      "جستجو",
+      "جستجوگر",
       "فراجستجوگر",
       "حریم شخصی",
       "وبگرد",
       "متا سرچ"
     ],
-    "recommended": true,
+    "recommended": false,
     "social": {
       "eitaa": "https://eitaa.com/gerdoo_me_channel",
       "rubika": "https://rubika.ir/gerdoo_me_channel",
@@ -533,6 +533,79 @@
       { "title": "رتبه‌بندی سایت‌ها", "url": "https://analytics.gerdoo.me/", "icon": "website" },
       { "title": "تبلیغات", "url": "https://agahi.gerdoo.me/", "icon": "link" },
       { "title": "کمک به خیریه", "url": "https://gerdoo.me/charity/", "icon": "heart" }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "برتینا",
+    "mainLink": "https://www.bertina.ir",
+    "unfilteredLink": "https://search.bertina.ir",
+    "description": "موتور جستجوی فارسی برتینا — جستجوی سریع و آسان در وب. قدرتمندترین موتور جستجوی هوش مصنوعی فارسی با سرویس‌های جانبی شامل هوش مصنوعی رایگان، ایمیل، مترجم، DNS و هواشناسی.",
+    "tags": [
+      "جستجوگر",
+      "هوش مصنوعی"
+    ],
+    "recommended": true,
+    "social": {
+      "twitter": "https://twitter.com/bertina_search",
+      "linkedin": "https://linkedin.com/company/bertina"
+    },
+    "donate": null,
+    "customLinks": [
+      { "title": "هوش مصنوعی رایگان", "url": "https://llm.bertina.ir/", "icon": "link" },
+      { "title": "ایمیل رایگان", "url": "https://www.bertinamail.com/", "icon": "link" },
+      { "title": "مترجم رایگان", "url": "https://translate.bertina.ir/", "icon": "link" },
+      { "title": "DNS رایگان", "url": "https://www.bertina.ir/dns", "icon": "link" },
+      { "title": "هواشناسی", "url": "https://weather.bertina.ir/", "icon": "link" },
+      { "title": "درباره برتینا", "url": "https://www.bertina.ir/about-us", "icon": "website" }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "ویجی دی ال",
+    "mainLink": "https://vgdl.ir",
+    "unfilteredLink": "https://vgdl.ir",
+    "description": "دانلود بازی کامپیوتر (PC) ویندوز با لینک مستقیم. انواع ژانرها شامل اکشن، استراتژیک، نقش‌آفرینی، شوتر، ترسناک، ماجراجویی و چندنفره.",
+    "tags": [
+      "بازی",
+      "دانلود",
+      "فارسی ساز",
+      "کامپیوتر"
+    ],
+    "recommended": true,
+    "social": {
+      "twitter": "https://twitter.com/kingtimes"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 27,
+    "name": "فن ساب",
+    "mainLink": "https://fansub.ir",
+    "unfilteredLink": "https://fansub.ir",
+    "description": "تولیدکننده و فروشنده فارسی‌ساز بازی‌های ویدیویی. ارائه فارسی‌ساز برای بازی‌های کامپیوتر، PS4، PS5، Xbox، Switch و اندروید. بخش فارسی‌سازهای رایگان، باندل‌های فارسی‌ساز و مقالات تخصصی بازی.",
+    "tags": [
+      "فارسی ساز",
+      "بازی",
+      "کامپیوتر",
+      "کنسول",
+      "اندروید"
+    ],
+    "recommended": true,
+    "social": {
+      "telegram": "https://t.me/FanSub_Official",
+      "instagram": "https://www.instagram.com/fansub_official/",
+      "discord": "https://discord.com/invite/W4dgv3cvNK"
+    },
+    "donate": null,
+    "customLinks": [
+      { "title": "فروشگاه", "url": "https://fansub.ir/shop/", "icon": "link" },
+      { "title": "فارسی‌سازهای رایگان", "url": "https://fansub.ir/product-category/free-sub/", "icon": "link" },
+      { "title": "مقالات", "url": "https://fansub.ir/blog/", "icon": "blog" },
+      { "title": "سوالات پرتکرار", "url": "https://fansub.ir/faq/", "icon": "link" },
+      { "title": "درباره ما", "url": "https://fansub.ir/%d8%af%d8%b1%d8%a8%d8%a7%d8%b1%d9%87-%d9%85%d8%a7/", "icon": "website" },
+      { "title": "ارتباط با ما", "url": "https://fansub.ir/joint-us/", "icon": "link" }
     ]
   }
 ]

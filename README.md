@@ -16,7 +16,7 @@ A fully responsive, single-page web directory of Iranian websites, designed for 
 - **Expandable cards** – click on a card (except buttons) to reveal:
   - A description of the site
   - "آدرس اصلی" (main link) and "آدرس فعلی" (unfiltered/alternative link) – clicking them **copies the URL to your clipboard**.
-  - Social media and related links (global platforms like Telegram, Instagram, plus Iranian networks like Eitaa, Rubika, Soroush, Bale, Aparat).
+  - Social media and related links (global platforms like Telegram, Instagram, Discord, plus Iranian networks like Eitaa, Rubika, Soroush, Bale, Aparat).
   - Custom links (blog, archive, support, etc.).
   - Donate/support link (if available).
 - **Smooth animations** – cards fade in with staggered delay, hover effects with lift, and transitions throughout.
@@ -119,6 +119,7 @@ Each site in the directory is represented by a JSON object in `data/sites.json`:
 | `aparat` | آپارات | Video |
 | `whatsapp` | واتساپ | WhatsApp |
 | `linkedin` | لینکدین | LinkedIn |
+| `discord` | دیسکورد | Discord |
 
 ### Supported Custom Link Icons
 
