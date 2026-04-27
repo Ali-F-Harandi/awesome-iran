@@ -485,7 +485,7 @@
     "donate": "https://daramet.com/donyayeserial",
     "customLinks": [
       { "title": "وبلاگ", "url": "https://serialblog.rzb.ir/", "icon": "blog" },
-      { "title": "آرشیو دنیای سریال", "url": "https://dls6.iran-gamecenter-host.com/DonyayeSerial/10_thous.html", "icon": "link" }
+      { "title": "آرشیو دنیای سریال", "url": "https://dls6.iran-gamecenter-host.com/DonyayeSerial/10_thous.html", "icon": "archive" }
     ]
   }
 ]
