@@ -30,6 +30,14 @@
     let searchQuery = '';
     let expandedCardIds = new Set();
     let hashUpdateTimer = null;
+    let sortMode = 'default';
+    let viewMode = 'card'; // 'card' | 'list'
+    let showBookmarksOnly = false;
+    let bookmarkedIds = new Set();
+    let allExpanded = false;
+    let debounceTimer = null;
+
+    const BOOKMARK_KEY = 'awesome-iran-bookmarks';
 
     // ──────────────────────────────────
     // DOM References
@@ -43,6 +51,115 @@
     const resultsCount = document.getElementById('resultsCount');
     const footerDateEl = document.getElementById('footerDate');
     const backToTopBtn = document.getElementById('backToTop');
+    const sortSelect = document.getElementById('sortSelect');
+    const viewToggle = document.getElementById('viewToggle');
+    const expandAllBtn = document.getElementById('expandAllBtn');
+    const bookmarkFilterBtn = document.getElementById('bookmarkFilterBtn');
+
+
+    // ──────────────────────────────────
+    // Bookmarks: Load/Save
+    // ──────────────────────────────────
+    function loadBookmarks() {
+        try {
+            const data = localStorage.getItem(BOOKMARK_KEY);
+            if (data) {
+                bookmarkedIds = new Set(JSON.parse(data));
+            }
+        } catch(e) {
+            bookmarkedIds = new Set();
+        }
+    }
+
+    function saveBookmarks() {
+        try {
+            localStorage.setItem(BOOKMARK_KEY, JSON.stringify([...bookmarkedIds]));
+        } catch(e) {
+            // silently fail
+        }
+    }
+
+    function toggleBookmark(siteId) {
+        if (bookmarkedIds.has(siteId)) {
+            bookmarkedIds.delete(siteId);
+        } else {
+            bookmarkedIds.add(siteId);
+        }
+        saveBookmarks();
+        // Update bookmark button in the card
+        const btn = sitesGrid.querySelector(`[data-id="${siteId}"] .bookmark-btn`);
+        if (btn) {
+            btn.classList.toggle('bookmarked', bookmarkedIds.has(siteId));
+            btn.innerHTML = bookmarkedIds.has(siteId)
+                ? '<i class="fa-solid fa-bookmark"></i>'
+                : '<i class="fa-regular fa-bookmark"></i>';
+        }
+        updateBookmarkFilterBtn();
+    }
+
+    function updateBookmarkFilterBtn() {
+        bookmarkFilterBtn.classList.toggle('active', showBookmarksOnly);
+    }
+
+    // ──────────────────────────────────
+    // Category Icon Map
+    // ──────────────────────────────────
+    function getCategoryIcon(tag) {
+        const iconMap = {
+            'دانلود': '📥',
+            'فیلم و سریال': '🎬',
+            'استریم': '▶️',
+            'سرگرمی': '🎭',
+            'خرید': '🛒',
+            'فروشگاه': '🏪',
+            'وبلاگ': '📝',
+            'وبلاگدهی': '📝',
+            'آموزش': '🎓',
+            'برنامه‌نویسی': '💻',
+            'تکنولوژی': '💻',
+            'ویدیو': '🎥',
+            'اشتراک‌گذاری': '🔗',
+            'پخش زنده': '📡',
+            'کتاب': '📚',
+            'کتابخوان': '📖',
+            'آگهی': '📢',
+            'نقشه': '🗺️',
+            'مسیریاب': '🧭',
+            'جستجوگر': '🔍',
+            'فراجستجوگر': '🔍',
+            'هوش مصنوعی': '🤖',
+            'بازی': '🎮',
+            'فارسی ساز': '🌍',
+            'اپلیکیشن': '📱',
+            'اندروید': '📱',
+            'محصولات': '📦',
+            'اقتصادی': '💰',
+            'مقایسه قیمت': '📊',
+            'نویسندگی': '✍️',
+            'محتوا': '📰',
+            'مطالعه': '📖',
+            'ساخت وبلاگ': '✏️',
+            'جامعه': '👥',
+            'دوره آنلاین': '🎓',
+            'بدون سانسور': '🔓',
+            'زیرنویس': '💬',
+            'دوبله': '🎙️',
+            'رایگان': '🎁',
+            'انیمه': '🎌',
+            'پخش آنلاین': '▶️',
+            'متا سرچ': '🔎',
+            'دستیار هوشمند': '🤖',
+            'تولید تصویر': '🎨',
+            'حریم شخصی': '🔒',
+            'وبگرد': '🌐',
+            'کامپیوتر': '🖥️',
+            'کنسول': '🎮',
+            'صنایع دستی': '🎨',
+            'هنر': '🎨',
+            'ناوبری': '🧭',
+        };
+        return iconMap[tag] || '📌';
+    }
 
     // ──────────────────────────────────
     // Load Data from JSON
@@ -173,6 +290,16 @@
         if (tags.length > 0) {
             tags.forEach(t => activeTags.add(decodeURIComponent(t)));
         }
+        const sort = params.get('sort');
+        if (sort && ['default', 'name', 'recommended', 'id'].includes(sort)) {
+            sortMode = sort;
+            sortSelect.value = sort;
+        }
+        const view = params.get('view');
+        if (view && ['card', 'list'].includes(view)) {
+            viewMode = view;
+            updateViewToggleUI();
+        }
         return (search !== null && search !== '') || tags.length > 0;
     }
 
@@ -184,6 +311,12 @@
         activeTags.forEach(tag => {
             params.append('tag', tag);
         });
+        if (sortMode !== 'default') {
+            params.set('sort', sortMode);
+        }
+        if (viewMode !== 'card') {
+            params.set('view', viewMode);
+        }
         const hashStr = params.toString();
         const newHash = hashStr ? '#' + hashStr : '';
         if (window.location.hash !== newHash) {
@@ -197,11 +330,55 @@
     }
 
     // ──────────────────────────────────
+    // Sort Logic
+    // ──────────────────────────────────
+    function applySorting(sites) {
+        if (sortMode === 'name') {
+            sites.sort((a, b) => a.name.localeCompare(b.name, 'fa'));
+        } else if (sortMode === 'recommended') {
+            sites.sort((a, b) => {
+                if (a.recommended && !b.recommended) return -1;
+                if (!a.recommended && b.recommended) return 1;
+                return a.name.localeCompare(b.name, 'fa');
+            });
+        } else if (sortMode === 'id') {
+            sites.sort((a, b) => a.id - b.id);
+        } else {
+            // default: group by first tag (frequency order), recommended within groups
+            const tagFreq = {};
+            sitesData.forEach(site => {
+                const mainTag = (site.tags && site.tags.length > 0) ? site.tags[0] : '';
+                if (mainTag) tagFreq[mainTag] = (tagFreq[mainTag] || 0) + 1;
+            });
+            const sortedTags = Object.entries(tagFreq)
+                .sort((a, b) => {
+                    if (b[1] !== a[1]) return b[1] - a[1];
+                    return a[0].localeCompare(b[0], 'fa');
+                })
+                .map(([tag]) => tag);
+            const tagOrder = {};
+            sortedTags.forEach((tag, idx) => tagOrder[tag] = idx);
+
+            sites.sort((a, b) => {
+                const tagA = (a.tags && a.tags.length > 0) ? a.tags[0] : '';
+                const tagB = (b.tags && b.tags.length > 0) ? b.tags[0] : '';
+                const orderA = tagOrder[tagA] !== undefined ? tagOrder[tagA] : 9999;
+                const orderB = tagOrder[tagB] !== undefined ? tagOrder[tagB] : 9999;
+                if (orderA !== orderB) return orderA - orderB;
+                if (a.recommended && !b.recommended) return -1;
+                if (!a.recommended && b.recommended) return 1;
+                return a.id - b.id;
+            });
+        }
+        return sites;
+    }
+
+    // ──────────────────────────────────
     // Filter Logic (NOW INCLUDES URL SEARCH)
     // ──────────────────────────────────
     function getFilteredSites() {
         const query = searchQuery.trim().toLowerCase();
-        const filtered = sitesData.filter(site => {
+        let filtered = sitesData.filter(site => {
             // Search by name, tags, description, AND URLs
             const matchesSearch =
                 !query ||
@@ -216,96 +393,55 @@
                 activeTags.size === 0 ||
                 site.tags.some(tag => activeTags.has(tag));
 
-            return matchesSearch && matchesTags;
+            // Filter by bookmarks
+            const matchesBookmarks = !showBookmarksOnly || bookmarkedIds.has(site.id);
+
+            return matchesSearch && matchesTags && matchesBookmarks;
         });
 
-        // ── Sorting ──
-        if (activeTags.size > 0) {
-            // FILTER MODE: recommended first → main tag match → id
+        // Apply sorting
+        if (sortMode === 'default' && activeTags.size > 0) {
+            // FILTER MODE with default sort: recommended first → main tag match → id
             filtered.sort((a, b) => {
-                // 1. Recommended sites first
                 if (a.recommended && !b.recommended) return -1;
                 if (!a.recommended && b.recommended) return 1;
-                // 2. Sites whose main tag (first tag) matches the active filter
                 const mainA = (a.tags && a.tags.length > 0) ? a.tags[0] : '';
                 const mainB = (b.tags && b.tags.length > 0) ? b.tags[0] : '';
                 const matchA = activeTags.has(mainA) ? 0 : 1;
                 const matchB = activeTags.has(mainB) ? 0 : 1;
                 if (matchA !== matchB) return matchA - matchB;
-                // 3. By id
                 return a.id - b.id;
             });
         } else {
-            // DEFAULT MODE: group by first tag (frequency order), recommended within groups
-            // Build frequency map of first tags (from ALL sites, not just filtered)
-            const tagFreq = {};
-            sitesData.forEach(site => {
-                const mainTag = (site.tags && site.tags.length > 0) ? site.tags[0] : '';
-                if (mainTag) tagFreq[mainTag] = (tagFreq[mainTag] || 0) + 1;
-            });
-
-            // Sort first tags: frequency desc, then Persian alphabetical for ties
-            const sortedTags = Object.entries(tagFreq)
-                .sort((a, b) => {
-                    if (b[1] !== a[1]) return b[1] - a[1]; // frequency desc
-                    return a[0].localeCompare(b[0], 'fa');   // alpha for ties
-                })
-                .map(([tag]) => tag);
-
-            // Build order lookup
-            const tagOrder = {};
-            sortedTags.forEach((tag, idx) => tagOrder[tag] = idx);
-
-            filtered.sort((a, b) => {
-                const tagA = (a.tags && a.tags.length > 0) ? a.tags[0] : '';
-                const tagB = (b.tags && b.tags.length > 0) ? b.tags[0] : '';
-                // 1. Group by first tag using frequency-based order
-                const orderA = tagOrder[tagA] !== undefined ? tagOrder[tagA] : 9999;
-                const orderB = tagOrder[tagB] !== undefined ? tagOrder[tagB] : 9999;
-                if (orderA !== orderB) return orderA - orderB;
-                // 2. Within same group: recommended first
-                if (a.recommended && !b.recommended) return -1;
-                if (!a.recommended && b.recommended) return 1;
-                // 3. By id
-                return a.id - b.id;
-            });
+            applySorting(filtered);
         }
 
         return filtered;
     }
 
     // ──────────────────────────────────
-    // Clipboard Copy Function
+    // Clipboard Copy Function (Modern API only)
     // ──────────────────────────────────
-    function copyToClipboard(text, element) {
-        // Modern clipboard API
-        if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(text).then(() => {
-                showCopySuccess(element);
-            }).catch(() => {
-                fallbackCopy(text, element);
-            });
-        } else {
-            fallbackCopy(text, element);
-        }
-    }
-
-    function fallbackCopy(text, element) {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
-        textarea.style.pointerEvents = 'none';
-        document.body.appendChild(textarea);
-        textarea.select();
+    async function copyToClipboard(text, element) {
         try {
-            document.execCommand('copy');
+            await navigator.clipboard.writeText(text);
             showCopySuccess(element);
         } catch (err) {
-            // Silent fail - just don't show success
-            console.warn('کپی انجام نشد:', err);
+            // Fallback for non-secure contexts or older browsers
+            try {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.cssText = 'position:fixed;opacity:0;pointer-events:none;left:-9999px;top:-9999px;';
+                document.body.appendChild(textarea);
+                textarea.select();
+                textarea.setSelectionRange(0, textarea.value.length);
+                await navigator.clipboard.writeText(text);
+                document.body.removeChild(textarea);
+                showCopySuccess(element);
+            } catch (err2) {
+                console.warn('کپی انجام نشد:', err2);
+            }
         }
-        document.body.removeChild(textarea);
     }
 
     function showCopySuccess(element) {
@@ -396,7 +532,7 @@
     }
 
     // ──────────────────────────────────
-    // Render All Site Cards
+    // Render All Site Cards (with Category Headers)
     // ──────────────────────────────────
     function renderSites(sites) {
         sitesGrid.innerHTML = '';
@@ -417,14 +553,39 @@
 
         resultsCount.innerHTML = 'نمایش <strong>' + sites.length + '</strong> از ' + sitesData.length + ' سایت';
 
+        // Determine if we should show category headers (only in default sort mode)
+        const showCategoryHeaders = (sortMode === 'default') && (activeTags.size === 0);
+        let lastCategory = '';
+
         sites.forEach((site, index) => {
             const isExpanded = expandedCardIds.has(site.id);
             const isRec = site.recommended;
+            const isBookmarked = bookmarkedIds.has(site.id);
+
+            // Category header
+            if (showCategoryHeaders) {
+                const mainTag = (site.tags && site.tags.length > 0) ? site.tags[0] : '';
+                if (mainTag !== lastCategory) {
+                    lastCategory = mainTag;
+                    const header = document.createElement('div');
+                    header.className = 'category-header';
+                    // Count sites in this category
+                    const catCount = sites.filter(s => s.tags && s.tags.length > 0 && s.tags[0] === mainTag).length;
+                    header.innerHTML = `
+                        <span class="category-header-icon">${getCategoryIcon(mainTag)}</span>
+                        <span class="category-header-title">${escapeHtml(mainTag)}</span>
+                        <span class="category-header-count">${catCount}</span>
+                        <span class="category-header-line"></span>
+                    `;
+                    sitesGrid.appendChild(header);
+                }
+            }
+
             const card = document.createElement('div');
             card.className =
                 `site-card visible${isExpanded ? ' expanded' : ''}${isRec ? ' recommended' : ''}`;
             card.setAttribute('data-id', site.id);
-            card.style.animationDelay = `${index * 0.04}s`;
+            card.style.animationDelay = `${Math.min(index * 0.04, 1.2)}s`;
 
             // Recommended badge
             const recBadge = isRec ? '<span class="recommended-badge">\u2605 پیشنهادی</span>' : '';
@@ -438,9 +599,12 @@
 
             card.innerHTML = `
                     <div class="card-main">
-                        <div class="card-star${isRec ? ' active' : ''}">
-                            ${isRec ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star"></i>'}
-                        </div>
+                        <button class="bookmark-btn${isBookmarked ? ' bookmarked' : ''}" 
+                                data-bookmark-id="${site.id}" 
+                                title="${isBookmarked ? 'حذف از بوکمارک' : 'افزودن به بوکمارک'}"
+                                onclick="event.stopPropagation();">
+                            <i class="${isBookmarked ? 'fa-solid' : 'fa-regular'} fa-bookmark"></i>
+                        </button>
                         <div class="card-info">
                             <div class="card-name">${escapeHtml(site.name)}</div>
                             <div class="card-tags-row">${recBadge}${tagsMiniHtml}</div>
@@ -520,6 +684,18 @@
                 }
             });
         });
+
+        // ── Bookmark button handlers ──
+        sitesGrid.querySelectorAll('.bookmark-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const siteId = parseInt(this.getAttribute('data-bookmark-id'));
+                toggleBookmark(siteId);
+            });
+        });
+
+        // Apply view mode class
+        sitesGrid.classList.toggle('list-view', viewMode === 'list');
     }
 
     function toggleCardExpand(siteId) {
@@ -533,6 +709,53 @@
         if (card) {
             card.classList.toggle('expanded', expandedCardIds.has(siteId));
         }
+        updateExpandAllBtn();
+    }
+
+    function expandAllCards() {
+        allExpanded = true;
+        const filtered = getFilteredSites();
+        filtered.forEach(s => expandedCardIds.add(s.id));
+        sitesGrid.querySelectorAll('.site-card').forEach(card => {
+            card.classList.add('expanded');
+        });
+        updateExpandAllBtn();
+    }
+
+    function collapseAllCards() {
+        allExpanded = false;
+        expandedCardIds.clear();
+        sitesGrid.querySelectorAll('.site-card.expanded').forEach(card => {
+            card.classList.remove('expanded');
+        });
+        updateExpandAllBtn();
+    }
+
+    function updateExpandAllBtn() {
+        const filtered = getFilteredSites();
+        const expandedCount = filtered.filter(s => expandedCardIds.has(s.id)).length;
+        allExpanded = expandedCount === filtered.length && filtered.length > 0;
+        
+        if (allExpanded) {
+            expandAllBtn.innerHTML = '<i class="fa-solid fa-angles-up"></i> <span>بستن همه</span>';
+            expandAllBtn.title = 'بستن همه کارت‌ها';
+            expandAllBtn.classList.add('active');
+        } else {
+            expandAllBtn.innerHTML = '<i class="fa-solid fa-angles-down"></i> <span>باز کردن همه</span>';
+            expandAllBtn.title = 'باز کردن همه کارت‌ها';
+            expandAllBtn.classList.remove('active');
+        }
+    }
+
+    function updateViewToggleUI() {
+        if (viewMode === 'list') {
+            viewToggle.innerHTML = '<i class="fa-solid fa-grip"></i> <span>نمای کارتی</span>';
+            viewToggle.classList.add('active');
+        } else {
+            viewToggle.innerHTML = '<i class="fa-solid fa-list"></i> <span>نمای لیستی</span>';
+            viewToggle.classList.remove('active');
+        }
+        sitesGrid.classList.toggle('list-view', viewMode === 'list');
     }
 
     function filterAndRender() {
@@ -545,8 +768,11 @@
             }
         }
         renderSites(filtered);
+        updateExpandAllBtn();
         scheduleHashUpdate();
     }
+
+
 
     // ──────────────────────────────────
     // Back-to-Top Button
@@ -566,6 +792,7 @@
     // ──────────────────────────────────
     // Event Listeners
     // ──────────────────────────────────
+    // Debounced search input
     searchInput.addEventListener('input', function() {
         searchQuery = this.value;
         if (searchQuery.trim()) {
@@ -573,7 +800,11 @@
         } else {
             clearSearchBtn.classList.remove('visible');
         }
-        filterAndRender();
+        // Debounce
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            filterAndRender();
+        }, 200);
     });
 
     clearSearchBtn.addEventListener('click', function() {
@@ -586,6 +817,35 @@
 
     resetTagsBtn.addEventListener('click', function() {
         resetAllTags();
+    });
+
+    // Sort select
+    sortSelect.addEventListener('change', function() {
+        sortMode = this.value;
+        filterAndRender();
+    });
+
+    // View toggle
+    viewToggle.addEventListener('click', function() {
+        viewMode = viewMode === 'card' ? 'list' : 'card';
+        updateViewToggleUI();
+        filterAndRender();
+    });
+
+    // Expand/Collapse all
+    expandAllBtn.addEventListener('click', function() {
+        if (allExpanded) {
+            collapseAllCards();
+        } else {
+            expandAllCards();
+        }
+    });
+
+    // Bookmark filter
+    bookmarkFilterBtn.addEventListener('click', function() {
+        showBookmarksOnly = !showBookmarksOnly;
+        updateBookmarkFilterBtn();
+        filterAndRender();
     });
 
     // Listen for back/forward navigation to restore hash state
@@ -615,6 +875,8 @@
     // Initial Render
     // ──────────────────────────────────
     function init() {
+        // Load bookmarks from localStorage
+        loadBookmarks();
         // Restore state from URL hash
         readHash();
         renderTagChips();
@@ -626,10 +888,16 @@
             });
         }, 50);
 
+        // Update UI for view mode
+        updateViewToggleUI();
+        updateBookmarkFilterBtn();
+        updateExpandAllBtn();
+
         console.log('✅ سایت‌های ایرانی آماده | ' + sitesData.length + ' سایت بارگذاری شد');
         console.log('🔍 قابلیت‌ها: جستجوی Real-time با نام، آدرس و تگ | فیلتر با تگ | کپی آدرس با کلیک');
         console.log('📱 طراحی کاملاً ریسپانسیو | بدون CDN خارجی | بدون شناور بودن بخش جستجو');
         console.log('🔗 ذخیره و اشتراک‌گذاری وضعیت فیلترها از طریق URL');
+        console.log('⭐ بوکمارک محلی | 📋 نمای لیستی/کارتی | 🔽 مرتب‌سازی');
     }
 
     // ──────────────────────────────────

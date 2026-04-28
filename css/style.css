@@ -55,39 +55,11 @@
                   radial-gradient(ellipse at 85% 100%, rgba(244, 114, 182, 0.06) 0%, transparent 50%);
 }
 
-/* ── Vazirmatn Font ─────────────── */
+/* ── Vazirmatn Variable Font ─────────────── */
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('../fonts/vazirmatn/Vazirmatn-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Vazirmatn';
-    src: url('../fonts/vazirmatn/Vazirmatn-Medium.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Vazirmatn';
-    src: url('../fonts/vazirmatn/Vazirmatn-SemiBold.woff2') format('woff2');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Vazirmatn';
-    src: url('../fonts/vazirmatn/Vazirmatn-Bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Vazirmatn';
-    src: url('../fonts/vazirmatn/Vazirmatn-Black.woff2') format('woff2');
-    font-weight: 900;
+    src: url('../fonts/vazirmatn/Vazirmatn[wght].woff2') format('woff2-variations');
+    font-weight: 100 900;
     font-style: normal;
     font-display: swap;
 }
@@ -370,10 +342,163 @@ body {
 /* ── Site Cards Grid (auto-fit / minmax) ───────────────── */
 .sites-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: 1rem;
     align-items: start;
 }
+
+/* ── View: List Mode ───────────────── */
+.sites-grid.list-view {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+}
+.sites-grid.list-view .site-card {
+    border-radius: var(--radius-sm);
+}
+.sites-grid.list-view .card-main {
+    padding: 8px 12px;
+    min-height: auto;
+}
+.sites-grid.list-view .card-description-preview {
+    display: inline;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-right: 8px;
+}
+.sites-grid.list-view .site-card.expanded .card-expanded {
+    max-height: 800px;
+}
+.sites-grid.list-view .card-tags-row {
+    display: none;
+}
+.sites-grid.list-view .site-card.expanded .card-tags-row {
+    display: flex;
+}
+
+/* ── Category Header ─────────────── */
+.category-header {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    margin-bottom: 4px;
+    padding: 0 4px;
+}
+.category-header:first-child {
+    margin-top: 0;
+}
+.category-header-icon {
+    font-size: 1.2rem;
+}
+.category-header-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+}
+.category-header-count {
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: var(--primary-bg);
+    color: var(--primary);
+    padding: 2px 8px;
+    border-radius: 50px;
+}
+.category-header-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+/* ── Toolbar Row (Sort, View, Expand) ────── */
+.toolbar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+.toolbar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 14px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-family: var(--font);
+    white-space: nowrap;
+    min-height: 38px;
+}
+.toolbar-btn:hover {
+    background: var(--primary-bg);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+.toolbar-btn.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+.toolbar-btn i {
+    font-size: 0.85rem;
+}
+.sort-select {
+    padding: 7px 12px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-family: var(--font);
+    outline: none;
+    min-height: 38px;
+    direction: rtl;
+}
+.sort-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* ── Bookmark Star ────────────────── */
+.bookmark-btn {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: all var(--transition);
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-radius: 50%;
+    padding: 0;
+}
+.bookmark-btn:hover {
+    color: var(--star);
+    background: var(--star-bg);
+}
+.bookmark-btn.bookmarked {
+    color: var(--star);
+    animation: starPop 0.4s ease;
+}
+.bookmark-btn.bookmarked i {
+    font-weight: 900;
+}
+
+
 
 /* ── Site Card ────────────────────── */
 .site-card {
@@ -801,6 +926,24 @@ body {
     letter-spacing: -0.2px;
 }
 
+/* ── Dark Mode: Category Header ──── */
+[data-theme="dark"] .category-header-title {
+    color: var(--text);
+}
+[data-theme="dark"] .toolbar-btn {
+    background: var(--surface);
+    border-color: var(--border);
+}
+[data-theme="dark"] .sort-select {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--text-secondary);
+}
+[data-theme="dark"] .sort-select option {
+    background: var(--surface);
+    color: var(--text);
+}
+
 /* ── Responsive Fine-tuning ───────── */
 @media (max-width: 480px) {
     .container {
@@ -813,7 +956,7 @@ body {
     }
     #searchInput {
         padding: 10px 38px 10px 10px;
-        font-size: 0.88rem;
+        font-size: 16px;
     }
     .card-main {
         padding: 10px 10px;
@@ -852,6 +995,24 @@ body {
     .expanded-link-item {
         padding: 6px 10px;
         font-size: 0.72rem;
+    }
+    .toolbar-row {
+        gap: 5px;
+    }
+    .toolbar-btn {
+        padding: 6px 10px;
+        font-size: 0.72rem;
+    }
+    .sort-select {
+        padding: 6px 10px;
+        font-size: 0.72rem;
+    }
+    .category-header-title {
+        font-size: 0.85rem;
+    }
+    .modal-box {
+        margin: 10px;
+        border-radius: var(--radius-lg);
     }
 }
 @media (min-width: 1024px) {

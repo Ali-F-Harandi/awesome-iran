@@ -212,6 +212,12 @@
             cursor: pointer;
             user-select: none;
         }
+        .site-card-header[draggable="true"] {
+            cursor: grab;
+        }
+        .site-card-header[draggable="true"]:active {
+            cursor: grabbing;
+        }
         .site-card-header:hover { background: linear-gradient(135deg, #dcfce7, #d1fae5); }
         .site-card-header .title-area {
             display: flex;
@@ -267,6 +273,13 @@
         .site-card-body {
             display: none;
             padding: 18px;
+            -webkit-user-drag: none;
+        }
+        .site-card-body input,
+        .site-card-body textarea,
+        .site-card-body select {
+            -webkit-user-drag: none;
+            user-select: text;
         }
         .site-card.open .site-card-body {
             display: block;
@@ -650,15 +663,58 @@
 
         /* ─── Responsive ─── */
         @media (max-width: 768px) {
-            .toolbar { flex-direction: column; align-items: stretch; }
-            .toolbar-group { justify-content: center; }
-            .search-bar { max-width: none; }
-            .site-card-header { flex-wrap: wrap; gap: 8px; }
+            .header { padding: 14px 12px; }
+            .header h1 { font-size: 18px; }
+            .header p { font-size: 11px; }
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 10px 12px;
+                gap: 8px;
+                top: 56px;
+            }
+            .toolbar-group { justify-content: center; flex-wrap: wrap; gap: 6px; }
+            .btn { padding: 10px 14px; font-size: 13px; min-height: 44px; }
+            .btn-sm { padding: 8px 12px; font-size: 12px; min-height: 38px; }
+            .search-bar { max-width: none; min-width: 0; }
+            .search-bar input { font-size: 16px; padding: 10px 12px 10px 34px; min-height: 44px; }
+            .site-card-header { flex-wrap: wrap; gap: 8px; padding: 12px; }
             .site-card-header .site-url { max-width: 100%; order: 3; width: 100%; }
             .site-card-header .header-actions { order: 2; }
+            .site-card-body { padding: 14px 12px; }
             .row-fields { grid-template-columns: 1fr; }
             .social-entry { flex-wrap: wrap; }
             .social-entry .platform-input { flex: 1 1 100%; }
+            .social-entry .url-input { flex: 1 1 100%; }
+            .field-input { font-size: 16px; padding: 10px 12px; min-height: 44px; }
+            .field-label { font-size: 11px; }
+            .main { padding: 12px; }
+            .stats { padding: 8px 12px; font-size: 12px; flex-wrap: wrap; gap: 4px; }
+            .export-header { flex-wrap: wrap; gap: 8px; padding: 12px; }
+            .export-header h3 { font-size: 13px; }
+            .export-header > div { flex-wrap: wrap; }
+            .modal { max-width: 100%; margin: 10px; border-radius: var(--radius); }
+            .drag-handle { font-size: 20px; padding: 8px; }
+            .tag-item { font-size: 13px; padding: 5px 12px; }
+            .tag-input { font-size: 16px; min-width: 80px; }
+            .site-card-header .site-id { width: 32px; height: 32px; font-size: 13px; }
+            .site-card-header .site-name { font-size: 14px; }
+            .btn-icon { padding: 8px; font-size: 16px; min-width: 38px; min-height: 38px; }
+        }
+
+        /* ─── Touch improvements ─── */
+        @media (hover: none) and (pointer: coarse) {
+            .site-card-header { -webkit-user-select: none; user-select: none; }
+            .site-card-body input,
+            .site-card-body textarea,
+            .site-card-body select {
+                -webkit-user-drag: none;
+                user-select: text;
+                font-size: 16px;
+            }
+            .drag-handle { opacity: 0.7; font-size: 20px; padding: 8px; }
+            .btn { min-height: 44px; }
+            .btn-sm { min-height: 38px; }
         }
 
         /* ─── Scrollbar ─── */
@@ -986,16 +1042,16 @@
         }
 
         container.innerHTML = filtered.map((site, idx) => `
-            <div class="site-card" id="card-${site.id}" draggable="true" data-id="${site.id}" ondragstart="onDragStart(event, ${site.id})" ondragover="onDragOver(event)" ondrop="onDrop(event, ${site.id})" ondragend="onDragEnd(event)">
-                <div class="site-card-header" onclick="toggleCard(${site.id})" onmousedown="event.stopPropagation()">
+            <div class="site-card" id="card-${site.id}" data-id="${site.id}" ondragover="onDragOver(event)" ondrop="onDrop(event, ${site.id})">
+                <div class="site-card-header" draggable="true" onclick="toggleCard(${site.id})" ondragstart="onDragStart(event, ${site.id})" ondragend="onDragEnd(event)">
                     <div class="title-area">
-                        <span class="drag-handle" title="برای جابجایی بکشید و رها کنید" onmousedown="event.stopPropagation()">⠿</span>
+                        <span class="drag-handle" title="برای جابجایی بکشید و رها کنید">⠿</span>
                         <span class="site-id">${site.id}</span>
                         <span class="site-name">${escapeHtml(site.name) || '(بدون نام)'}</span>
                         <span class="site-url">${escapeHtml(site.mainLink)}</span>
                     </div>
                     <div class="header-actions">
-                        ${site.recommended ? '<span style="color:#f59e0b; font-size:14px;" title="سایت پیشنهادی">⭐</span>' : ''}
+                        ${site.recommended ? '<span class="rec-star" style="color:#f59e0b; font-size:14px;" title="سایت پیشنهادی">⭐</span>' : ''}
                         <button class="btn btn-sm btn-icon btn-ghost" title="تکرار" onclick="event.stopPropagation(); duplicateSite(${site.id})">📋</button>
                         <button class="btn btn-sm btn-icon btn-ghost" title="حذف" onclick="event.stopPropagation(); confirmDelete(${site.id})">🗑️</button>
                         <span class="chevron">▼</span>
@@ -1011,9 +1067,9 @@
     function renderCardFields(site) {
         const tagsHtml = (site.tags || []).map((tag, i) => `
             <span class="tag-item" draggable="true" ondragstart="onTagDragStart(event, ${site.id}, ${i})" ondragover="onTagDragOver(event)" ondrop="onTagDrop(event, ${site.id}, ${i})" ondragend="onTagDragEnd(event)">
-                ${i > 0 ? '<button class="tag-move" onclick="event.stopPropagation(); event.preventDefault(); moveTag(' + site.id + ', ' + i + ', -1)" title="جابجایی به چپ">◀</button>' : ''}
+                ${i > 0 ? '<button class="tag-move" onclick="event.stopPropagation(); event.preventDefault(); moveTag(' + site.id + ', ' + i + ', -1)" title="جابجایی به راست">▶</button>' : ''}
                 ${escapeHtml(tag)}
-                ${i < (site.tags || []).length - 1 ? '<button class="tag-move" onclick="event.stopPropagation(); event.preventDefault(); moveTag(' + site.id + ', ' + i + ', 1)" title="جابجایی به راست">▶</button>' : ''}
+                ${i < (site.tags || []).length - 1 ? '<button class="tag-move" onclick="event.stopPropagation(); event.preventDefault(); moveTag(' + site.id + ', ' + i + ', 1)" title="جابجایی به چپ">◀</button>' : ''}
                 <span class="tag-sep"></span>
                 <button class="tag-remove" onclick="event.stopPropagation(); removeTag(${site.id}, ${i})" title="حذف تگ">&times;</button>
             </span>
@@ -1031,8 +1087,8 @@
             <!-- ID & Name -->
             <div class="row-fields">
                 <div class="field-group">
-                    <label class="field-label">شناسه (ID)</label>
-                    <input class="field-input" type="number" value="${site.id}" onchange="updateField(${site.id}, 'id', parseInt(this.value))" />
+                    <label class="field-label">شناسه (ID) — خودکار بر اساس جایگاه</label>
+                    <input class="field-input" type="number" value="${site.id}" readonly title="شناسه به صورت خودکار بر اساس جایگاه در لیست تعیین می‌شود" style="background:var(--bg);cursor:not-allowed;" />
                 </div>
                 <div class="field-group">
                     <label class="field-label">نام سایت</label>
@@ -1074,7 +1130,7 @@
             <div class="field-group">
                 <div class="tags-container" id="tags-${site.id}">
                     ${tagsHtml}
-                    <input class="tag-input" type="text" placeholder="تگ جدید + Enter"
+                    <input class="tag-input" type="text" placeholder="تگ جدید + Enter یا ,"
                            onkeydown="handleTagInput(event, ${site.id})" />
                 </div>
             </div>
@@ -1125,6 +1181,7 @@
     }
 
     function onDragOver(e) {
+        if (draggedId === null) return; // Ignore non-card drags (e.g. tag drags)
         e.preventDefault();
         e.dataTransfer.dropEffect = 'move';
         const card = e.currentTarget;
@@ -1158,6 +1215,7 @@
         // Insert at new position
         sitesData.splice(insertIndex, 0, moved);
 
+        renumberIds();
         renderList();
         updateExport();
         showToast(`آیتم جابجا شد`);
@@ -1197,7 +1255,22 @@
                 if (field === 'mainLink' && urlEl) urlEl.textContent = value;
             }
             if (field === 'recommended') {
-                renderList();
+                // Update star icon inline without re-rendering (to preserve open/close state)
+                const card = document.getElementById('card-' + id);
+                if (card) {
+                    const existingStar = card.querySelector('.rec-star');
+                    if (value && !existingStar) {
+                        const actionsEl = card.querySelector('.header-actions');
+                        const star = document.createElement('span');
+                        star.className = 'rec-star';
+                        star.style.cssText = 'color:#f59e0b; font-size:14px;';
+                        star.title = 'سایت پیشنهادی';
+                        star.textContent = '⭐';
+                        actionsEl.insertBefore(star, actionsEl.firstChild);
+                    } else if (!value && existingStar) {
+                        existingStar.remove();
+                    }
+                }
             }
         }
     }
@@ -1206,17 +1279,22 @@
     // Tags Management
     // ═══════════════════════════════════════════
     function handleTagInput(e, siteId) {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' || e.key === ',' || e.key === '،') {
             e.preventDefault();
             const input = e.target;
-            const value = input.value.trim();
-            if (!value) return;
+            // Remove any trailing comma (English or Persian) from the value
+            const value = input.value.replace(/[,،]\s*$/, '').trim();
+            if (!value) {
+                input.value = '';
+                return;
+            }
 
             const site = sitesData.find(s => s.id === siteId);
             if (!site) return;
 
             if (site.tags.includes(value)) {
                 showToast('این تگ قبلاً وجود دارد', 'error');
+                input.value = '';
                 return;
             }
 
@@ -1295,12 +1373,12 @@
         const container = document.getElementById('tags-' + siteId);
         if (!container || !site) return;
 
-        const inputHtml = `<input class="tag-input" type="text" placeholder="تگ جدید + Enter" onkeydown="handleTagInput(event, ${siteId})" />`;
+        const inputHtml = `<input class="tag-input" type="text" placeholder="تگ جدید + Enter یا ," onkeydown="handleTagInput(event, ${siteId})" />`;
         const tagsHtml = site.tags.map((tag, i) => `
             <span class="tag-item" draggable="true" ondragstart="onTagDragStart(event, ${siteId}, ${i})" ondragover="onTagDragOver(event)" ondrop="onTagDrop(event, ${siteId}, ${i})" ondragend="onTagDragEnd(event)">
-                ${i > 0 ? '<button class="tag-move" onclick="event.stopPropagation(); event.preventDefault(); moveTag(' + siteId + ', ' + i + ', -1)" title="جابجایی به چپ">◀</button>' : ''}
+                ${i > 0 ? '<button class="tag-move" onclick="event.stopPropagation(); event.preventDefault(); moveTag(' + siteId + ', ' + i + ', -1)" title="جابجایی به راست">▶</button>' : ''}
                 ${escapeHtml(tag)}
-                ${i < site.tags.length - 1 ? '<button class="tag-move" onclick="event.stopPropagation(); event.preventDefault(); moveTag(' + siteId + ', ' + i + ', 1)" title="جابجایی به راست">▶</button>' : ''}
+                ${i < site.tags.length - 1 ? '<button class="tag-move" onclick="event.stopPropagation(); event.preventDefault(); moveTag(' + siteId + ', ' + i + ', 1)" title="جابجایی به چپ">◀</button>' : ''}
                 <span class="tag-sep"></span>
                 <button class="tag-remove" onclick="event.stopPropagation(); removeTag(${siteId}, ${i})" title="حذف تگ">&times;</button>
             </span>
@@ -1431,7 +1509,7 @@
     // ═══════════════════════════════════════════
     function addNewSite() {
         const newSite = {
-            id: nextId++,
+            id: sitesData.length + 1,
             name: '',
             mainLink: '',
             unfilteredLink: '',
@@ -1443,6 +1521,7 @@
             customLinks: []
         };
         sitesData.push(newSite);
+        nextId = sitesData.length + 1;
         renderList();
         updateStats();
 
@@ -1476,10 +1555,18 @@
         document.getElementById('deleteModal').classList.remove('active');
     }
 
+    function renumberIds() {
+        sitesData.forEach((site, index) => {
+            site.id = index + 1;
+        });
+        nextId = sitesData.length + 1;
+    }
+
     function deleteSite(id) {
         const site = sitesData.find(s => s.id === id);
         const name = site ? site.name : '';
         sitesData = sitesData.filter(s => s.id !== id);
+        renumberIds();
         renderList();
         updateStats();
         showToast(`سایت «${name}» حذف شد`);
@@ -1489,10 +1576,10 @@
         const site = sitesData.find(s => s.id === id);
         if (!site) return;
         const newSite = JSON.parse(JSON.stringify(site));
-        newSite.id = nextId++;
         newSite.name = site.name + ' (کپی)';
         const index = sitesData.findIndex(s => s.id === id);
         sitesData.splice(index + 1, 0, newSite);
+        renumberIds();
         renderList();
         updateStats();
         showToast(`سایت «${site.name}» تکرار شد`);
@@ -1505,12 +1592,13 @@
 
         // Swap
         [sitesData[index], sitesData[newIndex]] = [sitesData[newIndex], sitesData[index]];
+        renumberIds();
         renderList();
         updateExport();
 
-        // Re-open the moved card
+        // Re-open the moved card (now has new ID based on position)
         setTimeout(() => {
-            const card = document.getElementById('card-' + id);
+            const card = document.getElementById('card-' + sitesData[newIndex].id);
             if (card) card.classList.add('open');
         }, 10);
     }
@@ -1520,20 +1608,23 @@
     // ═══════════════════════════════════════════
     function copyJSON() {
         const json = generateJSON();
-        const textarea = document.getElementById('jsonOutput');
-        textarea.select();
-        textarea.setSelectionRange(0, 99999);
-
         if (navigator.clipboard && window.isSecureContext) {
             navigator.clipboard.writeText(json).then(() => {
                 showToast('📋 JSON در کلیپ‌بورد کپی شد');
             }).catch(() => {
-                document.execCommand('copy');
-                showToast('📋 JSON کپی شد');
+                showToast('خطا در کپی JSON', 'error');
             });
         } else {
-            document.execCommand('copy');
-            showToast('📋 JSON کپی شد');
+            // Fallback: create temporary textarea
+            const textarea = document.getElementById('jsonOutput');
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            try {
+                document.execCommand('copy');
+                showToast('📋 JSON کپی شد');
+            } catch(e) {
+                showToast('خطا در کپی JSON', 'error');
+            }
         }
     }
 

@@ -48,6 +48,26 @@
             <button class="reset-tags" id="resetTags">✕ پاک کردن فیلترها</button>
         </div>
 
+        <!-- Toolbar Row: Sort, View, Expand All, Bookmark Filter, Suggest -->
+        <div class="toolbar-row" id="toolbarRow">
+            <select class="sort-select" id="sortSelect" title="مرتب‌سازی">
+                <option value="default">📦 پیش‌فرض (دسته‌بندی)</option>
+                <option value="name">🔤 نام (الفبا)</option>
+                <option value="recommended">⭐ پیشنهادی اول</option>
+                <option value="id">🔢 شناسه</option>
+            </select>
+            <button class="toolbar-btn" id="viewToggle" title="تغییر نما">
+                <i class="fa-solid fa-list"></i> <span>نمای لیستی</span>
+            </button>
+            <button class="toolbar-btn" id="expandAllBtn" title="باز/بسته کردن همه">
+                <i class="fa-solid fa-angles-down"></i> <span>باز کردن همه</span>
+            </button>
+            <button class="toolbar-btn" id="bookmarkFilterBtn" title="نمایش بوکمارک‌ها">
+                <i class="fa-solid fa-bookmark"></i> <span>بوکمارک‌ها</span>
+            </button>
+
+        </div>
+
         <!-- Sites Grid -->
         <div class="sites-grid" id="sitesGrid"></div>
 
@@ -73,6 +93,8 @@
             <polyline points="18 15 12 9 6 15"/>
         </svg>
     </button>
+
+
 
     <script src="js/main.js"></script>
 </body>
