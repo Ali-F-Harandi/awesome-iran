@@ -25,12 +25,14 @@ A fully responsive, single-page web directory of Iranian websites, designed for 
 - **Footer** with last-updated date from `meta.json`.
 - No external CDN dependencies; all assets are bundled locally.
 - **Standalone site editor** (`site-editor.html`) for managing `sites.json` and `meta.json` without editing code directly.
+- **Offline version** (`offline.html`) — a single-file, zero-dependency version that works without a server, perfect for sharing via USB or email during the national internet period.
 
 ## 📁 Project Structure
 
 ```
 awesome-iran/
 ├── index.html              # Main site page
+├── offline.html            # Lightweight single-file offline version (no external deps)
 ├── site-editor.html        # Standalone JSON editor for managing sites
 ├── css/
 │   └── style.css           # All styles (emerald green theme + dark mode)
@@ -41,6 +43,7 @@ awesome-iran/
 │   └── meta.json           # Project metadata (lastUpdated date)
 ├── fonts/
 │   ├── vazirmatn/          # Vazirmatn Persian font (woff2)
+│   │   ├── Vazirmatn[wght].woff2  # Variable font
 │   │   ├── Vazirmatn-Regular.woff2
 │   │   ├── Vazirmatn-Bold.woff2
 │   │   ├── Vazirmatn-Medium.woff2
@@ -135,6 +138,30 @@ Each site in the directory is represented by a JSON object in `data/sites.json`:
 | `app` | 📱 App |
 | `heart` | ❤️ Heart |
 
+## 📴 Offline Version (`offline.html`)
+
+A **lightweight, single-file** version of the site directory that works completely offline with **zero external dependencies**:
+
+- **Single HTML file** — all CSS, JavaScript, and data are inlined
+- **No font files** — uses system fonts (Tahoma, Segoe UI) instead of Vazirmatn
+- **No Font Awesome** — icons are replaced with emoji/Unicode characters
+- **No server required** — works when opened directly from the file system (`file://` protocol)
+- **All data inlined** — `sites.json` and `meta.json` are embedded as JavaScript variables
+- **Full functionality** — search, tag filtering, dark mode, bookmarks, sort, view toggle, expand/collapse all, copy-to-clipboard (with `file://` fallback), URL hash persistence, and back-to-top button
+
+### When to Use `offline.html` vs `index.html`
+
+| Feature | `index.html` | `offline.html` |
+|---------|-------------|----------------|
+| Requires a web server | ✅ Yes | ❌ No |
+| Vazirmatn Persian font | ✅ Beautiful | ❌ System fonts |
+| Font Awesome icons | ✅ Professional | ❌ Emoji icons |
+| Single file | ❌ Multi-file | ✅ Single file |
+| File size | ~2 MB (with fonts) | ~86 KB |
+| Best for | Production / GitHub Pages | Offline sharing / USB / Email |
+
+> To update the offline version with new data, edit the `SITES_DATA` and `META_DATA` variables inside `offline.html`.
+
 ## 🛠 Site Editor (`site-editor.html`)
 
 A standalone HTML file for visually editing site data without touching code:
@@ -199,6 +226,10 @@ The page is completely self-contained:
 - **Vazirmatn** Persian font is bundled locally (woff2) in `fonts/vazirmatn/`.
 - **Font Awesome 6** icons are bundled locally in `fonts/fontawesome/` — no CDN required.
 - All styles and scripts are separate files but self-contained.
+
+## 📦 Download
+
+A pre-built ZIP archive of the entire project is included as `awesome-iran.zip` in the root directory. Download and extract it to get the complete project with all fonts, icons, and assets.
 
 ## 📄 License
 

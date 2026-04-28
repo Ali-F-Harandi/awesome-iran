@@ -1,0 +1,2621 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سایت‌های ایرانی - نت ملی (آفلاین)</title>
+    <script>
+        // Prevent FOUC: set theme before any rendering
+        (function(){
+            var t = localStorage.getItem('theme');
+            if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
+    <style>
+/* ═══════════════════════════════════════════════════════════════════
+   style.css — Emerald Green Theme · Production-Ready · Offline Version
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-hover: #f8fafc;
+    --primary: #10b981;
+    --primary-light: #34d399;
+    --primary-bg: #ecfdf5;
+    --star: #f59e0b;
+    --star-bg: #fffbeb;
+    --text: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --font: 'Tahoma', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --copy-success: #10b981;
+    --bg-gradient: radial-gradient(ellipse at 50% 0%, #d1fae5 0%, transparent 60%),
+                  radial-gradient(ellipse at 85% 100%, #fce7f3 0%, transparent 50%);
+}
+
+/* ── Dark Mode ──────────────────────── */
+[data-theme="dark"] {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface-hover: #273549;
+    --primary: #34d399;
+    --primary-light: #6ee7b7;
+    --primary-bg: rgba(16, 185, 129, 0.15);
+    --star: #fbbf24;
+    --star-bg: #422006;
+    --text: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border: #334155;
+    --border-light: #1e293b;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5), 0 4px 10px rgba(0, 0, 0, 0.3);
+    --bg-gradient: radial-gradient(ellipse at 50% 0%, rgba(16, 185, 129, 0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 85% 100%, rgba(244, 114, 182, 0.06) 0%, transparent 50%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: var(--bg-gradient);
+    background-attachment: fixed;
+}
+
+/* ── Global Focus-Visible (Accessibility) ────────────────────── */
+*:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+.tag-chip:focus-visible,
+.btn-go:focus-visible,
+.expanded-link-item:focus-visible {
+    outline-offset: 1px;
+}
+
+/* ── Container ─────────────────────── */
+.container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 16px 16px 40px;
+}
+
+/* ── Header ───────────────────────── */
+.header {
+    text-align: center;
+    padding: 28px 20px 8px;
+    position: relative;
+}
+.header-icon {
+    display: inline-block;
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    border-radius: var(--radius-lg);
+    margin-bottom: 10px;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+}
+.header-icon::after {
+    content: '🇮🇷';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+}
+.header h1 {
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+}
+.header .subtitle {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+/* ── Search Section ──────────────── */
+.search-section {
+    position: relative;
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    padding: 16px 18px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: box-shadow var(--transition);
+}
+.search-section:focus-within {
+    box-shadow: var(--shadow-lg), 0 0 0 3px rgba(16, 185, 129, 0.12);
+    border-color: var(--border);
+}
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.search-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 2;
+    color: var(--text-muted);
+    transition: color var(--transition);
+}
+.search-wrapper:focus-within .search-icon {
+    color: var(--primary-light);
+}
+.search-icon svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+#searchInput {
+    flex: 1;
+    width: 100%;
+    padding: 12px 42px 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-family: var(--font);
+    font-size: 0.95rem;
+    background: var(--surface-hover);
+    color: var(--text);
+    transition: all var(--transition);
+    outline: none;
+    direction: rtl;
+}
+#searchInput::placeholder {
+    color: var(--text-muted);
+}
+#searchInput:focus {
+    border-color: var(--primary-light);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.06);
+}
+.clear-search {
+    display: none;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--border);
+    border: none;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-secondary);
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+    z-index: 2;
+    line-height: 1;
+}
+.clear-search.visible {
+    display: flex;
+}
+.clear-search:hover {
+    background: var(--text-muted);
+    color: var(--surface);
+}
+.results-count {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    text-align: right;
+    transition: all var(--transition);
+}
+.results-count strong {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* ── Tag Chips ────────────────────── */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-light);
+    max-height: 140px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+    -webkit-overflow-scrolling: touch;
+}
+.tags-container::-webkit-scrollbar {
+    width: 4px;
+}
+.tags-container::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 8px;
+}
+.tags-container::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 8px;
+}
+.tag-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 14px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    transition: all var(--transition);
+    border: 1.5px solid var(--border);
+    background: var(--surface-hover);
+    color: var(--text-secondary);
+    font-family: var(--font);
+    letter-spacing: -0.2px;
+    min-height: 44px;
+}
+.tag-chip:hover {
+    background: var(--primary-bg);
+    border-color: var(--border);
+    color: var(--primary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+.tag-chip:active {
+    transform: scale(0.96);
+}
+.tag-chip.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+.tag-chip .tag-count {
+    font-size: 0.7rem;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 50px;
+    padding: 2px 7px;
+    font-weight: 600;
+}
+.tag-chip.active .tag-count {
+    background: rgba(255, 255, 255, 0.3);
+}
+.reset-tags {
+    display: none;
+    font-size: 0.75rem;
+    color: #ef4444;
+    cursor: pointer;
+    padding: 7px 12px;
+    border-radius: 50px;
+    background: #450a0a;
+    border: 1px solid #7f1d1d;
+    font-family: var(--font);
+    transition: all var(--transition);
+    white-space: nowrap;
+}
+.reset-tags.visible {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.reset-tags:hover {
+    background: #7f1d1d;
+    border-color: #991b1b;
+}
+
+/* ── Site Cards Grid (auto-fit / minmax) ───────────────── */
+.sites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 1rem;
+    align-items: start;
+}
+
+/* ── View: List Mode ───────────────── */
+.sites-grid.list-view {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+}
+.sites-grid.list-view .site-card {
+    border-radius: var(--radius-sm);
+}
+.sites-grid.list-view .card-main {
+    padding: 8px 12px;
+    min-height: auto;
+}
+.sites-grid.list-view .card-description-preview {
+    display: inline;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-right: 8px;
+}
+.sites-grid.list-view .site-card.expanded .card-expanded {
+    max-height: 800px;
+}
+.sites-grid.list-view .card-tags-row {
+    display: none;
+}
+.sites-grid.list-view .site-card.expanded .card-tags-row {
+    display: flex;
+}
+
+/* ── Category Header ─────────────── */
+.category-header {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    margin-bottom: 4px;
+    padding: 0 4px;
+}
+.category-header:first-child {
+    margin-top: 0;
+}
+.category-header-icon {
+    font-size: 1.2rem;
+}
+.category-header-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+}
+.category-header-count {
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: var(--primary-bg);
+    color: var(--primary);
+    padding: 2px 8px;
+    border-radius: 50px;
+}
+.category-header-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+/* ── Toolbar Row (Sort, View, Expand) ────── */
+.toolbar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+.toolbar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 14px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-family: var(--font);
+    white-space: nowrap;
+    min-height: 38px;
+}
+.toolbar-btn:hover {
+    background: var(--primary-bg);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+.toolbar-btn.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+.sort-select {
+    padding: 7px 12px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-family: var(--font);
+    outline: none;
+    min-height: 38px;
+    direction: rtl;
+}
+.sort-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* ── Bookmark Star ────────────────── */
+.bookmark-btn {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: all var(--transition);
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-radius: 50%;
+    padding: 0;
+}
+.bookmark-btn:hover {
+    color: var(--star);
+    background: var(--star-bg);
+}
+.bookmark-btn.bookmarked {
+    color: var(--star);
+    animation: starPop 0.4s ease;
+}
+
+/* ── Site Card ────────────────────── */
+.site-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    transition: all var(--transition-slow);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: fadeInUp 0.4s ease forwards;
+    opacity: 0;
+    transform: translateY(8px);
+}
+.site-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.site-card.hidden {
+    display: none;
+}
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.site-card:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--text-muted);
+    transform: translateY(-3px);
+}
+.site-card.expanded {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary);
+    background: var(--surface-hover);
+    transform: translateY(-3px);
+}
+.site-card.recommended {
+    border-right: 3px solid var(--star);
+}
+
+/* ── Recommended Badge ────────────── */
+.recommended-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 3px 10px;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #92400e;
+    border-radius: 50px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: -0.1px;
+    border: 1px solid #fbbf24;
+    white-space: nowrap;
+}
+[data-theme="dark"] .recommended-badge {
+    background: linear-gradient(135deg, #78350f, #92400e);
+    color: #fbbf24;
+    border-color: #b45309;
+}
+
+/* ── Card Main Row ────────────────── */
+.card-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 14px;
+    min-height: 56px;
+    flex-wrap: wrap;
+}
+.card-star {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--text-muted);
+    transition: all var(--transition);
+}
+.card-star.active {
+    color: var(--star);
+    animation: starPop 0.4s ease;
+}
+@keyframes starPop {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.35);
+    }
+}
+.card-star svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+}
+.card-info {
+    flex: 1;
+    min-width: 120px;
+}
+.card-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+    letter-spacing: -0.3px;
+    line-height: 1.3;
+}
+.card-tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 3px;
+}
+.card-tag-mini {
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    border-radius: 50px;
+    background: var(--border);
+    color: var(--text-secondary);
+    font-weight: 500;
+    letter-spacing: -0.2px;
+}
+.card-tag-main {
+    font-size: 0.68rem;
+    padding: 2px 10px;
+    border-radius: 50px;
+    background: #fef2f2;
+    color: #dc2626;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    border: 1px solid #fecaca;
+}
+[data-theme="dark"] .card-tag-main {
+    background: rgba(220, 38, 38, 0.15);
+    color: #f87171;
+    border-color: rgba(220, 38, 38, 0.3);
+}
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    margin-right: auto;
+}
+.btn-go {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    background: var(--primary);
+    color: #fff;
+    transition: all var(--transition);
+    white-space: nowrap;
+    font-family: var(--font);
+    letter-spacing: -0.2px;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+    position: relative;
+    z-index: 2;
+    min-height: 44px;
+    min-width: 44px;
+}
+.btn-go:hover {
+    background: #059669;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+    transform: translateY(-1px);
+}
+.btn-go:active {
+    transform: scale(0.95);
+}
+.btn-go svg {
+    width: 14px;
+    height: 14px;
+}
+.expand-arrow {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+    color: var(--text-muted);
+    font-size: 12px;
+    background: var(--surface-hover);
+}
+.site-card.expanded .expand-arrow {
+    transform: rotate(180deg);
+    background: var(--primary-bg);
+    color: var(--primary);
+}
+.expand-arrow svg {
+    width: 14px;
+    height: 14px;
+    transition: transform var(--transition);
+}
+
+/* ── Expanded Content ─────────────── */
+.card-expanded {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all var(--transition-slow);
+    border-top: 0px solid transparent;
+    padding: 0 14px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.site-card.expanded .card-expanded {
+    max-height: 600px;
+    opacity: 1;
+    padding: 14px;
+    border-top: 1px solid var(--border);
+    gap: 10px;
+}
+.expanded-description {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+.expanded-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.expanded-link-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.78rem;
+    padding: 8px 14px;
+    border-radius: 50px;
+    background: var(--surface-hover);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all var(--transition);
+    border: 1.5px solid transparent;
+    font-family: var(--font);
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    min-height: 44px;
+}
+.expanded-link-item:hover {
+    background: var(--border);
+    border-color: var(--text-muted);
+    color: var(--text);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+.expanded-link-item:active {
+    transform: scale(0.95);
+}
+.expanded-link-item.unfiltered {
+    background: #fef3c7;
+    color: #92400e;
+    border-color: #fde68a;
+    font-weight: 600;
+}
+.expanded-link-item.unfiltered:hover {
+    background: #fde68a;
+    border-color: #fcd34d;
+    color: #78350f;
+}
+.expanded-link-item.copy-success {
+    background: #064e3b !important;
+    color: #6ee7b7 !important;
+    border-color: #065f46 !important;
+    font-weight: 700 !important;
+    animation: copyPulse 0.5s ease;
+}
+@keyframes copyPulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.08);
+    }
+    60% {
+        transform: scale(0.97);
+    }
+}
+.expanded-link-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: -0.2px;
+}
+
+/* ── Social Media Badges ──────────── */
+.social-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    letter-spacing: -0.2px;
+    margin-bottom: 2px;
+}
+.social-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.social-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+    transition: all var(--transition);
+    white-space: nowrap;
+    letter-spacing: -0.2px;
+    font-family: var(--font);
+}
+.social-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.1);
+}
+.social-badge:active {
+    transform: scale(0.93);
+}
+.social-telegram {
+    background: #26A5E4;
+}
+.social-instagram {
+    background: #E4405F;
+}
+.social-twitter {
+    background: #1DA1F2;
+}
+.social-youtube {
+    background: #FF0000;
+}
+.social-eitaa {
+    background: #F78F1E;
+}
+.social-rubika {
+    background: #00BFA5;
+}
+.social-soroush {
+    background: #5B4DA8;
+}
+.social-bale {
+    background: #4CAF50;
+}
+.social-aparat {
+    background: #ED145B;
+}
+.social-whatsapp {
+    background: #25D366;
+}
+.social-linkedin {
+    background: #0A66C2;
+}
+.social-discord {
+    background: #5865F2;
+}
+.social-custom {
+    background: #6366f1;
+}
+.custom-links-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(100, 116, 139, 0.25);
+}
+
+/* ── Empty State ──────────────────── */
+.empty-state {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px;
+    text-align: center;
+    grid-column: 1 / -1;
+}
+.empty-state.visible {
+    display: flex;
+}
+.empty-icon {
+    font-size: 56px;
+    margin-bottom: 14px;
+    opacity: 0.7;
+}
+.empty-state h3 {
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+.empty-state p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* ── Footer ───────────────────────── */
+.footer {
+    text-align: center;
+    padding: 24px 16px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: -0.2px;
+}
+
+/* ── Dark Mode: Category Header ──── */
+[data-theme="dark"] .category-header-title {
+    color: var(--text);
+}
+[data-theme="dark"] .toolbar-btn {
+    background: var(--surface);
+    border-color: var(--border);
+}
+[data-theme="dark"] .sort-select {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--text-secondary);
+}
+[data-theme="dark"] .sort-select option {
+    background: var(--surface);
+    color: var(--text);
+}
+
+/* ── Responsive Fine-tuning ───────── */
+@media (max-width: 480px) {
+    .container {
+        padding: 8px 8px 32px;
+    }
+    .search-section {
+        padding: 12px 10px;
+        border-radius: var(--radius-lg);
+        margin-bottom: 10px;
+    }
+    #searchInput {
+        padding: 10px 38px 10px 10px;
+        font-size: 16px;
+    }
+    .card-main {
+        padding: 10px 10px;
+        gap: 6px;
+    }
+    .card-name {
+        font-size: 0.85rem;
+    }
+    .btn-go {
+        padding: 7px 12px;
+        font-size: 0.73rem;
+        gap: 3px;
+    }
+    .btn-go svg {
+        width: 12px;
+        height: 12px;
+    }
+    .tag-chip {
+        padding: 5px 10px;
+        font-size: 0.72rem;
+    }
+    .card-expanded {
+        padding: 0 10px;
+    }
+    .site-card.expanded .card-expanded {
+        padding: 10px;
+    }
+    .social-badge {
+        padding: 4px 8px;
+        font-size: 0.65rem;
+    }
+    .expand-arrow {
+        width: 26px;
+        height: 26px;
+    }
+    .expanded-link-item {
+        padding: 6px 10px;
+        font-size: 0.72rem;
+    }
+    .toolbar-row {
+        gap: 5px;
+    }
+    .toolbar-btn {
+        padding: 6px 10px;
+        font-size: 0.72rem;
+    }
+    .sort-select {
+        padding: 6px 10px;
+        font-size: 0.72rem;
+    }
+    .category-header-title {
+        font-size: 0.85rem;
+    }
+    .modal-box {
+        margin: 10px;
+        border-radius: var(--radius-lg);
+    }
+}
+@media (min-width: 1024px) {
+    .container {
+        max-width: 960px;
+    }
+    .card-main {
+        padding: 15px 18px;
+    }
+    .card-name {
+        font-size: 1rem;
+    }
+}
+@media (min-width: 1300px) {
+    .container {
+        max-width: 1050px;
+    }
+}
+
+/* ─── Donate Badge ─── */
+.donate-section {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(239, 68, 68, 0.3);
+}
+.donate-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    color: #991b1b;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.donate-badge:hover {
+    background: linear-gradient(135deg, #fecaca, #fca5a5);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+}
+.donate-badge i {
+    color: #ef4444;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* ─── Dark Mode Toggle ─── */
+.theme-toggle {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 1000;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+.theme-toggle:hover {
+    background: var(--surface-hover);
+    transform: scale(1.08);
+    box-shadow: var(--shadow-lg);
+}
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+/* ─── Dark mode: scrollbar ─── */
+[data-theme="dark"] .tags-container::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+[data-theme="dark"] .tags-container {
+    scrollbar-color: #475569 transparent;
+}
+
+/* ─── Dark mode: reset-tags ─── */
+[data-theme="dark"] .reset-tags {
+    background: rgba(127, 29, 29, 0.5);
+    border-color: #7f1d1d;
+    color: #fca5a5;
+}
+
+/* ─── Back-to-Top Button ─── */
+.back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 900;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.back-to-top:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+}
+.back-to-top:active {
+    transform: scale(0.92);
+}
+.back-to-top svg {
+    width: 20px;
+    height: 20px;
+}
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" title="تغییر حالت نمایش">
+        <span class="icon-moon">🌙</span>
+        <span class="icon-sun">☀️</span>
+    </button>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-icon"></div>
+            <h1>سایت‌های ایرانی</h1>
+            <p class="subtitle">دسترسی سریع به سایت‌های کاربردی در زمان نت ملی</p>
+        </header>
+
+        <!-- Search Section -->
+        <div class="search-section" id="searchSection">
+            <div class="search-wrapper">
+                <!-- Search Icon (inline SVG) -->
+                <span class="search-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </span>
+                <input type="text" id="searchInput" placeholder="جستجو با نام سایت، آدرس یا تگ ... مثل دانلود، فیلم، بازی، download" autocomplete="off">
+                <button class="clear-search" id="clearSearch" title="پاک کردن">✕</button>
+            </div>
+            <div class="results-count" id="resultsCount"></div>
+            <div class="tags-container" id="tagsContainer"></div>
+            <button class="reset-tags" id="resetTags">✕ پاک کردن فیلترها</button>
+        </div>
+
+        <!-- Toolbar Row: Sort, View, Expand All, Bookmark Filter -->
+        <div class="toolbar-row" id="toolbarRow">
+            <select class="sort-select" id="sortSelect" title="مرتب‌سازی">
+                <option value="default">📦 پیش‌فرض (دسته‌بندی)</option>
+                <option value="name">🔤 نام (الفبا)</option>
+                <option value="recommended">⭐ پیشنهادی اول</option>
+                <option value="id">🔢 شناسه</option>
+            </select>
+            <button class="toolbar-btn" id="viewToggle" title="تغییر نما">
+                ☰ <span>نمای لیستی</span>
+            </button>
+            <button class="toolbar-btn" id="expandAllBtn" title="باز/بسته کردن همه">
+                ⏬ <span>باز کردن همه</span>
+            </button>
+            <button class="toolbar-btn" id="bookmarkFilterBtn" title="نمایش بوکمارک‌ها">
+                🔖 <span>بوکمارک‌ها</span>
+            </button>
+        </div>
+
+        <!-- Sites Grid -->
+        <div class="sites-grid" id="sitesGrid"></div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState">
+            <div class="empty-icon">🔍</div>
+            <h3>نتیجه‌ای یافت نشد</h3>
+            <p>با عبارت دیگری جستجو کنید یا فیلتر تگ‌ها را تغییر دهید</p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            مناسب زمان نت ملی • لیست در حال به‌روزرسانی
+            <span class="footer-date-wrap" style="display:none;">
+                &bull; این فهرست در تاریخ <span id="footerDate"></span> به‌روزرسانی شده است
+            </span>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="بازگشت به بالا" title="بازگشت به بالا">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
+    </button>
+
+    <script>
+// ──────────────────────────────────
+// Inline Data (no fetch needed)
+// ──────────────────────────────────
+var SITES_DATA = [
+  {
+    "id": 1,
+    "name": "دانلودها",
+    "mainLink": "https://downloadha.com",
+    "unfilteredLink": "https://downloadha.com",
+    "description": "مرجع دانلود نرم‌افزار و بازی با لینک مستقیم. یکی از قدیمی‌ترین و معتبرترین سایت‌های دانلود ایرانی.",
+    "tags": ["دانلود", "بازی", "نرم‌افزار", "آموزش"],
+    "recommended": true,
+    "social": {
+      "telegram": "https://t.me/downloadha",
+      "instagram": "https://instagram.com/downloadha_ir",
+      "eitaa": "https://eitaa.com/downloadha",
+      "aparat": "https://aparat.com/downloadha",
+      "rubika": "https://rubika.ir/downloadha"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 3,
+    "name": "آپارات",
+    "mainLink": "https://aparat.com",
+    "unfilteredLink": "https://aparat.com",
+    "description": "بزرگترین پلتفرم اشتراک‌گذاری ویدیو در ایران. تماشای ویدیوهای متنوع، کانال‌های شخصی و پخش زنده.",
+    "tags": ["ویدیو", "اشتراک‌گذاری", "پخش زنده"],
+    "recommended": true,
+    "social": {
+      "telegram": "https://t.me/aparat",
+      "instagram": "https://instagram.com/aparat",
+      "twitter": "https://twitter.com/aparat",
+      "aparat": "https://aparat.com/aparat",
+      "eitaa": "https://eitaa.com/aparat",
+      "rubika": "https://rubika.ir/aparat"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 4,
+    "name": "فیلیمو",
+    "mainLink": "https://filimo.com",
+    "unfilteredLink": "https://filimo.com",
+    "description": "پلتفرم استریم فیلم و سریال ایرانی و خارجی با زیرنویس و دوبله فارسی، پخش آنلاین با کیفیت بالا.",
+    "tags": ["فیلم و سریال", "استریم", "اشتراکی", "سرگرمی"],
+    "recommended": true,
+    "social": {
+      "telegram": "https://t.me/filimo",
+      "instagram": "https://instagram.com/filimo",
+      "twitter": "https://twitter.com/filimo",
+      "aparat": "https://aparat.com/filimo",
+      "eitaa": "https://eitaa.com/filimo"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 5,
+    "name": "نماوا",
+    "mainLink": "https://namava.ir",
+    "unfilteredLink": "https://namava.ir",
+    "description": "سرویس استریم ویدیوی ایرانی با کتابخانه‌ای غنی از فیلم، سریال، مستند و برنامه‌های تلویزیونی.",
+    "tags": ["فیلم و سریال", "استریم", "اشتراکی", "سرگرمی"],
+    "recommended": false,
+    "social": {
+      "telegram": "https://t.me/namava",
+      "instagram": "https://instagram.com/namava",
+      "twitter": "https://twitter.com/namava",
+      "eitaa": "https://eitaa.com/namava"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 6,
+    "name": "دیجی‌کالا",
+    "mainLink": "https://digikala.com",
+    "unfilteredLink": "https://digikala.com",
+    "description": "بزرگترین فروشگاه اینترنتی ایران. خرید انواع کالاهای دیجیتال، لوازم خانگی، مد و پوشاک، کتاب و ...",
+    "tags": ["خرید", "فروشگاه", "محصولات", "کالا"],
+    "recommended": true,
+    "social": {
+      "telegram": "https://t.me/digikala",
+      "instagram": "https://instagram.com/digikala",
+      "twitter": "https://twitter.com/digikala",
+      "aparat": "https://aparat.com/digikala",
+      "linkedin": "https://linkedin.com/company/digikala"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 7,
+    "name": "ترب",
+    "mainLink": "https://torob.com",
+    "unfilteredLink": "https://torob.com",
+    "description": "موتور جستجوی خرید و مقایسه قیمت محصولات در فروشگاه‌های اینترنتی ایران. بهترین قیمت را پیدا کنید.",
+    "tags": ["خرید", "مقایسه قیمت", "محصولات", "اقتصادی"],
+    "recommended": true,
+    "social": {
+      "telegram": "https://t.me/torob",
+      "instagram": "https://instagram.com/torob",
+      "twitter": "https://twitter.com/torob"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 8,
+    "name": "ویرگول",
+    "mainLink": "https://virgool.io",
+    "unfilteredLink": "https://virgool.io",
+    "description": "پلتفرم وبلاگ‌نویسی و محتوای ایرانی. انتشار مقالات، داستان‌ها و نوشته‌های کاربران در موضوعات مختلف.",
+    "tags": ["وبلاگ", "نویسندگی", "محتوا", "مطالعه"],
+    "recommended": true,
+    "social": {
+      "telegram": "https://t.me/virgool",
+      "instagram": "https://instagram.com/virgool",
+      "twitter": "https://twitter.com/virgool"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 9,
+    "name": "میهن بلاگ",
+    "mainLink": "https://mihanblog.com",
+    "unfilteredLink": "https://mihanblog.com",
+    "description": "سرویس وبلاگ‌دهی قدیمی و محبوب ایرانی. ساخت وبلاگ رایگان با امکانات متنوع.",
+    "tags": ["وبلاگ", "وبلاگدهی", "ساخت وبلاگ"],
+    "recommended": false,
+    "social": {
+      "telegram": "https://t.me/mihanblog"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 10,
+    "name": "بلاگفا",
+    "mainLink": "https://blogfa.com",
+    "unfilteredLink": "https://blogfa.com",
+    "description": "یکی از قدیمی‌ترین سرویس‌های وبلاگ‌دهی فارسی. جامعه بزرگ وبلاگ‌نویسان ایرانی.",
+    "tags": ["وبلاگ", "وبلاگدهی", "جامعه"],
+    "recommended": false,
+    "social": {
+      "telegram": "https://t.me/blogfa",
+      "instagram": "https://instagram.com/blogfa"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 11,
+    "name": "سکان آکادمی",
+    "mainLink": "https://sokanacademy.com",
+    "unfilteredLink": "https://sokanacademy.com",
+    "description": "آکادمی آموزش برنامه‌نویسی و تکنولوژی. دوره‌های آنلاین، مقالات تخصصی و مسیرهای یادگیری.",
+    "tags": ["آموزش", "برنامه‌نویسی", "تکنولوژی", "دوره آنلاین"],
+    "recommended": true,
+    "social": {
+      "telegram": "https://t.me/sokanacademy",
+      "instagram": "https://instagram.com/sokanacademy",
+      "youtube": "https://youtube.com/@sokanacademy",
+      "aparat": "https://aparat.com/sokanacademy"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 13,
+    "name": "کافه بازار",
+    "mainLink": "https://cafebazaar.ir",
+    "unfilteredLink": "https://cafebazaar.ir",
+    "description": "بزرگترین مارکت اپلیکیشن اندروید در ایران. دانلود اپ‌ها، بازی‌ها و برنامه‌های ایرانی.",
+    "tags": ["اپلیکیشن", "اندروید", "فروشگاه", "بازی", "دانلود"],
+    "recommended": true,
+    "social": {
+      "telegram": "https://t.me/cafebazaar",
+      "instagram": "https://instagram.com/cafebazaar",
+      "twitter": "https://twitter.com/cafebazaar",
+      "linkedin": "https://linkedin.com/company/cafebazaar"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 14,
+    "name": "طاقچه",
+    "mainLink": "https://taaghche.com",
+    "unfilteredLink": "https://taaghche.com",
+    "description": "فروشگاه و کتابخوان الکترونیک ایرانی. خرید و مطالعه کتاب‌های الکترونیک و صوتی.",
+    "tags": ["کتاب", "کتابخوان", "کتاب صوتی", "مطالعه", "فروشگاه"],
+    "recommended": true,
+    "social": {
+      "telegram": "https://t.me/taaghche",
+      "instagram": "https://instagram.com/taaghche",
+      "twitter": "https://twitter.com/taaghche"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 15,
+    "name": "فیدیبو",
+    "mainLink": "https://fidibo.com",
+    "unfilteredLink": "https://fidibo.com",
+    "description": "پلتفرم کتاب الکترونیک و صوتی ایرانی با هزاران عنوان کتاب از ناشران مطرح.",
+    "tags": ["کتاب", "کتابخوان", "کتاب الکترونیک", "مطالعه"],
+    "recommended": false,
+    "social": {
+      "telegram": "https://t.me/fidibo",
+      "instagram": "https://instagram.com/fidibo",
+      "twitter": "https://twitter.com/fidibo"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 16,
+    "name": "دیوار",
+    "mainLink": "https://divar.ir",
+    "unfilteredLink": "https://divar.ir",
+    "description": "پلتفرم خرید و فروش و معاوضه کالا و خدمات. آگهی‌های رایگان در سراسر ایران.",
+    "tags": ["خرید", "فروش", "آگهی", "اقتصادی", "محصولات"],
+    "recommended": true,
+    "social": {
+      "telegram": "https://t.me/divar",
+      "instagram": "https://instagram.com/divar",
+      "twitter": "https://twitter.com/divar",
+      "linkedin": "https://linkedin.com/company/divar"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 17,
+    "name": "شیپور",
+    "mainLink": "https://sheypoor.com",
+    "unfilteredLink": "https://sheypoor.com",
+    "description": "سایت آگهی و خرید و فروش اینترنتی. معامله سریع و آسان کالاهای نو و دست دوم.",
+    "tags": ["خرید", "فروش", "آگهی", "اقتصادی"],
+    "recommended": false,
+    "social": {
+      "telegram": "https://t.me/sheypoor",
+      "instagram": "https://instagram.com/sheypoor"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 18,
+    "name": "باسلام",
+    "mainLink": "https://basalam.com",
+    "unfilteredLink": "https://basalam.com",
+    "description": "بازار آنلاین صنایع دستی و محصولات بومی ایرانی. حمایت از کسب‌وکارهای کوچک و هنرمندان.",
+    "tags": ["خرید", "صنایع دستی", "محصولات", "هنر", "فروشگاه"],
+    "recommended": true,
+    "social": {
+      "telegram": "https://t.me/basalam",
+      "instagram": "https://instagram.com/basalam",
+      "eitaa": "https://eitaa.com/basalam"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 19,
+    "name": "نشان",
+    "mainLink": "https://neshan.org",
+    "unfilteredLink": "https://neshan.org",
+    "description": "اپلیکیشن و سایت نقشه و مسیریاب ایرانی. ناوبری دقیق با نقشه‌های آفلاین و ترافیک زنده.",
+    "tags": ["نقشه", "مسیریاب", "ناوبری", "اپلیکیشن"],
+    "recommended": true,
+    "social": {
+      "telegram": "https://t.me/neshan",
+      "instagram": "https://instagram.com/neshan",
+      "twitter": "https://twitter.com/neshan"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 20,
+    "name": "بلد",
+    "mainLink": "https://balad.ir",
+    "unfilteredLink": "https://balad.ir",
+    "description": "نقشه و مسیریاب ایرانی با رابط کاربری ساده. مسیریابی دقیق در شهرهای ایران.",
+    "tags": ["نقشه", "مسیریاب", "ناوبری", "اپلیکیشن"],
+    "recommended": false,
+    "social": {
+      "telegram": "https://t.me/balad",
+      "instagram": "https://instagram.com/balad"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 21,
+    "name": "مووی‌یاب",
+    "mainLink": "https://movieyaab.ir",
+    "unfilteredLink": "https://movieyaab.ir",
+    "description": "پلتفرم جستجوی فیلم، سریال و انیمه. جستجوی نام فارسی یا انگلیسی فیلم و سریال، دریافت لینک دانلود و پخش آنلاین. متصل به منابع متنوع شامل MovieBox، Animeone، FilmKio، Moviejavan، Simba و AnimeGate.",
+    "tags": ["فیلم و سریال", "انیمه", "پخش آنلاین", "دانلود", "بدون سانسور"],
+    "recommended": true,
+    "social": {
+      "rubika": "https://rubika.ir/movieyaab",
+      "bale": "https://ble.ir/movieyaab",
+      "links": "https://zil.ink/movieyaab"
+    },
+    "donate": "https://movieyaab.ir/donate",
+    "customLinks": []
+  },
+  {
+    "id": 22,
+    "name": "دنیای سریال (سریال بلاگ)",
+    "mainLink": "https://serialblog.top/",
+    "unfilteredLink": "https://donyayeserial.com/",
+    "description": "دانلود فیلم و سریال های خارجی بدون سانسور به همراه زیرنویس و دوبله فارسی کاملا رایگان. آرشیو جامع با بیش از ۱۰ هزار عنوان.",
+    "tags": ["دانلود", "فیلم و سریال", "بدون سانسور", "زیرنویس", "دوبله", "رایگان"],
+    "recommended": true,
+    "social": {
+      "telegram_bot": "https://t.me/DonyayeSerialBot",
+      "telegram": "https://t.me/donyayeserialtel",
+      "bale": "https://ble.ir/serial_blog",
+      "rubika": "https://rubika.ir/serialblog"
+    },
+    "donate": "https://daramet.com/donyayeserial",
+    "customLinks": [
+      {
+        "title": "وبلاگ",
+        "url": "https://serialblog.rzb.ir/",
+        "icon": "blog"
+      },
+      {
+        "title": "آرشیو دنیای سریال",
+        "url": "https://dls6.iran-gamecenter-host.com/DonyayeSerial/10_thous.html",
+        "icon": "link"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "ذره‌بین",
+    "mainLink": "https://zarebin.ir",
+    "unfilteredLink": "https://zarebin.ir",
+    "description": "جستجوگر هوشمند فارسی با فناوری متا سرچ و هوش مصنوعی. جستجوی آینده در دستان شما — خلاقیت، تولید تصویر، خلاصه‌سازی و پاسخ به سوالات روزمره. اولین هوش مصنوعی ایرانی متصل به وب زنده.",
+    "tags": ["جستجوگر", "هوش مصنوعی", "متا سرچ", "دستیار هوشمند", "اندروید", "تولید تصویر"],
+    "recommended": false,
+    "social": {
+      "bale": "https://ble.ir/zarebin",
+      "rubika": "https://rubika.ir/zarebin"
+    },
+    "donate": null,
+    "customLinks": [
+      {
+        "title": "دانلود مستقیم",
+        "url": "https://zarebin.ir/download",
+        "icon": "download"
+      },
+      {
+        "title": "کافه بازار",
+        "url": "https://cafebazaar.ir/app/com.zarebin.browser",
+        "icon": "app"
+      },
+      {
+        "title": "مایکت",
+        "url": "https://myket.ir/app/com.zarebin.browser",
+        "icon": "app"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "گردو",
+    "mainLink": "https://gerdoo.me",
+    "unfilteredLink": "https://gerdoo.me",
+    "description": "فراجستجوگر ایرانی با حریم شخصی بالا. جستجو در سایت‌ها، عکس‌ها، فیلم‌ها و خبرها. امکان رتبه‌بندی سایت‌ها و تبلیغات.",
+    "tags": ["جستجوگر", "فراجستجوگر", "حریم شخصی", "وبگرد", "متا سرچ"],
+    "recommended": false,
+    "social": {
+      "eitaa": "https://eitaa.com/gerdoo_me_channel",
+      "rubika": "https://rubika.ir/gerdoo_me_channel",
+      "bale": "https://ble.ir/gerdoo_me_channel",
+      "telegram": "https://t.me/s/gerdoo_me_channel"
+    },
+    "donate": "https://gerdoo.me/charity/",
+    "customLinks": [
+      {
+        "title": "رتبه‌بندی سایت‌ها",
+        "url": "https://analytics.gerdoo.me/",
+        "icon": "website"
+      },
+      {
+        "title": "تبلیغات",
+        "url": "https://agahi.gerdoo.me/",
+        "icon": "link"
+      },
+      {
+        "title": "کمک به خیریه",
+        "url": "https://gerdoo.me/charity/",
+        "icon": "heart"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "برتینا",
+    "mainLink": "https://www.bertina.ir",
+    "unfilteredLink": "https://search.bertina.ir",
+    "description": "موتور جستجوی فارسی برتینا — جستجوی سریع و آسان در وب. قدرتمندترین موتور جستجوی هوش مصنوعی فارسی با سرویس‌های جانبی شامل هوش مصنوعی رایگان، ایمیل، مترجم، DNS و هواشناسی.",
+    "tags": ["جستجوگر", "هوش مصنوعی"],
+    "recommended": true,
+    "social": {
+      "twitter": "https://twitter.com/bertina_search",
+      "linkedin": "https://linkedin.com/company/bertina"
+    },
+    "donate": null,
+    "customLinks": [
+      {
+        "title": "هوش مصنوعی رایگان",
+        "url": "https://llm.bertina.ir/",
+        "icon": "link"
+      },
+      {
+        "title": "ایمیل رایگان",
+        "url": "https://www.bertinamail.com/",
+        "icon": "contact"
+      },
+      {
+        "title": "مترجم رایگان",
+        "url": "https://translate.bertina.ir/",
+        "icon": "link"
+      },
+      {
+        "title": "DNS رایگان",
+        "url": "https://www.bertina.ir/dns",
+        "icon": "link"
+      },
+      {
+        "title": "هواشناسی",
+        "url": "https://weather.bertina.ir/",
+        "icon": "link"
+      },
+      {
+        "title": "درباره برتینا",
+        "url": "https://www.bertina.ir/about-us",
+        "icon": "website"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "ویجی دی ال",
+    "mainLink": "https://vgdl.ir",
+    "unfilteredLink": "https://vgdl.ir",
+    "description": "دانلود بازی کامپیوتر (PC) ویندوز با لینک مستقیم. انواع ژانرها شامل اکشن، استراتژیک، نقش‌آفرینی، شوتر، ترسناک، ماجراجویی و چندنفره.",
+    "tags": ["بازی", "دانلود", "فارسی ساز", "کامپیوتر", "اندروید", "نرم افزار"],
+    "recommended": true,
+    "social": {
+      "rubika": "https://rubika.ir/vgdl2033",
+      "eitaa": "https://eitaa.com/vgdl_ir",
+      "telegram": "https://t.me/gbox_ir"
+    },
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 27,
+    "name": "فن ساب",
+    "mainLink": "https://fansub.ir",
+    "unfilteredLink": "https://fansub.ir",
+    "description": "تولیدکننده و فروشنده فارسی‌ساز بازی‌های ویدیویی. ارائه فارسی‌ساز برای بازی‌های کامپیوتر، PS4، PS5، Xbox، Switch و اندروید. بخش فارسی‌سازهای رایگان، باندل‌های فارسی‌ساز و مقالات تخصصی بازی.",
+    "tags": ["فارسی ساز", "بازی", "کامپیوتر", "کنسول", "اندروید"],
+    "recommended": true,
+    "social": {
+      "telegram": "https://t.me/FanSub_Official",
+      "instagram": "https://www.instagram.com/fansub_official/",
+      "discord": "https://discord.com/invite/W4dgv3cvNK"
+    },
+    "donate": null,
+    "customLinks": [
+      {
+        "title": "فروشگاه",
+        "url": "https://fansub.ir/shop/",
+        "icon": "link"
+      },
+      {
+        "title": "فارسی‌سازهای رایگان",
+        "url": "https://fansub.ir/product-category/free-sub/",
+        "icon": "link"
+      },
+      {
+        "title": "مقالات",
+        "url": "https://fansub.ir/blog/",
+        "icon": "blog"
+      },
+      {
+        "title": "سوالات پرتکرار",
+        "url": "https://fansub.ir/faq/",
+        "icon": "link"
+      },
+      {
+        "title": "درباره ما",
+        "url": "https://fansub.ir/%d8%af%d8%b1%d8%a8%d8%a7%d8%b1%d9%87-%d9%85%d8%a7/",
+        "icon": "website"
+      },
+      {
+        "title": "ارتباط با ما",
+        "url": "https://fansub.ir/joint-us/",
+        "icon": "link"
+      }
+    ]
+  }
+];
+
+var META_DATA = {"lastUpdated": "1405/02/07"};
+
+// ──────────────────────────────────
+// Dark Mode (runs immediately)
+// ──────────────────────────────────
+(function initTheme() {
+    var STORAGE_KEY = 'theme';
+    var toggle = document.getElementById('themeToggle');
+    if (!toggle) return;
+
+    var theme = localStorage.getItem(STORAGE_KEY);
+    if (!theme) {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-theme', theme);
+
+    toggle.addEventListener('click', function() {
+        var current = document.documentElement.getAttribute('data-theme');
+        var next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem(STORAGE_KEY, next);
+    });
+})();
+
+(function() {
+    // ──────────────────────────────────
+    // State
+    // ──────────────────────────────────
+    var sitesData = [];
+    var activeTags = new Set();
+    var searchQuery = '';
+    var expandedCardIds = new Set();
+    var hashUpdateTimer = null;
+    var sortMode = 'default';
+    var viewMode = 'card';
+    var showBookmarksOnly = false;
+    var bookmarkedIds = new Set();
+    var allExpanded = false;
+    var debounceTimer = null;
+
+    var BOOKMARK_KEY = 'awesome-iran-bookmarks';
+
+    // ──────────────────────────────────
+    // DOM References
+    // ──────────────────────────────────
+    var searchInput = document.getElementById('searchInput');
+    var clearSearchBtn = document.getElementById('clearSearch');
+    var tagsContainer = document.getElementById('tagsContainer');
+    var resetTagsBtn = document.getElementById('resetTags');
+    var sitesGrid = document.getElementById('sitesGrid');
+    var emptyState = document.getElementById('emptyState');
+    var resultsCount = document.getElementById('resultsCount');
+    var footerDateEl = document.getElementById('footerDate');
+    var backToTopBtn = document.getElementById('backToTop');
+    var sortSelect = document.getElementById('sortSelect');
+    var viewToggle = document.getElementById('viewToggle');
+    var expandAllBtn = document.getElementById('expandAllBtn');
+    var bookmarkFilterBtn = document.getElementById('bookmarkFilterBtn');
+
+    // ──────────────────────────────────
+    // Bookmarks: Load/Save
+    // ──────────────────────────────────
+    function loadBookmarks() {
+        try {
+            var data = localStorage.getItem(BOOKMARK_KEY);
+            if (data) {
+                bookmarkedIds = new Set(JSON.parse(data));
+            }
+        } catch(e) {
+            bookmarkedIds = new Set();
+        }
+    }
+
+    function saveBookmarks() {
+        try {
+            localStorage.setItem(BOOKMARK_KEY, JSON.stringify(Array.from(bookmarkedIds)));
+        } catch(e) {
+            // silently fail
+        }
+    }
+
+    function toggleBookmark(siteId) {
+        if (bookmarkedIds.has(siteId)) {
+            bookmarkedIds.delete(siteId);
+        } else {
+            bookmarkedIds.add(siteId);
+        }
+        saveBookmarks();
+        var btn = sitesGrid.querySelector('[data-id="' + siteId + '"] .bookmark-btn');
+        if (btn) {
+            btn.classList.toggle('bookmarked', bookmarkedIds.has(siteId));
+            btn.innerHTML = bookmarkedIds.has(siteId) ? '🔖' : '📑';
+        }
+        updateBookmarkFilterBtn();
+    }
+
+    function updateBookmarkFilterBtn() {
+        bookmarkFilterBtn.classList.toggle('active', showBookmarksOnly);
+    }
+
+    // ──────────────────────────────────
+    // Category Icon Map
+    // ──────────────────────────────────
+    function getCategoryIcon(tag) {
+        var iconMap = {
+            'دانلود': '📥',
+            'فیلم و سریال': '🎬',
+            'استریم': '▶️',
+            'سرگرمی': '🎭',
+            'خرید': '🛒',
+            'فروشگاه': '🏪',
+            'وبلاگ': '📝',
+            'وبلاگدهی': '📝',
+            'آموزش': '🎓',
+            'برنامه‌نویسی': '💻',
+            'تکنولوژی': '💻',
+            'ویدیو': '🎥',
+            'اشتراک‌گذاری': '🔗',
+            'پخش زنده': '📡',
+            'کتاب': '📚',
+            'کتابخوان': '📖',
+            'آگهی': '📢',
+            'نقشه': '🗺️',
+            'مسیریاب': '🧭',
+            'جستجوگر': '🔍',
+            'فراجستجوگر': '🔍',
+            'هوش مصنوعی': '🤖',
+            'بازی': '🎮',
+            'فارسی ساز': '🌍',
+            'اپلیکیشن': '📱',
+            'اندروید': '📱',
+            'محصولات': '📦',
+            'اقتصادی': '💰',
+            'مقایسه قیمت': '📊',
+            'نویسندگی': '✍️',
+            'محتوا': '📰',
+            'مطالعه': '📖',
+            'ساخت وبلاگ': '✏️',
+            'جامعه': '👥',
+            'دوره آنلاین': '🎓',
+            'بدون سانسور': '🔓',
+            'زیرنویس': '💬',
+            'دوبله': '🎙️',
+            'رایگان': '🎁',
+            'انیمه': '🎌',
+            'پخش آنلاین': '▶️',
+            'متا سرچ': '🔎',
+            'دستیار هوشمند': '🤖',
+            'تولید تصویر': '🎨',
+            'حریم شخصی': '🔒',
+            'وبگرد': '🌐',
+            'کامپیوتر': '🖥️',
+            'کنسول': '🎮',
+            'صنایع دستی': '🎨',
+            'هنر': '🎨',
+            'ناوبری': '🧭'
+        };
+        return iconMap[tag] || '📌';
+    }
+
+    // ──────────────────────────────────
+    // Load Data (inline, no fetch)
+    // ──────────────────────────────────
+    function loadSitesData() {
+        sitesData = SITES_DATA;
+        loadMetaData();
+        init();
+    }
+
+    function loadMetaData() {
+        var meta = META_DATA;
+        if (meta && meta.lastUpdated && footerDateEl) {
+            footerDateEl.textContent = meta.lastUpdated;
+            var wrap = footerDateEl.closest('.footer-date-wrap');
+            if (wrap) wrap.style.display = '';
+        }
+    }
+
+    // ──────────────────────────────────
+    // Build All Unique Tags (sorted by frequency)
+    // ──────────────────────────────────
+    function getAllTags() {
+        var tagCounts = {};
+        sitesData.forEach(function(site) {
+            site.tags.forEach(function(tag) {
+                tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+            });
+        });
+        return Object.entries(tagCounts)
+            .sort(function(a, b) {
+                if (b[1] !== a[1]) return b[1] - a[1];
+                return a[0].localeCompare(b[0], 'fa');
+            })
+            .map(function(entry) { return { tag: entry[0], count: entry[1] }; });
+    }
+
+    // ──────────────────────────────────
+    // Render Tag Chips
+    // ──────────────────────────────────
+    function renderTagChips() {
+        var allTags = getAllTags();
+        tagsContainer.innerHTML = allTags.map(function(item) {
+            var isActive = activeTags.has(item.tag);
+            return '<span class="tag-chip' + (isActive ? ' active' : '') + '"'
+                + ' data-tag="' + escapeHtml(item.tag) + '"'
+                + ' role="button"'
+                + ' tabindex="0"'
+                + ' aria-pressed="' + isActive + '">'
+                + escapeHtml(item.tag)
+                + ' <span class="tag-count">' + item.count + '</span>'
+                + '</span>';
+        }).join('');
+
+        if (activeTags.size > 0) {
+            resetTagsBtn.classList.add('visible');
+        } else {
+            resetTagsBtn.classList.remove('visible');
+        }
+
+        tagsContainer.querySelectorAll('.tag-chip').forEach(function(chip) {
+            chip.addEventListener('click', function(e) {
+                e.preventDefault();
+                var tag = this.getAttribute('data-tag');
+                toggleTag(tag);
+            });
+        });
+    }
+
+    function escapeHtml(str) {
+        var div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
+    function toggleTag(tag) {
+        if (activeTags.has(tag)) {
+            activeTags.delete(tag);
+        } else {
+            activeTags.add(tag);
+        }
+        renderTagChips();
+        filterAndRender();
+        sitesGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function resetAllTags() {
+        activeTags.clear();
+        renderTagChips();
+        filterAndRender();
+    }
+
+    // ──────────────────────────────────
+    // URL Hash Persistence
+    // ──────────────────────────────────
+    function readHash() {
+        var hash = window.location.hash.slice(1);
+        if (!hash) return false;
+        var params = new URLSearchParams(hash);
+        var search = params.get('search');
+        if (search !== null && search !== '') {
+            searchQuery = decodeURIComponent(search);
+            searchInput.value = searchQuery;
+            clearSearchBtn.classList.add('visible');
+        }
+        var tags = params.getAll('tag');
+        if (tags.length > 0) {
+            tags.forEach(function(t) { activeTags.add(decodeURIComponent(t)); });
+        }
+        var sort = params.get('sort');
+        if (sort && ['default', 'name', 'recommended', 'id'].indexOf(sort) !== -1) {
+            sortMode = sort;
+            sortSelect.value = sort;
+        }
+        var view = params.get('view');
+        if (view && ['card', 'list'].indexOf(view) !== -1) {
+            viewMode = view;
+            updateViewToggleUI();
+        }
+        return (search !== null && search !== '') || tags.length > 0;
+    }
+
+    function writeHash() {
+        var params = new URLSearchParams();
+        if (searchQuery.trim()) {
+            params.set('search', searchQuery.trim());
+        }
+        activeTags.forEach(function(tag) {
+            params.append('tag', tag);
+        });
+        if (sortMode !== 'default') {
+            params.set('sort', sortMode);
+        }
+        if (viewMode !== 'card') {
+            params.set('view', viewMode);
+        }
+        var hashStr = params.toString();
+        var newHash = hashStr ? '#' + hashStr : '';
+        if (window.location.hash !== newHash) {
+            history.replaceState(null, '', location.pathname + newHash);
+        }
+    }
+
+    function scheduleHashUpdate() {
+        clearTimeout(hashUpdateTimer);
+        hashUpdateTimer = setTimeout(writeHash, 150);
+    }
+
+    // ──────────────────────────────────
+    // Sort Logic
+    // ──────────────────────────────────
+    function applySorting(sites) {
+        if (sortMode === 'name') {
+            sites.sort(function(a, b) { return a.name.localeCompare(b.name, 'fa'); });
+        } else if (sortMode === 'recommended') {
+            sites.sort(function(a, b) {
+                if (a.recommended && !b.recommended) return -1;
+                if (!a.recommended && b.recommended) return 1;
+                return a.name.localeCompare(b.name, 'fa');
+            });
+        } else if (sortMode === 'id') {
+            sites.sort(function(a, b) { return a.id - b.id; });
+        } else {
+            var tagFreq = {};
+            sitesData.forEach(function(site) {
+                var mainTag = (site.tags && site.tags.length > 0) ? site.tags[0] : '';
+                if (mainTag) tagFreq[mainTag] = (tagFreq[mainTag] || 0) + 1;
+            });
+            var sortedTags = Object.entries(tagFreq)
+                .sort(function(a, b) {
+                    if (b[1] !== a[1]) return b[1] - a[1];
+                    return a[0].localeCompare(b[0], 'fa');
+                })
+                .map(function(entry) { return entry[0]; });
+            var tagOrder = {};
+            sortedTags.forEach(function(tag, idx) { tagOrder[tag] = idx; });
+
+            sites.sort(function(a, b) {
+                var tagA = (a.tags && a.tags.length > 0) ? a.tags[0] : '';
+                var tagB = (b.tags && b.tags.length > 0) ? b.tags[0] : '';
+                var orderA = tagOrder[tagA] !== undefined ? tagOrder[tagA] : 9999;
+                var orderB = tagOrder[tagB] !== undefined ? tagOrder[tagB] : 9999;
+                if (orderA !== orderB) return orderA - orderB;
+                if (a.recommended && !b.recommended) return -1;
+                if (!a.recommended && b.recommended) return 1;
+                return a.id - b.id;
+            });
+        }
+        return sites;
+    }
+
+    // ──────────────────────────────────
+    // Filter Logic
+    // ──────────────────────────────────
+    function getFilteredSites() {
+        var query = searchQuery.trim().toLowerCase();
+        var filtered = sitesData.filter(function(site) {
+            var matchesSearch =
+                !query ||
+                site.name.toLowerCase().indexOf(query) !== -1 ||
+                site.tags.some(function(tag) { return tag.toLowerCase().indexOf(query) !== -1; }) ||
+                (site.description && site.description.toLowerCase().indexOf(query) !== -1) ||
+                site.mainLink.toLowerCase().indexOf(query) !== -1 ||
+                site.unfilteredLink.toLowerCase().indexOf(query) !== -1;
+
+            var matchesTags =
+                activeTags.size === 0 ||
+                site.tags.some(function(tag) { return activeTags.has(tag); });
+
+            var matchesBookmarks = !showBookmarksOnly || bookmarkedIds.has(site.id);
+
+            return matchesSearch && matchesTags && matchesBookmarks;
+        });
+
+        if (sortMode === 'default' && activeTags.size > 0) {
+            filtered.sort(function(a, b) {
+                if (a.recommended && !b.recommended) return -1;
+                if (!a.recommended && b.recommended) return 1;
+                var mainA = (a.tags && a.tags.length > 0) ? a.tags[0] : '';
+                var mainB = (b.tags && b.tags.length > 0) ? b.tags[0] : '';
+                var matchA = activeTags.has(mainA) ? 0 : 1;
+                var matchB = activeTags.has(mainB) ? 0 : 1;
+                if (matchA !== matchB) return matchA - matchB;
+                return a.id - b.id;
+            });
+        } else {
+            applySorting(filtered);
+        }
+
+        return filtered;
+    }
+
+    // ──────────────────────────────────
+    // Clipboard Copy Function (with execCommand fallback for file://)
+    // ──────────────────────────────────
+    function copyToClipboard(text, element) {
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(function() {
+                showCopySuccess(element);
+            }).catch(function() {
+                fallbackCopy(text, element);
+            });
+        } else {
+            fallbackCopy(text, element);
+        }
+    }
+
+    function fallbackCopy(text, element) {
+        try {
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.cssText = 'position:fixed;opacity:0;pointer-events:none;left:-9999px;top:-9999px;';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            textarea.setSelectionRange(0, textarea.value.length);
+            var success = document.execCommand('copy');
+            document.body.removeChild(textarea);
+            if (success) {
+                showCopySuccess(element);
+            } else {
+                console.warn('کپی انجام نشد: execCommand failed');
+            }
+        } catch (err) {
+            console.warn('کپی انجام نشد:', err);
+        }
+    }
+
+    function showCopySuccess(element) {
+        var originalHTML = element.innerHTML;
+        var originalTitle = element.getAttribute('title') || '';
+        element.classList.add('copy-success');
+        element.innerHTML = '✓ کپی شد!';
+        element.setAttribute('title', 'آدرس در کلیپ‌بورد ذخیره شد');
+        setTimeout(function() {
+            element.classList.remove('copy-success');
+            element.innerHTML = originalHTML;
+            element.setAttribute('title', originalTitle);
+        }, 1800);
+    }
+
+    // ──────────────────────────────────
+    // Social Media Badge HTML Generator (emoji icons)
+    // ──────────────────────────────────
+    function getSocialBadges(social) {
+        if (!social) return '';
+        var platformConfig = {
+            telegram_bot: { label: 'ربات تلگرام', cls: 'social-telegram', icon: '🤖' },
+            telegram: { label: 'تلگرام', cls: 'social-telegram', icon: '✈️' },
+            instagram: { label: 'اینستاگرام', cls: 'social-instagram', icon: '📷' },
+            twitter: { label: 'توییتر', cls: 'social-twitter', icon: '🐦' },
+            youtube: { label: 'یوتیوب', cls: 'social-youtube', icon: '▶️' },
+            eitaa: { label: 'ایتا', cls: 'social-eitaa', icon: '📨' },
+            rubika: { label: 'روبیکا', cls: 'social-rubika', icon: '💬' },
+            soroush: { label: 'سروش', cls: 'social-soroush', icon: '🪶' },
+            bale: { label: 'بله', cls: 'social-bale', icon: '🕊️' },
+            aparat: { label: 'آپارات', cls: 'social-aparat', icon: '🎬' },
+            whatsapp: { label: 'واتساپ', cls: 'social-whatsapp', icon: '📱' },
+            linkedin: { label: 'لینکدین', cls: 'social-linkedin', icon: '💼' },
+            discord: { label: 'دیسکورد', cls: 'social-discord', icon: '🎮' }
+        };
+
+        var badges = [];
+        var entries = Object.entries(social);
+        for (var i = 0; i < entries.length; i++) {
+            var platform = entries[i][0];
+            var url = entries[i][1];
+            if (url && platformConfig[platform]) {
+                var config = platformConfig[platform];
+                badges.push(
+                    '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer"'
+                    + ' class="social-badge ' + config.cls + '"'
+                    + ' title="' + config.label + '"'
+                    + ' onclick="event.stopPropagation();">'
+                    + config.icon + ' ' + config.label
+                    + '</a>'
+                );
+            }
+        }
+        return badges.length > 0 ?
+            '<div class="social-title">شبکه‌های اجتماعی و لینک‌های مرتبط:</div>'
+            + '<div class="social-badges">' + badges.join('') + '</div>' :
+            '';
+    }
+
+    // ──────────────────────────────────
+    // Custom Links HTML Generator (emoji icons)
+    // ──────────────────────────────────
+    function getCustomLinksHtml(customLinks) {
+        if (!customLinks || !Array.isArray(customLinks) || customLinks.length === 0) return '';
+        var iconMap = {
+            'blog': '📝',
+            'link': '🔗',
+            'website': '🌐',
+            'download': '⬇️',
+            'archive': '📦',
+            'support': '🎧',
+            'contact': '✉️',
+            'app': '📱',
+            'heart': '❤️'
+        };
+        var badges = customLinks.map(function(cl) {
+            var icon = (cl.icon && iconMap[cl.icon]) || iconMap['link'];
+            return '<a href="' + escapeHtml(cl.url) + '" target="_blank" rel="noopener noreferrer"'
+                + ' class="social-badge social-custom"'
+                + ' title="' + escapeHtml(cl.title) + '"'
+                + ' onclick="event.stopPropagation();">'
+                + icon + ' ' + escapeHtml(cl.title)
+                + '</a>';
+        }).join('');
+        return '<div class="custom-links-badges">' + badges + '</div>';
+    }
+
+    // ──────────────────────────────────
+    // Render All Site Cards (with Category Headers)
+    // ──────────────────────────────────
+    function renderSites(sites) {
+        sitesGrid.innerHTML = '';
+        emptyState.classList.remove('visible');
+
+        if (sites.length === 0) {
+            emptyState.classList.add('visible');
+            sitesGrid.appendChild(emptyState);
+            resultsCount.innerHTML = 'نمایش <strong>0</strong> از ' + sitesData.length + ' سایت';
+            return;
+        }
+
+        if (!sitesGrid.contains(emptyState)) {
+            sitesGrid.appendChild(emptyState);
+        }
+        emptyState.classList.remove('visible');
+
+        resultsCount.innerHTML = 'نمایش <strong>' + sites.length + '</strong> از ' + sitesData.length + ' سایت';
+
+        var showCategoryHeaders = (sortMode === 'default') && (activeTags.size === 0);
+        var lastCategory = '';
+
+        sites.forEach(function(site, index) {
+            var isExpanded = expandedCardIds.has(site.id);
+            var isRec = site.recommended;
+            var isBookmarked = bookmarkedIds.has(site.id);
+
+            // Category header
+            if (showCategoryHeaders) {
+                var mainTag = (site.tags && site.tags.length > 0) ? site.tags[0] : '';
+                if (mainTag !== lastCategory) {
+                    lastCategory = mainTag;
+                    var header = document.createElement('div');
+                    header.className = 'category-header';
+                    var catCount = sites.filter(function(s) { return s.tags && s.tags.length > 0 && s.tags[0] === mainTag; }).length;
+                    header.innerHTML =
+                        '<span class="category-header-icon">' + getCategoryIcon(mainTag) + '</span>'
+                        + '<span class="category-header-title">' + escapeHtml(mainTag) + '</span>'
+                        + '<span class="category-header-count">' + catCount + '</span>'
+                        + '<span class="category-header-line"></span>';
+                    sitesGrid.appendChild(header);
+                }
+            }
+
+            var card = document.createElement('div');
+            card.className = 'site-card visible'
+                + (isExpanded ? ' expanded' : '')
+                + (isRec ? ' recommended' : '');
+            card.setAttribute('data-id', site.id);
+            card.style.animationDelay = Math.min(index * 0.04, 1.2) + 's';
+
+            var recBadge = isRec ? '<span class="recommended-badge">\u2605 پیشنهادی</span>' : '';
+
+            var socialBadgesHtml = getSocialBadges(site.social);
+            var tagsMiniHtml = site.tags.map(function(t, i) {
+                var isMain = (i === 0);
+                var cls = isMain ? 'card-tag-main' : 'card-tag-mini';
+                return '<span class="' + cls + '">' + escapeHtml(t) + '</span>';
+            }).join('');
+
+            var donateHtml = '';
+            if (site.donate) {
+                donateHtml = '<div class="donate-section">'
+                    + '<a href="' + escapeHtml(site.donate) + '" target="_blank" rel="noopener noreferrer"'
+                    + ' class="donate-badge"'
+                    + ' title="حمایت مالی"'
+                    + ' onclick="event.stopPropagation();">'
+                    + '❤️ حمایت مالی ❤'
+                    + '</a>'
+                    + '</div>';
+            }
+
+            card.innerHTML =
+                '<div class="card-main">'
+                + '<button class="bookmark-btn' + (isBookmarked ? ' bookmarked' : '') + '"'
+                + ' data-bookmark-id="' + site.id + '"'
+                + ' title="' + (isBookmarked ? 'حذف از بوکمارک' : 'افزودن به بوکمارک') + '"'
+                + ' onclick="event.stopPropagation();">'
+                + (isBookmarked ? '🔖' : '📑')
+                + '</button>'
+                + '<div class="card-info">'
+                + '<div class="card-name">' + escapeHtml(site.name) + '</div>'
+                + '<div class="card-tags-row">' + recBadge + tagsMiniHtml + '</div>'
+                + '</div>'
+                + '<div class="card-actions">'
+                + '<a href="' + escapeHtml(site.unfilteredLink) + '"'
+                + ' target="_blank"'
+                + ' rel="noopener noreferrer"'
+                + ' class="btn-go"'
+                + ' title="رفتن به سایت (باز شدن در تب جدید)"'
+                + ' onclick="event.stopPropagation();">'
+                + '↗ برو به سایت'
+                + '</a>'
+                + '<span class="expand-arrow">▼</span>'
+                + '</div>'
+                + '</div>'
+                + '<div class="card-expanded">'
+                + '<div class="expanded-description">' + escapeHtml(site.description || '') + '</div>'
+                + '<div class="expanded-links">'
+                + '<span class="expanded-link-item unfiltered"'
+                + ' data-url="' + escapeHtml(site.unfilteredLink) + '"'
+                + ' title="کلیک کنید تا آدرس فعلی کپی شود">'
+                + '🔗 آدرس فعلی'
+                + '</span>'
+                + '<span class="expanded-link-item"'
+                + ' data-url="' + escapeHtml(site.mainLink) + '"'
+                + ' title="کلیک کنید تا آدرس اصلی کپی شود">'
+                + '🌐 آدرس اصلی'
+                + '</span>'
+                + '</div>'
+                + socialBadgesHtml
+                + getCustomLinksHtml(site.customLinks)
+                + donateHtml
+                + '</div>';
+
+            card.addEventListener('click', function(e) {
+                if (
+                    e.target.closest('a') ||
+                    e.target.closest('button') ||
+                    e.target.closest('.social-badge') ||
+                    e.target.closest('.expanded-link-item') ||
+                    e.target.closest('.card-expanded')
+                ) {
+                    return;
+                }
+                toggleCardExpand(site.id);
+            });
+
+            sitesGrid.appendChild(card);
+        });
+
+        // Attach delegated click handlers for copy-to-clipboard
+        sitesGrid.querySelectorAll('.expanded-link-item').forEach(function(item) {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var url = this.getAttribute('data-url');
+                if (url) {
+                    copyToClipboard(url, this);
+                }
+            });
+        });
+
+        // Bookmark button handlers
+        sitesGrid.querySelectorAll('.bookmark-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var siteId = parseInt(this.getAttribute('data-bookmark-id'));
+                toggleBookmark(siteId);
+            });
+        });
+
+        // Apply view mode class
+        sitesGrid.classList.toggle('list-view', viewMode === 'list');
+    }
+
+    function toggleCardExpand(siteId) {
+        if (expandedCardIds.has(siteId)) {
+            expandedCardIds.delete(siteId);
+        } else {
+            expandedCardIds.add(siteId);
+        }
+        var card = sitesGrid.querySelector('[data-id="' + siteId + '"]');
+        if (card) {
+            card.classList.toggle('expanded', expandedCardIds.has(siteId));
+        }
+        updateExpandAllBtn();
+    }
+
+    function expandAllCards() {
+        allExpanded = true;
+        var filtered = getFilteredSites();
+        filtered.forEach(function(s) { expandedCardIds.add(s.id); });
+        sitesGrid.querySelectorAll('.site-card').forEach(function(card) {
+            card.classList.add('expanded');
+        });
+        updateExpandAllBtn();
+    }
+
+    function collapseAllCards() {
+        allExpanded = false;
+        expandedCardIds.clear();
+        sitesGrid.querySelectorAll('.site-card.expanded').forEach(function(card) {
+            card.classList.remove('expanded');
+        });
+        updateExpandAllBtn();
+    }
+
+    function updateExpandAllBtn() {
+        var filtered = getFilteredSites();
+        var expandedCount = filtered.filter(function(s) { return expandedCardIds.has(s.id); }).length;
+        allExpanded = expandedCount === filtered.length && filtered.length > 0;
+
+        if (allExpanded) {
+            expandAllBtn.innerHTML = '⏫ <span>بستن همه</span>';
+            expandAllBtn.title = 'بستن همه کارت‌ها';
+            expandAllBtn.classList.add('active');
+        } else {
+            expandAllBtn.innerHTML = '⏬ <span>باز کردن همه</span>';
+            expandAllBtn.title = 'باز کردن همه کارت‌ها';
+            expandAllBtn.classList.remove('active');
+        }
+    }
+
+    function updateViewToggleUI() {
+        if (viewMode === 'list') {
+            viewToggle.innerHTML = '⊞ <span>نمای کارتی</span>';
+            viewToggle.classList.add('active');
+        } else {
+            viewToggle.innerHTML = '☰ <span>نمای لیستی</span>';
+            viewToggle.classList.remove('active');
+        }
+        sitesGrid.classList.toggle('list-view', viewMode === 'list');
+    }
+
+    function filterAndRender() {
+        var filtered = getFilteredSites();
+        var visibleIds = new Set(filtered.map(function(s) { return s.id; }));
+        var idsToRemove = [];
+        expandedCardIds.forEach(function(id) {
+            if (!visibleIds.has(id)) {
+                idsToRemove.push(id);
+            }
+        });
+        idsToRemove.forEach(function(id) { expandedCardIds.delete(id); });
+        renderSites(filtered);
+        updateExpandAllBtn();
+        scheduleHashUpdate();
+    }
+
+    // ──────────────────────────────────
+    // Back-to-Top Button
+    // ──────────────────────────────────
+    function handleScroll() {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ──────────────────────────────────
+    // Event Listeners
+    // ──────────────────────────────────
+    searchInput.addEventListener('input', function() {
+        searchQuery = this.value;
+        if (searchQuery.trim()) {
+            clearSearchBtn.classList.add('visible');
+        } else {
+            clearSearchBtn.classList.remove('visible');
+        }
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(function() {
+            filterAndRender();
+        }, 200);
+    });
+
+    clearSearchBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        searchQuery = '';
+        clearSearchBtn.classList.remove('visible');
+        filterAndRender();
+        searchInput.focus();
+    });
+
+    resetTagsBtn.addEventListener('click', function() {
+        resetAllTags();
+    });
+
+    sortSelect.addEventListener('change', function() {
+        sortMode = this.value;
+        filterAndRender();
+    });
+
+    viewToggle.addEventListener('click', function() {
+        viewMode = viewMode === 'card' ? 'list' : 'card';
+        updateViewToggleUI();
+        filterAndRender();
+    });
+
+    expandAllBtn.addEventListener('click', function() {
+        if (allExpanded) {
+            collapseAllCards();
+        } else {
+            expandAllCards();
+        }
+    });
+
+    bookmarkFilterBtn.addEventListener('click', function() {
+        showBookmarksOnly = !showBookmarksOnly;
+        updateBookmarkFilterBtn();
+        filterAndRender();
+    });
+
+    window.addEventListener('hashchange', function() {
+        activeTags.clear();
+        searchQuery = '';
+        searchInput.value = '';
+        clearSearchBtn.classList.remove('visible');
+        readHash();
+        renderTagChips();
+        filterAndRender();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            if (document.activeElement === searchInput && searchQuery.trim()) {
+                searchInput.value = '';
+                searchQuery = '';
+                clearSearchBtn.classList.remove('visible');
+                filterAndRender();
+            }
+        }
+    });
+
+    // ──────────────────────────────────
+    // Initial Render
+    // ──────────────────────────────────
+    function init() {
+        loadBookmarks();
+        readHash();
+        renderTagChips();
+        filterAndRender();
+        setTimeout(function() {
+            document.querySelectorAll('.site-card').forEach(function(card) {
+                card.classList.add('visible');
+            });
+        }, 50);
+
+        updateViewToggleUI();
+        updateBookmarkFilterBtn();
+        updateExpandAllBtn();
+
+        console.log('✅ سایت‌های ایرانی آماده (آفلاین) | ' + sitesData.length + ' سایت بارگذاری شد');
+    }
+
+    // ──────────────────────────────────
+    // Start
+    // ──────────────────────────────────
+    loadSitesData();
+})();
+    </script>
+</body>
+</html>
