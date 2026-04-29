@@ -1,105 +1,199 @@
-// ──────────────────────────────────
-// Dark Mode (runs immediately)
-// ──────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+// main.js — سایت‌های ایرانی | Production-Ready Refactored
+// ═══════════════════════════════════════════════════════════════════
+
+'use strict';
+
+// ───────────────────────────────────────────────────────────────────
+// Configuration & Constants
+// ───────────────────────────────────────────────────────────────────
+const CONFIG = {
+    STORAGE_KEYS: {
+        THEME: 'theme',
+        BOOKMARKS: 'awesome-iran-bookmarks'
+    },
+    DATA_FILES: {
+        SITES: 'data/sites.json',
+        META: 'data/meta.json'
+    },
+    ANIMATION: {
+        CARD_DELAY_MS: 40,
+        CARD_DELAY_MAX_MS: 1200,
+        COPY_SUCCESS_MS: 1800,
+        ENTRANCE_DELAY_MS: 50
+    },
+    DEBOUNCE: {
+        SEARCH_MS: 200,
+        HASH_MS: 150
+    },
+    SCROLL: {
+        BACK_TO_TOP_PX: 300
+    }
+};
+
+const SOCIAL_PLATFORMS = {
+    telegram_bot: { label: 'ربات تلگرام', cls: 'social-telegram', icon: 'fa-solid fa-robot' },
+    telegram: { label: 'تلگرام', cls: 'social-telegram', icon: 'fa-brands fa-telegram' },
+    instagram: { label: 'اینستاگرام', cls: 'social-instagram', icon: 'fa-brands fa-instagram' },
+    twitter: { label: 'توییتر', cls: 'social-twitter', icon: 'fa-brands fa-x-twitter' },
+    youtube: { label: 'یوتیوب', cls: 'social-youtube', icon: 'fa-brands fa-youtube' },
+    eitaa: { label: 'ایتا', cls: 'social-eitaa', icon: 'fa-solid fa-paper-plane' },
+    rubika: { label: 'روبیکا', cls: 'social-rubika', icon: 'fa-solid fa-comment-dots' },
+    soroush: { label: 'سروش', cls: 'social-soroush', icon: 'fa-solid fa-feather' },
+    bale: { label: 'بله', cls: 'social-bale', icon: 'fa-solid fa-dove' },
+    aparat: { label: 'آپارات', cls: 'social-aparat', icon: 'fa-solid fa-video' },
+    whatsapp: { label: 'واتساپ', cls: 'social-whatsapp', icon: 'fa-brands fa-whatsapp' },
+    linkedin: { label: 'لینکدین', cls: 'social-linkedin', icon: 'fa-brands fa-linkedin' },
+    discord: { label: 'دیسکورد', cls: 'social-discord', icon: 'fa-brands fa-discord' }
+};
+
+const CUSTOM_LINK_ICONS = {
+    blog: 'fa-solid fa-blog',
+    link: 'fa-solid fa-arrow-up-right-from-square',
+    website: 'fa-solid fa-globe',
+    download: 'fa-solid fa-download',
+    archive: 'fa-solid fa-box-archive',
+    support: 'fa-solid fa-headset',
+    contact: 'fa-solid fa-envelope',
+    app: 'fa-solid fa-mobile-screen-button',
+    heart: 'fa-solid fa-heart'
+};
+
+const CATEGORY_ICONS = {
+    'دانلود': '📥', 'فیلم و سریال': '🎬', 'استریم': '▶️', 'سرگرمی': '🎭',
+    'خرید': '🛒', 'فروشگاه': '🏪', 'وبلاگ': '📝', 'وبلاگدهی': '📝',
+    'آموزش': '🎓', 'برنامه‌نویسی': '💻', 'تکنولوژی': '💻', 'ویدیو': '🎥',
+    'اشتراک‌گذاری': '🔗', 'پخش زنده': '📡', 'کتاب': '📚', 'کتابخوان': '📖',
+    'آگهی': '📢', 'نقشه': '🗺️', 'مسیریاب': '🧭', 'جستجوگر': '🔍',
+    'فراجستجوگر': '🔍', 'هوش مصنوعی': '🤖', 'بازی': '🎮', 'فارسی ساز': '🌍',
+    'اپلیکیشن': '📱', 'اندروید': '📱', 'محصولات': '📦', 'اقتصادی': '💰',
+    'مقایسه قیمت': '📊', 'نویسندگی': '✍️', 'محتوا': '📰', 'مطالعه': '📖',
+    'ساخت وبلاگ': '✏️', 'جامعه': '👥', 'دوره آنلاین': '🎓', 'بدون سانسور': '🔓',
+    'زیرنویس': '💬', 'دوبله': '🎙️', 'رایگان': '🎁', 'انیمه': '🎌',
+    'پخش آنلاین': '▶️', 'متا سرچ': '🔎', 'دستیار هوشمند': '🤖',
+    'تولید تصویر': '🎨', 'حریم شخصی': '🔒', 'وبگرد': '🌐', 'کامپیوتر': '🖥️',
+    'کنسول': '🎮', 'صنایع دستی': '🎨', 'هنر': '🎨', 'ناوبری': '🧭'
+};
+
+const DEFAULT_ICON = '📌';
+
+// ───────────────────────────────────────────────────────────────────
+// Application State
+// ───────────────────────────────────────────────────────────────────
+const state = {
+    sites: [],
+    activeTags: new Set(),
+    searchQuery: '',
+    expandedCardIds: new Set(),
+    sortMode: 'default',
+    viewMode: 'card',
+    showBookmarksOnly: false,
+    bookmarkedIds: new Set(),
+    allExpanded: false,
+    timers: {
+        hash: null,
+        debounce: null
+    }
+};
+
+// ───────────────────────────────────────────────────────────────────
+// DOM Elements Cache
+// ───────────────────────────────────────────────────────────────────
+let elements = {};
+
+// ═══════════════════════════════════════════════════════════════════
+// UTILITY FUNCTIONS
+// ═══════════════════════════════════════════════════════════════════
+
+/**
+ * Escape HTML special characters
+ */
+function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+/**
+ * Get category icon with fallback
+ */
+function getCategoryIcon(tag) {
+    return CATEGORY_ICONS[tag] || DEFAULT_ICON;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// THEME MANAGEMENT
+// ═══════════════════════════════════════════════════════════════════
+
 (function initTheme() {
-    const STORAGE_KEY = 'theme';
     const toggle = document.getElementById('themeToggle');
     if (!toggle) return;
 
     // Determine initial theme: saved > system > light
-    let theme = localStorage.getItem(STORAGE_KEY);
+    let theme = localStorage.getItem(CONFIG.STORAGE_KEYS.THEME);
     if (!theme) {
         theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     document.documentElement.setAttribute('data-theme', theme);
 
-    toggle.addEventListener('click', function() {
+    toggle.addEventListener('click', () => {
         const current = document.documentElement.getAttribute('data-theme');
         const next = current === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem(STORAGE_KEY, next);
+        localStorage.setItem(CONFIG.STORAGE_KEYS.THEME, next);
     });
 })();
 
-(function() {
-    // ──────────────────────────────────
-    // State
-    // ──────────────────────────────────
-    let sitesData = [];
-    let activeTags = new Set();
-    let searchQuery = '';
-    let expandedCardIds = new Set();
-    let hashUpdateTimer = null;
-    let sortMode = 'default';
-    let viewMode = 'card'; // 'card' | 'list'
-    let showBookmarksOnly = false;
-    let bookmarkedIds = new Set();
-    let allExpanded = false;
-    let debounceTimer = null;
+// ═══════════════════════════════════════════════════════════════════
+// BOOKMARK MANAGEMENT
+// ═══════════════════════════════════════════════════════════════════
 
-    const BOOKMARK_KEY = 'awesome-iran-bookmarks';
-
-    // ──────────────────────────────────
-    // DOM References
-    // ──────────────────────────────────
-    const searchInput = document.getElementById('searchInput');
-    const clearSearchBtn = document.getElementById('clearSearch');
-    const tagsContainer = document.getElementById('tagsContainer');
-    const resetTagsBtn = document.getElementById('resetTags');
-    const sitesGrid = document.getElementById('sitesGrid');
-    const emptyState = document.getElementById('emptyState');
-    const resultsCount = document.getElementById('resultsCount');
-    const footerDateEl = document.getElementById('footerDate');
-    const backToTopBtn = document.getElementById('backToTop');
-    const sortSelect = document.getElementById('sortSelect');
-    const viewToggle = document.getElementById('viewToggle');
-    const expandAllBtn = document.getElementById('expandAllBtn');
-    const bookmarkFilterBtn = document.getElementById('bookmarkFilterBtn');
-
-
-    // ──────────────────────────────────
-    // Bookmarks: Load/Save
-    // ──────────────────────────────────
-    function loadBookmarks() {
-        try {
-            const data = localStorage.getItem(BOOKMARK_KEY);
-            if (data) {
-                bookmarkedIds = new Set(JSON.parse(data));
-            }
-        } catch(e) {
-            bookmarkedIds = new Set();
-        }
+function loadBookmarks() {
+    try {
+        const data = localStorage.getItem(CONFIG.STORAGE_KEYS.BOOKMARKS);
+        state.bookmarkedIds = data ? new Set(JSON.parse(data)) : new Set();
+    } catch {
+        state.bookmarkedIds = new Set();
     }
+}
 
-    function saveBookmarks() {
-        try {
-            localStorage.setItem(BOOKMARK_KEY, JSON.stringify([...bookmarkedIds]));
-        } catch(e) {
-            // silently fail
-        }
+function saveBookmarks() {
+    try {
+        localStorage.setItem(
+            CONFIG.STORAGE_KEYS.BOOKMARKS,
+            JSON.stringify([...state.bookmarkedIds])
+        );
+    } catch {
+        // Silently fail on storage errors
     }
+}
 
-    function toggleBookmark(siteId) {
-        if (bookmarkedIds.has(siteId)) {
-            bookmarkedIds.delete(siteId);
-        } else {
-            bookmarkedIds.add(siteId);
-        }
-        saveBookmarks();
-        // Update bookmark button in the card
-        const btn = sitesGrid.querySelector(`[data-id="${siteId}"] .bookmark-btn`);
-        if (btn) {
-            btn.classList.toggle('bookmarked', bookmarkedIds.has(siteId));
-            btn.innerHTML = bookmarkedIds.has(siteId)
-                ? '<i class="fa-solid fa-bookmark"></i>'
-                : '<i class="fa-regular fa-bookmark"></i>';
-        }
-        updateBookmarkFilterBtn();
+function toggleBookmark(siteId) {
+    if (state.bookmarkedIds.has(siteId)) {
+        state.bookmarkedIds.delete(siteId);
+    } else {
+        state.bookmarkedIds.add(siteId);
     }
+    saveBookmarks();
+    updateBookmarkButton(siteId);
+    updateBookmarkFilterBtn();
+}
 
-    function updateBookmarkFilterBtn() {
-        bookmarkFilterBtn.classList.toggle('active', showBookmarksOnly);
-    }
+function updateBookmarkButton(siteId) {
+    const btn = elements.sitesGrid?.querySelector(`[data-id="${siteId}"] .bookmark-btn`);
+    if (!btn) return;
+
+    const isBookmarked = state.bookmarkedIds.has(siteId);
+    btn.classList.toggle('bookmarked', isBookmarked);
+    btn.innerHTML = isBookmarked
+        ? '<i class="fa-solid fa-bookmark"></i>'
+        : '<i class="fa-regular fa-bookmark"></i>';
+    btn.title = isBookmarked ? 'حذف از بوکمارک' : 'افزودن به بوکمارک';
+}
+
+function updateBookmarkFilterBtn() {
+    elements.bookmarkFilterBtn?.classList.toggle('active', state.showBookmarksOnly);
+}
 
     // ──────────────────────────────────
     // Category Icon Map
