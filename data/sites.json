@@ -678,10 +678,9 @@
     ],
     "recommended": true,
     "social": {
-      "new_2": "https://splus.ir/subakde.ir",
-      "new_4": "https://t.me/subkade",
-      "telegram": "https://www.instagram.com/subkade.official/",
-      "instagram": "https://eitaa.com/subkade"
+      "telegram": "https://t.me/subkade",
+      "eitaa": "https://eitaa.com/subkade",
+      "soroush": "https://splus.ir/subakde.ir"
     },
     "donate": "https://subkade.ir/donate/",
     "customLinks": []

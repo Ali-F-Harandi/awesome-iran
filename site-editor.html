@@ -752,6 +752,11 @@
             </div>
             <button class="btn btn-primary" onclick="addNewSite()">➕ سایت جدید</button>
         </div>
+        <div class="toolbar-group" style="border-right:1px solid var(--border); padding-right:12px;">
+            <button class="btn" onclick="connectToProject()">📁 اتصال به پوشه پروژه</button>
+            <button class="btn btn-primary" id="saveProjectBtn" onclick="saveToProject()" style="display:none;">💾 ذخیره همه در پروژه</button>
+            <span id="projectStatus" style="font-size:12px; color:var(--primary);"></span>
+        </div>
     </div>
 
     <!-- Stats Bar -->
@@ -980,7 +985,6 @@
             }
         };
         reader.readAsText(file);
-        // Reset so same file can be re-imported
         this.value = '';
     });
 
@@ -1084,7 +1088,6 @@
         `).join('');
 
         return `
-            <!-- ID & Name -->
             <div class="row-fields">
                 <div class="field-group">
                     <label class="field-label">شناسه (ID) — خودکار بر اساس جایگاه</label>
@@ -1096,7 +1099,6 @@
                 </div>
             </div>
 
-            <!-- Links -->
             <div class="row-fields">
                 <div class="field-group">
                     <label class="field-label">آدرس اصلی (mainLink)</label>
@@ -1108,13 +1110,11 @@
                 </div>
             </div>
 
-            <!-- Description -->
             <div class="field-group">
                 <label class="field-label">توضیحات</label>
                 <textarea class="field-input rtl" placeholder="توضیح مختصر..." onchange="updateField(${site.id}, 'description', this.value)">${escapeHtml(site.description)}</textarea>
             </div>
 
-            <!-- Recommended -->
             <div class="field-group" onclick="event.stopPropagation()">
                 <div class="toggle-wrapper">
                     <label class="toggle" onclick="event.stopPropagation()">
@@ -1125,7 +1125,6 @@
                 </div>
             </div>
 
-            <!-- Tags -->
             <div class="section-divider">🏷️ تگ‌ها <span style="font-size:11px; color:var(--text-muted); font-weight:400;">(تگ اول = موضوع اصلی سایت)</span></div>
             <div class="field-group">
                 <div class="tags-container" id="tags-${site.id}">
@@ -1135,28 +1134,24 @@
                 </div>
             </div>
 
-            <!-- Social -->
             <div class="section-divider">🌐 شبکه‌های اجتماعی</div>
             <div class="field-group" id="social-${site.id}">
                 ${socialEntries}
                 <button class="btn btn-sm" onclick="addSocial(${site.id})" style="margin-top:8px;">➕ افزودن شبکه اجتماعی</button>
             </div>
 
-            <!-- Donate -->
             <div class="section-divider">❤️ حمایت مالی</div>
             <div class="field-group">
                 <label class="field-label">لینک حمایت مالی (donate)</label>
                 <input class="field-input" type="text" value="${escapeHtml(site.donate || '')}" placeholder="https://... (خالی = بدون لینک)" dir="ltr" onchange="updateField(${site.id}, 'donate', this.value || null)" />
             </div>
 
-            <!-- Custom Links -->
             <div class="section-divider">🔗 لینک‌های کاستوم (customLinks)</div>
             <div class="field-group" id="customlinks-${site.id}">
                 ${renderCustomLinksEntries(site.id, site.customLinks || [])}
                 <button class="btn btn-sm" onclick="addCustomLink(${site.id})" style="margin-top:8px;">➕ افزودن لینک کاستوم</button>
             </div>
 
-            <!-- Move buttons -->
             <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
                 <button class="btn btn-sm" onclick="moveSite(${site.id}, -1)">⬆️ بالا</button>
                 <button class="btn btn-sm" onclick="moveSite(${site.id}, 1)">⬇️ پایین</button>
@@ -1173,7 +1168,6 @@
         draggedId = id;
         e.dataTransfer.effectAllowed = 'move';
         e.dataTransfer.setData('text/plain', id);
-        // Add a small delay so the browser captures the drag image before styling
         setTimeout(() => {
             const card = document.getElementById('card-' + id);
             if (card) card.classList.add('dragging');
@@ -1181,7 +1175,7 @@
     }
 
     function onDragOver(e) {
-        if (draggedId === null) return; // Ignore non-card drags (e.g. tag drags)
+        if (draggedId === null) return;
         e.preventDefault();
         e.dataTransfer.dropEffect = 'move';
         const card = e.currentTarget;
@@ -1203,16 +1197,13 @@
         const toIndex = sitesData.findIndex(s => s.id === targetId);
         if (fromIndex === -1 || toIndex === -1) return;
 
-        // Calculate actual insert position based on cursor
         const card = e.currentTarget;
         const rect = card.getBoundingClientRect();
         const midY = rect.top + rect.height / 2;
         let insertIndex = e.clientY < midY ? toIndex : toIndex + 1;
         if (fromIndex < toIndex) insertIndex--;
 
-        // Remove from old position
         const [moved] = sitesData.splice(fromIndex, 1);
-        // Insert at new position
         sitesData.splice(insertIndex, 0, moved);
 
         renumberIds();
@@ -1245,17 +1236,14 @@
             site[field] = value;
             updateExport();
             updateStats();
-            // Update header display
             const card = document.getElementById('card-' + id);
             if (card && (field === 'name' || field === 'mainLink')) {
-                // Refresh just the header text
                 const nameEl = card.querySelector('.site-name');
                 const urlEl = card.querySelector('.site-url');
                 if (field === 'name' && nameEl) nameEl.textContent = value || '(بدون نام)';
                 if (field === 'mainLink' && urlEl) urlEl.textContent = value;
             }
             if (field === 'recommended') {
-                // Update star icon inline without re-rendering (to preserve open/close state)
                 const card = document.getElementById('card-' + id);
                 if (card) {
                     const existingStar = card.querySelector('.rec-star');
@@ -1282,7 +1270,6 @@
         if (e.key === 'Enter' || e.key === ',' || e.key === '،') {
             e.preventDefault();
             const input = e.target;
-            // Remove any trailing comma (English or Persian) from the value
             const value = input.value.replace(/[,،]\s*$/, '').trim();
             if (!value) {
                 input.value = '';
@@ -1302,7 +1289,6 @@
             input.value = '';
             updateExport();
 
-            // Re-render tags in-place
             refreshTags(siteId);
         }
     }
@@ -1320,7 +1306,6 @@
         if (!site) return;
         const newIndex = tagIndex + direction;
         if (newIndex < 0 || newIndex >= site.tags.length) return;
-        // Swap
         [site.tags[tagIndex], site.tags[newIndex]] = [site.tags[newIndex], site.tags[tagIndex]];
         updateExport();
         refreshTags(siteId);
@@ -1329,14 +1314,13 @@
     // ═══════════════════════════════════════════
     // Tag Drag & Drop Reordering
     // ═══════════════════════════════════════════
-    let tagDragInfo = null; // { siteId, fromIndex }
+    let tagDragInfo = null;
 
     function onTagDragStart(e, siteId, tagIndex) {
         tagDragInfo = { siteId, fromIndex: tagIndex };
         e.dataTransfer.effectAllowed = 'move';
         e.dataTransfer.setData('text/plain', tagIndex);
         e.target.style.opacity = '0.4';
-        // Prevent parent card drag
         e.stopPropagation();
     }
 
@@ -1525,7 +1509,6 @@
         renderList();
         updateStats();
 
-        // Auto-open the new card
         setTimeout(() => {
             const card = document.getElementById('card-' + newSite.id);
             if (card) {
@@ -1590,13 +1573,11 @@
         const newIndex = index + direction;
         if (newIndex < 0 || newIndex >= sitesData.length) return;
 
-        // Swap
         [sitesData[index], sitesData[newIndex]] = [sitesData[newIndex], sitesData[index]];
         renumberIds();
         renderList();
         updateExport();
 
-        // Re-open the moved card (now has new ID based on position)
         setTimeout(() => {
             const card = document.getElementById('card-' + sitesData[newIndex].id);
             if (card) card.classList.add('open');
@@ -1615,7 +1596,6 @@
                 showToast('خطا در کپی JSON', 'error');
             });
         } else {
-            // Fallback: create temporary textarea
             const textarea = document.getElementById('jsonOutput');
             textarea.select();
             textarea.setSelectionRange(0, 99999);
@@ -1697,21 +1677,172 @@
     // Keyboard shortcuts
     // ═══════════════════════════════════════════
     document.addEventListener('keydown', function(e) {
-        // Ctrl+S to download
         if ((e.ctrlKey || e.metaKey) && e.key === 's') {
             e.preventDefault();
             if (sitesData.length > 0) downloadJSON();
         }
-        // Escape to close modal
         if (e.key === 'Escape') {
             closeDeleteModal();
         }
     });
 
-    // Close modal on overlay click
     document.getElementById('deleteModal').addEventListener('click', function(e) {
         if (e.target === this) closeDeleteModal();
     });
+
+    // ═══════════════════════════════════════════
+    // Project Sync via File System Access API
+    // ═══════════════════════════════════════════
+    let rootDirHandle = null;
+
+    async function connectToProject() {
+        try {
+            rootDirHandle = await window.showDirectoryPicker();
+
+            // تلاش برای خواندن داده‌های موجود از پروژه
+            await loadFromConnectedFolder();
+
+            document.getElementById('projectStatus').textContent = '✅ متصل شد: ' + rootDirHandle.name;
+            document.getElementById('saveProjectBtn').style.display = '';
+            showToast('اتصال با موفقیت انجام شد');
+        } catch (err) {
+            if (err.name === 'AbortError') return;
+            showToast('خطا: ' + err.message, 'error');
+        }
+    }
+
+    async function loadFromConnectedFolder() {
+        if (!rootDirHandle) return;
+
+        let sitesLoaded = false;
+        let metaLoaded = false;
+
+        // خواندن sites.json
+        try {
+            const dataDirHandle = await rootDirHandle.getDirectoryHandle('data');
+            const sitesFileHandle = await dataDirHandle.getFileHandle('sites.json');
+            const file = await sitesFileHandle.getFile();
+            const text = await file.text();
+            const data = JSON.parse(text);
+            if (Array.isArray(data)) {
+                sitesData = data.map(s => ({
+                    id: s.id || getNextId(),
+                    name: s.name || '',
+                    mainLink: s.mainLink || '',
+                    unfilteredLink: s.unfilteredLink || s.mainLink || '',
+                    description: s.description || '',
+                    tags: Array.isArray(s.tags) ? [...s.tags] : [],
+                    recommended: !!s.recommended,
+                    social: (s.social && typeof s.social === 'object') ? { ...s.social } : {},
+                    donate: s.donate || null,
+                    customLinks: Array.isArray(s.customLinks) ? s.customLinks.map(cl => ({ ...cl })) : []
+                }));
+                sitesLoaded = true;
+                nextId = getNextId();
+                renderList();
+                updateStats();
+            }
+        } catch (e) {
+            console.warn('نتوانست sites.json را بخواند:', e);
+        }
+
+        // خواندن meta.json
+        try {
+            const dataDirHandle = await rootDirHandle.getDirectoryHandle('data');
+            const metaFileHandle = await dataDirHandle.getFileHandle('meta.json');
+            const file = await metaFileHandle.getFile();
+            const text = await file.text();
+            const data = JSON.parse(text);
+            metaData.lastUpdated = data.lastUpdated || '';
+            metaLoaded = true;
+            renderMetaSection();
+        } catch (e) {
+            console.warn('نتوانست meta.json را بخواند:', e);
+        }
+
+        if (sitesLoaded || metaLoaded) {
+            let msg = 'داده‌های پروژه بارگذاری شدند: ';
+            if (sitesLoaded) msg += `${sitesData.length} سایت`;
+            if (metaLoaded) msg += (sitesLoaded ? ' + ' : '') + 'تاریخ به‌روزرسانی';
+            showToast(msg);
+        } else {
+            showToast('هیچ داده‌ای در پوشه data یافت نشد', 'error');
+        }
+    }
+
+    async function saveToProject() {
+        if (!rootDirHandle) {
+            showToast('❗ ابتدا به پوشه پروژه متصل شوید', 'error');
+            return;
+        }
+
+        try {
+            const dataDirHandle = await rootDirHandle.getDirectoryHandle('data', { create: true });
+
+            const sitesFileHandle = await dataDirHandle.getFileHandle('sites.json', { create: true });
+            const sitesWritable = await sitesFileHandle.createWritable();
+            await sitesWritable.write(generateJSON());
+            await sitesWritable.close();
+
+            const metaFileHandle = await dataDirHandle.getFileHandle('meta.json', { create: true });
+            const metaWritable = await metaFileHandle.createWritable();
+            await metaWritable.write(JSON.stringify(metaData, null, 2));
+            await metaWritable.close();
+
+            // به‌روزرسانی offline.html
+            let offlineHandle;
+            try {
+                offlineHandle = await rootDirHandle.getFileHandle('offline.html');
+            } catch {
+                showToast('❌ فایل offline.html در پوشه پروژه پیدا نشد', 'error');
+                return;
+            }
+
+            const file = await offlineHandle.getFile();
+            let content = await file.text();
+
+            const startSites = '/* BEGIN_SITES_DATA */';
+            const endSites = '/* END_SITES_DATA */';
+            const sitesRegex = new RegExp(
+                escapeRegex(startSites) + '[\\s\\S]*?' + escapeRegex(endSites),
+                'g'
+            );
+            if (!sitesRegex.test(content)) {
+                showToast('❌ نشانگرهای SITES_DATA در offline.html یافت نشد', 'error');
+                return;
+            }
+            content = content.replace(sitesRegex, startSites + generateJSON() + endSites);
+
+            const startMeta = '/* BEGIN_META_DATA */';
+            const endMeta = '/* END_META_DATA */';
+            const metaRegex = new RegExp(
+                escapeRegex(startMeta) + '[\\s\\S]*?' + escapeRegex(endMeta),
+                'g'
+            );
+            if (!metaRegex.test(content)) {
+                showToast('❌ نشانگرهای META_DATA در offline.html یافت نشد', 'error');
+                return;
+            }
+            content = content.replace(metaRegex, startMeta + JSON.stringify(metaData, null, 2) + endMeta);
+
+            const offlineWritable = await offlineHandle.createWritable();
+            await offlineWritable.write(content);
+            await offlineWritable.close();
+
+            showToast('✅ همه فایل‌ها با موفقیت ذخیره شدند');
+        } catch (err) {
+            showToast('خطا در ذخیره‌سازی: ' + err.message, 'error');
+            console.error(err);
+        }
+    }
+
+    function escapeRegex(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    if (typeof window.showDirectoryPicker !== 'function') {
+        showToast('⚠️ مرورگر شما از نوشتن مستقیم فایل پشتیبانی نمی‌کند. لطفاً از Chrome یا Edge استفاده کنید.', 'error');
+    }
 
     // ═══════════════════════════════════════════
     // Init
