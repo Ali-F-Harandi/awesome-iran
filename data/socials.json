@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "key": "telegram",
+    "label": "تلگرام",
+    "icon": "✈️",
+    "iconFA": "fa-brands fa-telegram",
+    "cls": "social-telegram"
+  },
+  {
+    "id": 2,
+    "key": "telegram_bot",
+    "label": "ربات تلگرام",
+    "icon": "🤖",
+    "iconFA": "fa-solid fa-robot",
+    "cls": "social-telegram"
+  },
+  {
+    "id": 3,
+    "key": "instagram",
+    "label": "اینستاگرام",
+    "icon": "📷",
+    "iconFA": "fa-brands fa-instagram",
+    "cls": "social-instagram"
+  },
+  {
+    "id": 4,
+    "key": "twitter",
+    "label": "توییتر",
+    "icon": "🐦",
+    "iconFA": "fa-brands fa-x-twitter",
+    "cls": "social-twitter"
+  },
+  {
+    "id": 5,
+    "key": "youtube",
+    "label": "یوتیوب",
+    "icon": "▶️",
+    "iconFA": "fa-brands fa-youtube",
+    "cls": "social-youtube"
+  },
+  {
+    "id": 6,
+    "key": "eitaa",
+    "label": "ایتا",
+    "icon": "📨",
+    "iconFA": "fa-solid fa-paper-plane",
+    "cls": "social-eitaa"
+  },
+  {
+    "id": 7,
+    "key": "rubika",
+    "label": "روبیکا",
+    "icon": "💬",
+    "iconFA": "fa-solid fa-comment-dots",
+    "cls": "social-rubika"
+  },
+  {
+    "id": 8,
+    "key": "soroush",
+    "label": "سروش",
+    "icon": "🪶",
+    "iconFA": "fa-solid fa-feather",
+    "cls": "social-soroush"
+  },
+  {
+    "id": 9,
+    "key": "bale",
+    "label": "بله",
+    "icon": "🕊️",
+    "iconFA": "fa-solid fa-dove",
+    "cls": "social-bale"
+  },
+  {
+    "id": 10,
+    "key": "aparat",
+    "label": "آپارات",
+    "icon": "🎬",
+    "iconFA": "fa-solid fa-video",
+    "cls": "social-aparat"
+  },
+  {
+    "id": 11,
+    "key": "whatsapp",
+    "label": "واتساپ",
+    "icon": "📱",
+    "iconFA": "fa-brands fa-whatsapp",
+    "cls": "social-whatsapp"
+  },
+  {
+    "id": 12,
+    "key": "linkedin",
+    "label": "لینکدین",
+    "icon": "💼",
+    "iconFA": "fa-brands fa-linkedin",
+    "cls": "social-linkedin"
+  },
+  {
+    "id": 13,
+    "key": "discord",
+    "label": "دیسکورد",
+    "icon": "🎮",
+    "iconFA": "fa-brands fa-discord",
+    "cls": "social-discord"
+  },
+  {
+    "id": 14,
+    "key": "github",
+    "label": "گیت‌هاب",
+    "icon": "🐙",
+    "iconFA": "fa-brands fa-github",
+    "cls": "social-custom"
+  }
+]

@@ -1065,6 +1065,88 @@ body {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.2); }
 }
+/* ── Check Site Button ───────────── */
+.check-site-btn {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: var(--surface-hover);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all var(--transition);
+    color: var(--star);               /* زرد پیش‌فرض */
+    padding: 0;
+    margin-right: -4px;
+}
+.check-site-btn:hover {
+    background: var(--primary-bg);
+    color: var(--primary);
+}
+.check-site-btn.checking {
+    pointer-events: none;
+    opacity: 0.6;
+}
+.check-site-btn.check-success {
+    color: var(--primary);            /* سبز */
+}
+.check-site-btn.check-fail {
+    color: #ef4444;                   /* قرمز (متناسب با تم) */
+}
+
+/* ── Footer Links Section ────────── */
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 14px;
+    padding: 14px 0 0;
+    border-top: 1px dashed var(--border);
+}
+
+.footer-link-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-family: var(--font);
+    white-space: nowrap;
+}
+
+.footer-link-item:hover {
+    background: var(--primary-bg);
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+}
+
+.footer-link-item .link-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+/* ── Dark Mode: Footer Links ──────── */
+[data-theme="dark"] .footer-link-item {
+    background: var(--surface);
+    border-color: var(--border);
+}
+[data-theme="dark"] .footer-link-item:hover {
+    background: var(--primary-bg);
+}
 
 /* ─── Dark Mode Toggle ─── */
 .theme-toggle {

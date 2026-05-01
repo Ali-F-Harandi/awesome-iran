@@ -1,0 +1,290 @@
+[
+  {
+    "id": 1,
+    "name": "دانلود",
+    "icon": "📥",
+    "iconFA": "fa-solid fa-download"
+  },
+  {
+    "id": 2,
+    "name": "بازی",
+    "icon": "🎮",
+    "iconFA": "fa-solid fa-gamepad"
+  },
+  {
+    "id": 3,
+    "name": "نرم‌افزار",
+    "icon": "💻",
+    "iconFA": "fa-solid fa-window-maximize"
+  },
+  {
+    "id": 4,
+    "name": "آموزش",
+    "icon": "🎓",
+    "iconFA": "fa-solid fa-graduation-cap"
+  },
+  {
+    "id": 5,
+    "name": "ویدیو",
+    "icon": "🎥",
+    "iconFA": "fa-solid fa-video"
+  },
+  {
+    "id": 6,
+    "name": "اشتراک‌گذاری",
+    "icon": "🔗",
+    "iconFA": "fa-solid fa-share-nodes"
+  },
+  {
+    "id": 7,
+    "name": "پخش آنلاین",
+    "icon": "▶️",
+    "iconFA": "fa-solid fa-play"
+  },
+  {
+    "id": 8,
+    "name": "نمایش خانگی",
+    "icon": "📺",
+    "iconFA": "fa-solid fa-tv"
+  },
+  {
+    "id": 9,
+    "name": "فیلم و سریال",
+    "icon": "🎬",
+    "iconFA": "fa-solid fa-film"
+  },
+  {
+    "id": 10,
+    "name": "خرید",
+    "icon": "🛒",
+    "iconFA": "fa-solid fa-cart-shopping"
+  },
+  {
+    "id": 11,
+    "name": "فروشگاه",
+    "icon": "🏪",
+    "iconFA": "fa-solid fa-store"
+  },
+  {
+    "id": 12,
+    "name": "محصولات",
+    "icon": "📦",
+    "iconFA": "fa-solid fa-box"
+  },
+  {
+    "id": 13,
+    "name": "کالا",
+    "icon": "🧩",
+    "iconFA": "fa-solid fa-cubes"
+  },
+  {
+    "id": 14,
+    "name": "مقایسه قیمت",
+    "icon": "📊",
+    "iconFA": "fa-solid fa-scale-balanced"
+  },
+  {
+    "id": 15,
+    "name": "وبلاگ",
+    "icon": "📝",
+    "iconFA": "fa-solid fa-blog"
+  },
+  {
+    "id": 16,
+    "name": "نویسندگی",
+    "icon": "✍️",
+    "iconFA": "fa-solid fa-pen-nib"
+  },
+  {
+    "id": 17,
+    "name": "وبلاگدهی",
+    "icon": "📝",
+    "iconFA": "fa-brands fa-blogger"
+  },
+  {
+    "id": 18,
+    "name": "برنامه‌نویسی",
+    "icon": "💻",
+    "iconFA": "fa-solid fa-code"
+  },
+  {
+    "id": 19,
+    "name": "تکنولوژی",
+    "icon": "⚙️",
+    "iconFA": "fa-solid fa-microchip"
+  },
+  {
+    "id": 20,
+    "name": "دوره آنلاین",
+    "icon": "🎓",
+    "iconFA": "fa-solid fa-laptop"
+  },
+  {
+    "id": 21,
+    "name": "اپلیکیشن",
+    "icon": "📱",
+    "iconFA": "fa-solid fa-mobile-screen-button"
+  },
+  {
+    "id": 22,
+    "name": "اندروید",
+    "icon": "📱",
+    "iconFA": "fa-brands fa-android"
+  },
+  {
+    "id": 23,
+    "name": "کتاب",
+    "icon": "📚",
+    "iconFA": "fa-solid fa-book"
+  },
+  {
+    "id": 24,
+    "name": "کتابخوان",
+    "icon": "📖",
+    "iconFA": "fa-solid fa-book-open"
+  },
+  {
+    "id": 25,
+    "name": "کتاب صوتی",
+    "icon": "🎧",
+    "iconFA": "fa-solid fa-headphones"
+  },
+  {
+    "id": 26,
+    "name": "مطالعه",
+    "icon": "📖",
+    "iconFA": "fa-solid fa-book-open-reader"
+  },
+  {
+    "id": 27,
+    "name": "کتاب الکترونیک",
+    "icon": "📱",
+    "iconFA": "fa-solid fa-tablet-screen-button"
+  },
+  {
+    "id": 28,
+    "name": "فروش",
+    "icon": "💰",
+    "iconFA": "fa-solid fa-tag"
+  },
+  {
+    "id": 29,
+    "name": "آگهی",
+    "icon": "📢",
+    "iconFA": "fa-solid fa-bullhorn"
+  },
+  {
+    "id": 30,
+    "name": "اقتصادی",
+    "icon": "📈",
+    "iconFA": "fa-solid fa-money-bill-trend-up"
+  },
+  {
+    "id": 31,
+    "name": "صنایع دستی",
+    "icon": "🎨",
+    "iconFA": "fa-solid fa-paintbrush"
+  },
+  {
+    "id": 32,
+    "name": "هنر",
+    "icon": "🎨",
+    "iconFA": "fa-solid fa-palette"
+  },
+  {
+    "id": 33,
+    "name": "مسیریاب",
+    "icon": "🧭",
+    "iconFA": "fa-solid fa-location-dot"
+  },
+  {
+    "id": 34,
+    "name": "نقشه",
+    "icon": "🗺️",
+    "iconFA": "fa-solid fa-map"
+  },
+  {
+    "id": 35,
+    "name": "انیمه",
+    "icon": "🎌",
+    "iconFA": "fa-solid fa-dragon"
+  },
+  {
+    "id": 36,
+    "name": "بدون سانسور",
+    "icon": "🔓",
+    "iconFA": "fa-solid fa-unlock"
+  },
+  {
+    "id": 37,
+    "name": "زیرنویس",
+    "icon": "💬",
+    "iconFA": "fa-solid fa-closed-captioning"
+  },
+  {
+    "id": 38,
+    "name": "دوبله",
+    "icon": "🎙️",
+    "iconFA": "fa-solid fa-microphone"
+  },
+  {
+    "id": 39,
+    "name": "جستجوگر",
+    "icon": "🔍",
+    "iconFA": "fa-solid fa-magnifying-glass"
+  },
+  {
+    "id": 40,
+    "name": "هوش مصنوعی",
+    "icon": "🤖",
+    "iconFA": "fa-solid fa-robot"
+  },
+  {
+    "id": 41,
+    "name": "تولید تصویر",
+    "icon": "🖼️",
+    "iconFA": "fa-solid fa-image"
+  },
+  {
+    "id": 42,
+    "name": "فارسی ساز",
+    "icon": "🌍",
+    "iconFA": "fa-solid fa-language"
+  },
+  {
+    "id": 43,
+    "name": "کامپیوتر",
+    "icon": "🖥️",
+    "iconFA": "fa-solid fa-desktop"
+  },
+  {
+    "id": 44,
+    "name": "کنسول",
+    "icon": "🎮",
+    "iconFA": "fa-solid fa-gamepad"
+  },
+  {
+    "id": 45,
+    "name": "نرم افزار",
+    "icon": "💿",
+    "iconFA": "fa-solid fa-window-maximize"
+  },
+  {
+    "id": 46,
+    "name": "مانگا",
+    "icon": "📘",
+    "iconFA": "fa-solid fa-book"
+  },
+  {
+    "id": 47,
+    "name": "کمیک",
+    "icon": "💥",
+    "iconFA": "fa-solid fa-book-journal-whills"
+  },
+  {
+    "id": 48,
+    "name": "زیرنویس فارسی",
+    "icon": "💬",
+    "iconFA": "fa-solid fa-closed-captioning"
+  }
+]

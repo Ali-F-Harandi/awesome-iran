@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ویرایشگر Sites.json</title>
+    <title>ویرایشگر سایت‌های ایرانی</title>
+    <link rel="stylesheet" href="fonts/fontawesome/css/all.min.css">
     <style>
+        /* ═══════════════════════════════════════════
+           همان استایل‌های قبلی + استایل‌های جدید
+           ═══════════════════════════════════════════ */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
@@ -41,7 +45,6 @@
             min-height: 100vh;
         }
 
-        /* ─── Header ─── */
         .header {
             background: linear-gradient(135deg, #065f46, #047857, #059669);
             color: white;
@@ -52,626 +55,222 @@
             top: 0;
             z-index: 100;
         }
-        .header h1 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-        .header p {
-            font-size: 13px;
-            opacity: 0.85;
-        }
+        .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+        .header p { font-size: 13px; opacity: 0.85; }
 
-        /* ─── Toolbar ─── */
         .toolbar {
             background: var(--surface);
             border-bottom: 1px solid var(--border);
             padding: 12px 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 82px;
-            z-index: 90;
-            box-shadow: var(--shadow);
+            display: flex; flex-wrap: wrap; gap: 10px;
+            align-items: center; justify-content: space-between;
+            position: sticky; top: 110px; z-index: 90; box-shadow: var(--shadow);
         }
-        .toolbar-group {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
+        .toolbar-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 
-        /* ─── Buttons ─── */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all var(--transition);
-            background: var(--surface);
-            color: var(--text);
-            white-space: nowrap;
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 16px; border: 1px solid var(--border);
+            border-radius: var(--radius-sm); font-size: 13px; font-weight: 500;
+            cursor: pointer; transition: all var(--transition);
+            background: var(--surface); color: var(--text); white-space: nowrap;
             font-family: inherit;
         }
         .btn:hover { border-color: var(--border-hover); box-shadow: var(--shadow); }
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
+        .btn-primary { background: var(--primary); color: white; border-color: var(--primary); }
         .btn-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-            border-color: var(--danger);
-        }
+        .btn-danger { background: var(--danger); color: white; border-color: var(--danger); }
         .btn-danger:hover { background: var(--danger-hover); border-color: var(--danger-hover); }
-        .btn-sm {
-            padding: 4px 10px;
-            font-size: 12px;
-            border-radius: 4px;
-        }
-        .btn-icon {
-            padding: 5px 8px;
-            font-size: 14px;
-            line-height: 1;
-        }
-        .btn-ghost {
-            background: transparent;
-            border-color: transparent;
-        }
+        .btn-sm { padding: 4px 10px; font-size: 12px; border-radius: 4px; }
+        .btn-icon { padding: 5px 8px; font-size: 14px; line-height: 1; }
+        .btn-ghost { background: transparent; border-color: transparent; }
         .btn-ghost:hover { background: var(--bg); border-color: var(--border); }
 
-        /* ─── File Input ─── */
-        .file-input-wrapper {
-            position: relative;
-            overflow: hidden;
-        }
+        .file-input-wrapper { position: relative; overflow: hidden; }
         .file-input-wrapper input[type="file"] {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            opacity: 0;
-            cursor: pointer;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;
         }
 
-        /* ─── Stats Bar ─── */
         .stats {
-            padding: 8px 20px;
-            background: var(--warning-light);
-            border-bottom: 1px solid #fde68a;
-            font-size: 13px;
-            color: #92400e;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 8px 20px; background: var(--warning-light); border-bottom: 1px solid #fde68a;
+            font-size: 13px; color: #92400e; display: flex; justify-content: space-between; align-items: center;
         }
-        .stats .count-badge {
-            background: #fbbf24;
-            color: #78350f;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 12px;
+        .count-badge {
+            background: #fbbf24; color: #78350f; padding: 2px 10px; border-radius: 12px;
+            font-weight: 600; font-size: 12px;
         }
 
-        /* ─── Main Content ─── */
-        .main {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .main { max-width: 1000px; margin: 0 auto; padding: 20px; }
 
-        /* ─── Empty State ─── */
-        .empty-state {
-            text-align: center;
-            padding: 80px 20px;
-            color: var(--text-muted);
-        }
-        .empty-state .icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-            opacity: 0.4;
-        }
-        .empty-state h3 {
-            font-size: 20px;
-            margin-bottom: 8px;
-            color: var(--text-secondary);
-        }
+        .empty-state { text-align: center; padding: 80px 20px; color: var(--text-muted); }
+        .empty-state .icon { font-size: 64px; margin-bottom: 16px; opacity: 0.4; }
+        .empty-state h3 { font-size: 20px; margin-bottom: 8px; color: var(--text-secondary); }
         .empty-state p { font-size: 14px; }
 
-        /* ─── Site Card ─── */
+        /* کارت‌های سایت */
         .site-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            margin-bottom: 16px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            transition: all var(--transition);
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius); margin-bottom: 16px; box-shadow: var(--shadow);
+            overflow: hidden; transition: all var(--transition);
         }
-        .site-card:hover {
-            border-color: var(--border-hover);
-            box-shadow: var(--shadow-md);
-        }
+        .site-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-md); }
         .site-card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 18px;
-            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
-            border-bottom: 1px solid var(--border);
-            cursor: pointer;
-            user-select: none;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 18px; background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            border-bottom: 1px solid var(--border); cursor: pointer; user-select: none;
         }
-        .site-card-header[draggable="true"] {
-            cursor: grab;
-        }
-        .site-card-header[draggable="true"]:active {
-            cursor: grabbing;
-        }
+        .site-card-header[draggable="true"] { cursor: grab; }
+        .site-card-header[draggable="true"]:active { cursor: grabbing; }
         .site-card-header:hover { background: linear-gradient(135deg, #dcfce7, #d1fae5); }
-        .site-card-header .title-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-            min-width: 0;
+        .title-area { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
+        .site-id {
+            background: var(--primary); color: white; width: 28px; height: 28px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 700; flex-shrink: 0;
         }
-        .site-card-header .site-id {
-            background: var(--primary);
-            color: white;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-        .site-card-header .site-name {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .site-card-header .site-url {
-            font-size: 12px;
-            color: var(--text-muted);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: 200px;
-        }
-        .site-card-header .header-actions {
-            display: flex;
-            gap: 6px;
-            flex-shrink: 0;
-        }
-        .site-card-header .chevron {
-            transition: transform var(--transition);
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-        .site-card.open .site-card-header .chevron {
-            transform: rotate(180deg);
-        }
+        .site-name { font-size: 15px; font-weight: 600; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .site-url { font-size: 12px; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px; }
+        .header-actions { display: flex; gap: 6px; flex-shrink: 0; }
+        .chevron { transition: transform var(--transition); font-size: 12px; color: var(--text-muted); }
+        .site-card.open .site-card-header .chevron { transform: rotate(180deg); }
 
-        /* ─── Card Body ─── */
-        .site-card-body {
-            display: none;
-            padding: 18px;
-            -webkit-user-drag: none;
-        }
-        .site-card-body input,
-        .site-card-body textarea,
-        .site-card-body select {
-            -webkit-user-drag: none;
-            user-select: text;
-        }
-        .site-card.open .site-card-body {
-            display: block;
-        }
+        .site-card-body { display: none; padding: 18px; }
+        .site-card.open .site-card-body { display: block; }
 
-        /* ─── Form Fields ─── */
-        .field-group {
-            margin-bottom: 14px;
+        /* بخش‌های export-section (تگ‌ها، متادیتا، شبکه‌های اجتماعی) با قابلیت باز و بسته شدن */
+        .export-section {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius); box-shadow: var(--shadow-md);
+            overflow: hidden; margin-bottom: 24px;
         }
-        .field-group:last-child { margin-bottom: 0; }
-        .field-label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-        .field-input {
-            width: 100%;
-            padding: 9px 12px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-size: 13px;
-            font-family: inherit;
-            color: var(--text);
-            background: var(--surface);
-            transition: border-color var(--transition);
-            direction: ltr;
-            text-align: left;
-        }
-        .field-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
-        }
-        .field-input.rtl {
-            direction: rtl;
-            text-align: right;
-        }
-        textarea.field-input {
-            resize: vertical;
-            min-height: 60px;
-        }
-
-        /* ─── Tags Editor ─── */
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            padding: 8px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            min-height: 40px;
-            background: var(--surface);
-            align-items: center;
-        }
-        .tag-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: var(--info-light);
-            color: #1e40af;
-            padding: 3px 10px;
-            border-radius: 14px;
-            font-size: 12px;
-            font-weight: 500;
-            animation: tagIn 0.2s ease;
-        }
-        @keyframes tagIn {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        .tag-item .tag-remove, .tag-item .tag-move {
-            cursor: pointer;
-            font-size: 11px;
-            line-height: 1;
-            opacity: 0.4;
-            transition: opacity var(--transition);
-            background: none;
-            border: none;
-            color: inherit;
-            padding: 0;
-            font-family: inherit;
-        }
-        .tag-item .tag-remove:hover, .tag-item .tag-move:hover { opacity: 1; }
-        .tag-item .tag-sep {
-            width: 1px;
-            height: 10px;
-            background: #93c5fd;
-            opacity: 0.4;
-        }
-        .tag-input {
-            border: none;
-            outline: none;
-            font-size: 13px;
-            font-family: inherit;
-            flex: 1;
-            min-width: 100px;
-            padding: 3px;
-            background: transparent;
-        }
-        .tag-input::placeholder { color: var(--text-muted); }
-
-        /* ─── Social Editor ─── */
-        .social-entry {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            margin-bottom: 8px;
-            animation: tagIn 0.2s ease;
-        }
-        .social-entry:last-child { margin-bottom: 0; }
-        .social-entry .field-input {
-            flex: 1;
-        }
-        .social-entry .platform-input {
-            flex: 0 0 140px;
-            direction: ltr;
-            text-align: left;
-        }
-        .social-entry .url-input {
-            flex: 1;
-        }
-
-        /* ─── Recommended Toggle ─── */
-        .toggle-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .toggle {
-            position: relative;
-            width: 44px;
-            height: 24px;
-            cursor: pointer;
-        }
-        .toggle input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .toggle .slider {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: #cbd5e1;
-            border-radius: 12px;
+        .export-section .export-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 18px; cursor: pointer; user-select: none;
+            border-bottom: 1px solid transparent;
             transition: background var(--transition);
         }
-        .toggle .slider::before {
-            content: '';
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: white;
-            top: 3px;
-            left: 3px;
-            transition: transform var(--transition);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        }
-        .toggle input:checked + .slider {
-            background: var(--primary);
-        }
-        .toggle input:checked + .slider::before {
-            transform: translateX(20px);
-        }
-        .toggle-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        /* ─── Row Fields ─── */
-        .row-fields {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-        @media (max-width: 600px) {
-            .row-fields { grid-template-columns: 1fr; }
-        }
-
-        /* ─── Export Section ─── */
-        .export-section {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-md);
-            overflow: hidden;
-        }
-        .export-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 18px;
-            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+        .export-section.open .export-header {
             border-bottom: 1px solid var(--border);
         }
-        .export-header h3 {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text);
+        .export-section .export-header:hover {
+            filter: brightness(0.98);
         }
-        .export-body {
-            padding: 0;
-        }
-        .export-textarea {
-            width: 100%;
-            min-height: 300px;
-            padding: 16px;
-            border: none;
-            outline: none;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 12px;
-            line-height: 1.5;
-            color: var(--text);
-            background: #1e293b;
-            color: #e2e8f0;
-            resize: vertical;
-            direction: ltr;
-            text-align: left;
-        }
-        .export-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 8px;
-            padding: 12px 18px;
-            border-top: 1px solid var(--border);
-            background: var(--bg);
-        }
-
-        /* ─── Search Bar ─── */
-        .search-bar {
-            position: relative;
-            flex: 1;
-            min-width: 200px;
-            max-width: 320px;
-        }
-        .search-bar input {
-            width: 100%;
-            padding: 8px 12px 8px 34px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-size: 13px;
-            font-family: inherit;
-            direction: rtl;
-            background: var(--bg);
-        }
-        .search-bar input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
-        }
-        .search-bar .search-icon {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 14px;
-            pointer-events: none;
-        }
-
-        /* ─── Modal ─── */
-        .modal-overlay {
+        .export-section .export-body {
+            padding: 18px;
             display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
         }
+        .export-section.open .export-body {
+            display: block;
+        }
+        .bg-tags { background: linear-gradient(135deg, #e0f2fe, #bae6fd); }
+        .bg-meta { background: linear-gradient(135deg, #fef3c7, #fde68a); }
+        .bg-sites { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+
+        .field-group { margin-bottom: 14px; }
+        .field-label { display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 5px; }
+        .field-input {
+            width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+            font-size: 13px; font-family: inherit; color: var(--text); background: var(--surface);
+            transition: border-color var(--transition); direction: ltr; text-align: left;
+        }
+        .field-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
+        .field-input.rtl { direction: rtl; text-align: right; }
+        textarea.field-input { resize: vertical; min-height: 60px; }
+
+        .tags-container-editor {
+            display: flex; flex-wrap: wrap; gap: 6px; padding: 8px;
+            border: 1px solid var(--border); border-radius: var(--radius-sm);
+            min-height: 40px; background: var(--surface); align-items: center;
+        }
+        .tag-item {
+            display: inline-flex; align-items: center; gap: 4px;
+            background: var(--info-light); color: #1e40af; padding: 3px 10px;
+            border-radius: 14px; font-size: 12px; font-weight: 500;
+            animation: tagIn 0.2s ease;
+        }
+        @keyframes tagIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        .tag-remove, .tag-move { cursor: pointer; font-size: 11px; opacity: 0.4; transition: opacity var(--transition); background: none; border: none; color: inherit; padding: 0; }
+        .tag-remove:hover, .tag-move:hover { opacity: 1; }
+        .tag-sep { width: 1px; height: 10px; background: #93c5fd; opacity: 0.4; }
+        .tag-input { border: none; outline: none; font-size: 13px; font-family: inherit; flex: 1; min-width: 100px; padding: 3px; background: transparent; }
+
+        .social-entry { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+        .social-entry .field-input { flex: 1; }
+        .platform-input { flex: 0 0 140px; }
+
+        .toggle-wrapper { display: flex; align-items: center; gap: 10px; }
+        .toggle { position: relative; width: 44px; height: 24px; cursor: pointer; }
+        .toggle input { opacity: 0; width: 0; height: 0; }
+        .toggle .slider { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #cbd5e1; border-radius: 12px; transition: background var(--transition); }
+        .toggle .slider::before { content: ''; position: absolute; width: 18px; height: 18px; border-radius: 50%; background: white; top: 3px; left: 3px; transition: transform var(--transition); box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        .toggle input:checked + .slider { background: var(--primary); }
+        .toggle input:checked + .slider::before { transform: translateX(20px); }
+        .toggle-label { font-size: 13px; color: var(--text-secondary); }
+
+        .row-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        @media (max-width: 600px) { .row-fields { grid-template-columns: 1fr; } }
+
+        .export-textarea {
+            width: 100%; min-height: 300px; padding: 16px; border: none; outline: none;
+            font-family: 'Consolas', 'Courier New', monospace; font-size: 12px;
+            background: #1e293b; color: #e2e8f0; resize: vertical; direction: ltr;
+        }
+
+        .search-bar { position: relative; flex: 1; min-width: 200px; max-width: 320px; }
+        .search-bar input { width: 100%; padding: 8px 12px 8px 34px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; font-family: inherit; direction: rtl; background: var(--bg); }
+        .search-bar input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
+        .search-bar .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 14px; pointer-events: none; }
+
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
         .modal-overlay.active { display: flex; }
-        .modal {
-            background: var(--surface);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
-            width: 100%;
-            max-width: 480px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        .modal-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border);
-        }
+        .modal { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-lg); width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; }
+        .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--border); }
         .modal-header h3 { font-size: 16px; font-weight: 600; }
         .modal-body { padding: 20px; }
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 8px;
-            padding: 14px 20px;
-            border-top: 1px solid var(--border);
-            background: var(--bg);
-        }
+        .modal-footer { display: flex; justify-content: flex-end; gap: 8px; padding: 14px 20px; border-top: 1px solid var(--border); background: var(--bg); }
 
-        /* ─── Toast ─── */
-        .toast-container {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2000;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            align-items: center;
-        }
+        .toast-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 2000; display: flex; flex-direction: column; gap: 8px; align-items: center; }
         .toast {
-            background: #1e293b;
-            color: white;
-            padding: 10px 20px;
-            border-radius: var(--radius-sm);
-            font-size: 13px;
-            box-shadow: var(--shadow-lg);
-            animation: toastIn 0.3s ease, toastOut 0.3s ease 2.5s forwards;
-            white-space: nowrap;
+            background: #1e293b; color: white; padding: 10px 20px; border-radius: var(--radius-sm);
+            font-size: 13px; box-shadow: var(--shadow-lg);
+            animation: toastIn 0.3s ease, toastOut 0.3s ease 2.5s forwards; white-space: nowrap;
         }
         .toast.success { background: #065f46; }
         .toast.error { background: #991b1b; }
-        @keyframes toastIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes toastOut {
-            from { opacity: 1; }
-            to { opacity: 0; transform: translateY(-10px); }
-        }
+        @keyframes toastIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes toastOut { from { opacity: 1; } to { opacity: 0; transform: translateY(-10px); } }
 
-        /* ─── Drag Handle ─── */
-        .drag-handle {
-            cursor: grab;
-            color: var(--text-muted);
-            font-size: 16px;
-            padding: 4px 6px;
-            user-select: none;
-            opacity: 0.4;
-            transition: opacity var(--transition);
-        }
+        .drag-handle { cursor: grab; color: var(--text-muted); font-size: 16px; padding: 4px 6px; user-select: none; opacity: 0.4; transition: opacity var(--transition); }
         .drag-handle:hover { opacity: 1; }
         .drag-handle:active { cursor: grabbing; }
+        .site-card.dragging { opacity: 0.4; box-shadow: 0 0 0 2px var(--primary); transform: scale(0.98); }
+        .site-card.drag-over-top { border-top: 3px solid var(--primary); margin-top: -2px; }
+        .site-card.drag-over-bottom { border-bottom: 3px solid var(--primary); margin-bottom: -2px; }
 
-        /* ─── Drag & Drop States ─── */
-        .site-card.dragging {
-            opacity: 0.4;
-            box-shadow: 0 0 0 2px var(--primary);
-            transform: scale(0.98);
-        }
-        .site-card.drag-over-top {
-            border-top: 3px solid var(--primary);
-            margin-top: -2px;
-        }
-        .site-card.drag-over-bottom {
-            border-bottom: 3px solid var(--primary);
-            margin-bottom: -2px;
-        }
+        .section-divider { display: flex; align-items: center; gap: 10px; margin: 18px 0 14px; font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+        .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-        /* ─── Section Divider ─── */
-        .section-divider {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 18px 0 14px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
+        .tag-entry {
+            display: flex; gap: 8px; align-items: center; margin-bottom: 10px; flex-wrap: wrap;
+            background: var(--bg); padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border);
         }
-        .section-divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
+        .tag-entry .field-input { flex: 1; min-width: 120px; }
+        .tag-entry .icon-preview { font-size: 1.5rem; min-width: 36px; text-align: center; }
 
-        /* ─── Responsive ─── */
+        .footer-link-entry {
+            display: flex; gap: 8px; align-items: center; margin-bottom: 10px; flex-wrap: wrap;
+            background: var(--bg); padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border);
+        }
+        .footer-link-entry .field-input { flex: 1; min-width: 120px; }
+        .footer-link-entry .icon-preview { font-size: 1.5rem; min-width: 36px; text-align: center; }
+
         @media (max-width: 768px) {
             .header { padding: 14px 12px; }
             .header h1 { font-size: 18px; }
             .header p { font-size: 11px; }
             .toolbar {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 10px 12px;
-                gap: 8px;
-                top: 56px;
+                flex-direction: column; align-items: stretch; padding: 10px 12px; gap: 8px;
+                top: 80px;
             }
             .toolbar-group { justify-content: center; flex-wrap: wrap; gap: 6px; }
             .btn { padding: 10px 14px; font-size: 13px; min-height: 44px; }
@@ -679,1176 +278,1021 @@
             .search-bar { max-width: none; min-width: 0; }
             .search-bar input { font-size: 16px; padding: 10px 12px 10px 34px; min-height: 44px; }
             .site-card-header { flex-wrap: wrap; gap: 8px; padding: 12px; }
-            .site-card-header .site-url { max-width: 100%; order: 3; width: 100%; }
-            .site-card-header .header-actions { order: 2; }
             .site-card-body { padding: 14px 12px; }
             .row-fields { grid-template-columns: 1fr; }
             .social-entry { flex-wrap: wrap; }
-            .social-entry .platform-input { flex: 1 1 100%; }
-            .social-entry .url-input { flex: 1 1 100%; }
+            .platform-input { flex: 1 1 100%; }
             .field-input { font-size: 16px; padding: 10px 12px; min-height: 44px; }
-            .field-label { font-size: 11px; }
             .main { padding: 12px; }
             .stats { padding: 8px 12px; font-size: 12px; flex-wrap: wrap; gap: 4px; }
-            .export-header { flex-wrap: wrap; gap: 8px; padding: 12px; }
-            .export-header h3 { font-size: 13px; }
-            .export-header > div { flex-wrap: wrap; }
             .modal { max-width: 100%; margin: 10px; border-radius: var(--radius); }
             .drag-handle { font-size: 20px; padding: 8px; }
             .tag-item { font-size: 13px; padding: 5px 12px; }
             .tag-input { font-size: 16px; min-width: 80px; }
-            .site-card-header .site-id { width: 32px; height: 32px; font-size: 13px; }
-            .site-card-header .site-name { font-size: 14px; }
-            .btn-icon { padding: 8px; font-size: 16px; min-width: 38px; min-height: 38px; }
         }
-
-        /* ─── Touch improvements ─── */
-        @media (hover: none) and (pointer: coarse) {
-            .site-card-header { -webkit-user-select: none; user-select: none; }
-            .site-card-body input,
-            .site-card-body textarea,
-            .site-card-body select {
-                -webkit-user-drag: none;
-                user-select: text;
-                font-size: 16px;
-            }
-            .drag-handle { opacity: 0.7; font-size: 20px; padding: 8px; }
-            .btn { min-height: 44px; }
-            .btn-sm { min-height: 38px; }
+        .fa-preview {
+            font-size: 1.3rem;
+            min-width: 24px;
+            text-align: center;
+            color: var(--primary);
         }
-
-        /* ─── Scrollbar ─── */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .tag-entry .fa-preview,
+        .footer-link-entry .fa-preview {
+            margin: 0 4px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <div class="header">
-        <h1>🛠️ ویرایشگر Sites.json</h1>
-        <p>ویرایش، افزودن و حذف سایت‌ها | مدیریت تگ‌ها و شبکه‌های اجتماعی | خروجی JSON</p>
+<div class="header">
+    <h1>🛠️ ویرایشگر سایت‌های ایرانی</h1>
+    <p>ویرایش سایت‌ها، تگ‌ها، متادیتا، شبکه‌های اجتماعی و ذخیره در پروژه</p>
+</div>
+
+<div class="toolbar">
+    <div class="toolbar-group">
+        <div class="file-input-wrapper">
+            <button class="btn btn-primary">📂 ایمپورت sites.json</button>
+            <input type="file" id="sitesFileInput" accept=".json">
+        </div>
+        <div class="file-input-wrapper">
+            <button class="btn">🏷️ ایمپورت tags.json</button>
+            <input type="file" id="tagsFileInput" accept=".json">
+        </div>
+        <div class="file-input-wrapper">
+            <button class="btn">🌐 ایمپورت socials.json</button>
+            <input type="file" id="socialsFileInput" accept=".json">
+        </div>
+        <div class="file-input-wrapper">
+            <button class="btn">⚙️ ایمپورت meta.json</button>
+            <input type="file" id="metaFileInput" accept=".json">
+        </div>
+        <button class="btn" onclick="loadSampleData()">📋 نمونه</button>
+    </div>
+    <div class="toolbar-group">
+        <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="جستجو در سایت‌ها..." oninput="searchQuery=this.value; renderSitesList()">
+        </div>
+        <button class="btn btn-primary" onclick="addNewSite()">➕ سایت جدید</button>
+    </div>
+    <div class="toolbar-group" style="border-right:1px solid var(--border); padding-right:12px;">
+        <button class="btn" onclick="connectToProject()">📁 اتصال به پوشه پروژه</button>
+        <button class="btn btn-primary" id="saveProjectBtn" onclick="saveToProject()" style="display:none;">💾 ذخیره همه در پروژه</button>
+        <span id="projectStatus" style="font-size:12px; color:var(--primary);"></span>
+    </div>
+</div>
+
+<div class="stats" id="statsBar">
+    <span id="statsText">هیچ داده‌ای بارگذاری نشده است</span>
+    <span class="count-badge" id="countBadge">0</span>
+</div>
+
+<div class="main">
+    <!-- بخش تگ‌ها -->
+    <div class="export-section" id="tagsSection">
+        <div class="export-header bg-tags" onclick="toggleSection('tagsSection')">
+            <span class="chevron">▼</span>
+            <h3>🏷️ تگ‌ها (tags.json)</h3>
+            <div style="display:flex; gap:8px;" onclick="event.stopPropagation()">
+                <button class="btn btn-sm" onclick="downloadTagsJSON()">⬇️ دانلود</button>
+                <button class="btn btn-sm" onclick="copyTagsJSON()">📋 کپی</button>
+            </div>
+        </div>
+        <div class="export-body">
+            <div id="tagsListContainer"></div>
+            <button class="btn btn-sm" onclick="addTag()" style="margin-top:8px;">➕ افزودن تگ</button>
+        </div>
     </div>
 
-    <!-- Toolbar -->
-    <div class="toolbar">
-        <div class="toolbar-group">
-            <div class="file-input-wrapper">
-                <button class="btn btn-primary">📂 ایمپورت sites.json</button>
-                <input type="file" id="fileInput" accept=".json" />
+    <!-- بخش شبکه‌های اجتماعی -->
+    <div class="export-section" id="socialsSection">
+        <div class="export-header bg-tags" onclick="toggleSection('socialsSection')" style="background: linear-gradient(135deg, #e0f2fe, #bae6fd);">
+            <span class="chevron">▼</span>
+            <h3>🌐 شبکه‌های اجتماعی (socials.json)</h3>
+            <div style="display:flex; gap:8px;" onclick="event.stopPropagation()">
+                <button class="btn btn-sm" onclick="downloadSocialsJSON()">⬇️ دانلود</button>
+                <button class="btn btn-sm" onclick="copySocialsJSON()">📋 کپی</button>
             </div>
-            <div class="file-input-wrapper">
-                <button class="btn">⚙️ ایمپورت meta.json</button>
-                <input type="file" id="metaFileInput" accept=".json" />
-            </div>
-            <button class="btn" onclick="loadSampleData()" title="بارگذاری داده نمونه">📋 نمونه</button>
         </div>
-        <div class="toolbar-group">
-            <div class="search-bar">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="جستجو در سایت‌ها..." oninput="searchQuery=this.value; renderList()" />
-            </div>
-            <button class="btn btn-primary" onclick="addNewSite()">➕ سایت جدید</button>
-        </div>
-        <div class="toolbar-group" style="border-right:1px solid var(--border); padding-right:12px;">
-            <button class="btn" onclick="connectToProject()">📁 اتصال به پوشه پروژه</button>
-            <button class="btn btn-primary" id="saveProjectBtn" onclick="saveToProject()" style="display:none;">💾 ذخیره همه در پروژه</button>
-            <span id="projectStatus" style="font-size:12px; color:var(--primary);"></span>
+        <div class="export-body">
+            <div id="socialsListContainer"></div>
+            <button class="btn btn-sm" onclick="addSocialPlatform()" style="margin-top:8px;">➕ افزودن پلتفرم</button>
         </div>
     </div>
 
-    <!-- Stats Bar -->
-    <div class="stats" id="statsBar">
-        <span id="statsText">هیچ داده‌ای بارگذاری نشده است</span>
-        <span class="count-badge" id="countBadge">0</span>
-    </div>
-
-    <!-- Main Content -->
-    <div class="main">
-        <!-- Meta.json Section -->
-        <div class="export-section" id="metaSection" style="display:none; margin-top: 24px;">
-            <div class="export-header" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">
-                <h3>📅 تاریخ آخرین به‌روزرسانی (meta.json)</h3>
-                <div style="display:flex; gap:8px;">
-                    <button class="btn btn-sm" onclick="copyMetaJSON()">📋 کپی</button>
-                    <button class="btn btn-sm btn-primary" onclick="downloadMetaJSON()">⬇️ دانلود meta.json</button>
+    <!-- بخش متادیتا -->
+    <div class="export-section" id="metaSection">
+        <div class="export-header bg-meta" onclick="toggleSection('metaSection')">
+            <span class="chevron">▼</span>
+            <h3>📅 متادیتا (meta.json)</h3>
+            <div style="display:flex; gap:8px;" onclick="event.stopPropagation()">
+                <button class="btn btn-sm" onclick="downloadMetaJSON()">⬇️ دانلود</button>
+                <button class="btn btn-sm" onclick="copyMetaJSON()">📋 کپی</button>
+            </div>
+        </div>
+        <div class="export-body">
+            <div class="field-group">
+                <label class="field-label">تاریخ آخرین به‌روزرسانی</label>
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <input class="field-input rtl" type="text" id="metaDateInput" placeholder="۱۴۰۳/۱۰/۲۵" oninput="metaData.lastUpdated = this.value.trim()">
+                    <button class="btn btn-sm" onclick="autoSetTodayDate()">📅 امروز</button>
                 </div>
             </div>
-            <div style="padding: 18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-                <div style="flex:1; min-width:200px;">
-                    <label class="field-label">تاریخ شمسی (مثل: ۱۴۰۳/۱۰/۲۵)</label>
-                    <input class="field-input rtl" type="text" id="metaDateInput" placeholder="۱۴۰۳/۱۰/۲۵" oninput="onMetaDateChange(this.value)" />
-                </div>
-                <div style="padding-top:18px;">
-                    <button class="btn btn-sm" onclick="autoSetTodayDate()" title="تنظیم خودکار به تاریخ امروز">
-                        📅 امروز: <span id="todayPreview"></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Empty State -->
-        <div class="empty-state" id="emptyState">
-            <div class="icon">📁</div>
-            <h3>فایل sites.json را ایمپورت کنید</h3>
-            <p>با کلیک روی دکمه «ایمپورت» فایل JSON خود را بارگذاری کنید</p>
-        </div>
-
-        <!-- Sites List -->
-        <div id="sitesList"></div>
-
-        <!-- Export Section -->
-        <div class="export-section" id="exportSection" style="display:none; margin-top: 24px;">
-            <div class="export-header">
-                <h3>📦 خروجی JSON</h3>
-                <div style="display:flex; gap:8px;">
-                    <button class="btn btn-sm" onclick="copyJSON()">📋 کپی</button>
-                    <button class="btn btn-sm btn-primary" onclick="downloadJSON()">⬇️ دانلود</button>
-                </div>
-            </div>
-            <div class="export-body">
-                <textarea class="export-textarea" id="jsonOutput" readonly></textarea>
+            <div style="margin-top: 24px; border-top: 1px solid var(--border); padding-top: 16px;">
+                <h4 style="margin-bottom: 8px;">🔗 لینک‌های فوتر</h4>
+                <div id="footerLinksContainer"></div>
+                <button class="btn btn-sm" onclick="addFooterLink()" style="margin-top:8px;">➕ افزودن لینک فوتر</button>
             </div>
         </div>
     </div>
 
-    <!-- Delete Confirmation Modal -->
-    <div class="modal-overlay" id="deleteModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>⚠️ تأیید حذف</h3>
-                <button class="btn btn-sm btn-ghost" onclick="closeDeleteModal()">✕</button>
-            </div>
-            <div class="modal-body">
-                <p id="deleteModalText" style="font-size:14px; line-height:1.7;"></p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-sm" onclick="closeDeleteModal()">انصراف</button>
-                <button class="btn btn-sm btn-danger" id="confirmDeleteBtn">🗑️ حذف</button>
-            </div>
-        </div>
+    <!-- Sites Empty State -->
+    <div class="empty-state" id="emptyState">
+        <div class="icon">📁</div>
+        <h3>فایل sites.json را ایمپورت کنید</h3>
+        <p>یا از دکمه «اتصال به پوشه پروژه» برای بارگذاری خودکار استفاده کنید</p>
     </div>
 
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
+    <!-- Sites List -->
+    <div id="sitesList"></div>
 
-    <script>
-    // ═══════════════════════════════════════════
-    // State
-    // ═══════════════════════════════════════════
-    let sitesData = [];
-    let nextId = 1;
-    let searchQuery = '';
-    let metaData = { lastUpdated: '' };
+    <!-- Export Sites JSON -->
+    <div class="export-section" id="exportSection" style="display:none;">
+        <div class="export-header bg-sites">
+            <h3>📦 خروجی sites.json</h3>
+            <div style="display:flex; gap:8px;">
+                <button class="btn btn-sm" onclick="copySitesJSON()">📋 کپی</button>
+                <button class="btn btn-sm btn-primary" onclick="downloadSitesJSON()">⬇️ دانلود</button>
+            </div>
+        </div>
+        <div class="export-body" style="display:block; padding:0;">
+            <textarea class="export-textarea" id="jsonOutput" readonly></textarea>
+        </div>
+    </div>
+</div>
 
-    // ═══════════════════════════════════════════
-    // Utility Functions
-    // ═══════════════════════════════════════════
-    function escapeHtml(str) {
-        if (!str) return '';
-        const d = document.createElement('div');
-        d.textContent = str;
-        return d.innerHTML;
+<div class="modal-overlay" id="deleteModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>⚠️ تأیید حذف</h3>
+            <button class="btn btn-sm btn-ghost" onclick="closeDeleteModal()">✕</button>
+        </div>
+        <div class="modal-body"><p id="deleteModalText"></p></div>
+        <div class="modal-footer">
+            <button class="btn btn-sm" onclick="closeDeleteModal()">انصراف</button>
+            <button class="btn btn-sm btn-danger" id="confirmDeleteBtn">🗑️ حذف</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ═══════════════════════════════════════════
+// State
+// ═══════════════════════════════════════════
+let sitesData = [];
+let tagsData = [];
+let socialsData = [];
+let metaData = { lastUpdated: '', footerLinks: [] };
+let searchQuery = '';
+
+// ═══════════════════════════════════════════
+// Utility
+// ═══════════════════════════════════════════
+function escapeHtml(str) {
+    const d = document.createElement('div');
+    d.textContent = str || '';
+    return d.innerHTML;
+}
+
+function showToast(msg, type='success') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = 'toast ' + type;
+    toast.textContent = msg;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+}
+
+function getNextId(arr) {
+    return arr.reduce((max, item) => Math.max(max, item.id || 0), 0) + 1;
+}
+
+function toggleSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) section.classList.toggle('open');
+}
+
+// ═══════════════════════════════════════════
+// Jalali
+// ═══════════════════════════════════════════
+function gregorianToJalali(gy, gm, gd) {
+    const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+    let jy, jm, jd, days;
+    const gy2 = (gm > 2) ? (gy + 1) : gy;
+    days = 355666 + (365 * gy) + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100) + Math.floor((gy2 + 399) / 400) + gd + g_d_m[gm - 1];
+    jy = -1595 + (33 * Math.floor(days / 12053));
+    days %= 12053;
+    jy += 4 * Math.floor(days / 1461);
+    days %= 1461;
+    if (days > 365) { jy += Math.floor((days - 1) / 365); days = (days - 1) % 365; }
+    if (days < 186) { jm = 1 + Math.floor(days / 31); jd = 1 + (days % 31); }
+    else { jm = 7 + Math.floor((days - 186) / 30); jd = 1 + ((days - 186) % 30); }
+    return { jy, jm, jd };
+}
+function toPersianDigits(str) {
+    return str.toString().replace(/[0-9]/g, d => ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'][parseInt(d)]);
+}
+function getTodayJalali() {
+    const now = new Date();
+    const { jy, jm, jd } = gregorianToJalali(now.getFullYear(), now.getMonth() + 1, now.getDate());
+    return toPersianDigits(jy + '/' + String(jm).padStart(2,'0') + '/' + String(jd).padStart(2,'0'));
+}
+function autoSetTodayDate() {
+    metaData.lastUpdated = getTodayJalali();
+    document.getElementById('metaDateInput').value = metaData.lastUpdated;
+}
+
+// ═══════════════════════════════════════════
+// Tags Management
+// ═══════════════════════════════════════════
+function renderTagsList() {
+    const container = document.getElementById('tagsListContainer');
+    if (!container) return;
+    container.innerHTML = tagsData.map((tag, idx) => `
+        <div class="tag-entry">
+            <span class="icon-preview">${tag.icon || '📌'}</span>
+            <i class="fa-preview ${tag.iconFA || ''}" style="${tag.iconFA ? '' : 'display:none;'}"></i>
+            <input class="field-input" type="number" value="${tag.id}" style="max-width:60px;" readonly>
+            <input class="field-input rtl" type="text" value="${escapeHtml(tag.name)}" placeholder="نام تگ" onchange="updateTag(${idx}, 'name', this.value)">
+            <input class="field-input" type="text" value="${escapeHtml(tag.icon || '')}" placeholder="ایموجی" style="max-width:80px;" onchange="updateTag(${idx}, 'icon', this.value); this.closest('.tag-entry').querySelector('.icon-preview').textContent = this.value || '📌';">
+            <input class="field-input" type="text" value="${escapeHtml(tag.iconFA || '')}" placeholder="Font Awesome" style="direction: ltr;" onchange="updateTag(${idx}, 'iconFA', this.value); updateIconPreview(this);">
+            <button class="btn btn-sm btn-danger" onclick="removeTag(${idx})" title="حذف">✕</button>
+        </div>
+    `).join('') || '<p style="color:var(--text-muted);">هیچ تگی تعریف نشده است.</p>';
+    document.getElementById('tagsSection').style.display = 'block';
+}
+
+function updateIconPreview(inputElement) {
+    const entry = inputElement.closest('.tag-entry') || inputElement.closest('.footer-link-entry');
+    const iconEl = entry.querySelector('.fa-preview');
+    if (iconEl) {
+        iconEl.className = 'fa-preview ' + inputElement.value;
+        iconEl.style.display = inputElement.value ? '' : 'none';
     }
+}
 
-    function showToast(message, type = 'success') {
-        const container = document.getElementById('toastContainer');
-        const toast = document.createElement('div');
-        toast.className = 'toast ' + type;
-        toast.textContent = message;
-        container.appendChild(toast);
-        setTimeout(() => toast.remove(), 3000);
+function addTag() {
+    const newId = getNextId(tagsData);
+    tagsData.push({ id: newId, name: '', icon: '📌', iconFA: '' });
+    renderTagsList();
+}
+
+function updateTag(index, field, value) {
+    if (tagsData[index]) tagsData[index][field] = value;
+}
+
+function removeTag(index) {
+    const tagName = tagsData[index]?.name;
+    tagsData.splice(index, 1);
+    renderTagsList();
+    showToast(`تگ «${tagName}» حذف شد`);
+}
+
+function findOrCreateTag(tagName) {
+    let tag = tagsData.find(t => t.name === tagName);
+    if (!tag) {
+        const newId = getNextId(tagsData);
+        tag = { id: newId, name: tagName, icon: '📌', iconFA: '' };
+        tagsData.push(tag);
+        renderTagsList();
+        showToast(`تگ جدید «${tagName}» افزوده شد`);
     }
+    return tag.id;
+}
 
-    function getNextId() {
-        if (sitesData.length === 0) return 1;
-        return Math.max(...sitesData.map(s => s.id)) + 1;
-    }
+// ═══════════════════════════════════════════
+// Socials Management
+// ═══════════════════════════════════════════
+function renderSocialsList() {
+    const container = document.getElementById('socialsListContainer');
+    if (!container) return;
+    container.innerHTML = socialsData.map((s, idx) => `
+        <div class="tag-entry">
+            <span class="icon-preview">${s.icon || '📌'}</span>
+            <i class="fa-preview ${s.iconFA || ''}" style="${s.iconFA ? '' : 'display:none;'}"></i>
+            <input class="field-input" type="number" value="${s.id}" style="max-width:60px;" readonly>
+            <input class="field-input" type="text" value="${escapeHtml(s.key)}" placeholder="کلید (لاتین)" style="direction: ltr;" onchange="updateSocialPlatform(${idx}, 'key', this.value)">
+            <input class="field-input rtl" type="text" value="${escapeHtml(s.label)}" placeholder="برچسب فارسی" onchange="updateSocialPlatform(${idx}, 'label', this.value)">
+            <input class="field-input" type="text" value="${escapeHtml(s.icon)}" placeholder="ایموجی" style="max-width:80px;" onchange="updateSocialPlatform(${idx}, 'icon', this.value); this.closest('.tag-entry').querySelector('.icon-preview').textContent = this.value || '📌';">
+            <input class="field-input" type="text" value="${escapeHtml(s.iconFA)}" placeholder="Font Awesome" style="direction: ltr;" onchange="updateSocialPlatform(${idx}, 'iconFA', this.value); updateIconPreview(this);">
+            <input class="field-input" type="text" value="${escapeHtml(s.cls)}" placeholder="کلاس CSS" style="direction: ltr;" onchange="updateSocialPlatform(${idx}, 'cls', this.value)">
+            <button class="btn btn-sm btn-danger" onclick="removeSocialPlatform(${idx})">✕</button>
+        </div>
+    `).join('') || '<p style="color:var(--text-muted);">هیچ پلتفرمی تعریف نشده است.</p>';
+    document.getElementById('socialsSection').style.display = 'block';
+}
 
-    function generateJSON() {
-        return JSON.stringify(sitesData, null, 2);
-    }
+function addSocialPlatform() {
+    const newId = getNextId(socialsData);
+    socialsData.push({ id: newId, key: '', label: '', icon: '📌', iconFA: '', cls: 'social-custom' });
+    renderSocialsList();
+}
 
-    function updateExport() {
-        const output = document.getElementById('jsonOutput');
-        output.value = generateJSON();
-    }
+function updateSocialPlatform(index, field, value) {
+    if (socialsData[index]) socialsData[index][field] = value;
+}
 
-    // ═══════════════════════════════════════════
-    // Gregorian → Jalali Converter
-    // ═══════════════════════════════════════════
-    function gregorianToJalali(gy, gm, gd) {
-        const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
-        let jy, jm, jd, gy2, days;
-        gy2 = (gm > 2) ? (gy + 1) : gy;
-        days = 355666 + (365 * gy) + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100) + Math.floor((gy2 + 399) / 400) + gd + g_d_m[gm - 1];
-        jy = -1595 + (33 * Math.floor(days / 12053));
-        days %= 12053;
-        jy += 4 * Math.floor(days / 1461);
-        days %= 1461;
-        if (days > 365) {
-            jy += Math.floor((days - 1) / 365);
-            days = (days - 1) % 365;
-        }
-        if (days < 186) { jm = 1 + Math.floor(days / 31); jd = 1 + (days % 31); }
-        else { jm = 7 + Math.floor((days - 186) / 30); jd = 1 + ((days - 186) % 30); }
-        return { jy, jm, jd };
-    }
+function removeSocialPlatform(index) {
+    socialsData.splice(index, 1);
+    renderSocialsList();
+    showToast('پلتفرم حذف شد');
+}
 
-    function toPersianDigits(str) {
-        const persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
-        return str.toString().replace(/[0-9]/g, d => persianDigits[parseInt(d)]);
-    }
+// ═══════════════════════════════════════════
+// Footer Links
+// ═══════════════════════════════════════════
+function renderFooterLinks() {
+    const container = document.getElementById('footerLinksContainer');
+    if (!container) return;
+    const links = metaData.footerLinks || [];
+    container.innerHTML = links.map((link, idx) => `
+        <div class="footer-link-entry">
+            <span class="icon-preview">${link.icon || '❓'}</span>
+            <i class="fa-preview ${link.iconFA || ''}" style="${link.iconFA ? '' : 'display:none;'}"></i>
+            <input class="field-input" type="text" value="${escapeHtml(link.label)}" placeholder="برچسب" onchange="updateFooterLink(${idx}, 'label', this.value)">
+            <input class="field-input" type="url" value="${escapeHtml(link.url)}" placeholder="https://..." dir="ltr" onchange="updateFooterLink(${idx}, 'url', this.value)">
+            <input class="field-input" type="text" value="${escapeHtml(link.icon)}" placeholder="ایموجی" style="max-width:80px;" onchange="updateFooterLink(${idx}, 'icon', this.value); this.closest('.footer-link-entry').querySelector('.icon-preview').textContent = this.value || '❓';">
+            <input class="field-input" type="text" value="${escapeHtml(link.iconFA)}" placeholder="Font Awesome" dir="ltr" onchange="updateFooterLink(${idx}, 'iconFA', this.value); updateIconPreview(this);">
+            <button class="btn btn-sm btn-danger" onclick="removeFooterLink(${idx})">✕</button>
+        </div>
+    `).join('');
+}
 
-    function getTodayJalali() {
-        const now = new Date();
-        const { jy, jm, jd } = gregorianToJalali(now.getFullYear(), now.getMonth() + 1, now.getDate());
-        return toPersianDigits(jy + '/' + String(jm).padStart(2,'0') + '/' + String(jd).padStart(2,'0'));
-    }
+function addFooterLink() {
+    metaData.footerLinks.push({ label: '', url: '', icon: '', iconFA: '' });
+    renderFooterLinks();
+}
+function updateFooterLink(index, field, value) { metaData.footerLinks[index][field] = value; }
+function removeFooterLink(index) { metaData.footerLinks.splice(index, 1); renderFooterLinks(); }
 
-    function updateStats() {
-        const statsText = document.getElementById('statsText');
-        const countBadge = document.getElementById('countBadge');
-        const emptyState = document.getElementById('emptyState');
-        const exportSection = document.getElementById('exportSection');
-
-        if (sitesData.length === 0) {
-            statsText.textContent = 'هیچ داده‌ای بارگذاری نشده است';
-            emptyState.style.display = 'block';
-            exportSection.style.display = 'none';
-        } else {
-            const recCount = sitesData.filter(s => s.recommended).length;
-            statsText.textContent = `${sitesData.length} سایت | ${recCount} سایت پیشنهادی`;
-            emptyState.style.display = 'none';
-            exportSection.style.display = 'block';
-        }
-        countBadge.textContent = sitesData.length;
-        updateExport();
-    }
-
-    // ═══════════════════════════════════════════
-    // Meta.json Import
-    // ═══════════════════════════════════════════
-    document.getElementById('metaFileInput').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(ev) {
-            try {
-                const data = JSON.parse(ev.target.result);
-                metaData.lastUpdated = data.lastUpdated || '';
-                renderMetaSection();
-                showToast('✅ meta.json بارگذاری شد');
-            } catch (err) {
-                showToast('خطا در خواندن meta.json: ' + err.message, 'error');
-            }
-        };
-        reader.readAsText(file);
-        this.value = '';
-    });
-
-    // ═══════════════════════════════════════════
-    // File Import
-    // ═══════════════════════════════════════════
-    document.getElementById('fileInput').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = function(ev) {
-            try {
-                const data = JSON.parse(ev.target.result);
-                if (!Array.isArray(data)) {
-                    showToast('فرمت فایل نامعتبر است — باید آرایه‌ای از سایت‌ها باشد', 'error');
-                    return;
-                }
-                sitesData = data.map(s => ({
-                    id: s.id || getNextId(),
-                    name: s.name || '',
-                    mainLink: s.mainLink || '',
-                    unfilteredLink: s.unfilteredLink || s.mainLink || '',
-                    description: s.description || '',
-                    tags: Array.isArray(s.tags) ? [...s.tags] : [],
-                    recommended: !!s.recommended,
-                    social: (s.social && typeof s.social === 'object') ? { ...s.social } : {},
-                    donate: s.donate || null,
-                    customLinks: Array.isArray(s.customLinks) ? s.customLinks.map(cl => ({ ...cl })) : []
-                }));
-                nextId = getNextId();
-                renderList();
-                updateStats();
-                showToast(`✅ ${sitesData.length} سایت با موفقیت بارگذاری شد`);
-            } catch (err) {
-                showToast('خطا در خواندن فایل JSON: ' + err.message, 'error');
-            }
-        };
-        reader.readAsText(file);
-        this.value = '';
-    });
-
-    // ═══════════════════════════════════════════
-    // Sample Data
-    // ═══════════════════════════════════════════
-    function loadSampleData() {
-        sitesData = [
-            {
-                id: 1,
-                name: "دانلودها",
-                mainLink: "https://downloadha.com",
-                unfilteredLink: "https://downloadha.com",
-                description: "مرجع دانلود فیلم، سریال، نرم‌افزار، بازی و موسیقی",
-                tags: ["دانلود", "فیلم", "سریال"],
-                recommended: true,
-                social: {
-                    telegram: "https://t.me/downloadha",
-                    instagram: "https://instagram.com/downloadha_ir"
-                }
-            },
-            {
-                id: 2,
-                name: "آپارات",
-                mainLink: "https://aparat.com",
-                unfilteredLink: "https://aparat.com",
-                description: "بزرگترین پلتفرم اشتراک‌گذاری ویدیو در ایران",
-                tags: ["ویدیو", "اشتراک‌گذاری", "سرگرمی"],
-                recommended: true,
-                social: {
-                    telegram: "https://t.me/aparat",
-                    instagram: "https://instagram.com/aparat"
-                }
-            }
-        ];
-        nextId = 3;
-        renderList();
-        updateStats();
-        showToast('داده نمونه بارگذاری شد');
-    }
-
-    // ═══════════════════════════════════════════
-    // Render List
-    // ═══════════════════════════════════════════
-    function renderList() {
-        const container = document.getElementById('sitesList');
-        const query = searchQuery.trim().toLowerCase();
-        const filtered = sitesData.filter(s => {
-            if (!query) return true;
-            return s.name.toLowerCase().includes(query) ||
-                   s.mainLink.toLowerCase().includes(query) ||
-                   s.description.toLowerCase().includes(query) ||
-                   s.tags.some(t => t.toLowerCase().includes(query));
+// ═══════════════════════════════════════════
+// Sites CRUD
+// ═══════════════════════════════════════════
+function renderSitesList() {
+    const container = document.getElementById('sitesList');
+    const query = searchQuery.trim().toLowerCase();
+    const filtered = sitesData.filter(site => {
+        if (!query) return true;
+        const tagNames = site.tags.map(tid => {
+            const t = tagsData.find(t => t.id === tid);
+            return t ? t.name.toLowerCase() : '';
         });
+        return site.name.toLowerCase().includes(query) ||
+               site.mainLink.toLowerCase().includes(query) ||
+               (site.description || '').toLowerCase().includes(query) ||
+               tagNames.some(n => n.includes(query));
+    });
 
-        if (filtered.length === 0 && sitesData.length > 0) {
-            container.innerHTML = `<div class="empty-state"><div class="icon">🔍</div><h3>نتیجه‌ای یافت نشد</h3><p>عبارت دیگری را جستجو کنید</p></div>`;
-            return;
-        }
+    if (filtered.length === 0 && sitesData.length > 0) {
+        container.innerHTML = '<div class="empty-state"><div class="icon">🔍</div><h3>نتیجه‌ای یافت نشد</h3></div>';
+        return;
+    }
 
-        container.innerHTML = filtered.map((site, idx) => `
-            <div class="site-card" id="card-${site.id}" data-id="${site.id}" ondragover="onDragOver(event)" ondrop="onDrop(event, ${site.id})">
-                <div class="site-card-header" draggable="true" onclick="toggleCard(${site.id})" ondragstart="onDragStart(event, ${site.id})" ondragend="onDragEnd(event)">
+    container.innerHTML = filtered.map(site => {
+        return `
+            <div class="site-card" data-id="${site.id}" ondragover="onDragOver(event)" ondrop="onDrop(event, ${site.id})">
+                <div class="site-card-header" draggable="true" onclick="toggleSiteCard(${site.id})" ondragstart="onDragStart(event, ${site.id})" ondragend="onDragEnd(event)">
                     <div class="title-area">
-                        <span class="drag-handle" title="برای جابجایی بکشید و رها کنید">⠿</span>
+                        <span class="drag-handle">⠿</span>
                         <span class="site-id">${site.id}</span>
                         <span class="site-name">${escapeHtml(site.name) || '(بدون نام)'}</span>
                         <span class="site-url">${escapeHtml(site.mainLink)}</span>
                     </div>
                     <div class="header-actions">
-                        ${site.recommended ? '<span class="rec-star" style="color:#f59e0b; font-size:14px;" title="سایت پیشنهادی">⭐</span>' : ''}
-                        <button class="btn btn-sm btn-icon btn-ghost" title="تکرار" onclick="event.stopPropagation(); duplicateSite(${site.id})">📋</button>
-                        <button class="btn btn-sm btn-icon btn-ghost" title="حذف" onclick="event.stopPropagation(); confirmDelete(${site.id})">🗑️</button>
+                        ${site.recommended ? '<span style="color:#f59e0b;">⭐</span>' : ''}
+                        <button class="btn btn-sm btn-icon btn-ghost" onclick="event.stopPropagation(); duplicateSite(${site.id})">📋</button>
+                        <button class="btn btn-sm btn-icon btn-ghost" onclick="event.stopPropagation(); confirmDeleteSite(${site.id})">🗑️</button>
                         <span class="chevron">▼</span>
                     </div>
                 </div>
                 <div class="site-card-body">
-                    ${renderCardFields(site)}
+                    ${renderSiteFields(site)}
                 </div>
-            </div>
-        `).join('');
-    }
-
-    function renderCardFields(site) {
-        const tagsHtml = (site.tags || []).map((tag, i) => `
-            <span class="tag-item" draggable="true" ondragstart="onTagDragStart(event, ${site.id}, ${i})" ondragover="onTagDragOver(event)" ondrop="onTagDrop(event, ${site.id}, ${i})" ondragend="onTagDragEnd(event)">
-                ${i > 0 ? '<button class="tag-move" onclick="event.stopPropagation(); event.preventDefault(); moveTag(' + site.id + ', ' + i + ', -1)" title="جابجایی به راست">▶</button>' : ''}
-                ${escapeHtml(tag)}
-                ${i < (site.tags || []).length - 1 ? '<button class="tag-move" onclick="event.stopPropagation(); event.preventDefault(); moveTag(' + site.id + ', ' + i + ', 1)" title="جابجایی به چپ">◀</button>' : ''}
-                <span class="tag-sep"></span>
-                <button class="tag-remove" onclick="event.stopPropagation(); removeTag(${site.id}, ${i})" title="حذف تگ">&times;</button>
-            </span>
-        `).join('');
-
-        const socialEntries = Object.entries(site.social || {}).map(([platform, url], i) => `
-            <div class="social-entry">
-                <input class="field-input platform-input" type="text" value="${escapeHtml(platform)}" placeholder="پلتفرم (telegram)" onchange="updateSocial(${site.id}, ${i}, 'platform', this.value)" />
-                <input class="field-input url-input" type="text" value="${escapeHtml(url)}" placeholder="https://..." dir="ltr" onchange="updateSocial(${site.id}, ${i}, 'url', this.value)" />
-                <button class="btn btn-sm btn-icon btn-danger" onclick="removeSocial(${site.id}, ${i})" title="حذف">✕</button>
-            </div>
-        `).join('');
-
-        return `
-            <div class="row-fields">
-                <div class="field-group">
-                    <label class="field-label">شناسه (ID) — خودکار بر اساس جایگاه</label>
-                    <input class="field-input" type="number" value="${site.id}" readonly title="شناسه به صورت خودکار بر اساس جایگاه در لیست تعیین می‌شود" style="background:var(--bg);cursor:not-allowed;" />
-                </div>
-                <div class="field-group">
-                    <label class="field-label">نام سایت</label>
-                    <input class="field-input rtl" type="text" value="${escapeHtml(site.name)}" placeholder="نام سایت..." onchange="updateField(${site.id}, 'name', this.value)" />
-                </div>
-            </div>
-
-            <div class="row-fields">
-                <div class="field-group">
-                    <label class="field-label">آدرس اصلی (mainLink)</label>
-                    <input class="field-input" type="text" value="${escapeHtml(site.mainLink)}" placeholder="https://..." dir="ltr" onchange="updateField(${site.id}, 'mainLink', this.value)" />
-                </div>
-                <div class="field-group">
-                    <label class="field-label">آدرس فعلی (unfilteredLink)</label>
-                    <input class="field-input" type="text" value="${escapeHtml(site.unfilteredLink)}" placeholder="https://..." dir="ltr" onchange="updateField(${site.id}, 'unfilteredLink', this.value)" />
-                </div>
-            </div>
-
-            <div class="field-group">
-                <label class="field-label">توضیحات</label>
-                <textarea class="field-input rtl" placeholder="توضیح مختصر..." onchange="updateField(${site.id}, 'description', this.value)">${escapeHtml(site.description)}</textarea>
-            </div>
-
-            <div class="field-group" onclick="event.stopPropagation()">
-                <div class="toggle-wrapper">
-                    <label class="toggle" onclick="event.stopPropagation()">
-                        <input type="checkbox" ${site.recommended ? 'checked' : ''} onchange="updateField(${site.id}, 'recommended', this.checked)" />
-                        <span class="slider" onclick="event.stopPropagation()"></span>
-                    </label>
-                    <span class="toggle-label">سایت پیشنهادی ⭐</span>
-                </div>
-            </div>
-
-            <div class="section-divider">🏷️ تگ‌ها <span style="font-size:11px; color:var(--text-muted); font-weight:400;">(تگ اول = موضوع اصلی سایت)</span></div>
-            <div class="field-group">
-                <div class="tags-container" id="tags-${site.id}">
-                    ${tagsHtml}
-                    <input class="tag-input" type="text" placeholder="تگ جدید + Enter یا ,"
-                           onkeydown="handleTagInput(event, ${site.id})" />
-                </div>
-            </div>
-
-            <div class="section-divider">🌐 شبکه‌های اجتماعی</div>
-            <div class="field-group" id="social-${site.id}">
-                ${socialEntries}
-                <button class="btn btn-sm" onclick="addSocial(${site.id})" style="margin-top:8px;">➕ افزودن شبکه اجتماعی</button>
-            </div>
-
-            <div class="section-divider">❤️ حمایت مالی</div>
-            <div class="field-group">
-                <label class="field-label">لینک حمایت مالی (donate)</label>
-                <input class="field-input" type="text" value="${escapeHtml(site.donate || '')}" placeholder="https://... (خالی = بدون لینک)" dir="ltr" onchange="updateField(${site.id}, 'donate', this.value || null)" />
-            </div>
-
-            <div class="section-divider">🔗 لینک‌های کاستوم (customLinks)</div>
-            <div class="field-group" id="customlinks-${site.id}">
-                ${renderCustomLinksEntries(site.id, site.customLinks || [])}
-                <button class="btn btn-sm" onclick="addCustomLink(${site.id})" style="margin-top:8px;">➕ افزودن لینک کاستوم</button>
-            </div>
-
-            <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
-                <button class="btn btn-sm" onclick="moveSite(${site.id}, -1)">⬆️ بالا</button>
-                <button class="btn btn-sm" onclick="moveSite(${site.id}, 1)">⬇️ پایین</button>
             </div>
         `;
-    }
-
-    // ═══════════════════════════════════════════
-    // Drag & Drop Reordering
-    // ═══════════════════════════════════════════
-    let draggedId = null;
-
-    function onDragStart(e, id) {
-        draggedId = id;
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('text/plain', id);
-        setTimeout(() => {
-            const card = document.getElementById('card-' + id);
-            if (card) card.classList.add('dragging');
-        }, 0);
-    }
-
-    function onDragOver(e) {
-        if (draggedId === null) return;
-        e.preventDefault();
-        e.dataTransfer.dropEffect = 'move';
-        const card = e.currentTarget;
-        const rect = card.getBoundingClientRect();
-        const midY = rect.top + rect.height / 2;
-        card.classList.remove('drag-over-top', 'drag-over-bottom');
-        if (e.clientY < midY) {
-            card.classList.add('drag-over-top');
-        } else {
-            card.classList.add('drag-over-bottom');
-        }
-    }
-
-    function onDrop(e, targetId) {
-        e.preventDefault();
-        if (draggedId === null || draggedId === targetId) return;
-
-        const fromIndex = sitesData.findIndex(s => s.id === draggedId);
-        const toIndex = sitesData.findIndex(s => s.id === targetId);
-        if (fromIndex === -1 || toIndex === -1) return;
-
-        const card = e.currentTarget;
-        const rect = card.getBoundingClientRect();
-        const midY = rect.top + rect.height / 2;
-        let insertIndex = e.clientY < midY ? toIndex : toIndex + 1;
-        if (fromIndex < toIndex) insertIndex--;
-
-        const [moved] = sitesData.splice(fromIndex, 1);
-        sitesData.splice(insertIndex, 0, moved);
-
-        renumberIds();
-        renderList();
-        updateExport();
-        showToast(`آیتم جابجا شد`);
-    }
-
-    function onDragEnd(e) {
-        draggedId = null;
-        document.querySelectorAll('.site-card').forEach(card => {
-            card.classList.remove('dragging', 'drag-over-top', 'drag-over-bottom');
-        });
-    }
-
-    // ═══════════════════════════════════════════
-    // Card Toggle
-    // ═══════════════════════════════════════════
-    function toggleCard(id) {
-        const card = document.getElementById('card-' + id);
-        if (card) card.classList.toggle('open');
-    }
-
-    // ═══════════════════════════════════════════
-    // Field Updates
-    // ═══════════════════════════════════════════
-    function updateField(id, field, value) {
-        const site = sitesData.find(s => s.id === id);
-        if (site) {
-            site[field] = value;
-            updateExport();
-            updateStats();
-            const card = document.getElementById('card-' + id);
-            if (card && (field === 'name' || field === 'mainLink')) {
-                const nameEl = card.querySelector('.site-name');
-                const urlEl = card.querySelector('.site-url');
-                if (field === 'name' && nameEl) nameEl.textContent = value || '(بدون نام)';
-                if (field === 'mainLink' && urlEl) urlEl.textContent = value;
-            }
-            if (field === 'recommended') {
-                const card = document.getElementById('card-' + id);
-                if (card) {
-                    const existingStar = card.querySelector('.rec-star');
-                    if (value && !existingStar) {
-                        const actionsEl = card.querySelector('.header-actions');
-                        const star = document.createElement('span');
-                        star.className = 'rec-star';
-                        star.style.cssText = 'color:#f59e0b; font-size:14px;';
-                        star.title = 'سایت پیشنهادی';
-                        star.textContent = '⭐';
-                        actionsEl.insertBefore(star, actionsEl.firstChild);
-                    } else if (!value && existingStar) {
-                        existingStar.remove();
-                    }
-                }
-            }
-        }
-    }
-
-    // ═══════════════════════════════════════════
-    // Tags Management
-    // ═══════════════════════════════════════════
-    function handleTagInput(e, siteId) {
-        if (e.key === 'Enter' || e.key === ',' || e.key === '،') {
-            e.preventDefault();
-            const input = e.target;
-            const value = input.value.replace(/[,،]\s*$/, '').trim();
-            if (!value) {
-                input.value = '';
-                return;
-            }
-
-            const site = sitesData.find(s => s.id === siteId);
-            if (!site) return;
-
-            if (site.tags.includes(value)) {
-                showToast('این تگ قبلاً وجود دارد', 'error');
-                input.value = '';
-                return;
-            }
-
-            site.tags.push(value);
-            input.value = '';
-            updateExport();
-
-            refreshTags(siteId);
-        }
-    }
-
-    function removeTag(siteId, tagIndex) {
-        const site = sitesData.find(s => s.id === siteId);
-        if (!site) return;
-        site.tags.splice(tagIndex, 1);
-        updateExport();
-        refreshTags(siteId);
-    }
-
-    function moveTag(siteId, tagIndex, direction) {
-        const site = sitesData.find(s => s.id === siteId);
-        if (!site) return;
-        const newIndex = tagIndex + direction;
-        if (newIndex < 0 || newIndex >= site.tags.length) return;
-        [site.tags[tagIndex], site.tags[newIndex]] = [site.tags[newIndex], site.tags[tagIndex]];
-        updateExport();
-        refreshTags(siteId);
-    }
-
-    // ═══════════════════════════════════════════
-    // Tag Drag & Drop Reordering
-    // ═══════════════════════════════════════════
-    let tagDragInfo = null;
-
-    function onTagDragStart(e, siteId, tagIndex) {
-        tagDragInfo = { siteId, fromIndex: tagIndex };
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('text/plain', tagIndex);
-        e.target.style.opacity = '0.4';
-        e.stopPropagation();
-    }
-
-    function onTagDragOver(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.dataTransfer.dropEffect = 'move';
-    }
-
-    function onTagDrop(e, siteId, toIndex) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (!tagDragInfo || tagDragInfo.siteId !== siteId) { tagDragInfo = null; return; }
-        const fromIndex = tagDragInfo.fromIndex;
-        if (fromIndex === toIndex) { tagDragInfo = null; return; }
-
-        const site = sitesData.find(s => s.id === siteId);
-        if (!site) { tagDragInfo = null; return; }
-
-        const [moved] = site.tags.splice(fromIndex, 1);
-        site.tags.splice(toIndex, 0, moved);
-        updateExport();
-        refreshTags(siteId);
-        tagDragInfo = null;
-    }
-
-    function onTagDragEnd(e) {
-        e.target.style.opacity = '';
-        tagDragInfo = null;
-    }
-
-    function refreshTags(siteId) {
-        const site = sitesData.find(s => s.id === siteId);
-        const container = document.getElementById('tags-' + siteId);
-        if (!container || !site) return;
-
-        const inputHtml = `<input class="tag-input" type="text" placeholder="تگ جدید + Enter یا ," onkeydown="handleTagInput(event, ${siteId})" />`;
-        const tagsHtml = site.tags.map((tag, i) => `
-            <span class="tag-item" draggable="true" ondragstart="onTagDragStart(event, ${siteId}, ${i})" ondragover="onTagDragOver(event)" ondrop="onTagDrop(event, ${siteId}, ${i})" ondragend="onTagDragEnd(event)">
-                ${i > 0 ? '<button class="tag-move" onclick="event.stopPropagation(); event.preventDefault(); moveTag(' + siteId + ', ' + i + ', -1)" title="جابجایی به راست">▶</button>' : ''}
-                ${escapeHtml(tag)}
-                ${i < site.tags.length - 1 ? '<button class="tag-move" onclick="event.stopPropagation(); event.preventDefault(); moveTag(' + siteId + ', ' + i + ', 1)" title="جابجایی به چپ">◀</button>' : ''}
-                <span class="tag-sep"></span>
-                <button class="tag-remove" onclick="event.stopPropagation(); removeTag(${siteId}, ${i})" title="حذف تگ">&times;</button>
-            </span>
-        `).join('');
-
-        container.innerHTML = tagsHtml + inputHtml;
-        container.querySelector('.tag-input').focus();
-    }
-
-    // ═══════════════════════════════════════════
-    // Social Management
-    // ═══════════════════════════════════════════
-    function addSocial(siteId) {
-        const site = sitesData.find(s => s.id === siteId);
-        if (!site) return;
-
-        const keys = Object.keys(site.social);
-        site.social['new_' + (keys.length + 1)] = '';
-
-        updateExport();
-        refreshSocial(siteId);
-        showToast('فیلد شبکه اجتماعی اضافه شد');
-    }
-
-    function updateSocial(siteId, entryIndex, type, value) {
-        const site = sitesData.find(s => s.id === siteId);
-        if (!site) return;
-
-        const keys = Object.keys(site.social);
-        const oldKey = keys[entryIndex];
-        const oldValue = site.social[oldKey];
-
-        if (type === 'platform') {
-            delete site.social[oldKey];
-            site.social[value.trim()] = oldValue;
-        } else {
-            site.social[oldKey] = value.trim();
-        }
-
-        updateExport();
-    }
-
-    function removeSocial(siteId, entryIndex) {
-        const site = sitesData.find(s => s.id === siteId);
-        if (!site) return;
-
-        const keys = Object.keys(site.social);
-        delete site.social[keys[entryIndex]];
-        updateExport();
-        refreshSocial(siteId);
-    }
-
-    function refreshSocial(siteId) {
-        const site = sitesData.find(s => s.id === siteId);
-        const container = document.getElementById('social-' + siteId);
-        if (!container || !site) return;
-
-        const entriesHtml = Object.entries(site.social).map(([platform, url], i) => `
-            <div class="social-entry">
-                <input class="field-input platform-input" type="text" value="${escapeHtml(platform)}" placeholder="پلتفرم (telegram)" onchange="updateSocial(${siteId}, ${i}, 'platform', this.value)" />
-                <input class="field-input url-input" type="text" value="${escapeHtml(url)}" placeholder="https://..." dir="ltr" onchange="updateSocial(${siteId}, ${i}, 'url', this.value)" />
-                <button class="btn btn-sm btn-icon btn-danger" onclick="removeSocial(${siteId}, ${i})" title="حذف">✕</button>
-            </div>
-        `).join('');
-
-        container.innerHTML = entriesHtml + `<button class="btn btn-sm" onclick="addSocial(${siteId})" style="margin-top:8px;">➕ افزودن شبکه اجتماعی</button>`;
-    }
-
-    // ═══════════════════════════════════════════
-    // Custom Links Management
-    // ═══════════════════════════════════════════
-    function renderCustomLinksEntries(siteId, customLinks) {
-        if (!customLinks || customLinks.length === 0) return '';
-        return customLinks.map((cl, i) => `
-            <div class="social-entry">
-                <input class="field-input" type="text" value="${escapeHtml(cl.title || '')}" placeholder="عنوان (مثل: وبلاگ)" onchange="updateCustomLink(${siteId}, ${i}, 'title', this.value)" style="flex:0 0 140px;" />
-                <input class="field-input" type="text" value="${escapeHtml(cl.url || '')}" placeholder="https://..." dir="ltr" onchange="updateCustomLink(${siteId}, ${i}, 'url', this.value)" style="flex:1;" />
-                <select class="field-input" style="flex:0 0 130px;" onchange="updateCustomLink(${siteId}, ${i}, 'icon', this.value)">
-                    <option value="link" ${cl.icon === 'link' ? 'selected' : ''}>🔗 لینک</option>
-                    <option value="blog" ${cl.icon === 'blog' ? 'selected' : ''}>📝 وبلاگ</option>
-                    <option value="website" ${cl.icon === 'website' ? 'selected' : ''}>🌐 وبسایت</option>
-                    <option value="download" ${cl.icon === 'download' ? 'selected' : ''}>⬇️ دانلود</option>
-                    <option value="archive" ${cl.icon === 'archive' ? 'selected' : ''}>📦 آرشیو</option>
-                    <option value="support" ${cl.icon === 'support' ? 'selected' : ''}>🎧 پشتیبانی</option>
-                    <option value="contact" ${cl.icon === 'contact' ? 'selected' : ''}>✉️ تماس</option>
-                    <option value="app" ${cl.icon === 'app' ? 'selected' : ''}>📱 اپلیکیشن</option>
-                </select>
-                <button class="btn btn-sm btn-icon btn-danger" onclick="removeCustomLink(${siteId}, ${i})" title="حذف">✕</button>
-            </div>
-        `).join('');
-    }
-
-    function addCustomLink(siteId) {
-        const site = sitesData.find(s => s.id === siteId);
-        if (!site) return;
-        if (!Array.isArray(site.customLinks)) site.customLinks = [];
-        site.customLinks.push({ title: '', url: '', icon: 'link' });
-        updateExport();
-        refreshCustomLinks(siteId);
-        showToast('لینک کاستوم اضافه شد');
-    }
-
-    function updateCustomLink(siteId, index, field, value) {
-        const site = sitesData.find(s => s.id === siteId);
-        if (!site || !site.customLinks || !site.customLinks[index]) return;
-        site.customLinks[index][field] = value.trim();
-        updateExport();
-    }
-
-    function removeCustomLink(siteId, index) {
-        const site = sitesData.find(s => s.id === siteId);
-        if (!site || !site.customLinks) return;
-        site.customLinks.splice(index, 1);
-        updateExport();
-        refreshCustomLinks(siteId);
-    }
-
-    function refreshCustomLinks(siteId) {
-        const site = sitesData.find(s => s.id === siteId);
-        const container = document.getElementById('customlinks-' + siteId);
-        if (!container || !site) return;
-        container.innerHTML = renderCustomLinksEntries(siteId, site.customLinks || []) +
-            `<button class="btn btn-sm" onclick="addCustomLink(${siteId})" style="margin-top:8px;">➕ افزودن لینک کاستوم</button>`;
-    }
-
-    // ═══════════════════════════════════════════
-    // Add / Delete / Duplicate / Move
-    // ═══════════════════════════════════════════
-    function addNewSite() {
-        const newSite = {
-            id: sitesData.length + 1,
-            name: '',
-            mainLink: '',
-            unfilteredLink: '',
-            description: '',
-            tags: [],
-            recommended: false,
-            social: {},
-            donate: null,
-            customLinks: []
-        };
-        sitesData.push(newSite);
-        nextId = sitesData.length + 1;
-        renderList();
-        updateStats();
-
-        setTimeout(() => {
-            const card = document.getElementById('card-' + newSite.id);
-            if (card) {
-                card.classList.add('open');
-                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                const nameInput = card.querySelector('.site-card-body input.rtl');
-                if (nameInput) nameInput.focus();
-            }
-        }, 50);
-
-        showToast('سایت جدید اضافه شد');
-    }
-
-    function confirmDelete(id) {
-        const site = sitesData.find(s => s.id === id);
-        if (!site) return;
-        document.getElementById('deleteModalText').innerHTML =
-            `آیا از حذف سایت <strong>${escapeHtml(site.name)}</strong> اطمینان دارید؟<br><small style="color:var(--text-muted)">این عمل قابل بازگشت نیست.</small>`;
-        document.getElementById('deleteModal').classList.add('active');
-        document.getElementById('confirmDeleteBtn').onclick = function() {
-            deleteSite(id);
-            closeDeleteModal();
-        };
-    }
-
-    function closeDeleteModal() {
-        document.getElementById('deleteModal').classList.remove('active');
-    }
-
-    function renumberIds() {
-        sitesData.forEach((site, index) => {
-            site.id = index + 1;
-        });
-        nextId = sitesData.length + 1;
-    }
-
-    function deleteSite(id) {
-        const site = sitesData.find(s => s.id === id);
-        const name = site ? site.name : '';
-        sitesData = sitesData.filter(s => s.id !== id);
-        renumberIds();
-        renderList();
-        updateStats();
-        showToast(`سایت «${name}» حذف شد`);
-    }
-
-    function duplicateSite(id) {
-        const site = sitesData.find(s => s.id === id);
-        if (!site) return;
-        const newSite = JSON.parse(JSON.stringify(site));
-        newSite.name = site.name + ' (کپی)';
-        const index = sitesData.findIndex(s => s.id === id);
-        sitesData.splice(index + 1, 0, newSite);
-        renumberIds();
-        renderList();
-        updateStats();
-        showToast(`سایت «${site.name}» تکرار شد`);
-    }
-
-    function moveSite(id, direction) {
-        const index = sitesData.findIndex(s => s.id === id);
-        const newIndex = index + direction;
-        if (newIndex < 0 || newIndex >= sitesData.length) return;
-
-        [sitesData[index], sitesData[newIndex]] = [sitesData[newIndex], sitesData[index]];
-        renumberIds();
-        renderList();
-        updateExport();
-
-        setTimeout(() => {
-            const card = document.getElementById('card-' + sitesData[newIndex].id);
-            if (card) card.classList.add('open');
-        }, 10);
-    }
-
-    // ═══════════════════════════════════════════
-    // Export Functions
-    // ═══════════════════════════════════════════
-    function copyJSON() {
-        const json = generateJSON();
-        if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(json).then(() => {
-                showToast('📋 JSON در کلیپ‌بورد کپی شد');
-            }).catch(() => {
-                showToast('خطا در کپی JSON', 'error');
-            });
-        } else {
-            const textarea = document.getElementById('jsonOutput');
-            textarea.select();
-            textarea.setSelectionRange(0, 99999);
-            try {
-                document.execCommand('copy');
-                showToast('📋 JSON کپی شد');
-            } catch(e) {
-                showToast('خطا در کپی JSON', 'error');
-            }
-        }
-    }
-
-    function downloadJSON() {
-        const json = generateJSON();
-        const blob = new Blob([json], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'sites.json';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        showToast('⬇️ فایل sites.json دانلود شد');
-    }
-
-    function downloadMetaJSON() {
-        const json = JSON.stringify(metaData, null, 2);
-        const blob = new Blob([json], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'meta.json';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        showToast('⬇️ فایل meta.json دانلود شد');
-    }
-
-    function copyMetaJSON() {
-        const json = JSON.stringify(metaData, null, 2);
-        if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(json).then(() => {
-                showToast('📋 meta.json کپی شد');
-            }).catch(() => {
-                showToast('📋 meta.json کپی شد');
-            });
-        } else {
-            showToast('📋 meta.json کپی شد');
-        }
-    }
-
-    // ═══════════════════════════════════════════
-    // Meta Section Render
-    // ═══════════════════════════════════════════
-    function renderMetaSection() {
-        const container = document.getElementById('metaSection');
-        const input = document.getElementById('metaDateInput');
-        if (input) input.value = metaData.lastUpdated || '';
-        const todayEl = document.getElementById('todayPreview');
-        if (todayEl) todayEl.textContent = getTodayJalali();
-        container.style.display = '';
-    }
-
-    function onMetaDateChange(value) {
-        metaData.lastUpdated = value.trim();
-    }
-
-    function autoSetTodayDate() {
-        const jalali = getTodayJalali();
-        metaData.lastUpdated = jalali;
-        const input = document.getElementById('metaDateInput');
-        if (input) input.value = jalali;
-        showToast('📅 تاریخ به امروز تنظیم شد: ' + jalali);
-    }
-
-    // ═══════════════════════════════════════════
-    // Keyboard shortcuts
-    // ═══════════════════════════════════════════
-    document.addEventListener('keydown', function(e) {
-        if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-            e.preventDefault();
-            if (sitesData.length > 0) downloadJSON();
-        }
-        if (e.key === 'Escape') {
-            closeDeleteModal();
-        }
-    });
-
-    document.getElementById('deleteModal').addEventListener('click', function(e) {
-        if (e.target === this) closeDeleteModal();
-    });
-
-    // ═══════════════════════════════════════════
-    // Project Sync via File System Access API
-    // ═══════════════════════════════════════════
-    let rootDirHandle = null;
-
-    async function connectToProject() {
-        try {
-            rootDirHandle = await window.showDirectoryPicker();
-
-            // تلاش برای خواندن داده‌های موجود از پروژه
-            await loadFromConnectedFolder();
-
-            document.getElementById('projectStatus').textContent = '✅ متصل شد: ' + rootDirHandle.name;
-            document.getElementById('saveProjectBtn').style.display = '';
-            showToast('اتصال با موفقیت انجام شد');
-        } catch (err) {
-            if (err.name === 'AbortError') return;
-            showToast('خطا: ' + err.message, 'error');
-        }
-    }
-
-    async function loadFromConnectedFolder() {
-        if (!rootDirHandle) return;
-
-        let sitesLoaded = false;
-        let metaLoaded = false;
-
-        // خواندن sites.json
-        try {
-            const dataDirHandle = await rootDirHandle.getDirectoryHandle('data');
-            const sitesFileHandle = await dataDirHandle.getFileHandle('sites.json');
-            const file = await sitesFileHandle.getFile();
-            const text = await file.text();
-            const data = JSON.parse(text);
-            if (Array.isArray(data)) {
-                sitesData = data.map(s => ({
-                    id: s.id || getNextId(),
-                    name: s.name || '',
-                    mainLink: s.mainLink || '',
-                    unfilteredLink: s.unfilteredLink || s.mainLink || '',
-                    description: s.description || '',
-                    tags: Array.isArray(s.tags) ? [...s.tags] : [],
-                    recommended: !!s.recommended,
-                    social: (s.social && typeof s.social === 'object') ? { ...s.social } : {},
-                    donate: s.donate || null,
-                    customLinks: Array.isArray(s.customLinks) ? s.customLinks.map(cl => ({ ...cl })) : []
-                }));
-                sitesLoaded = true;
-                nextId = getNextId();
-                renderList();
-                updateStats();
-            }
-        } catch (e) {
-            console.warn('نتوانست sites.json را بخواند:', e);
-        }
-
-        // خواندن meta.json
-        try {
-            const dataDirHandle = await rootDirHandle.getDirectoryHandle('data');
-            const metaFileHandle = await dataDirHandle.getFileHandle('meta.json');
-            const file = await metaFileHandle.getFile();
-            const text = await file.text();
-            const data = JSON.parse(text);
-            metaData.lastUpdated = data.lastUpdated || '';
-            metaLoaded = true;
-            renderMetaSection();
-        } catch (e) {
-            console.warn('نتوانست meta.json را بخواند:', e);
-        }
-
-        if (sitesLoaded || metaLoaded) {
-            let msg = 'داده‌های پروژه بارگذاری شدند: ';
-            if (sitesLoaded) msg += `${sitesData.length} سایت`;
-            if (metaLoaded) msg += (sitesLoaded ? ' + ' : '') + 'تاریخ به‌روزرسانی';
-            showToast(msg);
-        } else {
-            showToast('هیچ داده‌ای در پوشه data یافت نشد', 'error');
-        }
-    }
-
-    async function saveToProject() {
-        if (!rootDirHandle) {
-            showToast('❗ ابتدا به پوشه پروژه متصل شوید', 'error');
-            return;
-        }
-
-        try {
-            const dataDirHandle = await rootDirHandle.getDirectoryHandle('data', { create: true });
-
-            const sitesFileHandle = await dataDirHandle.getFileHandle('sites.json', { create: true });
-            const sitesWritable = await sitesFileHandle.createWritable();
-            await sitesWritable.write(generateJSON());
-            await sitesWritable.close();
-
-            const metaFileHandle = await dataDirHandle.getFileHandle('meta.json', { create: true });
-            const metaWritable = await metaFileHandle.createWritable();
-            await metaWritable.write(JSON.stringify(metaData, null, 2));
-            await metaWritable.close();
-
-            // به‌روزرسانی offline.html
-            let offlineHandle;
-            try {
-                offlineHandle = await rootDirHandle.getFileHandle('offline.html');
-            } catch {
-                showToast('❌ فایل offline.html در پوشه پروژه پیدا نشد', 'error');
-                return;
-            }
-
-            const file = await offlineHandle.getFile();
-            let content = await file.text();
-
-            const startSites = '/* BEGIN_SITES_DATA */';
-            const endSites = '/* END_SITES_DATA */';
-            const sitesRegex = new RegExp(
-                escapeRegex(startSites) + '[\\s\\S]*?' + escapeRegex(endSites),
-                'g'
-            );
-            if (!sitesRegex.test(content)) {
-                showToast('❌ نشانگرهای SITES_DATA در offline.html یافت نشد', 'error');
-                return;
-            }
-            content = content.replace(sitesRegex, startSites + generateJSON() + endSites);
-
-            const startMeta = '/* BEGIN_META_DATA */';
-            const endMeta = '/* END_META_DATA */';
-            const metaRegex = new RegExp(
-                escapeRegex(startMeta) + '[\\s\\S]*?' + escapeRegex(endMeta),
-                'g'
-            );
-            if (!metaRegex.test(content)) {
-                showToast('❌ نشانگرهای META_DATA در offline.html یافت نشد', 'error');
-                return;
-            }
-            content = content.replace(metaRegex, startMeta + JSON.stringify(metaData, null, 2) + endMeta);
-
-            const offlineWritable = await offlineHandle.createWritable();
-            await offlineWritable.write(content);
-            await offlineWritable.close();
-
-            showToast('✅ همه فایل‌ها با موفقیت ذخیره شدند');
-        } catch (err) {
-            showToast('خطا در ذخیره‌سازی: ' + err.message, 'error');
-            console.error(err);
-        }
-    }
-
-    function escapeRegex(string) {
-        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }
-
-    if (typeof window.showDirectoryPicker !== 'function') {
-        showToast('⚠️ مرورگر شما از نوشتن مستقیم فایل پشتیبانی نمی‌کند. لطفاً از Chrome یا Edge استفاده کنید.', 'error');
-    }
-
-    // ═══════════════════════════════════════════
-    // Init
-    // ═══════════════════════════════════════════
+    }).join('');
     updateStats();
-    renderMetaSection();
-    </script>
+}
+
+function renderSiteFields(site) {
+    const tagsHtml = site.tags.map((tagId, i) => {
+        const tag = tagsData.find(t => t.id === tagId);
+        const name = tag ? tag.name : '?';
+        return `
+            <span class="tag-item" draggable="true" ondragstart="onTagDragStart(event, ${site.id}, ${i})" ondragover="onTagDragOver(event)" ondrop="onTagDrop(event, ${site.id}, ${i})" ondragend="onTagDragEnd(event)">
+                ${i > 0 ? `<button class="tag-move" onclick="event.stopPropagation(); moveSiteTag(${site.id}, ${i}, -1)">▶</button>` : ''}
+                ${escapeHtml(name)}
+                ${i < site.tags.length - 1 ? `<button class="tag-move" onclick="event.stopPropagation(); moveSiteTag(${site.id}, ${i}, 1)">◀</button>` : ''}
+                <span class="tag-sep"></span>
+                <button class="tag-remove" onclick="event.stopPropagation(); removeSiteTag(${site.id}, ${i})">&times;</button>
+            </span>
+        `;
+    }).join('');
+
+    // Social entries with dropdown from socialsData
+    const socialEntries = Object.entries(site.social || {}).map(([platform, url], i) => {
+        const platformOptions = socialsData.map(s => `<option value="${escapeHtml(s.key)}" ${platform === s.key ? 'selected' : ''}>${escapeHtml(s.label)}</option>`).join('');
+        return `
+            <div class="social-entry">
+                <select class="field-input platform-input" onchange="updateSocialKey(${site.id}, ${i}, this.value)">
+                    <option value="">-- انتخاب پلتفرم --</option>
+                    ${platformOptions}
+                </select>
+                <input class="field-input" value="${escapeHtml(url)}" placeholder="https://..." dir="ltr" onchange="updateSocial(${site.id}, ${i}, 'url', this.value)">
+                <button class="btn btn-sm btn-danger" onclick="removeSocial(${site.id}, ${i})">✕</button>
+            </div>
+        `;
+    }).join('');
+
+    return `
+        <div class="row-fields">
+            <div class="field-group">
+                <label class="field-label">شناسه</label>
+                <input class="field-input" type="number" value="${site.id}" readonly style="background:var(--bg);">
+            </div>
+            <div class="field-group">
+                <label class="field-label">نام سایت</label>
+                <input class="field-input rtl" value="${escapeHtml(site.name)}" onchange="updateSite(${site.id}, 'name', this.value)">
+            </div>
+        </div>
+        <div class="row-fields">
+            <div class="field-group">
+                <label class="field-label">آدرس اصلی</label>
+                <input class="field-input" value="${escapeHtml(site.mainLink)}" dir="ltr" onchange="updateSite(${site.id}, 'mainLink', this.value)">
+            </div>
+            <div class="field-group">
+                <label class="field-label">آدرس فعلی</label>
+                <input class="field-input" value="${escapeHtml(site.unfilteredLink)}" dir="ltr" onchange="updateSite(${site.id}, 'unfilteredLink', this.value)">
+            </div>
+        </div>
+        <div class="field-group">
+            <label class="field-label">توضیحات</label>
+            <textarea class="field-input rtl" onchange="updateSite(${site.id}, 'description', this.value)">${escapeHtml(site.description)}</textarea>
+        </div>
+        <div class="field-group">
+            <div class="toggle-wrapper">
+                <label class="toggle"><input type="checkbox" ${site.recommended ? 'checked' : ''} onchange="updateSite(${site.id}, 'recommended', this.checked)"><span class="slider"></span></label>
+                <span class="toggle-label">پیشنهادی ⭐</span>
+            </div>
+        </div>
+        <div class="section-divider">🏷️ تگ‌ها</div>
+        <div class="tags-container-editor" id="tags-${site.id}">
+            ${tagsHtml}
+            <input class="tag-input" placeholder="تگ جدید + Enter" onkeydown="handleSiteTagInput(event, ${site.id})">
+        </div>
+        <div class="section-divider">🌐 شبکه‌های اجتماعی</div>
+        <div id="social-${site.id}">
+            ${socialEntries}
+            <button class="btn btn-sm" onclick="addSocial(${site.id})">➕ افزودن</button>
+        </div>
+        <div class="section-divider">❤️ حمایت مالی</div>
+        <input class="field-input" value="${escapeHtml(site.donate || '')}" placeholder="https://..." dir="ltr" onchange="updateSite(${site.id}, 'donate', this.value || null)">
+        <div class="section-divider">🔗 لینک‌های کاستوم</div>
+        <div id="customlinks-${site.id}">
+            ${(site.customLinks || []).map((cl, i) => `
+                <div class="social-entry">
+                    <input class="field-input" value="${escapeHtml(cl.title)}" placeholder="عنوان" onchange="updateCustomLink(${site.id}, ${i}, 'title', this.value)" style="flex:0 0 140px;">
+                    <input class="field-input" value="${escapeHtml(cl.url)}" placeholder="https://..." dir="ltr" onchange="updateCustomLink(${site.id}, ${i}, 'url', this.value)" style="flex:1;">
+                    <select class="field-input" style="flex:0 0 130px;" onchange="updateCustomLink(${site.id}, ${i}, 'icon', this.value)">
+                        ${['link','blog','website','download','archive','support','contact','app','heart'].map(icon => `<option value="${icon}" ${cl.icon===icon?'selected':''}>${icon}</option>`).join('')}
+                    </select>
+                    <button class="btn btn-sm btn-danger" onclick="removeCustomLink(${site.id}, ${i})">✕</button>
+                </div>
+            `).join('')}
+            <button class="btn btn-sm" onclick="addCustomLink(${site.id})">➕ افزودن لینک</button>
+        </div>
+        <div style="margin-top:16px; display:flex; gap:8px;">
+            <button class="btn btn-sm" onclick="moveSite(${site.id}, -1)">⬆️ بالا</button>
+            <button class="btn btn-sm" onclick="moveSite(${site.id}, 1)">⬇️ پایین</button>
+        </div>
+    `;
+}
+
+// ═══════════════════════════════════════════
+// Site Tag Manipulation
+// ═══════════════════════════════════════════
+function handleSiteTagInput(e, siteId) {
+    if (e.key === 'Enter' || e.key === ',' || e.key === '،') {
+        e.preventDefault();
+        const input = e.target;
+        const value = input.value.replace(/[,،]/g, '').trim();
+        if (!value) { input.value = ''; return; }
+        const site = sitesData.find(s => s.id === siteId);
+        if (!site) return;
+        const tagId = findOrCreateTag(value);
+        if (!site.tags.includes(tagId)) {
+            site.tags.push(tagId);
+            refreshSiteTags(siteId);
+        } else {
+            showToast('این تگ قبلاً اضافه شده', 'error');
+        }
+        input.value = '';
+    }
+}
+
+function removeSiteTag(siteId, tagIndex) {
+    const site = sitesData.find(s => s.id === siteId);
+    if (!site) return;
+    site.tags.splice(tagIndex, 1);
+    refreshSiteTags(siteId);
+}
+
+function moveSiteTag(siteId, tagIndex, direction) {
+    const site = sitesData.find(s => s.id === siteId);
+    if (!site) return;
+    const newIndex = tagIndex + direction;
+    if (newIndex < 0 || newIndex >= site.tags.length) return;
+    [site.tags[tagIndex], site.tags[newIndex]] = [site.tags[newIndex], site.tags[tagIndex]];
+    refreshSiteTags(siteId);
+}
+
+function refreshSiteTags(siteId) {
+    const site = sitesData.find(s => s.id === siteId);
+    const container = document.getElementById('tags-' + siteId);
+    if (!container || !site) return;
+    const tagsHtml = site.tags.map((tagId, i) => {
+        const tag = tagsData.find(t => t.id === tagId);
+        const name = tag ? tag.name : '?';
+        return `<span class="tag-item" draggable="true" ondragstart="onTagDragStart(event, ${siteId}, ${i})" ondragover="onTagDragOver(event)" ondrop="onTagDrop(event, ${siteId}, ${i})" ondragend="onTagDragEnd(event)">
+            ${i > 0 ? `<button class="tag-move" onclick="event.stopPropagation(); moveSiteTag(${siteId}, ${i}, -1)">▶</button>` : ''}
+            ${escapeHtml(name)}
+            ${i < site.tags.length - 1 ? `<button class="tag-move" onclick="event.stopPropagation(); moveSiteTag(${siteId}, ${i}, 1)">◀</button>` : ''}
+            <span class="tag-sep"></span>
+            <button class="tag-remove" onclick="event.stopPropagation(); removeSiteTag(${siteId}, ${i})">&times;</button>
+        </span>`;
+    }).join('');
+    container.innerHTML = tagsHtml + '<input class="tag-input" placeholder="تگ جدید + Enter" onkeydown="handleSiteTagInput(event, ' + siteId + ')">';
+}
+
+let tagDragInfo = null;
+function onTagDragStart(e, siteId, idx) { tagDragInfo = { siteId, fromIndex: idx }; e.dataTransfer.effectAllowed = 'move'; e.target.style.opacity = '0.4'; e.stopPropagation(); }
+function onTagDragOver(e) { e.preventDefault(); e.stopPropagation(); }
+function onTagDrop(e, siteId, toIndex) {
+    e.preventDefault(); e.stopPropagation();
+    if (!tagDragInfo || tagDragInfo.siteId !== siteId) return;
+    const from = tagDragInfo.fromIndex;
+    if (from === toIndex) return;
+    const site = sitesData.find(s => s.id === siteId);
+    if (!site) return;
+    const moved = site.tags.splice(from, 1)[0];
+    site.tags.splice(toIndex, 0, moved);
+    refreshSiteTags(siteId);
+    tagDragInfo = null;
+}
+function onTagDragEnd(e) { e.target.style.opacity = ''; tagDragInfo = null; }
+
+// ═══════════════════════════════════════════
+// Generic CRUD helpers
+// ═══════════════════════════════════════════
+function updateSite(id, field, value) {
+    const site = sitesData.find(s => s.id === id);
+    if (site) site[field] = value;
+}
+function addSocial(siteId) {
+    const site = sitesData.find(s => s.id === siteId);
+    if (!site) return;
+    if (!site.social) site.social = {};
+    // Use first available social key as default, or empty string
+    const defaultKey = socialsData.length > 0 ? socialsData[0].key : '';
+    site.social[defaultKey || 'new_' + (Object.keys(site.social).length + 1)] = '';
+    refreshSocial(siteId);
+}
+function updateSocial(siteId, idx, type, value) {
+    const site = sitesData.find(s => s.id === siteId);
+    if (!site) return;
+    const keys = Object.keys(site.social);
+    const oldKey = keys[idx];
+    if (type === 'url') {
+        site.social[oldKey] = value.trim();
+    }
+    // platform change handled by updateSocialKey
+}
+function updateSocialKey(siteId, idx, newKey) {
+    const site = sitesData.find(s => s.id === siteId);
+    if (!site || !site.social) return;
+    const oldKey = Object.keys(site.social)[idx];
+    if (oldKey === newKey) return;
+    const oldValue = site.social[oldKey];
+    delete site.social[oldKey];
+    site.social[newKey] = oldValue;
+    refreshSocial(siteId);
+}
+function removeSocial(siteId, idx) {
+    const site = sitesData.find(s => s.id === siteId);
+    if (!site) return;
+    delete site.social[Object.keys(site.social)[idx]];
+    refreshSocial(siteId);
+}
+function refreshSocial(siteId) {
+    const site = sitesData.find(s => s.id === siteId);
+    const container = document.getElementById('social-' + siteId);
+    if (!container || !site) return;
+    const entries = Object.entries(site.social || {});
+    const socialEntries = entries.map(([platform, url], i) => {
+        const platformOptions = socialsData.map(s => `<option value="${escapeHtml(s.key)}" ${platform === s.key ? 'selected' : ''}>${escapeHtml(s.label)}</option>`).join('');
+        return `<div class="social-entry">
+            <select class="field-input platform-input" onchange="updateSocialKey(${siteId}, ${i}, this.value)">
+                <option value="">-- انتخاب پلتفرم --</option>
+                ${platformOptions}
+            </select>
+            <input class="field-input" value="${escapeHtml(url)}" placeholder="https://..." dir="ltr" onchange="updateSocial(${siteId}, ${i}, 'url', this.value)">
+            <button class="btn btn-sm btn-danger" onclick="removeSocial(${siteId}, ${i})">✕</button>
+        </div>`;
+    }).join('');
+    container.innerHTML = socialEntries + `<button class="btn btn-sm" onclick="addSocial(${siteId})">➕ افزودن</button>`;
+}
+function addCustomLink(siteId) {
+    const site = sitesData.find(s => s.id === siteId);
+    if (!site) return;
+    if (!site.customLinks) site.customLinks = [];
+    site.customLinks.push({ title: '', url: '', icon: 'link' });
+    refreshCustomLinks(siteId);
+}
+function updateCustomLink(siteId, idx, field, value) {
+    const site = sitesData.find(s => s.id === siteId);
+    if (site && site.customLinks && site.customLinks[idx]) site.customLinks[idx][field] = value;
+}
+function removeCustomLink(siteId, idx) {
+    const site = sitesData.find(s => s.id === siteId);
+    if (site && site.customLinks) site.customLinks.splice(idx, 1);
+    refreshCustomLinks(siteId);
+}
+function refreshCustomLinks(siteId) {
+    const site = sitesData.find(s => s.id === siteId);
+    const container = document.getElementById('customlinks-' + siteId);
+    if (!container || !site) return;
+    container.innerHTML = (site.customLinks || []).map((cl, i) => `
+        <div class="social-entry">
+            <input class="field-input" value="${escapeHtml(cl.title)}" placeholder="عنوان" onchange="updateCustomLink(${siteId}, ${i}, 'title', this.value)" style="flex:0 0 140px;">
+            <input class="field-input" value="${escapeHtml(cl.url)}" placeholder="https://..." dir="ltr" onchange="updateCustomLink(${siteId}, ${i}, 'url', this.value)" style="flex:1;">
+            <select class="field-input" style="flex:0 0 130px;" onchange="updateCustomLink(${siteId}, ${i}, 'icon', this.value)">
+                ${['link','blog','website','download','archive','support','contact','app','heart'].map(icon => `<option value="${icon}" ${cl.icon===icon?'selected':''}>${icon}</option>`).join('')}
+            </select>
+            <button class="btn btn-sm btn-danger" onclick="removeCustomLink(${siteId}, ${i})">✕</button>
+        </div>
+    `).join('') + `<button class="btn btn-sm" onclick="addCustomLink(${siteId})">➕ افزودن لینک</button>`;
+}
+
+function addNewSite() {
+    const newSite = {
+        id: getNextId(sitesData),
+        name: '', mainLink: '', unfilteredLink: '', description: '',
+        tags: [], recommended: false, social: {}, donate: null, customLinks: []
+    };
+    sitesData.push(newSite);
+    renderSitesList();
+    setTimeout(() => {
+        const card = document.querySelector(`.site-card[data-id="${newSite.id}"]`);
+        if (card) { card.classList.add('open'); card.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    }, 50);
+    showToast('سایت جدید اضافه شد');
+}
+
+function confirmDeleteSite(id) {
+    const site = sitesData.find(s => s.id === id);
+    if (!site) return;
+    document.getElementById('deleteModalText').innerHTML = `آیا از حذف سایت <strong>${escapeHtml(site.name)}</strong> اطمینان دارید؟`;
+    document.getElementById('deleteModal').classList.add('active');
+    document.getElementById('confirmDeleteBtn').onclick = () => { deleteSite(id); closeDeleteModal(); };
+}
+function closeDeleteModal() { document.getElementById('deleteModal').classList.remove('active'); }
+function deleteSite(id) {
+    const name = sitesData.find(s => s.id === id)?.name;
+    sitesData = sitesData.filter(s => s.id !== id);
+    renumberIds();
+    renderSitesList();
+    showToast(`سایت «${name}» حذف شد`);
+}
+function duplicateSite(id) {
+    const site = sitesData.find(s => s.id === id);
+    if (!site) return;
+    const newSite = JSON.parse(JSON.stringify(site));
+    newSite.id = getNextId(sitesData);
+    newSite.name = site.name + ' (کپی)';
+    const idx = sitesData.findIndex(s => s.id === id);
+    sitesData.splice(idx + 1, 0, newSite);
+    renumberIds();
+    renderSitesList();
+    showToast(`سایت «${site.name}» تکرار شد`);
+}
+function moveSite(id, direction) {
+    const idx = sitesData.findIndex(s => s.id === id);
+    const newIdx = idx + direction;
+    if (newIdx < 0 || newIdx >= sitesData.length) return;
+    [sitesData[idx], sitesData[newIdx]] = [sitesData[newIdx], sitesData[idx]];
+    renumberIds();
+    renderSitesList();
+}
+function renumberIds() {
+    sitesData.forEach((s, i) => s.id = i + 1);
+}
+function toggleSiteCard(id) {
+    document.querySelector(`.site-card[data-id="${id}"]`)?.classList.toggle('open');
+}
+
+// Drag & drop for sites
+let draggedId = null;
+function onDragStart(e, id) { draggedId = id; e.dataTransfer.effectAllowed = 'move'; setTimeout(() => { document.querySelector(`.site-card[data-id="${id}"]`)?.classList.add('dragging'); }, 0); }
+function onDragOver(e) {
+    if (draggedId === null) return;
+    e.preventDefault(); e.dataTransfer.dropEffect = 'move';
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    card.classList.remove('drag-over-top', 'drag-over-bottom');
+    card.classList.add(e.clientY < rect.top + rect.height/2 ? 'drag-over-top' : 'drag-over-bottom');
+}
+function onDrop(e, targetId) {
+    e.preventDefault();
+    if (draggedId === null || draggedId === targetId) return;
+    const fromIdx = sitesData.findIndex(s => s.id === draggedId);
+    const toIdx = sitesData.findIndex(s => s.id === targetId);
+    if (fromIdx === -1 || toIdx === -1) return;
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    let insertIdx = e.clientY < rect.top + rect.height/2 ? toIdx : toIdx + 1;
+    if (fromIdx < toIdx) insertIdx--;
+    const [moved] = sitesData.splice(fromIdx, 1);
+    sitesData.splice(insertIdx, 0, moved);
+    renumberIds();
+    renderSitesList();
+    updateExport();
+    showToast('آیتم جابجا شد');
+}
+function onDragEnd(e) {
+    draggedId = null;
+    document.querySelectorAll('.site-card').forEach(c => c.classList.remove('dragging', 'drag-over-top', 'drag-over-bottom'));
+}
+
+// Export helpers
+function generateSitesJSON() { return JSON.stringify(sitesData, null, 2); }
+function updateExport() { document.getElementById('jsonOutput').value = generateSitesJSON(); }
+function copySitesJSON() { copyToClipboard(generateSitesJSON(), 'sites.json'); }
+function downloadSitesJSON() { downloadJSON(generateSitesJSON(), 'sites.json'); }
+function downloadTagsJSON() { downloadJSON(JSON.stringify(tagsData, null, 2), 'tags.json'); }
+function copyTagsJSON() { copyToClipboard(JSON.stringify(tagsData, null, 2), 'tags.json'); }
+function downloadSocialsJSON() { downloadJSON(JSON.stringify(socialsData, null, 2), 'socials.json'); }
+function copySocialsJSON() { copyToClipboard(JSON.stringify(socialsData, null, 2), 'socials.json'); }
+function downloadMetaJSON() { downloadJSON(JSON.stringify(metaData, null, 2), 'meta.json'); }
+function copyMetaJSON() { copyToClipboard(JSON.stringify(metaData, null, 2), 'meta.json'); }
+function copyToClipboard(text, filename) {
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => showToast('📋 کپی شد')).catch(() => showToast('خطا در کپی', 'error'));
+    } else {
+        const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+        showToast('📋 کپی شد');
+    }
+}
+function downloadJSON(json, filename) {
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+    showToast(`⬇️ ${filename} دانلود شد`);
+}
+
+function updateStats() {
+    document.getElementById('statsText').textContent = sitesData.length ? `${sitesData.length} سایت | ${sitesData.filter(s => s.recommended).length} پیشنهادی` : 'هیچ داده‌ای بارگذاری نشده است';
+    document.getElementById('countBadge').textContent = sitesData.length;
+    document.getElementById('exportSection').style.display = sitesData.length ? 'block' : 'none';
+    document.getElementById('emptyState').style.display = sitesData.length ? 'none' : 'block';
+    updateExport();
+}
+
+// ═══════════════════════════════════════════
+// File Imports
+// ═══════════════════════════════════════════
+document.getElementById('sitesFileInput').addEventListener('change', function(e) {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+        try {
+            const data = JSON.parse(ev.target.result);
+            if (!Array.isArray(data)) throw new Error('آرایه نیست');
+            sitesData = data.map(s => ({ ...s, tags: Array.isArray(s.tags) ? s.tags : [] }));
+            renderSitesList();
+            showToast(`✅ ${sitesData.length} سایت بارگذاری شد`);
+        } catch (err) { showToast('خطا: ' + err.message, 'error'); }
+    };
+    reader.readAsText(file);
+    this.value = '';
+});
+
+document.getElementById('tagsFileInput').addEventListener('change', function(e) {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+        try {
+            const data = JSON.parse(ev.target.result);
+            if (!Array.isArray(data)) throw new Error('آرایه نیست');
+            tagsData = data;
+            renderTagsList();
+            if (sitesData.length > 0) renderSitesList();
+            showToast(`✅ ${tagsData.length} تگ بارگذاری شد`);
+        } catch (err) { showToast('خطا: ' + err.message, 'error'); }
+    };
+    reader.readAsText(file);
+    this.value = '';
+});
+
+document.getElementById('socialsFileInput').addEventListener('change', function(e) {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+        try {
+            const data = JSON.parse(ev.target.result);
+            if (!Array.isArray(data)) throw new Error('آرایه نیست');
+            socialsData = data;
+            renderSocialsList();
+            showToast(`✅ ${socialsData.length} پلتفرم اجتماعی بارگذاری شد`);
+        } catch (err) { showToast('خطا: ' + err.message, 'error'); }
+    };
+    reader.readAsText(file);
+    this.value = '';
+});
+
+document.getElementById('metaFileInput').addEventListener('change', function(e) {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+        try {
+            const data = JSON.parse(ev.target.result);
+            metaData.lastUpdated = data.lastUpdated || '';
+            metaData.footerLinks = data.footerLinks || [];
+            renderMetaSection();
+            showToast('✅ meta.json بارگذاری شد');
+        } catch (err) { showToast('خطا: ' + err.message, 'error'); }
+    };
+    reader.readAsText(file);
+    this.value = '';
+});
+
+function loadSampleData() {
+    sitesData = [
+        { id: 1, name: "دانلودها", mainLink: "https://downloadha.com", unfilteredLink: "https://downloadha.com", description: "مرجع دانلود", tags: [1,2,3], recommended: true, social: {telegram:"https://t.me/downloadha"}, donate: null, customLinks: [] },
+        { id: 2, name: "آپارات", mainLink: "https://aparat.com", unfilteredLink: "https://aparat.com", description: "اشتراک ویدیو", tags: [5,6], recommended: true, social: {}, donate: null, customLinks: [] }
+    ];
+    tagsData = [
+        { id: 1, name: "دانلود", icon: "📥", iconFA: "fa-solid fa-download" },
+        { id: 2, name: "بازی", icon: "🎮", iconFA: "fa-solid fa-gamepad" },
+        { id: 3, name: "نرم‌افزار", icon: "💻", iconFA: "fa-solid fa-window-maximize" },
+        { id: 5, name: "ویدیو", icon: "🎥", iconFA: "fa-solid fa-video" },
+        { id: 6, name: "اشتراک‌گذاری", icon: "🔗", iconFA: "fa-solid fa-share-nodes" }
+    ];
+    socialsData = [
+        { id: 1, key: "telegram", label: "تلگرام", icon: "✈️", iconFA: "fa-brands fa-telegram", cls: "social-telegram" },
+        { id: 6, key: "eitaa", label: "ایتا", icon: "📨", iconFA: "fa-solid fa-paper-plane", cls: "social-eitaa" }
+    ];
+    renderTagsList();
+    renderSocialsList();
+    renderSitesList();
+    showToast('داده نمونه بارگذاری شد');
+}
+
+function renderMetaSection() {
+    document.getElementById('metaDateInput').value = metaData.lastUpdated || '';
+    document.getElementById('metaSection').style.display = 'block';
+    renderFooterLinks();
+}
+
+// ═══════════════════════════════════════════
+// Project Sync
+// ═══════════════════════════════════════════
+let rootDirHandle = null;
+async function connectToProject() {
+    try {
+        rootDirHandle = await window.showDirectoryPicker();
+        await loadFromConnectedFolder();
+        document.getElementById('projectStatus').textContent = '✅ متصل شد: ' + rootDirHandle.name;
+        document.getElementById('saveProjectBtn').style.display = '';
+        showToast('اتصال با موفقیت انجام شد');
+    } catch (err) {
+        if (err.name === 'AbortError') return;
+        showToast('خطا: ' + err.message, 'error');
+    }
+}
+async function loadFromConnectedFolder() {
+    if (!rootDirHandle) return;
+    let sitesLoaded = false;
+    try {
+        const dataDir = await rootDirHandle.getDirectoryHandle('data');
+        // 1. tags.json
+        try {
+            const f = await dataDir.getFileHandle('tags.json');
+            const file = await f.getFile();
+            tagsData = JSON.parse(await file.text());
+            renderTagsList();
+        } catch(e) {}
+        // 2. socials.json
+        try {
+            const f = await dataDir.getFileHandle('socials.json');
+            const file = await f.getFile();
+            socialsData = JSON.parse(await file.text());
+            renderSocialsList();
+        } catch(e) {}
+        // 3. sites.json
+        try {
+            const f = await dataDir.getFileHandle('sites.json');
+            const file = await f.getFile();
+            const data = JSON.parse(await file.text());
+            sitesData = data.map(s => ({ ...s, tags: Array.isArray(s.tags) ? s.tags : [] }));
+            sitesLoaded = true;
+            renderSitesList();
+        } catch(e) {}
+        // 4. meta.json
+        try {
+            const f = await dataDir.getFileHandle('meta.json');
+            const file = await f.getFile();
+            const data = JSON.parse(await file.text());
+            metaData.lastUpdated = data.lastUpdated || '';
+            metaData.footerLinks = data.footerLinks || [];
+            renderMetaSection();
+        } catch(e) {}
+        if (!sitesLoaded && tagsData.length === 0 && socialsData.length === 0) {
+            showToast('هیچ داده‌ای در پوشه data یافت نشد', 'error');
+        } else {
+            showToast('داده‌های پروژه بارگذاری شدند');
+        }
+    } catch(e) {
+        showToast('خطا در بارگذاری پروژه', 'error');
+    }
+}
+
+function escapeRegex(str) { return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+async function saveToProject() {
+    if (!rootDirHandle) { showToast('❗ ابتدا به پوشه پروژه متصل شوید', 'error'); return; }
+    try {
+        const dataDir = await rootDirHandle.getDirectoryHandle('data', { create: true });
+
+        // sites.json
+        const sitesHandle = await dataDir.getFileHandle('sites.json', { create: true });
+        const sitesWritable = await sitesHandle.createWritable();
+        await sitesWritable.write(generateSitesJSON());
+        await sitesWritable.close();
+
+        // tags.json
+        const tagsHandle = await dataDir.getFileHandle('tags.json', { create: true });
+        const tagsWritable = await tagsHandle.createWritable();
+        await tagsWritable.write(JSON.stringify(tagsData, null, 2));
+        await tagsWritable.close();
+
+        // socials.json
+        const socialsHandle = await dataDir.getFileHandle('socials.json', { create: true });
+        const socialsWritable = await socialsHandle.createWritable();
+        await socialsWritable.write(JSON.stringify(socialsData, null, 2));
+        await socialsWritable.close();
+
+        // meta.json
+        const metaHandle = await dataDir.getFileHandle('meta.json', { create: true });
+        const metaWritable = await metaHandle.createWritable();
+        await metaWritable.write(JSON.stringify(metaData, null, 2));
+        await metaWritable.close();
+
+        // offline.html
+        let offlineHandle;
+        try { offlineHandle = await rootDirHandle.getFileHandle('offline.html'); } catch { showToast('❌ فایل offline.html در پوشه پروژه پیدا نشد', 'error'); return; }
+        const file = await offlineHandle.getFile();
+        let content = await file.text();
+
+        const startSites = '/* BEGIN_SITES_DATA */', endSites = '/* END_SITES_DATA */';
+        content = content.replace(new RegExp(escapeRegex(startSites) + '[\\s\\S]*?' + escapeRegex(endSites), 'g'), startSites + generateSitesJSON() + endSites);
+
+        const startTags = '/* BEGIN_TAGS_DATA */', endTags = '/* END_TAGS_DATA */';
+        const tagsForOffline = tagsData.map(({ id, name, icon }) => ({ id, name, icon }));
+        content = content.replace(new RegExp(escapeRegex(startTags) + '[\\s\\S]*?' + escapeRegex(endTags), 'g'), startTags + JSON.stringify(tagsForOffline, null, 2) + endTags);
+
+        const startSocials = '/* BEGIN_SOCIALS_DATA */', endSocials = '/* END_SOCIALS_DATA */';
+        const socialsForOffline = socialsData.map(({ id, key, label, icon }) => ({ id, key, label, icon }));
+        content = content.replace(new RegExp(escapeRegex(startSocials) + '[\\s\\S]*?' + escapeRegex(endSocials), 'g'), startSocials + JSON.stringify(socialsForOffline, null, 2) + endSocials);
+
+        const startMeta = '/* BEGIN_META_DATA */', endMeta = '/* END_META_DATA */';
+        content = content.replace(new RegExp(escapeRegex(startMeta) + '[\\s\\S]*?' + escapeRegex(endMeta), 'g'), startMeta + JSON.stringify(metaData, null, 2) + endMeta);
+
+        const offlineWritable = await offlineHandle.createWritable();
+        await offlineWritable.write(content);
+        await offlineWritable.close();
+
+        showToast('✅ همه فایل‌ها ذخیره شدند');
+    } catch (err) { showToast('خطا: ' + err.message, 'error'); console.error(err); }
+}
+
+// Init
+updateStats();
+renderTagsList();
+renderSocialsList();
+renderMetaSection();
+</script>
 </body>
 </html>

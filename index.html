@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="fonts/fontawesome/css/all.min.css">
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇷</text></svg>">
     <title>سایت‌های ایرانی - نت ملی</title>
     <script>
         // Prevent FOUC: set theme before any rendering
@@ -65,6 +66,9 @@
             <button class="toolbar-btn" id="bookmarkFilterBtn" title="نمایش بوکمارک‌ها">
                 <i class="fa-solid fa-bookmark"></i> <span>بوکمارک‌ها</span>
             </button>
+			<button class="toolbar-btn" id="checkAllBtn" title="بررسی در دسترس بودن همه سایت‌ها">
+				<i class="fa-solid fa-bolt"></i> <span>بررسی سایت‌ها</span>
+			</button>
 
         </div>
 
@@ -84,7 +88,7 @@
             <span class="footer-date-wrap" style="display:none;">
                 &bull; این فهرست در تاریخ <span id="footerDate"></span> به‌روزرسانی شده است
             </span>
-            &bull; <a href="site-editor.html" style="color:var(--primary); text-decoration:none;">ویرایشگر</a>
+			<div id="footerLinksContainer"></div>
         </footer>
     </div>
 

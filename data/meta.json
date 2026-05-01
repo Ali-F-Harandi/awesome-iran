@@ -1,3 +1,29 @@
 {
-  "lastUpdated": "1405/02/07"
+  "lastUpdated": "1405/02/07",
+  "footerLinks": [
+    {
+      "label": "نسخه داخلی",
+      "url": "https://awesomeiran.s3-website.ir-thr-at1.arvanstorage.ir/",
+      "icon": "🏠",
+      "iconFA": "fa-solid fa-house"
+    },
+    {
+      "label": "نسخه خارجی",
+      "url": "https://ali-f-harandi.github.io/awesome-iran/",
+      "icon": "🌍",
+      "iconFA": "fa-solid fa-globe"
+    },
+    {
+      "label": "نسخه آفلاین",
+      "url": "https://awesomeiran.rzb.ir/",
+      "icon": "💾",
+      "iconFA": "fa-solid fa-floppy-disk"
+    },
+    {
+      "label": "گزارش مشکلات و پیشنهاد سایت جدید",
+      "url": "https://awesomeiran.rzb.ir/1",
+      "icon": "💬",
+      "iconFA": "fa-solid fa-comments"
+    }
+  ]
 }

@@ -6,10 +6,10 @@
     "unfilteredLink": "https://downloadha.com",
     "description": "مرجع دانلود نرم‌افزار و بازی با لینک مستقیم. یکی از قدیمی‌ترین و معتبرترین سایت‌های دانلود ایرانی.",
     "tags": [
-      "دانلود",
-      "بازی",
-      "نرم‌افزار",
-      "آموزش"
+      1,
+      2,
+      3,
+      4
     ],
     "recommended": true,
     "social": {
@@ -29,9 +29,9 @@
     "unfilteredLink": "https://aparat.com",
     "description": "بزرگترین پلتفرم اشتراک‌گذاری ویدیو در ایران. تماشای ویدیوهای متنوع، کانال‌های شخصی و پخش زنده.",
     "tags": [
-      "ویدیو",
-      "اشتراک‌گذاری",
-      "پخش آنلاین"
+      5,
+      6,
+      7
     ],
     "recommended": true,
     "social": {
@@ -52,9 +52,9 @@
     "unfilteredLink": "https://filimo.com",
     "description": "پلتفرم استریم فیلم و سریال ایرانی و خارجی با زیرنویس و دوبله فارسی، پخش آنلاین با کیفیت بالا.",
     "tags": [
-      "نمایش خانگی",
-      "فیلم و سریال",
-      "پخش آنلاین"
+      8,
+      9,
+      7
     ],
     "recommended": true,
     "social": {
@@ -74,9 +74,9 @@
     "unfilteredLink": "https://namava.ir",
     "description": "سرویس استریم ویدیوی ایرانی با کتابخانه‌ای غنی از فیلم، سریال، مستند و برنامه‌های تلویزیونی.",
     "tags": [
-      "نمایش خانگی",
-      "فیلم و سریال",
-      "پخش آنلاین"
+      8,
+      9,
+      7
     ],
     "recommended": false,
     "social": {
@@ -95,10 +95,10 @@
     "unfilteredLink": "https://digikala.com",
     "description": "بزرگترین فروشگاه اینترنتی ایران. خرید انواع کالاهای دیجیتال، لوازم خانگی، مد و پوشاک، کتاب و ...",
     "tags": [
-      "خرید",
-      "فروشگاه",
-      "محصولات",
-      "کالا"
+      10,
+      11,
+      12,
+      13
     ],
     "recommended": true,
     "social": {
@@ -118,8 +118,8 @@
     "unfilteredLink": "https://torob.com",
     "description": "موتور جستجوی خرید و مقایسه قیمت محصولات در فروشگاه‌های اینترنتی ایران. بهترین قیمت را پیدا کنید.",
     "tags": [
-      "خرید",
-      "مقایسه قیمت"
+      10,
+      14
     ],
     "recommended": true,
     "social": {
@@ -137,10 +137,8 @@
     "unfilteredLink": "https://virgool.io",
     "description": "پلتفرم وبلاگ‌نویسی و محتوای ایرانی. انتشار مقالات، داستان‌ها و نوشته‌های کاربران در موضوعات مختلف.",
     "tags": [
-      "وبلاگ",
-      "نویسندگی",
-      "محتوا",
-      "مطالعه"
+      15,
+      16
     ],
     "recommended": true,
     "social": {
@@ -153,52 +151,33 @@
   },
   {
     "id": 8,
-    "name": "میهن بلاگ",
-    "mainLink": "https://mihanblog.com",
-    "unfilteredLink": "https://mihanblog.com",
-    "description": "سرویس وبلاگ‌دهی قدیمی و محبوب ایرانی. ساخت وبلاگ رایگان با امکانات متنوع.",
+    "name": "رز بلاگ",
+    "mainLink": "https://www.rozblog.com/",
+    "unfilteredLink": "https://www.rzb.ir/",
+    "description": "سرویس وبلاگ‌دهی قدیمی و محبوب ایرانی. خدمات سایت ساز را بصورت رایگان به کاربران گرامی ارائـه مـی دهد.",
     "tags": [
-      "وبلاگ",
-      "وبلاگدهی",
-      "ساخت وبلاگ"
+      15,
+      17
     ],
-    "recommended": false,
+    "recommended": true,
     "social": {
-      "telegram": "https://t.me/mihanblog"
+      "telegram": "https://t.me/rzb_ir",
+      "instagram": "https://instagram.com/rozblog1388"
     },
     "donate": null,
     "customLinks": []
   },
   {
     "id": 9,
-    "name": "بلاگفا",
-    "mainLink": "https://blogfa.com",
-    "unfilteredLink": "https://blogfa.com",
-    "description": "یکی از قدیمی‌ترین سرویس‌های وبلاگ‌دهی فارسی. جامعه بزرگ وبلاگ‌نویسان ایرانی.",
-    "tags": [
-      "وبلاگ",
-      "وبلاگدهی",
-      "جامعه"
-    ],
-    "recommended": false,
-    "social": {
-      "telegram": "https://t.me/blogfa",
-      "instagram": "https://instagram.com/blogfa"
-    },
-    "donate": null,
-    "customLinks": []
-  },
-  {
-    "id": 10,
     "name": "سکان آکادمی",
     "mainLink": "https://sokanacademy.com",
     "unfilteredLink": "https://sokanacademy.com",
     "description": "آکادمی آموزش برنامه‌نویسی و تکنولوژی. دوره‌های آنلاین، مقالات تخصصی و مسیرهای یادگیری.",
     "tags": [
-      "آموزش",
-      "برنامه‌نویسی",
-      "تکنولوژی",
-      "دوره آنلاین"
+      4,
+      18,
+      19,
+      20
     ],
     "recommended": true,
     "social": {
@@ -211,17 +190,17 @@
     "customLinks": []
   },
   {
-    "id": 11,
+    "id": 10,
     "name": "کافه بازار",
     "mainLink": "https://cafebazaar.ir",
     "unfilteredLink": "https://cafebazaar.ir",
     "description": "بزرگترین مارکت اپلیکیشن اندروید در ایران. دانلود اپ‌ها، بازی‌ها و برنامه‌های ایرانی.",
     "tags": [
-      "اپلیکیشن",
-      "اندروید",
-      "فروشگاه",
-      "بازی",
-      "دانلود"
+      21,
+      22,
+      11,
+      2,
+      1
     ],
     "recommended": true,
     "social": {
@@ -234,17 +213,17 @@
     "customLinks": []
   },
   {
-    "id": 12,
+    "id": 11,
     "name": "طاقچه",
     "mainLink": "https://taaghche.com",
     "unfilteredLink": "https://taaghche.com",
     "description": "فروشگاه و کتابخوان الکترونیک ایرانی. خرید و مطالعه کتاب‌های الکترونیک و صوتی.",
     "tags": [
-      "کتاب",
-      "کتابخوان",
-      "کتاب صوتی",
-      "مطالعه",
-      "فروشگاه"
+      23,
+      24,
+      25,
+      26,
+      11
     ],
     "recommended": true,
     "social": {
@@ -256,16 +235,16 @@
     "customLinks": []
   },
   {
-    "id": 13,
+    "id": 12,
     "name": "فیدیبو",
     "mainLink": "https://fidibo.com",
     "unfilteredLink": "https://fidibo.com",
     "description": "پلتفرم کتاب الکترونیک و صوتی ایرانی با هزاران عنوان کتاب از ناشران مطرح.",
     "tags": [
-      "کتاب",
-      "کتابخوان",
-      "کتاب الکترونیک",
-      "مطالعه"
+      23,
+      24,
+      27,
+      26
     ],
     "recommended": false,
     "social": {
@@ -277,17 +256,17 @@
     "customLinks": []
   },
   {
-    "id": 14,
+    "id": 13,
     "name": "دیوار",
     "mainLink": "https://divar.ir",
     "unfilteredLink": "https://divar.ir",
     "description": "پلتفرم خرید و فروش و معاوضه کالا و خدمات. آگهی‌های رایگان در سراسر ایران.",
     "tags": [
-      "خرید",
-      "فروش",
-      "آگهی",
-      "اقتصادی",
-      "محصولات"
+      10,
+      28,
+      29,
+      30,
+      12
     ],
     "recommended": true,
     "social": {
@@ -300,16 +279,16 @@
     "customLinks": []
   },
   {
-    "id": 15,
+    "id": 14,
     "name": "شیپور",
     "mainLink": "https://sheypoor.com",
     "unfilteredLink": "https://sheypoor.com",
     "description": "سایت آگهی و خرید و فروش اینترنتی. معامله سریع و آسان کالاهای نو و دست دوم.",
     "tags": [
-      "خرید",
-      "فروش",
-      "آگهی",
-      "اقتصادی"
+      10,
+      28,
+      29,
+      30
     ],
     "recommended": false,
     "social": {
@@ -320,17 +299,17 @@
     "customLinks": []
   },
   {
-    "id": 16,
+    "id": 15,
     "name": "باسلام",
     "mainLink": "https://basalam.com",
     "unfilteredLink": "https://basalam.com",
     "description": "بازار آنلاین صنایع دستی و محصولات بومی ایرانی. حمایت از کسب‌وکارهای کوچک و هنرمندان.",
     "tags": [
-      "خرید",
-      "صنایع دستی",
-      "محصولات",
-      "هنر",
-      "فروشگاه"
+      10,
+      31,
+      12,
+      32,
+      11
     ],
     "recommended": true,
     "social": {
@@ -342,15 +321,15 @@
     "customLinks": []
   },
   {
-    "id": 17,
+    "id": 16,
     "name": "نشان",
     "mainLink": "https://neshan.org",
     "unfilteredLink": "https://neshan.org",
     "description": "اپلیکیشن و سایت نقشه و مسیریاب ایرانی. ناوبری دقیق با نقشه‌های آفلاین و ترافیک زنده.",
     "tags": [
-      "مسیریاب",
-      "نقشه",
-      "اپلیکیشن"
+      33,
+      34,
+      21
     ],
     "recommended": true,
     "social": {
@@ -362,15 +341,15 @@
     "customLinks": []
   },
   {
-    "id": 18,
+    "id": 17,
     "name": "بلد",
     "mainLink": "https://balad.ir",
     "unfilteredLink": "https://balad.ir",
     "description": "نقشه و مسیریاب ایرانی با رابط کاربری ساده. مسیریابی دقیق در شهرهای ایران.",
     "tags": [
-      "مسیریاب",
-      "نقشه",
-      "اپلیکیشن"
+      33,
+      34,
+      21
     ],
     "recommended": false,
     "social": {
@@ -381,17 +360,17 @@
     "customLinks": []
   },
   {
-    "id": 19,
+    "id": 18,
     "name": "مووی‌یاب",
     "mainLink": "https://movieyaab.ir",
     "unfilteredLink": "https://movieyaab.ir",
     "description": "پلتفرم جستجوی فیلم، سریال و انیمه. جستجوی نام فارسی یا انگلیسی فیلم و سریال، دریافت لینک دانلود و پخش آنلاین. متصل به منابع متنوع شامل MovieBox، Animeone، FilmKio، Moviejavan، Simba و AnimeGate.",
     "tags": [
-      "فیلم و سریال",
-      "انیمه",
-      "پخش آنلاین",
-      "دانلود",
-      "بدون سانسور"
+      9,
+      35,
+      7,
+      1,
+      36
     ],
     "recommended": true,
     "social": {
@@ -403,17 +382,17 @@
     "customLinks": []
   },
   {
-    "id": 20,
+    "id": 19,
     "name": "دنیای سریال (سریال بلاگ)",
-    "mainLink": "https://serialblog.top/",
-    "unfilteredLink": "https://donyayeserial.com/",
+    "mainLink": "https://donyayeserial.com/",
+    "unfilteredLink": "https://serialblog.top/",
     "description": "دانلود فیلم و سریال های خارجی بدون سانسور به همراه زیرنویس و دوبله فارسی کاملا رایگان. آرشیو جامع با بیش از ۱۰ هزار عنوان.",
     "tags": [
-      "فیلم و سریال",
-      "دانلود",
-      "بدون سانسور",
-      "زیرنویس",
-      "دوبله"
+      9,
+      1,
+      36,
+      37,
+      38
     ],
     "recommended": true,
     "social": {
@@ -437,15 +416,15 @@
     ]
   },
   {
-    "id": 21,
+    "id": 20,
     "name": "ذره‌بین",
     "mainLink": "https://zarebin.ir",
     "unfilteredLink": "https://zarebin.ir",
     "description": "جستجوگر هوشمند فارسی با فناوری متا سرچ و هوش مصنوعی. جستجوی آینده در دستان شما — خلاقیت، تولید تصویر، خلاصه‌سازی و پاسخ به سوالات روزمره. اولین هوش مصنوعی ایرانی متصل به وب زنده.",
     "tags": [
-      "جستجوگر",
-      "هوش مصنوعی",
-      "تولید تصویر"
+      39,
+      40,
+      41
     ],
     "recommended": false,
     "social": {
@@ -472,13 +451,13 @@
     ]
   },
   {
-    "id": 22,
+    "id": 21,
     "name": "گردو",
     "mainLink": "https://gerdoo.me",
     "unfilteredLink": "https://gerdoo.me",
     "description": "فراجستجوگر ایرانی با حریم شخصی بالا. جستجو در سایت‌ها، عکس‌ها، فیلم‌ها و خبرها. امکان رتبه‌بندی سایت‌ها و تبلیغات.",
     "tags": [
-      "جستجوگر"
+      39
     ],
     "recommended": false,
     "social": {
@@ -507,14 +486,14 @@
     ]
   },
   {
-    "id": 23,
+    "id": 22,
     "name": "برتینا",
     "mainLink": "https://www.bertina.ir",
     "unfilteredLink": "https://search.bertina.ir",
     "description": "موتور جستجوی فارسی برتینا — جستجوی سریع و آسان در وب. قدرتمندترین موتور جستجوی هوش مصنوعی فارسی با سرویس‌های جانبی شامل هوش مصنوعی رایگان، ایمیل، مترجم، DNS و هواشناسی.",
     "tags": [
-      "جستجوگر",
-      "هوش مصنوعی"
+      39,
+      40
     ],
     "recommended": true,
     "social": {
@@ -556,18 +535,18 @@
     ]
   },
   {
-    "id": 24,
+    "id": 23,
     "name": "ویجی دی ال",
     "mainLink": "https://vgdl.ir",
     "unfilteredLink": "https://vgdl.ir",
     "description": "دانلود بازی کامپیوتر (PC) ویندوز با لینک مستقیم. انواع ژانرها شامل اکشن، استراتژیک، نقش‌آفرینی، شوتر، ترسناک، ماجراجویی و چندنفره.",
     "tags": [
-      "بازی",
-      "دانلود",
-      "فارسی ساز",
-      "کامپیوتر",
-      "اندروید",
-      "نرم افزار"
+      2,
+      1,
+      42,
+      43,
+      22,
+      45
     ],
     "recommended": true,
     "social": {
@@ -579,17 +558,17 @@
     "customLinks": []
   },
   {
-    "id": 25,
+    "id": 24,
     "name": "فن ساب",
     "mainLink": "https://fansub.ir",
     "unfilteredLink": "https://fansub.ir",
     "description": "تولیدکننده و فروشنده فارسی‌ساز بازی‌های ویدیویی. ارائه فارسی‌ساز برای بازی‌های کامپیوتر، PS4، PS5، Xbox، Switch و اندروید. بخش فارسی‌سازهای رایگان، باندل‌های فارسی‌ساز و مقالات تخصصی بازی.",
     "tags": [
-      "فارسی ساز",
-      "بازی",
-      "کامپیوتر",
-      "کنسول",
-      "اندروید"
+      42,
+      2,
+      43,
+      44,
+      22
     ],
     "recommended": true,
     "social": {
@@ -632,16 +611,33 @@
     ]
   },
   {
-    "id": 26,
+    "id": 25,
     "name": "انیمکس",
     "mainLink": "https://animex.click",
     "unfilteredLink": "https://animex.click",
     "description": "دانلود انیمه، فیلم و سریال کره‌ای با لینک مستقیم و زیرنویس فارسی. آرشیو جامع انیمه‌ها و سریال‌های آسیایی با کیفیت بالا.",
     "tags": [
-      "انیمه",
-      "دانلود",
-      "فیلم و سریال",
-      "زیرنویس"
+      35,
+      1,
+      9,
+      37
+    ],
+    "recommended": true,
+    "social": {},
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 26,
+    "name": "مانهوا",
+    "mainLink": "https://m4y.ir",
+    "unfilteredLink": "https://m4y.ir",
+    "description": "دانلود مانگا، مانهوا، مانها، کمیک و انیمه با ترجمه فارسی. بزرگترین مرجع دانلود کمیک و انیمه با زیرنویس و ترجمه فارسی.",
+    "tags": [
+      46,
+      47,
+      35,
+      1
     ],
     "recommended": true,
     "social": {},
@@ -650,31 +646,14 @@
   },
   {
     "id": 27,
-    "name": "مانهوا",
-    "mainLink": "https://m4y.ir",
-    "unfilteredLink": "https://m4y.ir",
-    "description": "دانلود مانگا، مانهوا، مانها، کمیک و انیمه با ترجمه فارسی. بزرگترین مرجع دانلود کمیک و انیمه با زیرنویس و ترجمه فارسی.",
-    "tags": [
-      "مانگا",
-      "کمیک",
-      "انیمه",
-      "دانلود"
-    ],
-    "recommended": true,
-    "social": {},
-    "donate": null,
-    "customLinks": []
-  },
-  {
-    "id": 28,
     "name": "سابکده",
     "mainLink": "https://subkade.ir",
     "unfilteredLink": "https://subkade.ir",
     "description": "مرجع دانلود زیرنویس فارسی، انگلیسی و عربی فیلم ها و سریال های روز دنیا",
     "tags": [
-      "زیرنویس فارسی",
-      "دانلود",
-      "فیلم و سریال"
+      48,
+      1,
+      9
     ],
     "recommended": true,
     "social": {
@@ -686,14 +665,14 @@
     "customLinks": []
   },
   {
-    "id": 29,
+    "id": 28,
     "name": "ساب استار",
     "mainLink": "https://subtitlestar.com/",
     "unfilteredLink": "https://subtitlestar.com/",
     "description": "مرجع دانلود زیرنویس فارسی",
     "tags": [
-      "زیرنویس فارسی",
-      "دانلود"
+      48,
+      1
     ],
     "recommended": false,
     "social": {},
@@ -701,15 +680,15 @@
     "customLinks": []
   },
   {
-    "id": 30,
+    "id": 29,
     "name": "ساب تو مووی",
     "mainLink": "https://subf2m.co/",
     "unfilteredLink": "https://subzone.ir/",
     "description": "زیرنویس سریال‌های تلویزیونی، فیلم‌ها و موزیک‌ویدئوها،  گردآوری شده توسط کاربران.",
     "tags": [
-      "زیرنویس فارسی",
-      "دانلود",
-      "فیلم و سریال"
+      48,
+      1,
+      9
     ],
     "recommended": false,
     "social": {

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇷</text></svg>">
     <title>سایت‌های ایرانی - نت ملی (آفلاین)</title>
     <script>
         // Prevent FOUC: set theme before any rendering
@@ -276,39 +277,85 @@ body {
     background: #cbd5e1;
     border-radius: 8px;
 }
-.tag-chip {
+
+/* ── Common interactive chip / button style ────────────────── */
+.tag-chip,
+.toolbar-btn,
+.sort-select,
+.expanded-link-item {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    padding: 7px 14px;
     border-radius: 50px;
-    font-size: 0.8rem;
+    font-family: var(--font);
+    font-size: 0.78rem;
     font-weight: 500;
     cursor: pointer;
     user-select: none;
     white-space: nowrap;
     transition: all var(--transition);
     border: 1.5px solid var(--border);
+}
+
+.tag-chip,
+.toolbar-btn,
+.expanded-link-item {
     background: var(--surface-hover);
     color: var(--text-secondary);
-    font-family: var(--font);
-    letter-spacing: -0.2px;
+}
+
+.sort-select {
+    cursor: pointer;
+    gap: 0;
+    background: var(--surface);
+    color: var(--text-secondary);
+    padding: 7px 12px;
+    font-weight: 500;
+    outline: none;
+    min-height: 38px;
+    direction: rtl;
+}
+.sort-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.tag-chip,
+.toolbar-btn {
+    padding: 7px 14px;
     min-height: 44px;
 }
-.tag-chip:hover {
+
+.expanded-link-item {
+    padding: 8px 14px;
+    min-height: 44px;
+}
+
+.tag-chip:hover,
+.toolbar-btn:hover,
+.expanded-link-item:hover {
     background: var(--primary-bg);
-    border-color: var(--border);
     color: var(--primary);
     transform: translateY(-1px);
     box-shadow: var(--shadow-sm);
 }
-.tag-chip:active {
-    transform: scale(0.96);
+.toolbar-btn:hover {
+    border-color: var(--primary);
+}
+
+.tag-chip:active,
+.toolbar-btn:active,
+.expanded-link-item:active {
+    transform: scale(0.95);
+}
+
+.tag-chip.active,
+.toolbar-btn.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
 }
 .tag-chip.active {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: #fff;
     font-weight: 600;
     box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
@@ -322,6 +369,7 @@ body {
 .tag-chip.active .tag-count {
     background: rgba(255, 255, 255, 0.3);
 }
+
 .reset-tags {
     display: none;
     font-size: 0.75rem;
@@ -345,7 +393,7 @@ body {
     border-color: #991b1b;
 }
 
-/* ── Site Cards Grid (auto-fit / minmax) ───────────────── */
+/* ── Site Cards Grid ───────────────── */
 .sites-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
@@ -417,59 +465,13 @@ body {
     background: var(--border);
 }
 
-/* ── Toolbar Row (Sort, View, Expand) ────── */
+/* ── Toolbar Row ────── */
 .toolbar-row {
     display: flex;
     align-items: center;
     gap: 8px;
     margin-bottom: 12px;
     flex-wrap: wrap;
-}
-.toolbar-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 7px 14px;
-    border-radius: 50px;
-    font-size: 0.78rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all var(--transition);
-    border: 1.5px solid var(--border);
-    background: var(--surface);
-    color: var(--text-secondary);
-    font-family: var(--font);
-    white-space: nowrap;
-    min-height: 38px;
-}
-.toolbar-btn:hover {
-    background: var(--primary-bg);
-    color: var(--primary);
-    border-color: var(--primary);
-}
-.toolbar-btn.active {
-    background: var(--primary);
-    color: #fff;
-    border-color: var(--primary);
-}
-.sort-select {
-    padding: 7px 12px;
-    border-radius: 50px;
-    font-size: 0.78rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all var(--transition);
-    border: 1.5px solid var(--border);
-    background: var(--surface);
-    color: var(--text-secondary);
-    font-family: var(--font);
-    outline: none;
-    min-height: 38px;
-    direction: rtl;
-}
-.sort-select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
 /* ── Bookmark Star ────────────────── */
@@ -496,6 +498,38 @@ body {
 .bookmark-btn.bookmarked {
     color: var(--star);
     animation: starPop 0.4s ease;
+}
+
+/* ── Check Site Button ───────────── */
+.check-site-btn {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: var(--surface-hover);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all var(--transition);
+    color: var(--star);
+    padding: 0;
+}
+.check-site-btn:hover {
+    background: var(--primary-bg);
+    color: var(--primary);
+}
+.check-site-btn.checking {
+    pointer-events: none;
+    opacity: 0.6;
+}
+.check-site-btn.check-success {
+    color: var(--primary);
+}
+.check-site-btn.check-fail {
+    color: #ef4444;
 }
 
 /* ── Site Card ────────────────────── */
@@ -571,35 +605,6 @@ body {
     padding: 13px 14px;
     min-height: 56px;
     flex-wrap: wrap;
-}
-.card-star {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    color: var(--text-muted);
-    transition: all var(--transition);
-}
-.card-star.active {
-    color: var(--star);
-    animation: starPop 0.4s ease;
-}
-@keyframes starPop {
-    0%,
-    100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.35);
-    }
-}
-.card-star svg {
-    width: 22px;
-    height: 22px;
-    display: block;
 }
 .card-info {
     flex: 1;
@@ -680,10 +685,6 @@ body {
 .btn-go:active {
     transform: scale(0.95);
 }
-.btn-go svg {
-    width: 14px;
-    height: 14px;
-}
 .expand-arrow {
     flex-shrink: 0;
     width: 30px;
@@ -701,11 +702,6 @@ body {
     transform: rotate(180deg);
     background: var(--primary-bg);
     color: var(--primary);
-}
-.expand-arrow svg {
-    width: 14px;
-    height: 14px;
-    transition: transform var(--transition);
 }
 
 /* ── Expanded Content ─────────────── */
@@ -738,34 +734,6 @@ body {
     flex-wrap: wrap;
     gap: 8px;
 }
-.expanded-link-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.78rem;
-    padding: 8px 14px;
-    border-radius: 50px;
-    background: var(--surface-hover);
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: all var(--transition);
-    border: 1.5px solid transparent;
-    font-family: var(--font);
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-    min-height: 44px;
-}
-.expanded-link-item:hover {
-    background: var(--border);
-    border-color: var(--text-muted);
-    color: var(--text);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-sm);
-}
-.expanded-link-item:active {
-    transform: scale(0.95);
-}
 .expanded-link-item.unfiltered {
     background: #fef3c7;
     color: #92400e;
@@ -786,21 +754,9 @@ body {
 }
 @keyframes copyPulse {
     0%,
-    100% {
-        transform: scale(1);
-    }
-    30% {
-        transform: scale(1.08);
-    }
-    60% {
-        transform: scale(0.97);
-    }
-}
-.expanded-link-label {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    letter-spacing: -0.2px;
+    100% { transform: scale(1); }
+    30%   { transform: scale(1.08); }
+    60%   { transform: scale(0.97); }
 }
 
 /* ── Social Media Badges ──────────── */
@@ -839,45 +795,19 @@ body {
 .social-badge:active {
     transform: scale(0.93);
 }
-.social-telegram {
-    background: #26A5E4;
-}
-.social-instagram {
-    background: #E4405F;
-}
-.social-twitter {
-    background: #1DA1F2;
-}
-.social-youtube {
-    background: #FF0000;
-}
-.social-eitaa {
-    background: #F78F1E;
-}
-.social-rubika {
-    background: #00BFA5;
-}
-.social-soroush {
-    background: #5B4DA8;
-}
-.social-bale {
-    background: #4CAF50;
-}
-.social-aparat {
-    background: #ED145B;
-}
-.social-whatsapp {
-    background: #25D366;
-}
-.social-linkedin {
-    background: #0A66C2;
-}
-.social-discord {
-    background: #5865F2;
-}
-.social-custom {
-    background: #6366f1;
-}
+.social-telegram { background: #26A5E4; }
+.social-instagram { background: #E4405F; }
+.social-twitter { background: #1DA1F2; }
+.social-youtube { background: #FF0000; }
+.social-eitaa { background: #F78F1E; }
+.social-rubika { background: #00BFA5; }
+.social-soroush { background: #5B4DA8; }
+.social-bale { background: #4CAF50; }
+.social-aparat { background: #ED145B; }
+.social-whatsapp { background: #25D366; }
+.social-linkedin { background: #0A66C2; }
+.social-discord { background: #5865F2; }
+.social-custom { background: #6366f1; }
 .custom-links-badges {
     display: flex;
     flex-wrap: wrap;
@@ -924,6 +854,56 @@ body {
     letter-spacing: -0.2px;
 }
 
+/* ── Footer Links Section ────────── */
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 14px;
+    padding: 14px 0 0;
+    border-top: 1px dashed var(--border);
+}
+
+.footer-link-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-family: var(--font);
+    white-space: nowrap;
+}
+
+.footer-link-item:hover {
+    background: var(--primary-bg);
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+}
+
+.footer-link-item .link-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+/* ── Dark Mode: Footer Links ──────── */
+[data-theme="dark"] .footer-link-item {
+    background: var(--surface);
+    border-color: var(--border);
+}
+[data-theme="dark"] .footer-link-item:hover {
+    background: var(--primary-bg);
+}
+
 /* ── Dark Mode: Category Header ──── */
 [data-theme="dark"] .category-header-title {
     color: var(--text);
@@ -968,11 +948,8 @@ body {
         font-size: 0.73rem;
         gap: 3px;
     }
-    .btn-go svg {
-        width: 12px;
-        height: 12px;
-    }
-    .tag-chip {
+    .tag-chip,
+    .toolbar-btn {
         padding: 5px 10px;
         font-size: 0.72rem;
     }
@@ -997,20 +974,12 @@ body {
     .toolbar-row {
         gap: 5px;
     }
-    .toolbar-btn {
-        padding: 6px 10px;
-        font-size: 0.72rem;
-    }
     .sort-select {
         padding: 6px 10px;
         font-size: 0.72rem;
     }
     .category-header-title {
         font-size: 0.85rem;
-    }
-    .modal-box {
-        margin: 10px;
-        border-radius: var(--radius-lg);
     }
 }
 @media (min-width: 1024px) {
@@ -1177,7 +1146,6 @@ body {
         <!-- Search Section -->
         <div class="search-section" id="searchSection">
             <div class="search-wrapper">
-                <!-- Search Icon (inline SVG) -->
                 <span class="search-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8"/>
@@ -1192,7 +1160,7 @@ body {
             <button class="reset-tags" id="resetTags">✕ پاک کردن فیلترها</button>
         </div>
 
-        <!-- Toolbar Row: Sort, View, Expand All, Bookmark Filter -->
+        <!-- Toolbar Row -->
         <div class="toolbar-row" id="toolbarRow">
             <select class="sort-select" id="sortSelect" title="مرتب‌سازی">
                 <option value="default">📦 پیش‌فرض (دسته‌بندی)</option>
@@ -1208,6 +1176,9 @@ body {
             </button>
             <button class="toolbar-btn" id="bookmarkFilterBtn" title="نمایش بوکمارک‌ها">
                 🔖 <span>بوکمارک‌ها</span>
+            </button>
+            <button class="toolbar-btn" id="checkAllBtn" title="بررسی در دسترس بودن همه سایت‌ها">
+                ⚡ <span>بررسی سایت‌ها</span>
             </button>
         </div>
 
@@ -1227,6 +1198,7 @@ body {
             <span class="footer-date-wrap" style="display:none;">
                 &bull; این فهرست در تاریخ <span id="footerDate"></span> به‌روزرسانی شده است
             </span>
+            <div id="footerLinksContainer"></div>
         </footer>
     </div>
 
@@ -1239,7 +1211,7 @@ body {
 
     <script>
 // ──────────────────────────────────
-// Inline Data (no fetch needed)
+// Inline Data
 // ──────────────────────────────────
 var SITES_DATA = /* BEGIN_SITES_DATA */[
   {
@@ -1249,10 +1221,10 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "unfilteredLink": "https://downloadha.com",
     "description": "مرجع دانلود نرم‌افزار و بازی با لینک مستقیم. یکی از قدیمی‌ترین و معتبرترین سایت‌های دانلود ایرانی.",
     "tags": [
-      "دانلود",
-      "بازی",
-      "نرم‌افزار",
-      "آموزش"
+      1,
+      2,
+      3,
+      4
     ],
     "recommended": true,
     "social": {
@@ -1272,9 +1244,9 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "unfilteredLink": "https://aparat.com",
     "description": "بزرگترین پلتفرم اشتراک‌گذاری ویدیو در ایران. تماشای ویدیوهای متنوع، کانال‌های شخصی و پخش زنده.",
     "tags": [
-      "ویدیو",
-      "اشتراک‌گذاری",
-      "پخش آنلاین"
+      5,
+      6,
+      7
     ],
     "recommended": true,
     "social": {
@@ -1295,9 +1267,9 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "unfilteredLink": "https://filimo.com",
     "description": "پلتفرم استریم فیلم و سریال ایرانی و خارجی با زیرنویس و دوبله فارسی، پخش آنلاین با کیفیت بالا.",
     "tags": [
-      "نمایش خانگی",
-      "فیلم و سریال",
-      "پخش آنلاین"
+      8,
+      9,
+      7
     ],
     "recommended": true,
     "social": {
@@ -1317,9 +1289,9 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "unfilteredLink": "https://namava.ir",
     "description": "سرویس استریم ویدیوی ایرانی با کتابخانه‌ای غنی از فیلم، سریال، مستند و برنامه‌های تلویزیونی.",
     "tags": [
-      "نمایش خانگی",
-      "فیلم و سریال",
-      "پخش آنلاین"
+      8,
+      9,
+      7
     ],
     "recommended": false,
     "social": {
@@ -1338,10 +1310,10 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "unfilteredLink": "https://digikala.com",
     "description": "بزرگترین فروشگاه اینترنتی ایران. خرید انواع کالاهای دیجیتال، لوازم خانگی، مد و پوشاک، کتاب و ...",
     "tags": [
-      "خرید",
-      "فروشگاه",
-      "محصولات",
-      "کالا"
+      10,
+      11,
+      12,
+      13
     ],
     "recommended": true,
     "social": {
@@ -1361,8 +1333,8 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "unfilteredLink": "https://torob.com",
     "description": "موتور جستجوی خرید و مقایسه قیمت محصولات در فروشگاه‌های اینترنتی ایران. بهترین قیمت را پیدا کنید.",
     "tags": [
-      "خرید",
-      "مقایسه قیمت"
+      10,
+      14
     ],
     "recommended": true,
     "social": {
@@ -1380,10 +1352,8 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "unfilteredLink": "https://virgool.io",
     "description": "پلتفرم وبلاگ‌نویسی و محتوای ایرانی. انتشار مقالات، داستان‌ها و نوشته‌های کاربران در موضوعات مختلف.",
     "tags": [
-      "وبلاگ",
-      "نویسندگی",
-      "محتوا",
-      "مطالعه"
+      15,
+      16
     ],
     "recommended": true,
     "social": {
@@ -1396,52 +1366,33 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
   },
   {
     "id": 8,
-    "name": "میهن بلاگ",
-    "mainLink": "https://mihanblog.com",
-    "unfilteredLink": "https://mihanblog.com",
-    "description": "سرویس وبلاگ‌دهی قدیمی و محبوب ایرانی. ساخت وبلاگ رایگان با امکانات متنوع.",
+    "name": "رز بلاگ",
+    "mainLink": "https://www.rozblog.com/",
+    "unfilteredLink": "https://www.rzb.ir/",
+    "description": "سرویس وبلاگ‌دهی قدیمی و محبوب ایرانی. خدمات سایت ساز را بصورت رایگان به کاربران گرامی ارائـه مـی دهد.",
     "tags": [
-      "وبلاگ",
-      "وبلاگدهی",
-      "ساخت وبلاگ"
+      15,
+      17
     ],
-    "recommended": false,
+    "recommended": true,
     "social": {
-      "telegram": "https://t.me/mihanblog"
+      "telegram": "https://t.me/rzb_ir",
+      "instagram": "https://instagram.com/rozblog1388"
     },
     "donate": null,
     "customLinks": []
   },
   {
     "id": 9,
-    "name": "بلاگفا",
-    "mainLink": "https://blogfa.com",
-    "unfilteredLink": "https://blogfa.com",
-    "description": "یکی از قدیمی‌ترین سرویس‌های وبلاگ‌دهی فارسی. جامعه بزرگ وبلاگ‌نویسان ایرانی.",
-    "tags": [
-      "وبلاگ",
-      "وبلاگدهی",
-      "جامعه"
-    ],
-    "recommended": false,
-    "social": {
-      "telegram": "https://t.me/blogfa",
-      "instagram": "https://instagram.com/blogfa"
-    },
-    "donate": null,
-    "customLinks": []
-  },
-  {
-    "id": 10,
     "name": "سکان آکادمی",
     "mainLink": "https://sokanacademy.com",
     "unfilteredLink": "https://sokanacademy.com",
     "description": "آکادمی آموزش برنامه‌نویسی و تکنولوژی. دوره‌های آنلاین، مقالات تخصصی و مسیرهای یادگیری.",
     "tags": [
-      "آموزش",
-      "برنامه‌نویسی",
-      "تکنولوژی",
-      "دوره آنلاین"
+      4,
+      18,
+      19,
+      20
     ],
     "recommended": true,
     "social": {
@@ -1454,17 +1405,17 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "customLinks": []
   },
   {
-    "id": 11,
+    "id": 10,
     "name": "کافه بازار",
     "mainLink": "https://cafebazaar.ir",
     "unfilteredLink": "https://cafebazaar.ir",
     "description": "بزرگترین مارکت اپلیکیشن اندروید در ایران. دانلود اپ‌ها، بازی‌ها و برنامه‌های ایرانی.",
     "tags": [
-      "اپلیکیشن",
-      "اندروید",
-      "فروشگاه",
-      "بازی",
-      "دانلود"
+      21,
+      22,
+      11,
+      2,
+      1
     ],
     "recommended": true,
     "social": {
@@ -1477,17 +1428,17 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "customLinks": []
   },
   {
-    "id": 12,
+    "id": 11,
     "name": "طاقچه",
     "mainLink": "https://taaghche.com",
     "unfilteredLink": "https://taaghche.com",
     "description": "فروشگاه و کتابخوان الکترونیک ایرانی. خرید و مطالعه کتاب‌های الکترونیک و صوتی.",
     "tags": [
-      "کتاب",
-      "کتابخوان",
-      "کتاب صوتی",
-      "مطالعه",
-      "فروشگاه"
+      23,
+      24,
+      25,
+      26,
+      11
     ],
     "recommended": true,
     "social": {
@@ -1499,16 +1450,16 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "customLinks": []
   },
   {
-    "id": 13,
+    "id": 12,
     "name": "فیدیبو",
     "mainLink": "https://fidibo.com",
     "unfilteredLink": "https://fidibo.com",
     "description": "پلتفرم کتاب الکترونیک و صوتی ایرانی با هزاران عنوان کتاب از ناشران مطرح.",
     "tags": [
-      "کتاب",
-      "کتابخوان",
-      "کتاب الکترونیک",
-      "مطالعه"
+      23,
+      24,
+      27,
+      26
     ],
     "recommended": false,
     "social": {
@@ -1520,17 +1471,17 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "customLinks": []
   },
   {
-    "id": 14,
+    "id": 13,
     "name": "دیوار",
     "mainLink": "https://divar.ir",
     "unfilteredLink": "https://divar.ir",
     "description": "پلتفرم خرید و فروش و معاوضه کالا و خدمات. آگهی‌های رایگان در سراسر ایران.",
     "tags": [
-      "خرید",
-      "فروش",
-      "آگهی",
-      "اقتصادی",
-      "محصولات"
+      10,
+      28,
+      29,
+      30,
+      12
     ],
     "recommended": true,
     "social": {
@@ -1543,16 +1494,16 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "customLinks": []
   },
   {
-    "id": 15,
+    "id": 14,
     "name": "شیپور",
     "mainLink": "https://sheypoor.com",
     "unfilteredLink": "https://sheypoor.com",
     "description": "سایت آگهی و خرید و فروش اینترنتی. معامله سریع و آسان کالاهای نو و دست دوم.",
     "tags": [
-      "خرید",
-      "فروش",
-      "آگهی",
-      "اقتصادی"
+      10,
+      28,
+      29,
+      30
     ],
     "recommended": false,
     "social": {
@@ -1563,17 +1514,17 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "customLinks": []
   },
   {
-    "id": 16,
+    "id": 15,
     "name": "باسلام",
     "mainLink": "https://basalam.com",
     "unfilteredLink": "https://basalam.com",
     "description": "بازار آنلاین صنایع دستی و محصولات بومی ایرانی. حمایت از کسب‌وکارهای کوچک و هنرمندان.",
     "tags": [
-      "خرید",
-      "صنایع دستی",
-      "محصولات",
-      "هنر",
-      "فروشگاه"
+      10,
+      31,
+      12,
+      32,
+      11
     ],
     "recommended": true,
     "social": {
@@ -1585,15 +1536,15 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "customLinks": []
   },
   {
-    "id": 17,
+    "id": 16,
     "name": "نشان",
     "mainLink": "https://neshan.org",
     "unfilteredLink": "https://neshan.org",
     "description": "اپلیکیشن و سایت نقشه و مسیریاب ایرانی. ناوبری دقیق با نقشه‌های آفلاین و ترافیک زنده.",
     "tags": [
-      "مسیریاب",
-      "نقشه",
-      "اپلیکیشن"
+      33,
+      34,
+      21
     ],
     "recommended": true,
     "social": {
@@ -1605,15 +1556,15 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "customLinks": []
   },
   {
-    "id": 18,
+    "id": 17,
     "name": "بلد",
     "mainLink": "https://balad.ir",
     "unfilteredLink": "https://balad.ir",
     "description": "نقشه و مسیریاب ایرانی با رابط کاربری ساده. مسیریابی دقیق در شهرهای ایران.",
     "tags": [
-      "مسیریاب",
-      "نقشه",
-      "اپلیکیشن"
+      33,
+      34,
+      21
     ],
     "recommended": false,
     "social": {
@@ -1624,17 +1575,17 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "customLinks": []
   },
   {
-    "id": 19,
+    "id": 18,
     "name": "مووی‌یاب",
     "mainLink": "https://movieyaab.ir",
     "unfilteredLink": "https://movieyaab.ir",
     "description": "پلتفرم جستجوی فیلم، سریال و انیمه. جستجوی نام فارسی یا انگلیسی فیلم و سریال، دریافت لینک دانلود و پخش آنلاین. متصل به منابع متنوع شامل MovieBox، Animeone، FilmKio، Moviejavan، Simba و AnimeGate.",
     "tags": [
-      "فیلم و سریال",
-      "انیمه",
-      "پخش آنلاین",
-      "دانلود",
-      "بدون سانسور"
+      9,
+      35,
+      7,
+      1,
+      36
     ],
     "recommended": true,
     "social": {
@@ -1646,17 +1597,17 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "customLinks": []
   },
   {
-    "id": 20,
+    "id": 19,
     "name": "دنیای سریال (سریال بلاگ)",
-    "mainLink": "https://serialblog.top/",
-    "unfilteredLink": "https://donyayeserial.com/",
+    "mainLink": "https://donyayeserial.com/",
+    "unfilteredLink": "https://serialblog.top/",
     "description": "دانلود فیلم و سریال های خارجی بدون سانسور به همراه زیرنویس و دوبله فارسی کاملا رایگان. آرشیو جامع با بیش از ۱۰ هزار عنوان.",
     "tags": [
-      "فیلم و سریال",
-      "دانلود",
-      "بدون سانسور",
-      "زیرنویس",
-      "دوبله"
+      9,
+      1,
+      36,
+      37,
+      38
     ],
     "recommended": true,
     "social": {
@@ -1680,15 +1631,15 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     ]
   },
   {
-    "id": 21,
+    "id": 20,
     "name": "ذره‌بین",
     "mainLink": "https://zarebin.ir",
     "unfilteredLink": "https://zarebin.ir",
     "description": "جستجوگر هوشمند فارسی با فناوری متا سرچ و هوش مصنوعی. جستجوی آینده در دستان شما — خلاقیت، تولید تصویر، خلاصه‌سازی و پاسخ به سوالات روزمره. اولین هوش مصنوعی ایرانی متصل به وب زنده.",
     "tags": [
-      "جستجوگر",
-      "هوش مصنوعی",
-      "تولید تصویر"
+      39,
+      40,
+      41
     ],
     "recommended": false,
     "social": {
@@ -1715,13 +1666,13 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     ]
   },
   {
-    "id": 22,
+    "id": 21,
     "name": "گردو",
     "mainLink": "https://gerdoo.me",
     "unfilteredLink": "https://gerdoo.me",
     "description": "فراجستجوگر ایرانی با حریم شخصی بالا. جستجو در سایت‌ها، عکس‌ها، فیلم‌ها و خبرها. امکان رتبه‌بندی سایت‌ها و تبلیغات.",
     "tags": [
-      "جستجوگر"
+      39
     ],
     "recommended": false,
     "social": {
@@ -1750,14 +1701,14 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     ]
   },
   {
-    "id": 23,
+    "id": 22,
     "name": "برتینا",
     "mainLink": "https://www.bertina.ir",
     "unfilteredLink": "https://search.bertina.ir",
     "description": "موتور جستجوی فارسی برتینا — جستجوی سریع و آسان در وب. قدرتمندترین موتور جستجوی هوش مصنوعی فارسی با سرویس‌های جانبی شامل هوش مصنوعی رایگان، ایمیل، مترجم، DNS و هواشناسی.",
     "tags": [
-      "جستجوگر",
-      "هوش مصنوعی"
+      39,
+      40
     ],
     "recommended": true,
     "social": {
@@ -1799,18 +1750,18 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     ]
   },
   {
-    "id": 24,
+    "id": 23,
     "name": "ویجی دی ال",
     "mainLink": "https://vgdl.ir",
     "unfilteredLink": "https://vgdl.ir",
     "description": "دانلود بازی کامپیوتر (PC) ویندوز با لینک مستقیم. انواع ژانرها شامل اکشن، استراتژیک، نقش‌آفرینی، شوتر، ترسناک، ماجراجویی و چندنفره.",
     "tags": [
-      "بازی",
-      "دانلود",
-      "فارسی ساز",
-      "کامپیوتر",
-      "اندروید",
-      "نرم افزار"
+      2,
+      1,
+      42,
+      43,
+      22,
+      45
     ],
     "recommended": true,
     "social": {
@@ -1822,17 +1773,17 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "customLinks": []
   },
   {
-    "id": 25,
+    "id": 24,
     "name": "فن ساب",
     "mainLink": "https://fansub.ir",
     "unfilteredLink": "https://fansub.ir",
     "description": "تولیدکننده و فروشنده فارسی‌ساز بازی‌های ویدیویی. ارائه فارسی‌ساز برای بازی‌های کامپیوتر، PS4، PS5، Xbox، Switch و اندروید. بخش فارسی‌سازهای رایگان، باندل‌های فارسی‌ساز و مقالات تخصصی بازی.",
     "tags": [
-      "فارسی ساز",
-      "بازی",
-      "کامپیوتر",
-      "کنسول",
-      "اندروید"
+      42,
+      2,
+      43,
+      44,
+      22
     ],
     "recommended": true,
     "social": {
@@ -1875,16 +1826,33 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     ]
   },
   {
-    "id": 26,
+    "id": 25,
     "name": "انیمکس",
     "mainLink": "https://animex.click",
     "unfilteredLink": "https://animex.click",
     "description": "دانلود انیمه، فیلم و سریال کره‌ای با لینک مستقیم و زیرنویس فارسی. آرشیو جامع انیمه‌ها و سریال‌های آسیایی با کیفیت بالا.",
     "tags": [
-      "انیمه",
-      "دانلود",
-      "فیلم و سریال",
-      "زیرنویس"
+      35,
+      1,
+      9,
+      37
+    ],
+    "recommended": true,
+    "social": {},
+    "donate": null,
+    "customLinks": []
+  },
+  {
+    "id": 26,
+    "name": "مانهوا",
+    "mainLink": "https://m4y.ir",
+    "unfilteredLink": "https://m4y.ir",
+    "description": "دانلود مانگا، مانهوا، مانها، کمیک و انیمه با ترجمه فارسی. بزرگترین مرجع دانلود کمیک و انیمه با زیرنویس و ترجمه فارسی.",
+    "tags": [
+      46,
+      47,
+      35,
+      1
     ],
     "recommended": true,
     "social": {},
@@ -1893,31 +1861,14 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
   },
   {
     "id": 27,
-    "name": "مانهوا",
-    "mainLink": "https://m4y.ir",
-    "unfilteredLink": "https://m4y.ir",
-    "description": "دانلود مانگا، مانهوا، مانها، کمیک و انیمه با ترجمه فارسی. بزرگترین مرجع دانلود کمیک و انیمه با زیرنویس و ترجمه فارسی.",
-    "tags": [
-      "مانگا",
-      "کمیک",
-      "انیمه",
-      "دانلود"
-    ],
-    "recommended": true,
-    "social": {},
-    "donate": null,
-    "customLinks": []
-  },
-  {
-    "id": 28,
     "name": "سابکده",
     "mainLink": "https://subkade.ir",
     "unfilteredLink": "https://subkade.ir",
     "description": "مرجع دانلود زیرنویس فارسی، انگلیسی و عربی فیلم ها و سریال های روز دنیا",
     "tags": [
-      "زیرنویس فارسی",
-      "دانلود",
-      "فیلم و سریال"
+      48,
+      1,
+      9
     ],
     "recommended": true,
     "social": {
@@ -1929,14 +1880,14 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "customLinks": []
   },
   {
-    "id": 29,
+    "id": 28,
     "name": "ساب استار",
     "mainLink": "https://subtitlestar.com/",
     "unfilteredLink": "https://subtitlestar.com/",
     "description": "مرجع دانلود زیرنویس فارسی",
     "tags": [
-      "زیرنویس فارسی",
-      "دانلود"
+      48,
+      1
     ],
     "recommended": false,
     "social": {},
@@ -1944,15 +1895,15 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
     "customLinks": []
   },
   {
-    "id": 30,
+    "id": 29,
     "name": "ساب تو مووی",
     "mainLink": "https://subf2m.co/",
     "unfilteredLink": "https://subzone.ir/",
     "description": "زیرنویس سریال‌های تلویزیونی، فیلم‌ها و موزیک‌ویدئوها،  گردآوری شده توسط کاربران.",
     "tags": [
-      "زیرنویس فارسی",
-      "دانلود",
-      "فیلم و سریال"
+      48,
+      1,
+      9
     ],
     "recommended": false,
     "social": {
@@ -1963,9 +1914,365 @@ var SITES_DATA = /* BEGIN_SITES_DATA */[
   }
 ]/* END_SITES_DATA */;
 
+var TAGS_DATA = /* BEGIN_TAGS_DATA */[
+  {
+    "id": 1,
+    "name": "دانلود",
+    "icon": "📥"
+  },
+  {
+    "id": 2,
+    "name": "بازی",
+    "icon": "🎮"
+  },
+  {
+    "id": 3,
+    "name": "نرم‌افزار",
+    "icon": "💻"
+  },
+  {
+    "id": 4,
+    "name": "آموزش",
+    "icon": "🎓"
+  },
+  {
+    "id": 5,
+    "name": "ویدیو",
+    "icon": "🎥"
+  },
+  {
+    "id": 6,
+    "name": "اشتراک‌گذاری",
+    "icon": "🔗"
+  },
+  {
+    "id": 7,
+    "name": "پخش آنلاین",
+    "icon": "▶️"
+  },
+  {
+    "id": 8,
+    "name": "نمایش خانگی",
+    "icon": "📺"
+  },
+  {
+    "id": 9,
+    "name": "فیلم و سریال",
+    "icon": "🎬"
+  },
+  {
+    "id": 10,
+    "name": "خرید",
+    "icon": "🛒"
+  },
+  {
+    "id": 11,
+    "name": "فروشگاه",
+    "icon": "🏪"
+  },
+  {
+    "id": 12,
+    "name": "محصولات",
+    "icon": "📦"
+  },
+  {
+    "id": 13,
+    "name": "کالا",
+    "icon": "🧩"
+  },
+  {
+    "id": 14,
+    "name": "مقایسه قیمت",
+    "icon": "📊"
+  },
+  {
+    "id": 15,
+    "name": "وبلاگ",
+    "icon": "📝"
+  },
+  {
+    "id": 16,
+    "name": "نویسندگی",
+    "icon": "✍️"
+  },
+  {
+    "id": 17,
+    "name": "وبلاگدهی",
+    "icon": "📝"
+  },
+  {
+    "id": 18,
+    "name": "برنامه‌نویسی",
+    "icon": "💻"
+  },
+  {
+    "id": 19,
+    "name": "تکنولوژی",
+    "icon": "⚙️"
+  },
+  {
+    "id": 20,
+    "name": "دوره آنلاین",
+    "icon": "🎓"
+  },
+  {
+    "id": 21,
+    "name": "اپلیکیشن",
+    "icon": "📱"
+  },
+  {
+    "id": 22,
+    "name": "اندروید",
+    "icon": "📱"
+  },
+  {
+    "id": 23,
+    "name": "کتاب",
+    "icon": "📚"
+  },
+  {
+    "id": 24,
+    "name": "کتابخوان",
+    "icon": "📖"
+  },
+  {
+    "id": 25,
+    "name": "کتاب صوتی",
+    "icon": "🎧"
+  },
+  {
+    "id": 26,
+    "name": "مطالعه",
+    "icon": "📖"
+  },
+  {
+    "id": 27,
+    "name": "کتاب الکترونیک",
+    "icon": "📱"
+  },
+  {
+    "id": 28,
+    "name": "فروش",
+    "icon": "💰"
+  },
+  {
+    "id": 29,
+    "name": "آگهی",
+    "icon": "📢"
+  },
+  {
+    "id": 30,
+    "name": "اقتصادی",
+    "icon": "📈"
+  },
+  {
+    "id": 31,
+    "name": "صنایع دستی",
+    "icon": "🎨"
+  },
+  {
+    "id": 32,
+    "name": "هنر",
+    "icon": "🎨"
+  },
+  {
+    "id": 33,
+    "name": "مسیریاب",
+    "icon": "🧭"
+  },
+  {
+    "id": 34,
+    "name": "نقشه",
+    "icon": "🗺️"
+  },
+  {
+    "id": 35,
+    "name": "انیمه",
+    "icon": "🎌"
+  },
+  {
+    "id": 36,
+    "name": "بدون سانسور",
+    "icon": "🔓"
+  },
+  {
+    "id": 37,
+    "name": "زیرنویس",
+    "icon": "💬"
+  },
+  {
+    "id": 38,
+    "name": "دوبله",
+    "icon": "🎙️"
+  },
+  {
+    "id": 39,
+    "name": "جستجوگر",
+    "icon": "🔍"
+  },
+  {
+    "id": 40,
+    "name": "هوش مصنوعی",
+    "icon": "🤖"
+  },
+  {
+    "id": 41,
+    "name": "تولید تصویر",
+    "icon": "🖼️"
+  },
+  {
+    "id": 42,
+    "name": "فارسی ساز",
+    "icon": "🌍"
+  },
+  {
+    "id": 43,
+    "name": "کامپیوتر",
+    "icon": "🖥️"
+  },
+  {
+    "id": 44,
+    "name": "کنسول",
+    "icon": "🎮"
+  },
+  {
+    "id": 45,
+    "name": "نرم افزار",
+    "icon": "💿"
+  },
+  {
+    "id": 46,
+    "name": "مانگا",
+    "icon": "📘"
+  },
+  {
+    "id": 47,
+    "name": "کمیک",
+    "icon": "💥"
+  },
+  {
+    "id": 48,
+    "name": "زیرنویس فارسی",
+    "icon": "💬"
+  }
+]/* END_TAGS_DATA */;
+
 var META_DATA = /* BEGIN_META_DATA */{
-  "lastUpdated": "1405/02/07"
+  "lastUpdated": "1405/02/07",
+  "footerLinks": [
+    {
+      "label": "نسخه داخلی",
+      "url": "https://awesomeiran.s3-website.ir-thr-at1.arvanstorage.ir/",
+      "icon": "🏠",
+      "iconFA": "fa-solid fa-house"
+    },
+    {
+      "label": "نسخه خارجی",
+      "url": "https://ali-f-harandi.github.io/awesome-iran/",
+      "icon": "🌍",
+      "iconFA": "fa-solid fa-globe"
+    },
+    {
+      "label": "نسخه آفلاین",
+      "url": "https://awesomeiran.rzb.ir/",
+      "icon": "💾",
+      "iconFA": "fa-solid fa-floppy-disk"
+    },
+    {
+      "label": "گزارش مشکلات و پیشنهاد سایت جدید",
+      "url": "https://awesomeiran.rzb.ir/1",
+      "icon": "💬",
+      "iconFA": "fa-solid fa-comments"
+    }
+  ]
 }/* END_META_DATA */;
+
+var SOCIALS_DATA = /* BEGIN_SOCIALS_DATA */[
+  {
+    "id": 1,
+    "key": "telegram",
+    "label": "تلگرام",
+    "icon": "✈️"
+  },
+  {
+    "id": 2,
+    "key": "telegram_bot",
+    "label": "ربات تلگرام",
+    "icon": "🤖"
+  },
+  {
+    "id": 3,
+    "key": "instagram",
+    "label": "اینستاگرام",
+    "icon": "📷"
+  },
+  {
+    "id": 4,
+    "key": "twitter",
+    "label": "توییتر",
+    "icon": "🐦"
+  },
+  {
+    "id": 5,
+    "key": "youtube",
+    "label": "یوتیوب",
+    "icon": "▶️"
+  },
+  {
+    "id": 6,
+    "key": "eitaa",
+    "label": "ایتا",
+    "icon": "📨"
+  },
+  {
+    "id": 7,
+    "key": "rubika",
+    "label": "روبیکا",
+    "icon": "💬"
+  },
+  {
+    "id": 8,
+    "key": "soroush",
+    "label": "سروش",
+    "icon": "🪶"
+  },
+  {
+    "id": 9,
+    "key": "bale",
+    "label": "بله",
+    "icon": "🕊️"
+  },
+  {
+    "id": 10,
+    "key": "aparat",
+    "label": "آپارات",
+    "icon": "🎬"
+  },
+  {
+    "id": 11,
+    "key": "whatsapp",
+    "label": "واتساپ",
+    "icon": "📱"
+  },
+  {
+    "id": 12,
+    "key": "linkedin",
+    "label": "لینکدین",
+    "icon": "💼"
+  },
+  {
+    "id": 13,
+    "key": "discord",
+    "label": "دیسکورد",
+    "icon": "🎮"
+  },
+  {
+    "id": 14,
+    "key": "github",
+    "label": "گیت‌هاب",
+    "icon": "🐙"
+  }
+]/* END_SOCIALS_DATA */;
 
 // ──────────────────────────────────
 // Dark Mode (runs immediately)
@@ -1994,7 +2301,9 @@ var META_DATA = /* BEGIN_META_DATA */{
     // State
     // ──────────────────────────────────
     var sitesData = [];
-    var activeTags = new Set();
+    var tagsMap = new Map();
+    var socialsMap = new Map();
+    var activeTags = new Set();       // contains tag names
     var searchQuery = '';
     var expandedCardIds = new Set();
     var hashUpdateTimer = null;
@@ -2006,6 +2315,10 @@ var META_DATA = /* BEGIN_META_DATA */{
     var debounceTimer = null;
 
     var BOOKMARK_KEY = 'awesome-iran-bookmarks';
+
+    // site availability check state
+    var siteCheckStatus = new Map();
+    var siteCheckControllers = new Map();
 
     // ──────────────────────────────────
     // DOM References
@@ -2023,6 +2336,7 @@ var META_DATA = /* BEGIN_META_DATA */{
     var viewToggle = document.getElementById('viewToggle');
     var expandAllBtn = document.getElementById('expandAllBtn');
     var bookmarkFilterBtn = document.getElementById('bookmarkFilterBtn');
+    var checkAllBtn = document.getElementById('checkAllBtn');
 
     // ──────────────────────────────────
     // Bookmarks: Load/Save
@@ -2041,9 +2355,7 @@ var META_DATA = /* BEGIN_META_DATA */{
     function saveBookmarks() {
         try {
             localStorage.setItem(BOOKMARK_KEY, JSON.stringify(Array.from(bookmarkedIds)));
-        } catch(e) {
-            // silently fail
-        }
+        } catch(e) {}
     }
 
     function toggleBookmark(siteId) {
@@ -2066,91 +2378,80 @@ var META_DATA = /* BEGIN_META_DATA */{
     }
 
     // ──────────────────────────────────
-    // Category Icon Map
+    // Tag Helpers
     // ──────────────────────────────────
-    function getCategoryIcon(tag) {
-        var iconMap = {
-            'دانلود': '📥',
-            'فیلم و سریال': '🎬',
-            'استریم': '▶️',
-            'سرگرمی': '🎭',
-            'خرید': '🛒',
-            'فروشگاه': '🏪',
-            'وبلاگ': '📝',
-            'وبلاگدهی': '📝',
-            'آموزش': '🎓',
-            'برنامه‌نویسی': '💻',
-            'تکنولوژی': '💻',
-            'ویدیو': '🎥',
-            'اشتراک‌گذاری': '🔗',
-            'پخش زنده': '📡',
-            'کتاب': '📚',
-            'کتابخوان': '📖',
-            'آگهی': '📢',
-            'نقشه': '🗺️',
-            'مسیریاب': '🧭',
-            'جستجوگر': '🔍',
-            'فراجستجوگر': '🔍',
-            'هوش مصنوعی': '🤖',
-            'بازی': '🎮',
-            'فارسی ساز': '🌍',
-            'اپلیکیشن': '📱',
-            'اندروید': '📱',
-            'محصولات': '📦',
-            'اقتصادی': '💰',
-            'مقایسه قیمت': '📊',
-            'نویسندگی': '✍️',
-            'محتوا': '📰',
-            'مطالعه': '📖',
-            'ساخت وبلاگ': '✏️',
-            'جامعه': '👥',
-            'دوره آنلاین': '🎓',
-            'بدون سانسور': '🔓',
-            'زیرنویس': '💬',
-            'دوبله': '🎙️',
-            'رایگان': '🎁',
-            'انیمه': '🎌',
-            'پخش آنلاین': '▶️',
-            'متا سرچ': '🔎',
-            'دستیار هوشمند': '🤖',
-            'تولید تصویر': '🎨',
-            'حریم شخصی': '🔒',
-            'وبگرد': '🌐',
-            'کامپیوتر': '🖥️',
-            'کنسول': '🎮',
-            'صنایع دستی': '🎨',
-            'هنر': '🎨',
-            'ناوبری': '🧭'
-        };
-        return iconMap[tag] || '📌';
+    function getTagName(tagId) {
+        var t = tagsMap.get(tagId);
+        return t ? t.name : '';
+    }
+
+    function getTagIcon(tagId) {
+        var t = tagsMap.get(tagId);
+        return t ? t.icon : '📌';
+    }
+
+    function getCategoryIcon(tagId) {
+        return '<span>' + getTagIcon(tagId) + '</span>';
+    }
+
+    function getSiteTagNames(site) {
+        return site.tags.map(function(id) { return getTagName(id); }).filter(Boolean);
     }
 
     // ──────────────────────────────────
-    // Load Data (inline, no fetch)
+    // Load Data (inline)
     // ──────────────────────────────────
     function loadSitesData() {
         sitesData = SITES_DATA;
+        // Build tagsMap
+        TAGS_DATA.forEach(function(t) { tagsMap.set(t.id, t); });
+        // Build socialsMap
+        SOCIALS_DATA.forEach(function(s) { socialsMap.set(s.key, s); });
         loadMetaData();
         init();
     }
 
     function loadMetaData() {
         var meta = META_DATA;
-        if (meta && meta.lastUpdated && footerDateEl) {
+        if (meta.lastUpdated && footerDateEl) {
             footerDateEl.textContent = meta.lastUpdated;
             var wrap = footerDateEl.closest('.footer-date-wrap');
             if (wrap) wrap.style.display = '';
         }
+        renderFooterLinks(meta.footerLinks);
+    }
+
+    function renderFooterLinks(links) {
+        var container = document.getElementById('footerLinksContainer');
+        if (!container) return;
+        if (!links || !Array.isArray(links) || links.length === 0) {
+            container.style.display = 'none';
+            return;
+        }
+        container.style.display = '';
+        var html = '<div class="footer-links">';
+        links.forEach(function(link) {
+            html +=
+                '<a href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener noreferrer" class="footer-link-item" title="' + escapeHtml(link.label) + '">' +
+                '<span class="link-icon">' + (link.icon || '') + '</span>' +
+                escapeHtml(link.label) +
+                '</a>';
+        });
+        html += '</div>';
+        container.innerHTML = html;
     }
 
     // ──────────────────────────────────
-    // Build All Unique Tags (sorted by frequency)
+    // Build All Unique Tags (by name, sorted by frequency)
     // ──────────────────────────────────
     function getAllTags() {
         var tagCounts = {};
         sitesData.forEach(function(site) {
-            site.tags.forEach(function(tag) {
-                tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+            site.tags.forEach(function(tagId) {
+                var name = getTagName(tagId);
+                if (name) {
+                    tagCounts[name] = (tagCounts[name] || 0) + 1;
+                }
             });
         });
         return Object.entries(tagCounts)
@@ -2158,7 +2459,7 @@ var META_DATA = /* BEGIN_META_DATA */{
                 if (b[1] !== a[1]) return b[1] - a[1];
                 return a[0].localeCompare(b[0], 'fa');
             })
-            .map(function(entry) { return { tag: entry[0], count: entry[1] }; });
+            .map(function(entry) { return { name: entry[0], count: entry[1] }; });
     }
 
     // ──────────────────────────────────
@@ -2167,15 +2468,15 @@ var META_DATA = /* BEGIN_META_DATA */{
     function renderTagChips() {
         var allTags = getAllTags();
         tagsContainer.innerHTML = allTags.map(function(item) {
-            var isActive = activeTags.has(item.tag);
-            return '<span class="tag-chip' + (isActive ? ' active' : '') + '"'
-                + ' data-tag="' + escapeHtml(item.tag) + '"'
-                + ' role="button"'
-                + ' tabindex="0"'
-                + ' aria-pressed="' + isActive + '">'
-                + escapeHtml(item.tag)
-                + ' <span class="tag-count">' + item.count + '</span>'
-                + '</span>';
+            var isActive = activeTags.has(item.name);
+            return '<span class="tag-chip' + (isActive ? ' active' : '') + '"' +
+                ' data-tag="' + escapeHtml(item.name) + '"' +
+                ' role="button"' +
+                ' tabindex="0"' +
+                ' aria-pressed="' + isActive + '">' +
+                escapeHtml(item.name) +
+                ' <span class="tag-count">' + item.count + '</span>' +
+                '</span>';
         }).join('');
 
         if (activeTags.size > 0) {
@@ -2199,11 +2500,11 @@ var META_DATA = /* BEGIN_META_DATA */{
         return div.innerHTML;
     }
 
-    function toggleTag(tag) {
-        if (activeTags.has(tag)) {
-            activeTags.delete(tag);
+    function toggleTag(tagName) {
+        if (activeTags.has(tagName)) {
+            activeTags.delete(tagName);
         } else {
-            activeTags.add(tag);
+            activeTags.add(tagName);
         }
         renderTagChips();
         filterAndRender();
@@ -2289,23 +2590,23 @@ var META_DATA = /* BEGIN_META_DATA */{
         } else {
             var tagFreq = {};
             sitesData.forEach(function(site) {
-                var mainTag = (site.tags && site.tags.length > 0) ? site.tags[0] : '';
-                if (mainTag) tagFreq[mainTag] = (tagFreq[mainTag] || 0) + 1;
+                var mainTagName = getTagName(site.tags[0] || '');
+                if (mainTagName) tagFreq[mainTagName] = (tagFreq[mainTagName] || 0) + 1;
             });
-            var sortedTags = Object.entries(tagFreq)
+            var sortedTagNames = Object.entries(tagFreq)
                 .sort(function(a, b) {
                     if (b[1] !== a[1]) return b[1] - a[1];
                     return a[0].localeCompare(b[0], 'fa');
                 })
                 .map(function(entry) { return entry[0]; });
             var tagOrder = {};
-            sortedTags.forEach(function(tag, idx) { tagOrder[tag] = idx; });
+            sortedTagNames.forEach(function(name, idx) { tagOrder[name] = idx; });
 
             sites.sort(function(a, b) {
-                var tagA = (a.tags && a.tags.length > 0) ? a.tags[0] : '';
-                var tagB = (b.tags && b.tags.length > 0) ? b.tags[0] : '';
-                var orderA = tagOrder[tagA] !== undefined ? tagOrder[tagA] : 9999;
-                var orderB = tagOrder[tagB] !== undefined ? tagOrder[tagB] : 9999;
+                var mainA = getTagName(a.tags[0] || '');
+                var mainB = getTagName(b.tags[0] || '');
+                var orderA = tagOrder[mainA] !== undefined ? tagOrder[mainA] : 9999;
+                var orderB = tagOrder[mainB] !== undefined ? tagOrder[mainB] : 9999;
                 if (orderA !== orderB) return orderA - orderB;
                 if (a.recommended && !b.recommended) return -1;
                 if (!a.recommended && b.recommended) return 1;
@@ -2321,17 +2622,18 @@ var META_DATA = /* BEGIN_META_DATA */{
     function getFilteredSites() {
         var query = searchQuery.trim().toLowerCase();
         var filtered = sitesData.filter(function(site) {
+            var tagNames = getSiteTagNames(site).map(function(n) { return n.toLowerCase(); });
             var matchesSearch =
                 !query ||
                 site.name.toLowerCase().indexOf(query) !== -1 ||
-                site.tags.some(function(tag) { return tag.toLowerCase().indexOf(query) !== -1; }) ||
                 (site.description && site.description.toLowerCase().indexOf(query) !== -1) ||
                 site.mainLink.toLowerCase().indexOf(query) !== -1 ||
-                site.unfilteredLink.toLowerCase().indexOf(query) !== -1;
+                site.unfilteredLink.toLowerCase().indexOf(query) !== -1 ||
+                tagNames.some(function(tagName) { return tagName.indexOf(query) !== -1; });
 
             var matchesTags =
                 activeTags.size === 0 ||
-                site.tags.some(function(tag) { return activeTags.has(tag); });
+                tagNames.some(function(tagName) { return activeTags.has(tagName); });
 
             var matchesBookmarks = !showBookmarksOnly || bookmarkedIds.has(site.id);
 
@@ -2342,8 +2644,8 @@ var META_DATA = /* BEGIN_META_DATA */{
             filtered.sort(function(a, b) {
                 if (a.recommended && !b.recommended) return -1;
                 if (!a.recommended && b.recommended) return 1;
-                var mainA = (a.tags && a.tags.length > 0) ? a.tags[0] : '';
-                var mainB = (b.tags && b.tags.length > 0) ? b.tags[0] : '';
+                var mainA = getTagName(a.tags[0] || '');
+                var mainB = getTagName(b.tags[0] || '');
                 var matchA = activeTags.has(mainA) ? 0 : 1;
                 var matchB = activeTags.has(mainB) ? 0 : 1;
                 if (matchA !== matchB) return matchA - matchB;
@@ -2357,7 +2659,7 @@ var META_DATA = /* BEGIN_META_DATA */{
     }
 
     // ──────────────────────────────────
-    // Clipboard Copy Function (with execCommand fallback for file://)
+    // Clipboard Copy Function
     // ──────────────────────────────────
     function copyToClipboard(text, element) {
         if (navigator.clipboard && window.isSecureContext) {
@@ -2384,8 +2686,6 @@ var META_DATA = /* BEGIN_META_DATA */{
             document.body.removeChild(textarea);
             if (success) {
                 showCopySuccess(element);
-            } else {
-                console.warn('کپی انجام نشد: execCommand failed');
             }
         } catch (err) {
             console.warn('کپی انجام نشد:', err);
@@ -2406,47 +2706,27 @@ var META_DATA = /* BEGIN_META_DATA */{
     }
 
     // ──────────────────────────────────
-    // Social Media Badge HTML Generator (emoji icons)
+    // Social Media Badge HTML Generator (emoji only, from socialsMap)
     // ──────────────────────────────────
     function getSocialBadges(social) {
         if (!social) return '';
-        var platformConfig = {
-            telegram_bot: { label: 'ربات تلگرام', cls: 'social-telegram', icon: '🤖' },
-            telegram: { label: 'تلگرام', cls: 'social-telegram', icon: '✈️' },
-            instagram: { label: 'اینستاگرام', cls: 'social-instagram', icon: '📷' },
-            twitter: { label: 'توییتر', cls: 'social-twitter', icon: '🐦' },
-            youtube: { label: 'یوتیوب', cls: 'social-youtube', icon: '▶️' },
-            eitaa: { label: 'ایتا', cls: 'social-eitaa', icon: '📨' },
-            rubika: { label: 'روبیکا', cls: 'social-rubika', icon: '💬' },
-            soroush: { label: 'سروش', cls: 'social-soroush', icon: '🪶' },
-            bale: { label: 'بله', cls: 'social-bale', icon: '🕊️' },
-            aparat: { label: 'آپارات', cls: 'social-aparat', icon: '🎬' },
-            whatsapp: { label: 'واتساپ', cls: 'social-whatsapp', icon: '📱' },
-            linkedin: { label: 'لینکدین', cls: 'social-linkedin', icon: '💼' },
-            discord: { label: 'دیسکورد', cls: 'social-discord', icon: '🎮' }
-        };
-
         var badges = [];
-        var entries = Object.entries(social);
-        for (var i = 0; i < entries.length; i++) {
-            var platform = entries[i][0];
-            var url = entries[i][1];
-            if (url && platformConfig[platform]) {
-                var config = platformConfig[platform];
+        for (var key in social) {
+            if (social[key] && socialsMap.has(key)) {
+                var cfg = socialsMap.get(key);
                 badges.push(
-                    '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer"'
-                    + ' class="social-badge ' + config.cls + '"'
-                    + ' title="' + config.label + '"'
-                    + ' onclick="event.stopPropagation();">'
-                    + config.icon + ' ' + config.label
-                    + '</a>'
+                    '<a href="' + escapeHtml(social[key]) + '" target="_blank" rel="noopener noreferrer"' +
+                    ' class="social-badge ' + (cfg.cls || 'social-custom') + '"' +
+                    ' title="' + cfg.label + '"' +
+                    ' onclick="event.stopPropagation();">' +
+                    cfg.icon + ' ' + cfg.label +
+                    '</a>'
                 );
             }
         }
-        return badges.length > 0 ?
-            '<div class="social-title">شبکه‌های اجتماعی و لینک‌های مرتبط:</div>'
-            + '<div class="social-badges">' + badges.join('') + '</div>' :
-            '';
+        if (badges.length === 0) return '';
+        return '<div class="social-title">شبکه‌های اجتماعی و لینک‌های مرتبط:</div>' +
+            '<div class="social-badges">' + badges.join('') + '</div>';
     }
 
     // ──────────────────────────────────
@@ -2465,16 +2745,163 @@ var META_DATA = /* BEGIN_META_DATA */{
             'app': '📱',
             'heart': '❤️'
         };
-        var badges = customLinks.map(function(cl) {
+        var configMap = {};
+        var entries = customLinks.map(function(cl) {
             var icon = (cl.icon && iconMap[cl.icon]) || iconMap['link'];
-            return '<a href="' + escapeHtml(cl.url) + '" target="_blank" rel="noopener noreferrer"'
-                + ' class="social-badge social-custom"'
-                + ' title="' + escapeHtml(cl.title) + '"'
-                + ' onclick="event.stopPropagation();">'
-                + icon + ' ' + escapeHtml(cl.title)
-                + '</a>';
-        }).join('');
-        return '<div class="custom-links-badges">' + badges + '</div>';
+            var key = cl.url;
+            configMap[key] = { label: cl.title, cls: 'social-custom', icon: icon };
+            return [key, cl.url];
+        });
+        return buildBadgeLinks(entries, configMap, 'custom-links-badges', 'div');
+    }
+
+    function buildBadgeLinks(entries, configMap, containerClass, wrapperTag) {
+        wrapperTag = wrapperTag || 'div';
+        var badges = [];
+        for (var i = 0; i < entries.length; i++) {
+            var key = entries[i][0];
+            var value = entries[i][1];
+            if (value && configMap[key]) {
+                var cfg = configMap[key];
+                badges.push(
+                    '<a href="' + escapeHtml(value) + '" target="_blank" rel="noopener noreferrer"' +
+                    ' class="social-badge ' + cfg.cls + '"' +
+                    ' title="' + cfg.label + '"' +
+                    ' onclick="event.stopPropagation();">' +
+                    cfg.icon + ' ' + cfg.label +
+                    '</a>'
+                );
+            }
+        }
+        if (badges.length === 0) return '';
+        return '<' + wrapperTag + ' class="' + containerClass + '">' + badges.join('') + '</' + wrapperTag + '>';
+    }
+
+    // ──────────────────────────────────
+    // Core check logic (returns promise)
+    // ──────────────────────────────────
+    function checkSiteInner(siteId) {
+        var site = sitesData.find(function(s) { return s.id === siteId; });
+        if (!site) return;
+
+        if (siteCheckControllers.has(siteId)) {
+            siteCheckControllers.get(siteId).abort();
+            siteCheckControllers.delete(siteId);
+        }
+
+        siteCheckStatus.set(siteId, 'loading');
+
+        var url = site.unfilteredLink;
+        var controller = new AbortController();
+        siteCheckControllers.set(siteId, controller);
+
+        var timeoutId = setTimeout(function() {
+            controller.abort();
+        }, 8000);
+
+        return fetch(url, { mode: 'no-cors', signal: controller.signal, cache: 'no-cache' })
+            .then(function() {
+                clearTimeout(timeoutId);
+                siteCheckStatus.set(siteId, 'success');
+            })
+            .catch(function() {
+                clearTimeout(timeoutId);
+                siteCheckStatus.set(siteId, 'fail');
+            })
+            .finally(function() {
+                siteCheckControllers.delete(siteId);
+            });
+    }
+
+    function updateCheckButtonUI(siteId) {
+        var btn = sitesGrid.querySelector('[data-id="' + siteId + '"] .check-site-btn');
+        if (!btn) return;
+        var status = siteCheckStatus.get(siteId);
+        btn.classList.remove('checking', 'check-success', 'check-fail');
+        btn.disabled = false;
+        if (status === 'loading') {
+            btn.classList.add('checking');
+            btn.innerHTML = '⏳';
+            btn.title = 'در حال بررسی...';
+            btn.disabled = true;
+        } else if (status === 'success') {
+            btn.classList.add('check-success');
+            btn.innerHTML = '✅';
+            btn.title = 'سایت در دسترس است';
+        } else {
+            btn.classList.add('check-fail');
+            btn.innerHTML = '❌';
+            btn.title = 'سایت در دسترس نیست یا خطا در بررسی';
+        }
+    }
+
+    function checkSiteAvailability(siteId) {
+        var btn = sitesGrid.querySelector('[data-id="' + siteId + '"] .check-site-btn');
+        if (!btn) return;
+
+        checkSiteInner(siteId).finally(function() {
+            updateCheckButtonUI(siteId);
+        });
+        btn.classList.add('checking');
+        btn.classList.remove('check-success', 'check-fail');
+        btn.innerHTML = '⏳';
+        btn.title = 'در حال بررسی...';
+        btn.disabled = true;
+    }
+
+    function checkAllSites() {
+        if (!checkAllBtn) return;
+
+        siteCheckControllers.forEach(function(controller) {
+            controller.abort();
+        });
+        siteCheckControllers.clear();
+
+        var sitesToCheck = sitesData.slice();
+        var total = sitesToCheck.length;
+        var completed = 0;
+
+        checkAllBtn.classList.add('active');
+        checkAllBtn.disabled = true;
+        function updateProgress() {
+            checkAllBtn.innerHTML = '⏳ <span>بررسی سایت‌ها (' + completed + '/' + total + ')</span>';
+        }
+        updateProgress();
+
+        var concurrency = 6;
+        var queue = sitesToCheck.slice();
+
+        function worker() {
+            return new Promise(function(resolve) {
+                function next() {
+                    if (queue.length === 0) return resolve();
+                    var site = queue.shift();
+                    checkSiteInner(site.id).then(function() {
+                        completed++;
+                        updateProgress();
+                        updateCheckButtonUI(site.id);
+                        next();
+                    }).catch(function() {
+                        completed++;
+                        updateProgress();
+                        updateCheckButtonUI(site.id);
+                        next();
+                    });
+                }
+                next();
+            });
+        }
+
+        var workers = [];
+        for (var i = 0; i < concurrency; i++) {
+            workers.push(worker());
+        }
+
+        Promise.all(workers).then(function() {
+            checkAllBtn.innerHTML = '⚡ <span>بررسی سایت‌ها</span>';
+            checkAllBtn.classList.remove('active');
+            checkAllBtn.disabled = false;
+        });
     }
 
     // ──────────────────────────────────
@@ -2506,93 +2933,131 @@ var META_DATA = /* BEGIN_META_DATA */{
             var isRec = site.recommended;
             var isBookmarked = bookmarkedIds.has(site.id);
 
-            // Category header
             if (showCategoryHeaders) {
-                var mainTag = (site.tags && site.tags.length > 0) ? site.tags[0] : '';
-                if (mainTag !== lastCategory) {
-                    lastCategory = mainTag;
+                var mainTagId = site.tags[0];
+                var mainTagName = getTagName(mainTagId);
+                if (mainTagName && mainTagName !== lastCategory) {
+                    lastCategory = mainTagName;
                     var header = document.createElement('div');
                     header.className = 'category-header';
-                    var catCount = sites.filter(function(s) { return s.tags && s.tags.length > 0 && s.tags[0] === mainTag; }).length;
+                    var catCount = sites.filter(function(s) { return s.tags[0] === mainTagId; }).length;
                     header.innerHTML =
-                        '<span class="category-header-icon">' + getCategoryIcon(mainTag) + '</span>'
-                        + '<span class="category-header-title">' + escapeHtml(mainTag) + '</span>'
-                        + '<span class="category-header-count">' + catCount + '</span>'
-                        + '<span class="category-header-line"></span>';
+                        '<span class="category-header-icon">' + getCategoryIcon(mainTagId) + '</span>' +
+                        '<span class="category-header-title">' + escapeHtml(mainTagName) + '</span>' +
+                        '<span class="category-header-count">' + catCount + '</span>' +
+                        '<span class="category-header-line"></span>';
                     sitesGrid.appendChild(header);
                 }
             }
 
             var card = document.createElement('div');
-            card.className = 'site-card visible'
-                + (isExpanded ? ' expanded' : '')
-                + (isRec ? ' recommended' : '');
+            card.className = 'site-card visible' +
+                (isExpanded ? ' expanded' : '') +
+                (isRec ? ' recommended' : '');
             card.setAttribute('data-id', site.id);
             card.style.animationDelay = Math.min(index * 0.04, 1.2) + 's';
 
             var recBadge = isRec ? '<span class="recommended-badge">\u2605 پیشنهادی</span>' : '';
 
             var socialBadgesHtml = getSocialBadges(site.social);
-            var tagsMiniHtml = site.tags.map(function(t, i) {
-                var isMain = (i === 0);
-                var cls = isMain ? 'card-tag-main' : 'card-tag-mini';
-                return '<span class="' + cls + '">' + escapeHtml(t) + '</span>';
+            var tagsMiniHtml = site.tags.map(function(tagId, i) {
+                var name = getTagName(tagId);
+                if (!name) return '';
+                var cls = i === 0 ? 'card-tag-main' : 'card-tag-mini';
+                return '<span class="' + cls + '">' + escapeHtml(name) + '</span>';
             }).join('');
 
             var donateHtml = '';
             if (site.donate) {
-                donateHtml = '<div class="donate-section">'
-                    + '<a href="' + escapeHtml(site.donate) + '" target="_blank" rel="noopener noreferrer"'
-                    + ' class="donate-badge"'
-                    + ' title="حمایت مالی"'
-                    + ' onclick="event.stopPropagation();">'
-                    + '❤️ حمایت مالی ❤'
-                    + '</a>'
-                    + '</div>';
+                donateHtml = '<div class="donate-section">' +
+                    '<a href="' + escapeHtml(site.donate) + '" target="_blank" rel="noopener noreferrer"' +
+                    ' class="donate-badge"' +
+                    ' title="حمایت مالی"' +
+                    ' onclick="event.stopPropagation();">' +
+                    '❤️ حمایت مالی ❤' +
+                    '</a>' +
+                    '</div>';
+            }
+
+            var expandedLinksHtml = '';
+            if (site.unfilteredLink === site.mainLink) {
+                expandedLinksHtml = '<div class="expanded-links">' +
+                    '<span class="expanded-link-item"' +
+                    ' data-url="' + escapeHtml(site.unfilteredLink) + '"' +
+                    ' title="کلیک کنید تا آدرس کپی شود">' +
+                    '🌐 کپی آدرس' +
+                    '</span>' +
+                    '</div>';
+            } else {
+                expandedLinksHtml = '<div class="expanded-links">' +
+                    '<span class="expanded-link-item unfiltered"' +
+                    ' data-url="' + escapeHtml(site.unfilteredLink) + '"' +
+                    ' title="کلیک کنید تا آدرس فعلی کپی شود">' +
+                    '🔗 آدرس فعلی' +
+                    '</span>' +
+                    '<span class="expanded-link-item"' +
+                    ' data-url="' + escapeHtml(site.mainLink) + '"' +
+                    ' title="کلیک کنید تا آدرس اصلی کپی شود">' +
+                    '🌐 آدرس اصلی' +
+                    '</span>' +
+                    '</div>';
+            }
+
+            var cachedStatus = siteCheckStatus.get(site.id);
+            var checkIcon = '⚡';
+            var checkTitle = 'بررسی در دسترس بودن سایت';
+            var checkClass = 'check-site-btn';
+            if (cachedStatus === 'loading') {
+                checkIcon = '⏳';
+                checkTitle = 'در حال بررسی...';
+                checkClass += ' checking';
+            } else if (cachedStatus === 'success') {
+                checkIcon = '✅';
+                checkTitle = 'سایت در دسترس است';
+                checkClass += ' check-success';
+            } else if (cachedStatus === 'fail') {
+                checkIcon = '❌';
+                checkTitle = 'سایت در دسترس نیست یا خطا در بررسی';
+                checkClass += ' check-fail';
             }
 
             card.innerHTML =
-                '<div class="card-main">'
-                + '<button class="bookmark-btn' + (isBookmarked ? ' bookmarked' : '') + '"'
-                + ' data-bookmark-id="' + site.id + '"'
-                + ' title="' + (isBookmarked ? 'حذف از بوکمارک' : 'افزودن به بوکمارک') + '"'
-                + ' onclick="event.stopPropagation();">'
-                + (isBookmarked ? '🔖' : '📑')
-                + '</button>'
-                + '<div class="card-info">'
-                + '<div class="card-name">' + escapeHtml(site.name) + '</div>'
-                + '<div class="card-tags-row">' + recBadge + tagsMiniHtml + '</div>'
-                + '</div>'
-                + '<div class="card-actions">'
-                + '<a href="' + escapeHtml(site.unfilteredLink) + '"'
-                + ' target="_blank"'
-                + ' rel="noopener noreferrer"'
-                + ' class="btn-go"'
-                + ' title="رفتن به سایت (باز شدن در تب جدید)"'
-                + ' onclick="event.stopPropagation();">'
-                + '↗ برو به سایت'
-                + '</a>'
-                + '<span class="expand-arrow">▼</span>'
-                + '</div>'
-                + '</div>'
-                + '<div class="card-expanded">'
-                + '<div class="expanded-description">' + escapeHtml(site.description || '') + '</div>'
-                + '<div class="expanded-links">'
-                + '<span class="expanded-link-item unfiltered"'
-                + ' data-url="' + escapeHtml(site.unfilteredLink) + '"'
-                + ' title="کلیک کنید تا آدرس فعلی کپی شود">'
-                + '🔗 آدرس فعلی'
-                + '</span>'
-                + '<span class="expanded-link-item"'
-                + ' data-url="' + escapeHtml(site.mainLink) + '"'
-                + ' title="کلیک کنید تا آدرس اصلی کپی شود">'
-                + '🌐 آدرس اصلی'
-                + '</span>'
-                + '</div>'
-                + socialBadgesHtml
-                + getCustomLinksHtml(site.customLinks)
-                + donateHtml
-                + '</div>';
+                '<div class="card-main">' +
+                '<button class="bookmark-btn' + (isBookmarked ? ' bookmarked' : '') + '"' +
+                ' data-bookmark-id="' + site.id + '"' +
+                ' title="' + (isBookmarked ? 'حذف از بوکمارک' : 'افزودن به بوکمارک') + '"' +
+                ' onclick="event.stopPropagation();">' +
+                (isBookmarked ? '🔖' : '📑') +
+                '</button>' +
+                '<div class="card-info">' +
+                '<div class="card-name">' + escapeHtml(site.name) + '</div>' +
+                '<div class="card-tags-row">' + recBadge + tagsMiniHtml + '</div>' +
+                '</div>' +
+                '<div class="card-actions">' +
+                '<a href="' + escapeHtml(site.unfilteredLink) + '"' +
+                ' target="_blank"' +
+                ' rel="noopener noreferrer"' +
+                ' class="btn-go"' +
+                ' title="رفتن به سایت (باز شدن در تب جدید)"' +
+                ' onclick="event.stopPropagation();">' +
+                '↗ برو به سایت' +
+                '</a>' +
+                '<span class="expand-arrow">▼</span>' +
+                '<button class="' + checkClass + '"' +
+                ' data-check-id="' + site.id + '"' +
+                ' title="' + checkTitle + '"' +
+                ' onclick="event.stopPropagation();">' +
+                checkIcon +
+                '</button>' +
+                '</div>' +
+                '</div>' +
+                '<div class="card-expanded">' +
+                '<div class="expanded-description">' + escapeHtml(site.description || '') + '</div>' +
+                expandedLinksHtml +
+                socialBadgesHtml +
+                getCustomLinksHtml(site.customLinks) +
+                donateHtml +
+                '</div>';
 
             card.addEventListener('click', function(e) {
                 if (
@@ -2610,7 +3075,6 @@ var META_DATA = /* BEGIN_META_DATA */{
             sitesGrid.appendChild(card);
         });
 
-        // Attach delegated click handlers for copy-to-clipboard
         sitesGrid.querySelectorAll('.expanded-link-item').forEach(function(item) {
             item.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -2622,7 +3086,6 @@ var META_DATA = /* BEGIN_META_DATA */{
             });
         });
 
-        // Bookmark button handlers
         sitesGrid.querySelectorAll('.bookmark-btn').forEach(function(btn) {
             btn.addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -2631,7 +3094,14 @@ var META_DATA = /* BEGIN_META_DATA */{
             });
         });
 
-        // Apply view mode class
+        sitesGrid.querySelectorAll('.check-site-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var siteId = parseInt(this.getAttribute('data-check-id'));
+                checkSiteAvailability(siteId);
+            });
+        });
+
         sitesGrid.classList.toggle('list-view', viewMode === 'list');
     }
 
@@ -2697,13 +3167,11 @@ var META_DATA = /* BEGIN_META_DATA */{
     function filterAndRender() {
         var filtered = getFilteredSites();
         var visibleIds = new Set(filtered.map(function(s) { return s.id; }));
-        var idsToRemove = [];
         expandedCardIds.forEach(function(id) {
             if (!visibleIds.has(id)) {
-                idsToRemove.push(id);
+                expandedCardIds.delete(id);
             }
         });
-        idsToRemove.forEach(function(id) { expandedCardIds.delete(id); });
         renderSites(filtered);
         updateExpandAllBtn();
         scheduleHashUpdate();
@@ -2777,6 +3245,12 @@ var META_DATA = /* BEGIN_META_DATA */{
         filterAndRender();
     });
 
+    if (checkAllBtn) {
+        checkAllBtn.addEventListener('click', function() {
+            checkAllSites();
+        });
+    }
+
     window.addEventListener('hashchange', function() {
         activeTags.clear();
         searchQuery = '';
@@ -2819,9 +3293,7 @@ var META_DATA = /* BEGIN_META_DATA */{
         console.log('✅ سایت‌های ایرانی آماده (آفلاین) | ' + sitesData.length + ' سایت بارگذاری شد');
     }
 
-    // ──────────────────────────────────
     // Start
-    // ──────────────────────────────────
     loadSitesData();
 })();
     </script>
