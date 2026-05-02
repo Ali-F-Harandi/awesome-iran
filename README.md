@@ -19,10 +19,19 @@ A fully responsive, single-page web directory of Iranian websites, designed for 
   - Social media and related links (global platforms like Telegram, Instagram, Discord, plus Iranian networks like Eitaa, Rubika, Soroush, Bale, Aparat).
   - Custom links (blog, archive, support, etc.).
   - Donate/support link (if available).
+- **Bookmarks** – save your favorite sites locally; they persist across sessions and can be filtered with the bookmark button.
+- **View toggle** – switch between card grid view and compact list view.
+- **Expand/Collapse All** – open or close all visible cards with a single click.
+- **Multiple sort options**:
+  - 📦 Default (category grouping by frequency)
+  - 🔤 Name (alphabetical)
+  - ⭐ Recommended first
+  - 🔢 ID (numeric order)
+- **Site availability checker** – quickly test if sites are accessible with the "بررسی سایت‌ها" button.
 - **Smooth animations** – cards fade in with staggered delay, hover effects with lift, and transitions throughout.
 - **Responsive grid** using `auto-fit` / `minmax` for fluid column layout without complex media queries.
 - **Accessibility** – focus-visible outlines on all interactive elements, touch-friendly 44px targets, semantic HTML.
-- **Footer** with last-updated date from `meta.json`.
+- **Footer** with last-updated date from `meta.json` and configurable footer links.
 - No external CDN dependencies; all assets are bundled locally.
 - **Standalone site editor** (`site-editor.html`) for managing `sites.json` and `meta.json` without editing code directly.
 - **Offline version** (`offline.html`) — a single-file, zero-dependency version that works without a server, perfect for sharing via USB or email during the national internet period.
@@ -31,19 +40,21 @@ A fully responsive, single-page web directory of Iranian websites, designed for 
 
 ```
 awesome-iran/
-├── index.html              # Main site page
-├── offline.html            # Lightweight single-file offline version (no external deps)
-├── site-editor.html        # Standalone JSON editor for managing sites
+├── index.html              # Main site page (multi-file, requires server for JSON)
+├── offline.html            # Lightweight single-file offline version (no external deps, works from file://)
+├── site-editor.html        # Standalone JSON editor for managing sites and metadata
 ├── css/
-│   └── style.css           # All styles (emerald green theme + dark mode)
+│   └── style.css           # All styles (emerald green theme + dark mode, 1200+ lines)
 ├── js/
-│   └── main.js             # Site logic (search, filter, render, hash, back-to-top)
+│   └── main.js             # Site logic (search, filter, render, hash, bookmarks, sort, view toggle, availability check)
 ├── data/
-│   ├── sites.json          # Site data (array of site objects)
-│   └── meta.json           # Project metadata (lastUpdated date)
+│   ├── sites.json          # Site data (array of site objects with tags as IDs)
+│   ├── tags.json           # Tag definitions (id, name, emoji icon, Font Awesome icon)
+│   ├── socials.json        # Social platform definitions (key, label, icon, Font Awesome class)
+│   └── meta.json           # Project metadata (lastUpdated date, footerLinks array)
 ├── fonts/
 │   ├── vazirmatn/          # Vazirmatn Persian font (woff2)
-│   │   ├── Vazirmatn[wght].woff2  # Variable font
+│   │   ├── Vazirmatn[wght].woff2  # Variable font (weights 100-900)
 │   │   ├── Vazirmatn-Regular.woff2
 │   │   ├── Vazirmatn-Bold.woff2
 │   │   ├── Vazirmatn-Medium.woff2
@@ -59,11 +70,13 @@ awesome-iran/
 │           └── ...
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml      # GitHub Pages auto-deploy
+│       └── deploy.yml      # GitHub Pages auto-deploy on push to main
 └── README.md
 ```
 
 ## 📦 Data Structure
+
+### Sites (`data/sites.json`)
 
 Each site in the directory is represented by a JSON object in `data/sites.json`:
 
@@ -74,7 +87,7 @@ Each site in the directory is represented by a JSON object in `data/sites.json`:
   "mainLink": "https://movieyaab.ir",
   "unfilteredLink": "https://movieyaab.ir",
   "description": "پلتفرم جستجوی فیلم، سریال و انیمه.",
-  "tags": ["فیلم و سریال", "انیمه", "جستجو", "پخش آنلاین", "دانلود"],
+  "tags": [9, 35, 39, 7, 1],
   "recommended": true,
   "social": {
     "telegram_bot": "https://t.me/example_bot",
@@ -83,10 +96,82 @@ Each site in the directory is represented by a JSON object in `data/sites.json`:
     "rubika": "https://rubika.ir/example",
     "bale": "https://ble.ir/example"
   },
-  "donate": "https://example.com/donate",
+  "donate": null,
   "customLinks": [
     { "title": "وبلاگ", "url": "https://blog.example.com", "icon": "blog" },
     { "title": "آرشیو", "url": "https://archive.example.com", "icon": "archive" }
+  ]
+}
+```
+
+> **Note:** Tags are now stored as numeric IDs (referencing `tags.json`) instead of string names. This allows for dynamic tag management and multi-language support.
+
+### Tags (`data/tags.json`)
+
+Tags are defined in a separate file with ID, name, emoji icon, and Font Awesome icon:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "دانلود",
+    "icon": "📥",
+    "iconFA": "fa-solid fa-download"
+  },
+  {
+    "id": 9,
+    "name": "فیلم و سریال",
+    "icon": "🎬",
+    "iconFA": "fa-solid fa-film"
+  },
+  {
+    "id": 35,
+    "name": "انیمه",
+    "icon": "🎌",
+    "iconFA": "fa-solid fa-dragon"
+  }
+]
+```
+
+### Social Platforms (`data/socials.json`)
+
+Social platform definitions with key, label, emoji icon, Font Awesome class, and CSS class:
+
+```json
+[
+  {
+    "id": 1,
+    "key": "telegram",
+    "label": "تلگرام",
+    "icon": "✈️",
+    "iconFA": "fa-brands fa-telegram",
+    "cls": "social-telegram"
+  },
+  {
+    "id": 6,
+    "key": "eitaa",
+    "label": "ایتا",
+    "icon": "📨",
+    "iconFA": "fa-solid fa-paper-plane",
+    "cls": "social-eitaa"
+  }
+]
+```
+
+### Metadata (`data/meta.json`)
+
+Project metadata including last updated date and optional footer links:
+
+```json
+{
+  "lastUpdated": "۱۴۰۳/۰۸/۱۵",
+  "footerLinks": [
+    {
+      "label": "گیت‌هاب",
+      "url": "https://github.com/your-repo",
+      "icon": "🐙",
+      "iconFA": "fa-brands fa-github"
+    }
   ]
 }
 ```
@@ -100,29 +185,34 @@ Each site in the directory is represented by a JSON object in `data/sites.json`:
 | `mainLink` | String | ✅ | The primary domain/URL of the site. |
 | `unfilteredLink` | String | ✅ | An alternative or bypass link. Displayed as "آدرس فعلی" in the card. |
 | `description` | String | ✅ | A short description explaining what the site offers. |
-| `tags` | Array of Strings | ✅ | Keywords for search and filtering. The **first tag** is the site's **main category** (displayed in red). Example: `["فیلم و سریال", "دانلود", "زیرنویس"]`. |
+| `tags` | Array of Numbers | ✅ | Tag **IDs** referencing `tags.json`. The **first tag** is the site's **main category** (displayed in red). Example: `[9, 35, 39, 7, 1]` where 9 = "فیلم و سریال". |
 | `recommended` | Boolean | ✅ | If `true`, a gold "★ پیشنهادی" badge and a highlighted border are shown. |
-| `social` | Object | — | Social media links. Keys are platform names, values are full URLs. |
+| `social` | Object | — | Social media links. Keys are platform names (matching `socials.json` keys), values are full URLs. |
 | `donate` | String or `null` | — | A donation/support URL. If present, a "حمایت مالی ❤" button appears. Use `null` to omit. |
 | `customLinks` | Array of Objects | — | Additional custom links. Each item has `title`, `url`, and `icon` fields. |
 
 ### Supported Social Platforms
 
-| Key | Label | Icon |
-|-----|-------|------|
-| `telegram` | تلگرام | Telegram |
-| `telegram_bot` | ربات تلگرام | Robot |
-| `instagram` | اینستاگرام | Instagram |
-| `twitter` | توییتر | X (Twitter) |
-| `youtube` | یوتیوب | YouTube |
-| `eitaa` | ایتا | Paper Plane |
-| `rubika` | روبیکا | Chat Dots |
-| `soroush` | سروش | Feather |
-| `bale` | بله | Dove |
-| `aparat` | آپارات | Video |
-| `whatsapp` | واتساپ | WhatsApp |
-| `linkedin` | لینکدین | LinkedIn |
-| `discord` | دیسکورد | Discord |
+These keys can be used in the `social` object (matching keys in `socials.json`):
+
+| Key | Label | Font Awesome Icon |
+|-----|-------|-------------------|
+| `telegram` | تلگرام | `fa-brands fa-telegram` |
+| `telegram_bot` | ربات تلگرام | `fa-solid fa-robot` |
+| `instagram` | اینستاگرام | `fa-brands fa-instagram` |
+| `twitter` | توییتر | `fa-brands fa-x-twitter` |
+| `youtube` | یوتیوب | `fa-brands fa-youtube` |
+| `eitaa` | ایتا | `fa-solid fa-paper-plane` |
+| `rubika` | روبیکا | `fa-solid fa-comment-dots` |
+| `soroush` | سروش | `fa-solid fa-feather` |
+| `bale` | بله | `fa-solid fa-dove` |
+| `aparat` | آپارات | `fa-solid fa-video` |
+| `whatsapp` | واتساپ | `fa-brands fa-whatsapp` |
+| `linkedin` | لینکدین | `fa-brands fa-linkedin` |
+| `discord` | دیسکورد | `fa-brands fa-discord` |
+| `github` | گیت‌هاب | `fa-brands fa-github` |
+
+> New platforms can be added by editing `data/socials.json`.
 
 ### Supported Custom Link Icons
 
@@ -178,19 +268,32 @@ A standalone HTML file for visually editing site data without touching code:
 
 ## 🚀 Usage
 
+### Running the Main Site (`index.html`)
+
 1. Clone or download the repository.
-2. Open `index.html` in any modern browser (requires a local server for JSON loading, e.g. `python3 -m http.server` or VS Code Live Server).
+2. Open `index.html` in any modern browser (**requires a local server** for JSON loading):
+   - Python: `python3 -m http.server 8000` then visit `http://localhost:8000`
+   - Node.js: `npx serve` or `npx http-server`
+   - VS Code: Use the "Live Server" extension
 3. Use the search box to find sites by name, URL, or tag.
 4. Click on tag chips to filter by category.
 5. Click on a card to expand and see more details, then click on any link label to copy the URL.
 6. Press the "برو به سایت" button to directly visit a site in a new tab.
 
-### To Edit Sites:
-1. Open `site-editor.html` in a browser.
-2. Import your `sites.json` file.
-3. Edit, add, remove, or reorder sites.
-4. Download or copy the updated JSON.
-5. Replace `data/sites.json` with the new content.
+### Using the Offline Version (`offline.html`)
+
+1. Simply open `offline.html` directly in any browser (no server needed).
+2. Works from `file://` protocol — perfect for USB drives or email attachments.
+3. To update data, edit the `SITES_DATA` and `META_DATA` JavaScript variables inside the file.
+
+### Editing Sites with the Editor
+
+1. Open `site-editor.html` in a browser (no server needed).
+2. Import your `sites.json` and `meta.json` files.
+3. Edit, add, remove, duplicate, or reorder sites using drag & drop.
+4. Edit all fields inline including tags (with autocomplete), social links, donate URL, and custom links.
+5. Export updated JSON — copy to clipboard or download as files.
+6. Replace `data/sites.json` and `data/meta.json` with the new content.
 
 ## 🚀 Deployment to GitHub Pages
 
@@ -209,23 +312,26 @@ The layout uses CSS Grid with `auto-fit` / `minmax(300px, 1fr)`:
 - Automatically adjusts from 1 to 3 columns based on available width.
 - Mobile (< 480px): single column, compact padding.
 - Tablet & desktop: fluid multi-column layout.
+- List view mode: compact single-column layout for quick scanning.
 
 ## 🎨 Design
 
 - **Emerald green** accent color (#10b981) with warm background gradient.
-- **Vazirmatn** Persian font for excellent readability.
-- **Dark mode** with system preference detection and manual toggle.
+- **Vazirmatn** Persian font (variable weight woff2) for excellent readability.
+- **Dark mode** with system preference detection and manual toggle (persisted in localStorage).
 - **Focus-visible** outlines for keyboard accessibility.
 - **44px minimum** touch targets for mobile-friendly interaction.
 - **Smooth animations** — staggered card entrance, hover lift effects, tag transitions.
+- **Category headers** with Font Awesome icons and frequency counts.
 
 ## 🔒 No External Dependencies
 
 The page is completely self-contained:
 
-- **Vazirmatn** Persian font is bundled locally (woff2) in `fonts/vazirmatn/`.
+- **Vazirmatn** Persian font is bundled locally (woff2 variable font, weights 100-900) in `fonts/vazirmatn/`.
 - **Font Awesome 6** icons are bundled locally in `fonts/fontawesome/` — no CDN required.
-- All styles and scripts are separate files but self-contained.
+- All styles (1200+ lines) and scripts (1000+ lines) are separate files but self-contained.
+- Data is loaded from local JSON files (`sites.json`, `tags.json`, `socials.json`, `meta.json`).
 
 ## 📦 Download
 
